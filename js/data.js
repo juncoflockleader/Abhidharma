@@ -2,7 +2,7 @@ const cittas = [
     {
         name: "12不善心",
         realm: "欲",
-        category: "不善",
+        category: ["不善"],
         children: [
             {
               "name": "悦俱邪见相应无行",
@@ -12,7 +12,7 @@ const cittas = [
               "volition": "无行",
               "note": "",
               "example": "",
-              "explanations": ["悦", "俱", "邪见", "相应", "无行"]
+              "note": ["悦", "俱", "邪见", "相应", "无行"]
             },
             {
               "name": "悦俱邪见相应有行",
@@ -22,7 +22,7 @@ const cittas = [
               "volition": "有行",
               "note": "",
               "example": "",
-              "explanations": ["悦", "俱", "邪见", "相应", "有行"]
+              "note": ["悦", "俱", "邪见", "相应", "有行"]
             },
             {
               "name": "悦俱邪见不相应无行",
@@ -32,7 +32,7 @@ const cittas = [
               "volition": "无行",
               "note": "",
               "example": "",
-              "explanations": ["悦", "俱", "邪见", "不相应", "无行"]
+              "note": ["悦", "俱", "邪见", "不相应", "无行"]
             },
             {
               "name": "悦俱邪见不相应有行",
@@ -42,7 +42,7 @@ const cittas = [
               "volition": "有行",
               "note": "",
               "example": "",
-              "explanations": ["悦", "俱", "邪见", "不相应", "有行"]
+              "note": ["悦", "俱", "邪见", "不相应", "有行"]
             },
             {
               "name": "舍俱邪见相应无行",
@@ -52,7 +52,7 @@ const cittas = [
               "volition": "无行",
               "note": "",
               "example": "",
-              "explanations": ["舍", "俱", "邪见", "相应", "无行"]
+              "note": ["舍", "俱", "邪见", "相应", "无行"]
             },
             {
               "name": "舍俱邪见相应有行",
@@ -62,7 +62,7 @@ const cittas = [
               "volition": "有行",
               "note": "",
               "example": "",
-              "explanations": ["舍", "俱", "邪见", "相应", "有行"]
+              "note": ["舍", "俱", "邪见", "相应", "有行"]
             },
             {
               "name": "舍俱邪见不相应无行",
@@ -72,7 +72,7 @@ const cittas = [
               "volition": "无行",
               "note": "",
               "example": "",
-              "explanations": ["舍", "俱", "邪见", "不相应", "无行"]
+              "note": ["舍", "俱", "邪见", "不相应", "无行"]
             },
             {
               "name": "舍俱邪见不相应有行",
@@ -82,7 +82,7 @@ const cittas = [
               "volition": "有行",
               "note": "",
               "example": "",
-              "explanations": ["舍", "俱", "邪见", "不相应", "有行"]
+              "note": ["舍", "俱", "邪见", "不相应", "有行"]
             },
             {
               "name": "忧俱嗔恚相应无行",
@@ -92,7 +92,7 @@ const cittas = [
               "volition": "无行",
               "note": "",
               "example": "",
-              "explanations": ["忧", "俱", "嗔恚", "相应", "无行"]
+              "note": ["忧", "俱", "嗔恚", "相应", "无行"]
             },
             {
               "name": "忧俱嗔恚相应有行",
@@ -102,7 +102,7 @@ const cittas = [
               "volition": "有行",
               "note": "",
               "example": "",
-              "explanations": ["忧", "俱", "嗔恚", "相应", "有行"]
+              "note": ["忧", "俱", "嗔恚", "相应", "有行"]
             },
             {
               "name": "舍俱疑相应",
@@ -112,7 +112,7 @@ const cittas = [
               "volition": "",
               "note": "",
               "example": "",
-              "explanations": ["舍", "俱", "疑", "相应"]
+              "note": ["舍", "俱", "疑", "相应"]
             },
             {
               "name": "舍俱掉举相应",
@@ -122,14 +122,14 @@ const cittas = [
               "volition": "",
               "note": "",
               "example": "",
-              "explanations": ["舍", "俱", "掉举", "相应"]
+              "note": ["舍", "俱", "掉举", "相应"]
             }
         ]
     },
     {
         name: "8大善心",
         realm: "欲",
-        category: "善",
+        category: ["善"],
         children: [
             {
               "name": "悦俱智相应无行心",
@@ -139,7 +139,241 @@ const cittas = [
               "volition": "无行",
               "note": "",
               "example": "",
-              "explanations": ["悦", "俱", "智", "相应", "无行"]
+              "note": ["悦", "俱", "智", "相应", "无行"]
+            },
+            {
+              "name": "悦俱智相应有行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "相应", "有行"]
+            },
+            {
+              "name": "悦俱智不相应无行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "无行"]
+            },
+            {
+              "name": "悦俱智不相应有行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "有行"]
+            },
+            {
+              "name": "舍俱智相应无行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "智", "相应", "无行"]
+            },
+            {
+              "name": "舍俱智相应有行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "智", "相应", "有行"]
+            },
+            {
+              "name": "舍俱智不相应无行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "无行"]
+            },
+            {
+              "name": "舍俱智不相应有行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "有行"]
+            }
+        ]
+    },
+    {
+        name: "8大果报心",
+        realm: "欲",
+        category: ["无记", "果报", "有因"],
+        children: [
+            {
+              "name": "悦俱智相应无行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "相应", "无行"]
+            },
+            {
+              "name": "悦俱智相应有行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "相应", "有行"]
+            },
+            {
+              "name": "悦俱智不相应无行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "无行"]
+            },
+            {
+              "name": "悦俱智不相应有行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "有行"]
+            },
+            {
+              "name": "舍俱智相应无行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "智", "相应", "无行"]
+            },
+            {
+              "name": "舍俱智相应有行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "智", "相应", "有行"]
+            },
+            {
+              "name": "舍俱智不相应无行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "无行"]
+            },
+            {
+              "name": "舍俱智不相应有行心",
+              "feeling": "舍",
+              "root": "慧",
+              "condition": "不相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "智", "不相应", "有行"]
+            }
+        ]
+    },
+    {
+        name: "7无因不善果报心",
+        realm: ["无记", "果报", "无因"],
+        category: "善",
+        children: [
+            {
+              "name": "眼识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "耳识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "鼻识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "舌识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "身识",
+              "feeling": "苦",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["苦", "俱", "五识"]
+            },
+            {
+              "name": "舍俱领受心",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "领受心"]
+            },
+            {
+              "name": "舍俱推度心",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "推度心"]
             }
         ]
     }
@@ -158,7 +392,13 @@ const cittas = [
     },
     "智": {
         "note": ""
-    }
+    },
+    "领受心": {
+        "note": ""
+    },
+    "五识": {
+        "note": "五根之识，能识别色声香味触。在无因不善果报心和无因善果报心中各有一组，合称为双五识。双五识只在五门心路生起，且都是过去业的果报。眼耳鼻舌都是舍俱，身识由善不善果报分为乐俱苦俱"
+    },
     "疑": {
       "note": "对于佛、法、僧，对于业果法则方面的怀疑"
     },
