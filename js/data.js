@@ -1,11 +1,13 @@
 const cittas = 
     {
         name: "心",
+        cetasika: ["触", "受", "想", "思", "一境性", "命根", "作意"],
         children: [
             {
                 name: "12不善心",
                 realm: "欲",
                 category: ["不善"],
+                cetasika:["寻", "伺", "痴", "无愧", "无惭", "掉举"],
                 children: [
                     {
                       "name": "悦俱邪见相应无行心",
@@ -13,8 +15,7 @@ const cittas =
                       "root": "贪",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "喜", "欲"],
                       "notes": ["悦", "俱", "邪见", "相应", "无行"]
                     },
                     {
@@ -23,8 +24,7 @@ const cittas =
                       "root": "贪",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "喜", "欲"],
                       "notes": ["悦", "俱", "邪见", "相应", "有行"]
                     },
                     {
@@ -33,8 +33,7 @@ const cittas =
                       "root": "贪",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "喜", "欲"],
                       "notes": ["悦", "俱", "邪见", "不相应", "无行"]
                     },
                     {
@@ -43,8 +42,7 @@ const cittas =
                       "root": "贪",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "喜", "欲"],
                       "notes": ["悦", "俱", "邪见", "不相应", "有行"]
                     },
                     {
@@ -53,8 +51,7 @@ const cittas =
                       "root": "贪",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "欲"],
                       "notes": ["舍", "俱", "邪见", "相应", "无行"]
                     },
                     {
@@ -63,8 +60,7 @@ const cittas =
                       "root": "贪",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "欲"],
                       "notes": ["舍", "俱", "邪见", "相应", "有行"]
                     },
                     {
@@ -73,8 +69,7 @@ const cittas =
                       "root": "贪",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "欲"],
                       "notes": ["舍", "俱", "邪见", "不相应", "无行"]
                     },
                     {
@@ -83,8 +78,7 @@ const cittas =
                       "root": "贪",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "欲"],
                       "notes": ["舍", "俱", "邪见", "不相应", "有行"]
                     },
                     {
@@ -93,8 +87,7 @@ const cittas =
                       "root": "嗔",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "欲"],
                       "notes": ["忧", "俱", "嗔恚", "相应", "无行"]
                     },
                     {
@@ -103,8 +96,7 @@ const cittas =
                       "root": "嗔",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进", "欲"],
                       "notes": ["忧", "俱", "嗔恚", "相应", "有行"]
                     },
                     {
@@ -113,8 +105,7 @@ const cittas =
                       "root": "痴",
                       "condition": "相应",
                       "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika:["精进", "欲"],
                       "notes": ["舍", "俱", "疑", "相应"]
                     },
                     {
@@ -123,8 +114,7 @@ const cittas =
                       "root": "痴",
                       "condition": "相应",
                       "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika:["胜解", "精进"],
                       "notes": ["舍", "俱", "掉举", "相应"]
                     }
                 ]
@@ -1002,7 +992,7 @@ const cittas =
         ];
     };
   
-  const explanations = {
+  const notes = {
     "悦": {
       "note": "somanassasahagata，受心所体验到乐受"
     },
