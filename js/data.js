@@ -12,6 +12,13 @@ const cittas =
                     {
                       "name": "悦俱邪见相应无行心",
                       "feeling": "悦",
+                      "roots": [],
+                      "functions": [],
+                      "gates": [],
+                      "object": [],
+                      "mental_object": [],
+                      "basis": [],
+                      "realms": [],
                       "root": "贪",
                       "condition": "相应",
                       "volition": "无行",
