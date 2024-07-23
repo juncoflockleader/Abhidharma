@@ -1,186 +1,190 @@
 const cittas = [
     {
-      "name": "悦俱邪见相应无行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "悦",
-      "root": "贪",
-      "condition": "相应",
-      "volition": "无行",
-      "description": "",
-      "example": "",
-      "explanations": ["悦", "俱", "邪见", "相应", "无行"]
+        name: "12不善心",
+        realm: "欲",
+        category: "不善",
+        children: [
+            {
+              "name": "悦俱邪见相应无行",
+              "feeling": "悦",
+              "root": "贪",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "explanations": ["悦", "俱", "邪见", "相应", "无行"]
+            },
+            {
+              "name": "悦俱邪见相应有行",
+              "feeling": "悦",
+              "root": "贪",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "explanations": ["悦", "俱", "邪见", "相应", "有行"]
+            },
+            {
+              "name": "悦俱邪见不相应无行",
+              "feeling": "悦",
+              "root": "贪",
+              "condition": "不相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "explanations": ["悦", "俱", "邪见", "不相应", "无行"]
+            },
+            {
+              "name": "悦俱邪见不相应有行",
+              "feeling": "悦",
+              "root": "贪",
+              "condition": "不相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "explanations": ["悦", "俱", "邪见", "不相应", "有行"]
+            },
+            {
+              "name": "舍俱邪见相应无行",
+              "feeling": "舍",
+              "root": "贪",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "explanations": ["舍", "俱", "邪见", "相应", "无行"]
+            },
+            {
+              "name": "舍俱邪见相应有行",
+              "feeling": "舍",
+              "root": "贪",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "explanations": ["舍", "俱", "邪见", "相应", "有行"]
+            },
+            {
+              "name": "舍俱邪见不相应无行",
+              "feeling": "舍",
+              "root": "贪",
+              "condition": "不相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "explanations": ["舍", "俱", "邪见", "不相应", "无行"]
+            },
+            {
+              "name": "舍俱邪见不相应有行",
+              "feeling": "舍",
+              "root": "贪",
+              "condition": "不相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "explanations": ["舍", "俱", "邪见", "不相应", "有行"]
+            },
+            {
+              "name": "忧俱嗔恚相应无行",
+              "feeling": "忧",
+              "root": "嗔",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "explanations": ["忧", "俱", "嗔恚", "相应", "无行"]
+            },
+            {
+              "name": "忧俱嗔恚相应有行",
+              "feeling": "忧",
+              "root": "嗔",
+              "condition": "相应",
+              "volition": "有行",
+              "note": "",
+              "example": "",
+              "explanations": ["忧", "俱", "嗔恚", "相应", "有行"]
+            },
+            {
+              "name": "舍俱疑相应",
+              "feeling": "舍",
+              "root": "痴",
+              "condition": "相应",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "explanations": ["舍", "俱", "疑", "相应"]
+            },
+            {
+              "name": "舍俱掉举相应",
+              "feeling": "舍",
+              "root": "痴",
+              "condition": "相应",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "explanations": ["舍", "俱", "掉举", "相应"]
+            }
+        ]
     },
     {
-      "name": "悦俱邪见相应有行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "悦",
-      "root": "贪",
-      "condition": "相应",
-      "volition": "有行",
-      "description": "",
-      "example": "",
-      "explanations": ["悦", "俱", "邪见", "相应", "有行"]
-    },
-    {
-      "name": "悦俱邪见不相应无行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "悦",
-      "root": "贪",
-      "condition": "不相应",
-      "volition": "无行",
-      "description": "",
-      "example": "",
-      "explanations": ["悦", "俱", "邪见", "不相应", "无行"]
-    },
-    {
-      "name": "悦俱邪见不相应有行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "悦",
-      "root": "贪",
-      "condition": "不相应",
-      "volition": "有行",
-      "description": "",
-      "example": "",
-      "explanations": ["悦", "俱", "邪见", "不相应", "有行"]
-    },
-    {
-      "name": "舍俱邪见相应无行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "舍",
-      "root": "贪",
-      "condition": "相应",
-      "volition": "无行",
-      "description": "",
-      "example": "",
-      "explanations": ["舍", "俱", "邪见", "相应", "无行"]
-    },
-    {
-      "name": "舍俱邪见相应有行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "舍",
-      "root": "贪",
-      "condition": "相应",
-      "volition": "有行",
-      "description": "",
-      "example": "",
-      "explanations": ["舍", "俱", "邪见", "相应", "有行"]
-    },
-    {
-      "name": "舍俱邪见不相应无行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "舍",
-      "root": "贪",
-      "condition": "不相应",
-      "volition": "无行",
-      "description": "",
-      "example": "",
-      "explanations": ["舍", "俱", "邪见", "不相应", "无行"]
-    },
-    {
-      "name": "舍俱邪见不相应有行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "舍",
-      "root": "贪",
-      "condition": "不相应",
-      "volition": "有行",
-      "description": "",
-      "example": "",
-      "explanations": ["舍", "俱", "邪见", "不相应", "有行"]
-    },
-    {
-      "name": "忧俱嗔恚相应无行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "忧",
-      "root": "嗔",
-      "condition": "相应",
-      "volition": "无行",
-      "description": "",
-      "example": "",
-      "explanations": ["忧", "俱", "嗔恚", "相应", "无行"]
-    },
-    {
-      "name": "忧俱嗔恚相应有行",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "忧",
-      "root": "嗔",
-      "condition": "相应",
-      "volition": "有行",
-      "description": "",
-      "example": "",
-      "explanations": ["忧", "俱", "嗔恚", "相应", "有行"]
-    },
-    {
-      "name": "舍俱疑相应",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "舍",
-      "root": "痴",
-      "condition": "相应",
-      "volition": "",
-      "description": "",
-      "example": "",
-      "explanations": ["舍", "俱", "疑", "相应"]
-    },
-    {
-      "name": "舍俱掉举相应",
-      "category": "不善",
-      "realm": "欲界",
-      "feeling": "舍",
-      "root": "痴",
-      "condition": "相应",
-      "volition": "",
-      "description": "",
-      "example": "",
-      "explanations": ["舍", "俱", "掉举", "相应"]
+        name: "8大善心",
+        realm: "欲",
+        category: "善",
+        children: [
+            {
+              "name": "悦俱智相应无行心",
+              "feeling": "悦",
+              "root": "慧",
+              "condition": "相应",
+              "volition": "无行",
+              "note": "",
+              "example": "",
+              "explanations": ["悦", "俱", "智", "相应", "无行"]
+            }
+        ]
     }
+    
   ];
   
   const explanations = {
     "悦": {
-      "text": "somanassasahagata，受心所体验到乐受"
+      "note": "somanassasahagata，受心所体验到乐受"
     },
     "舍": {
-      "text": "upekkhàsahagata，受心所体验到舍受"
+      "note": "upekkhàsahagata，受心所体验到舍受"
     },
     "忧": {
-      "text": "domanassa，直译为不好的心意"
+      "note": "domanassa，直译为不好的心意"
     },
+    "智": {
+        "note": ""
+    }
     "疑": {
-      "text": "对于佛、法、僧，对于业果法则方面的怀疑"
+      "note": "对于佛、法、僧，对于业果法则方面的怀疑"
     },
     "掉举": {
-      "text": "uddhacca是指心的散乱、不平静"
+      "note": "uddhacca是指心的散乱、不平静"
     },
     "邪见": {
-      "text": "不正确的见解"
+      "note": "不正确的见解"
     },
     "俱": {
-      "text": "伴随"
+      "note": "伴随"
     },
     "相应": {
-      "text": "持有相应的见解。对邪见，不知道是邪见，算作相应；对智，知道是智，算作相应"
+      "note": "持有相应的见解。对邪见，不知道是邪见，算作相应；对智，知道是智，算作相应"
     },
     "不相应": {
-      "text": "未持有相应的见解。对邪见，知道是邪见，算作不相应；对智，不知道是智，算作不相应"
+      "note": "未持有相应的见解。对邪见，知道是邪见，算作不相应；对智，不知道是智，算作不相应"
     },
     "有行": {
-      "text": "不用经过其他人怂恿、鼓励，或者自己没有刻意让它生起的贪心"
+      "note": "不用经过其他人怂恿、鼓励，或者自己没有刻意让它生起的贪心"
     },
     "无行": {
-        "text": "经过其他人怂恿"
+        "note": "经过其他人怂恿"
     },
     "嗔恚": {
-      "text": "生气、烦躁、担忧、紧张、害怕，属于嗔恚心"
+      "note": "生气、烦躁、担忧、紧张、害怕，属于嗔恚心"
     },
   };
   
@@ -702,7 +706,7 @@ const cittas = [
     "cells": [
       {
         "title": "不善",
-        "cittas": [0, 1, 2, 3, 4, 5, 6, 7]
+        "cittas": [0]
       }
     ]
   };
