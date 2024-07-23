@@ -307,71 +307,38 @@ const cittas =
                     {
                       "name": "眼识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "耳识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "鼻识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "舌识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "身识",
                       "feeling": "苦",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["苦", "俱", "五识"]
                     },
                     {
                       "name": "舍俱领受心",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "领受心"]
                     },
                     {
                       "name": "舍俱推度心",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "推度心"]
                     }
                 ]
@@ -1571,10 +1538,10 @@ const cittas =
       "column_header": "本性"
     },
     "rows_header": [
-      "欲界", "色界", "无色界", "出世间"
+      "54欲界心", "15色界心", "12无色界心", "8出世间心"
     ],
     "columns_header": [
-      "不善", "善", {"无记": {"果报": ["有因","无因"], "唯作":["有因", "无因"]}}
+      "12不善心", "21善心", {"56无记心": {"36果报心": ["21有因心","15无因心"], "20唯作心":["17有因心", "3无因心"]}}
     ],
     "cells": [
       {
