@@ -1,1002 +1,1006 @@
-const cittas = [
+const cittas = 
     {
-        name: "12不善心",
-        realm: "欲",
-        category: ["不善"],
+        name: "心",
         children: [
             {
-              "name": "悦俱邪见相应无行",
-              "feeling": "悦",
-              "root": "贪",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "邪见", "相应", "无行"]
+                name: "12不善心",
+                realm: "欲",
+                category: ["不善"],
+                children: [
+                    {
+                      "name": "悦俱邪见相应无行心",
+                      "feeling": "悦",
+                      "root": "贪",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "邪见", "相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱邪见相应有行心",
+                      "feeling": "悦",
+                      "root": "贪",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "邪见", "相应", "有行"]
+                    },
+                    {
+                      "name": "悦俱邪见不相应无行心",
+                      "feeling": "悦",
+                      "root": "贪",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "邪见", "不相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱邪见不相应有行心",
+                      "feeling": "悦",
+                      "root": "贪",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "邪见", "不相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱邪见相应无行心",
+                      "feeling": "舍",
+                      "root": "贪",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "邪见", "相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱邪见相应有行心",
+                      "feeling": "舍",
+                      "root": "贪",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "邪见", "相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱邪见不相应无行心",
+                      "feeling": "舍",
+                      "root": "贪",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "邪见", "不相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱邪见不相应有行心",
+                      "feeling": "舍",
+                      "root": "贪",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "邪见", "不相应", "有行"]
+                    },
+                    {
+                      "name": "忧俱嗔恚相应无行心",
+                      "feeling": "忧",
+                      "root": "嗔",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["忧", "俱", "嗔恚", "相应", "无行"]
+                    },
+                    {
+                      "name": "忧俱嗔恚相应有行心",
+                      "feeling": "忧",
+                      "root": "嗔",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["忧", "俱", "嗔恚", "相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱疑相应心",
+                      "feeling": "舍",
+                      "root": "痴",
+                      "condition": "相应",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "疑", "相应"]
+                    },
+                    {
+                      "name": "舍俱掉举相应心",
+                      "feeling": "舍",
+                      "root": "痴",
+                      "condition": "相应",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "掉举", "相应"]
+                    }
+                ]
             },
             {
-              "name": "悦俱邪见相应有行",
-              "feeling": "悦",
-              "root": "贪",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "邪见", "相应", "有行"]
+                name: "8大善心",
+                realm: "欲",
+                category: ["善"],
+                children: [
+                    {
+                      "name": "悦俱智相应无行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱智相应有行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "相应", "有行"]
+                    },
+                    {
+                      "name": "悦俱智不相应无行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱智不相应有行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱智相应无行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "智", "相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱智相应有行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "智", "相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱智不相应无行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱智不相应有行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "有行"]
+                    }
+                ]
             },
             {
-              "name": "悦俱邪见不相应无行",
-              "feeling": "悦",
-              "root": "贪",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "邪见", "不相应", "无行"]
+                name: "8大果报心",
+                realm: "欲",
+                category: ["无记", "果报", "有因"],
+                children: [
+                    {
+                      "name": "悦俱智相应无行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱智相应有行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "相应", "有行"]
+                    },
+                    {
+                      "name": "悦俱智不相应无行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱智不相应有行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱智相应无行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "智", "相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱智相应有行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "智", "相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱智不相应无行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱智不相应有行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "有行"]
+                    }
+                ]
             },
             {
-              "name": "悦俱邪见不相应有行",
-              "feeling": "悦",
-              "root": "贪",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "邪见", "不相应", "有行"]
+                name: "7无因不善果报心",
+                realm: "欲",
+                category: ["无记", "果报", "无因"],
+                children: [
+                    {
+                      "name": "眼识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "耳识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "鼻识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "舌识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "身识",
+                      "feeling": "苦",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["苦", "俱", "五识"]
+                    },
+                    {
+                      "name": "舍俱领受心",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "领受心"]
+                    },
+                    {
+                      "name": "舍俱推度心",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "推度心"]
+                    }
+                ]
             },
             {
-              "name": "舍俱邪见相应无行",
-              "feeling": "舍",
-              "root": "贪",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "邪见", "相应", "无行"]
+                name: "8无因善果报心",
+                realm: "欲",
+                category: ["无记", "果报", "无因"],
+                children: [
+                    {
+                      "name": "眼识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "耳识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "鼻识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "舌识",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "五识"]
+                    },
+                    {
+                      "name": "身识",
+                      "feeling": "乐",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["乐", "俱", "五识"]
+                    },
+                    {
+                      "name": "舍俱领受心",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "领受心"]
+                    },
+                    {
+                      "name": "舍俱推度心",
+                      "feeling": "舍",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "推度心"]
+                    },
+                    {
+                      "name": "悦俱推度心",
+                      "feeling": "悦",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "推度心"]
+                    }
+                ]
             },
             {
-              "name": "舍俱邪见相应有行",
-              "feeling": "舍",
-              "root": "贪",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "邪见", "相应", "有行"]
+                name: "8大唯作心",
+                realm: "欲",
+                note: "有因唯作心是阿罗汉独有",
+                category: ["无记", "唯作", "有因"],
+                children: [
+                    {
+                      "name": "悦俱智相应无行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱智相应有行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "相应", "有行"]
+                    },
+                    {
+                      "name": "悦俱智不相应无行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "无行"]
+                    },
+                    {
+                      "name": "悦俱智不相应有行心",
+                      "feeling": "悦",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱智相应无行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "智", "相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱智相应有行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["舍", "俱", "智", "相应", "有行"]
+                    },
+                    {
+                      "name": "舍俱智不相应无行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "无行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "无行"]
+                    },
+                    {
+                      "name": "舍俱智不相应有行心",
+                      "feeling": "舍",
+                      "root": "慧",
+                      "condition": "不相应",
+                      "volition": "有行",
+                      "note": "",
+                      "example": "",
+                      "notes": ["悦", "俱", "智", "不相应", "有行"]
+                    }
+                ]
             },
             {
-              "name": "舍俱邪见不相应无行",
-              "feeling": "舍",
-              "root": "贪",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "邪见", "不相应", "无行"]
+                name: "3无因唯作心",
+                realm: "欲",
+                note: "有因唯作心是阿罗汉独有",
+                category: ["无记", "唯作", "无因"],
+                children: [
+                    {
+                      "name": "五门转向心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["五门转向心"]
+                    },
+                    {
+                      "name": "意门转向心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["意门转向心"]
+                    },
+                    {
+                      "name": "生笑心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "",
+                      "example": "",
+                      "notes": ["生笑心"]
+                    }
+                ]
             },
             {
-              "name": "舍俱邪见不相应有行",
-              "feeling": "舍",
-              "root": "贪",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "邪见", "不相应", "有行"]
+                name: "5广大善心",
+                realm: "色",
+                category: ["善"],
+                children: [
+                    {
+                      "name": "初禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "寻、伺、喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第二禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "伺、喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第三禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第四禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第五禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
             },
             {
-              "name": "忧俱嗔恚相应无行",
-              "feeling": "忧",
-              "root": "嗔",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["忧", "俱", "嗔恚", "相应", "无行"]
+                name: "5广大果报心",
+                realm: "色",
+                category: ["无记", "果报", "有因"],
+                children: [
+                    {
+                      "name": "初禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "寻、伺、喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第二禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "伺、喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第三禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第四禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第五禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
             },
             {
-              "name": "忧俱嗔恚相应有行",
-              "feeling": "忧",
-              "root": "嗔",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["忧", "俱", "嗔恚", "相应", "有行"]
+                name: "5广大唯作心",
+                realm: "色",
+                category: ["无记", "唯作", "有因"],
+                children: [
+                    {
+                      "name": "初禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "寻、伺、喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第二禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "伺、喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第三禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "喜、乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第四禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "乐、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "第五禅心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
             },
             {
-              "name": "舍俱疑相应",
-              "feeling": "舍",
-              "root": "痴",
-              "condition": "相应",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "疑", "相应"]
+                name: "4广大善心",
+                realm: "无色",
+                category: ["善"],
+                children: [
+                    {
+                      "name": "空无边处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "识无边处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "无所有处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "非想非非想处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
             },
             {
-              "name": "舍俱掉举相应",
-              "feeling": "舍",
-              "root": "痴",
-              "condition": "相应",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "掉举", "相应"]
+                name: "4广大果报心",
+                realm: "无色",
+                category: ["无记", "果报", "有因"],
+                children: [
+                    {
+                      "name": "空无边处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "识无边处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "无所有处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "非想非非想处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
+            },
+            {
+                name: "4广大唯作心",
+                realm: "无色",
+                category: ["无记", "唯作", "有因"],
+                children: [
+                    {
+                      "name": "空无边处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "识无边处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "无所有处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "非想非非想处心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "舍、一境性",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
+            },
+            {
+                name: "4出世间善心",
+                realm: "出世间",
+                category: ["善"],
+                children: [
+                    {
+                      "name": "须陀洹道心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断三结",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "斯陀含道心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断粗欲界贪、嗔",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "阿那含道心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断细欲界贪嗔",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "阿罗汉道心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断五上分结",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
+            },
+            {
+                name: "4出世间果报心",
+                realm: "出世间",
+                category: ["无记", "果报", "有因"],
+                children: [
+                    {
+                      "name": "须陀洹果心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断三结",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "斯陀含果心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断粗欲界贪、嗔",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "阿那含果心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断细欲界贪嗔",
+                      "example": "",
+                      "notes": []
+                    },
+                    {
+                      "name": "阿罗汉果心",
+                      "feeling": "",
+                      "root": "",
+                      "condition": "",
+                      "volition": "",
+                      "note": "断五上分结",
+                      "example": "",
+                      "notes": []
+                    },
+                ]
             }
-        ]
-    },
-    {
-        name: "8大善心",
-        realm: "欲",
-        category: ["善"],
-        children: [
-            {
-              "name": "悦俱智相应无行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "相应", "无行"]
-            },
-            {
-              "name": "悦俱智相应有行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "相应", "有行"]
-            },
-            {
-              "name": "悦俱智不相应无行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "无行"]
-            },
-            {
-              "name": "悦俱智不相应有行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "有行"]
-            },
-            {
-              "name": "舍俱智相应无行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "智", "相应", "无行"]
-            },
-            {
-              "name": "舍俱智相应有行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "智", "相应", "有行"]
-            },
-            {
-              "name": "舍俱智不相应无行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "无行"]
-            },
-            {
-              "name": "舍俱智不相应有行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "有行"]
-            }
-        ]
-    },
-    {
-        name: "8大果报心",
-        realm: "欲",
-        category: ["无记", "果报", "有因"],
-        children: [
-            {
-              "name": "悦俱智相应无行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "相应", "无行"]
-            },
-            {
-              "name": "悦俱智相应有行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "相应", "有行"]
-            },
-            {
-              "name": "悦俱智不相应无行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "无行"]
-            },
-            {
-              "name": "悦俱智不相应有行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "有行"]
-            },
-            {
-              "name": "舍俱智相应无行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "智", "相应", "无行"]
-            },
-            {
-              "name": "舍俱智相应有行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "智", "相应", "有行"]
-            },
-            {
-              "name": "舍俱智不相应无行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "无行"]
-            },
-            {
-              "name": "舍俱智不相应有行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "有行"]
-            }
-        ]
-    },
-    {
-        name: "7无因不善果报心",
-        realm: "欲",
-        category: ["无记", "果报", "无因"],
-        children: [
-            {
-              "name": "眼识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "耳识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "鼻识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "舌识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "身识",
-              "feeling": "苦",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["苦", "俱", "五识"]
-            },
-            {
-              "name": "舍俱领受心",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "领受心"]
-            },
-            {
-              "name": "舍俱推度心",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "推度心"]
-            }
-        ]
-    },
-    {
-        name: "8无因善果报心",
-        realm: "欲",
-        category: ["无记", "果报", "无因"],
-        children: [
-            {
-              "name": "眼识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "耳识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "鼻识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "舌识",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "五识"]
-            },
-            {
-              "name": "身识",
-              "feeling": "乐",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["乐", "俱", "五识"]
-            },
-            {
-              "name": "舍俱领受心",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "领受心"]
-            },
-            {
-              "name": "舍俱推度心",
-              "feeling": "舍",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "推度心"]
-            },
-            {
-              "name": "悦俱推度心",
-              "feeling": "悦",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "推度心"]
-            }
-        ]
-    },
-    {
-        name: "8大唯作心",
-        realm: "欲",
-        note: "有因唯作心是阿罗汉独有",
-        category: ["无记", "唯作", "有因"],
-        children: [
-            {
-              "name": "悦俱智相应无行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "相应", "无行"]
-            },
-            {
-              "name": "悦俱智相应有行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "相应", "有行"]
-            },
-            {
-              "name": "悦俱智不相应无行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "无行"]
-            },
-            {
-              "name": "悦俱智不相应有行心",
-              "feeling": "悦",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "有行"]
-            },
-            {
-              "name": "舍俱智相应无行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "智", "相应", "无行"]
-            },
-            {
-              "name": "舍俱智相应有行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["舍", "俱", "智", "相应", "有行"]
-            },
-            {
-              "name": "舍俱智不相应无行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "无行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "无行"]
-            },
-            {
-              "name": "舍俱智不相应有行心",
-              "feeling": "舍",
-              "root": "慧",
-              "condition": "不相应",
-              "volition": "有行",
-              "note": "",
-              "example": "",
-              "notes": ["悦", "俱", "智", "不相应", "有行"]
-            }
-        ]
-    },
-    {
-        name: "3无因唯作心",
-        realm: "欲",
-        note: "有因唯作心是阿罗汉独有",
-        category: ["无记", "唯作", "无因"],
-        children: [
-            {
-              "name": "五门转向心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["五门转向心"]
-            },
-            {
-              "name": "意门转向心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["意门转向心"]
-            },
-            {
-              "name": "生笑心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "",
-              "example": "",
-              "notes": ["生笑心"]
-            }
-        ]
-    },
-    {
-        name: "5广大善心",
-        realm: "色",
-        category: ["善"],
-        children: [
-            {
-              "name": "初禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "寻、伺、喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第二禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "伺、喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第三禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第四禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第五禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "5广大果报心",
-        realm: "色",
-        category: ["无记", "果报", "有因"],
-        children: [
-            {
-              "name": "初禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "寻、伺、喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第二禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "伺、喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第三禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第四禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第五禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "5广大唯作心",
-        realm: "色",
-        category: ["无记", "唯作", "有因"],
-        children: [
-            {
-              "name": "初禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "寻、伺、喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第二禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "伺、喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第三禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "喜、乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第四禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "乐、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "第五禅心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "4广大善心",
-        realm: "无色",
-        category: ["善"],
-        children: [
-            {
-              "name": "空无边处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "识无边处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "无所有处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "非想非非想处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "4广大果报心",
-        realm: "无色",
-        category: ["无记", "果报", "有因"],
-        children: [
-            {
-              "name": "空无边处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "识无边处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "无所有处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "非想非非想处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "4广大唯作心",
-        realm: "无色",
-        category: ["无记", "唯作", "有因"],
-        children: [
-            {
-              "name": "空无边处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "识无边处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "无所有处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "非想非非想处心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "舍、一境性",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "4出世间善心",
-        realm: "出世间",
-        category: ["善"],
-        children: [
-            {
-              "name": "须陀洹道心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断三结",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "斯陀含道心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断粗欲界贪、嗔",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "阿那含道心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断细欲界贪嗔",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "阿罗汉道心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断五上分结",
-              "example": "",
-              "notes": []
-            },
-        ]
-    },
-    {
-        name: "4出世间果报心",
-        realm: "出世间",
-        category: ["无记", "果报", "有因"],
-        children: [
-            {
-              "name": "须陀洹果心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断三结",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "斯陀含果心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断粗欲界贪、嗔",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "阿那含果心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断细欲界贪嗔",
-              "example": "",
-              "notes": []
-            },
-            {
-              "name": "阿罗汉果心",
-              "feeling": "",
-              "root": "",
-              "condition": "",
-              "volition": "",
-              "note": "断五上分结",
-              "example": "",
-              "notes": []
-            },
-        ]
-    }
-  ];
+        ];
+    };
   
   const explanations = {
     "悦": {
