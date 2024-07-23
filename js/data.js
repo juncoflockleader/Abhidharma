@@ -130,7 +130,7 @@ const cittas =
                 realm: "欲",
                 category: ["善"],
                 cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
-                cetasika_opt_ext: ["正语", "正业", "正命", "悲", "喜"],
+                cetasika_opt_ext: ["正语", "正业", "正命", "悲悯", "随喜"],
                 children: [
                     {
                       "name": "悦俱智相应无行心",
@@ -210,7 +210,7 @@ const cittas =
                 name: "8大果报心",
                 realm: "欲",
                 category: ["无记", "果报", "有因"],
-                cetasika: ["信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
+                cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 children: [
                     {
                       "name": "悦俱智相应无行心",
@@ -218,8 +218,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲", "慧"],
                       "notes": ["悦", "俱", "智", "相应", "无行"]
                     },
                     {
@@ -228,8 +227,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲", "慧"],
                       "notes": ["悦", "俱", "智", "相应", "有行"]
                     },
                     {
@@ -238,8 +236,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"],
                       "notes": ["悦", "俱", "智", "不相应", "无行"]
                     },
                     {
@@ -248,8 +245,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"],
                       "notes": ["悦", "俱", "智", "不相应", "有行"]
                     },
                     {
@@ -258,8 +254,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲", "慧"],
                       "notes": ["舍", "俱", "智", "相应", "无行"]
                     },
                     {
@@ -268,8 +263,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲", "慧"],
                       "notes": ["舍", "俱", "智", "相应", "有行"]
                     },
                     {
@@ -278,8 +272,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"],
                       "notes": ["悦", "俱", "智", "不相应", "无行"]
                     },
                     {
@@ -288,8 +281,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"],
                       "notes": ["悦", "俱", "智", "不相应", "有行"]
                     }
                 ]
@@ -391,6 +383,8 @@ const cittas =
             {
                 name: "8大唯作心",
                 realm: "欲",
+                cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
+                cetasika_opt_ext: ["悲悯", "随喜"]
                 note: "有因唯作心是阿罗汉独有",
                 category: ["无记", "唯作", "有因"],
                 children: [
@@ -400,8 +394,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲", "慧"]
                       "notes": ["悦", "俱", "智", "相应", "无行"]
                     },
                     {
@@ -410,8 +403,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲", "慧"]
                       "notes": ["悦", "俱", "智", "相应", "有行"]
                     },
                     {
@@ -420,8 +412,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"]
                       "notes": ["悦", "俱", "智", "不相应", "无行"]
                     },
                     {
@@ -430,8 +421,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"]
                       "notes": ["悦", "俱", "智", "不相应", "有行"]
                     },
                     {
@@ -440,8 +430,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲", "慧"]
                       "notes": ["舍", "俱", "智", "相应", "无行"]
                     },
                     {
@@ -450,8 +439,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲", "慧"]
                       "notes": ["舍", "俱", "智", "相应", "有行"]
                     },
                     {
@@ -460,8 +448,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"]
                       "notes": ["悦", "俱", "智", "不相应", "无行"]
                     },
                     {
@@ -470,8 +457,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"]
                       "notes": ["悦", "俱", "智", "不相应", "有行"]
                     }
                 ]
