@@ -9,13 +9,13 @@ const cittas =
                 category: ["不善"],
                 "roots": ["痴"],
                 cetasika:["寻", "伺", "痴", "无愧", "无惭", "掉举"],
+                "functions": ["速行"],
+                "gates": ["六门"],
                 children: [
                     {
                       "name": "悦俱邪见相应无行心",
                       "feeling": "悦",
                       "roots": ["贪"],
-                      "functions": [],
-                      "gates": [],
                       "object": [],
                       "mental_object": [],
                       "basis": [],
@@ -133,6 +133,8 @@ const cittas =
                 realm: "欲",
                 category: ["善"],
                 "roots": ["无贪", "无嗔"],
+                "functions": ["速行"],
+                "gates": ["六门"],
                 cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 cetasika_opt_ext: ["正语", "正业", "正命", "悲悯", "随喜"],
                 children: [
@@ -211,6 +213,8 @@ const cittas =
                 realm: "欲",
                 category: ["无记", "果报", "有因"],
                 "roots": ["无贪", "无嗔"],
+                "functions": ["离路心", "彼所缘"],
+                "gates": ["六门", "离门"],
                 cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 children: [
                     {
@@ -291,37 +295,51 @@ const cittas =
                     {
                       "name": "眼识",
                       "feeling": "舍",
+                      "functions": ["见"],
+                      "gates": ["眼门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "耳识",
                       "feeling": "舍",
+                      "functions": ["听"],
+                      "gates": ["耳门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "鼻识",
                       "feeling": "舍",
+                      "functions": ["嗅"],
+                      "gates": ["鼻门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "舌识",
                       "feeling": "舍",
+                      "functions": ["尝"],
+                      "gates": ["舌门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "身识",
                       "feeling": "苦",
+                      "functions": ["触"],
+                      "gates": ["身门"],
                       "notes": ["苦", "俱", "五识"]
                     },
                     {
                       "name": "舍俱领受心",
                       "feeling": "舍",
+                      "functions": ["领受"],
+                      "gates": ["五门"],
                       cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "领受心"]
                     },
                     {
                       "name": "舍俱推度心",
                       "feeling": "舍",
+                      "functions": ["离路心", "推度", "彼所缘"],
+                      "gates": ["六门", "离门"],
                       cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "推度心"]
                     }
@@ -335,43 +353,59 @@ const cittas =
                     {
                       "name": "眼识",
                       "feeling": "舍",
+                      "functions": ["见"],
+                      "gates": ["眼门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "耳识",
                       "feeling": "舍",
+                      "functions": ["听"],
+                      "gates": ["耳门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "鼻识",
                       "feeling": "舍",
+                      "functions": ["嗅"],
+                      "gates": ["鼻门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "舌识",
                       "feeling": "舍",
+                      "functions": ["尝"],
+                      "gates": ["舌门"],
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "身识",
                       "feeling": "乐",
+                      "functions": ["触"],
+                      "gates": ["身门"],
                       "notes": ["乐", "俱", "五识"]
                     },
                     {
                       "name": "舍俱领受心",
                       "feeling": "舍",
+                      "functions": ["领受"],
+                      "gates": ["五门"],
                       cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "领受心"]
                     },
                     {
                       "name": "舍俱推度心",
                       "feeling": "舍",
+                      "functions": ["离路心", "推度", "彼所缘"],
+                      "gates": ["六门", "离门"],
                       cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "推度心"]
                     },
                     {
                       "name": "悦俱推度心",
                       "feeling": "悦",
+                      "functions": ["推度", "彼所缘"],
+                      "gates": ["六门"],
                       cetasika: ["寻", "伺", "胜解", "喜"],
                       "notes": ["悦", "俱", "推度心"]
                     }
@@ -380,6 +414,8 @@ const cittas =
             {
                 name: "8大唯作心",
                 realm: "欲",
+                "functions": ["速行"],
+                "gates": ["六门"],
                 cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 cetasika_opt_ext: ["悲悯", "随喜"]
                 note: "有因唯作心是阿罗汉独有",
@@ -464,12 +500,16 @@ const cittas =
                     {
                       "name": "五门转向心",
                       "feeling": "舍",
+                      "functions": ["转向"],
+                      "gates": ["五门"],
                       cetasika: ["寻", "伺", "胜解"],
                       "notes": ["五门转向心"]
                     },
                     {
                       "name": "意门转向心",
                       "feeling": "舍",
+                      "functions": ["转向、确定"],
+                      "gates": ["六门"],
                       cetasika: ["寻", "伺", "胜解", "精进"],
                       "notes": ["意门转向心"]
                     },
@@ -769,45 +809,30 @@ const cittas =
                 realm: "出世间",
                 category: ["无记", "果报", "有因"],
                 "roots": ["无贪", "无嗔", "无痴"],
+                "feeling": "依禅那而定",
                 cetasika: ["正语", "正业", "正命", "胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 note: "依照禅定状态(121心)可能有寻、伺、喜心所",
                 children: [
                     {
                       "name": "须陀洹果心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "断三结",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "斯陀含果心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "断粗欲界贪、嗔",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "阿那含果心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "断细欲界贪嗔",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "阿罗汉果心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "断五上分结",
                       "example": "",
                       "notes": []
