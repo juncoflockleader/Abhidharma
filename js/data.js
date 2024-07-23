@@ -463,16 +463,19 @@ const cittas =
                 children: [
                     {
                       "name": "五门转向心",
+                      "feeling": "舍",
                       cetasika: ["寻", "伺", "胜解"],
                       "notes": ["五门转向心"]
                     },
                     {
                       "name": "意门转向心",
+                      "feeling": "舍",
                       cetasika: ["寻", "伺", "胜解", "精进"],
                       "notes": ["意门转向心"]
                     },
                     {
                       "name": "生笑心",
+                      "feeling": "悦",
                       cetasika: ["寻", "伺", "胜解", "精进", "喜"],
                       "notes": ["生笑心"]
                     }
@@ -487,6 +490,7 @@ const cittas =
                 children: [
                     {
                       "name": "初禅心",
+                      "feeling": "悦",
                       cetasika: ["寻", "伺", "喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "寻、伺、喜、乐、一境性",
@@ -494,6 +498,7 @@ const cittas =
                     },
                     {
                       "name": "第二禅心",
+                      "feeling": "悦",
                       cetasika: ["伺", "喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "伺、喜、乐、一境性",
@@ -501,6 +506,7 @@ const cittas =
                     },
                     {
                       "name": "第三禅心",
+                      "feeling": "悦",
                       cetasika: ["喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "喜、乐、一境性",
@@ -508,12 +514,14 @@ const cittas =
                     },
                     {
                       "name": "第四禅心",
+                      "feeling": "悦",
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "乐、一境性",
                       "notes": []
                     },
                     {
                       "name": "第五禅心",
+                      "feeling": "舍",
                       "note": "舍、一境性",
                       "notes": []
                     },
@@ -528,6 +536,7 @@ const cittas =
                 children: [
                     {
                       "name": "初禅心",
+                      "feeling": "悦",
                       cetasika: ["寻", "伺", "喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "寻、伺、喜、乐、一境性",
@@ -535,6 +544,7 @@ const cittas =
                     },
                     {
                       "name": "第二禅心",
+                      "feeling": "悦",
                       cetasika: ["伺", "喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "伺、喜、乐、一境性",
@@ -542,6 +552,7 @@ const cittas =
                     },
                     {
                       "name": "第三禅心",
+                      "feeling": "悦",
                       cetasika: ["喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "喜、乐、一境性",
@@ -549,12 +560,14 @@ const cittas =
                     },
                     {
                       "name": "第四禅心",
+                      "feeling": "悦",
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "乐、一境性",
                       "notes": []
                     },
                     {
                       "name": "第五禅心",
+                      "feeling": "舍",
                       "note": "舍、一境性",
                       "notes": []
                     },
@@ -569,6 +582,7 @@ const cittas =
                 children: [
                     {
                       "name": "初禅心",
+                      "feeling": "悦",
                       cetasika: ["寻", "伺", "喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "寻、伺、喜、乐、一境性",
@@ -576,6 +590,7 @@ const cittas =
                     },
                     {
                       "name": "第二禅心",
+                      "feeling": "悦",
                       cetasika: ["伺", "喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "伺、喜、乐、一境性",
@@ -583,6 +598,7 @@ const cittas =
                     },
                     {
                       "name": "第三禅心",
+                      "feeling": "悦",
                       cetasika: ["喜"],
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "喜、乐、一境性",
@@ -590,12 +606,14 @@ const cittas =
                     },
                     {
                       "name": "第四禅心",
+                      "feeling": "悦",
                       cetasika_opt_ext: ["悲悯", "随喜"],
                       "note": "乐、一境性",
                       "notes": []
                     },
                     {
                       "name": "第五禅心",
+                      "feeling": "舍",
                       "note": "舍、一境性",
                       "notes": []
                     },
@@ -606,44 +624,29 @@ const cittas =
                 realm: "无色",
                 category: ["善"],
                 "roots": ["无贪", "无嗔", "无痴"],
-                cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
+                cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],    
+                "feeling": "悦",
                 children: [
                     {
                       "name": "空无边处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "识无边处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "无所有处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "非想非非想处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
@@ -653,46 +656,31 @@ const cittas =
             {
                 name: "4广大果报心",
                 realm: "无色",
+                "feeling": "悦",
                 category: ["无记", "果报", "有因"],
                 "roots": ["无贪", "无嗔", "无痴"],
                 cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 children: [
                     {
                       "name": "空无边处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "识无边处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "无所有处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "非想非非想处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
@@ -704,44 +692,29 @@ const cittas =
                 realm: "无色",
                 category: ["无记", "唯作", "有因"],
                 "roots": ["无贪", "无嗔", "无痴"],
+                "feeling": "悦",
                 cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
                 children: [
                     {
                       "name": "空无边处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "识无边处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "无所有处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
                     },
                     {
                       "name": "非想非非想处心",
-                      "feeling": "",
-                      "roots": "",
-                      "condition": "",
-                      "volition": "",
                       "note": "舍、一境性",
                       "example": "",
                       "notes": []
@@ -751,6 +724,7 @@ const cittas =
             {
                 name: "4出世间善心",
                 realm: "出世间",
+                "feeling": "依禅那而定",
                 category: ["善"],
                 "roots": ["无贪", "无嗔", "无痴"],
                 cetasika: ["正语", "正业", "正命", "胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
