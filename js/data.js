@@ -302,8 +302,8 @@ const cittas = [
     },
     {
         name: "7无因不善果报心",
-        realm: ["无记", "果报", "无因"],
-        category: "善",
+        realm: "欲",
+        category: ["无记", "果报", "无因"],
         children: [
             {
               "name": "眼识",
@@ -376,6 +376,94 @@ const cittas = [
               "note": ["舍", "俱", "推度心"]
             }
         ]
+    },
+    ,
+    {
+        name: "8无因善果报心",
+        realm: "欲",
+        category: ["无记", "果报", "无因"],
+        children: [
+            {
+              "name": "眼识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "耳识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "鼻识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "舌识",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "五识"]
+            },
+            {
+              "name": "身识",
+              "feeling": "乐",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["乐", "俱", "五识"]
+            },
+            {
+              "name": "舍俱领受心",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "领受心"]
+            },
+            {
+              "name": "舍俱推度心",
+              "feeling": "舍",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["舍", "俱", "推度心"]
+            },
+            {
+              "name": "悦俱推度心",
+              "feeling": "悦",
+              "root": "",
+              "condition": "",
+              "volition": "",
+              "note": "",
+              "example": "",
+              "note": ["悦", "俱", "推度心"]
+            }
+        ]
     }
     
   ];
@@ -390,10 +478,16 @@ const cittas = [
     "忧": {
       "note": "domanassa，直译为不好的心意"
     },
+    "乐": {
+        "note": ""
+    },
     "智": {
         "note": ""
     },
     "领受心": {
+        "note": ""
+    },
+    "推度心": {
         "note": ""
     },
     "五识": {
