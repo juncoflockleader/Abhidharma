@@ -620,30 +620,30 @@ const cittas = [
           },
           {
             name: "3离心所",
-            note: "只出现于欲界8大善心，及8出世间心。8出世间心必然同时生起三离心所，而欲界善心则视情况生起且一次只能生起一个。离有三种：自然离(有机会造恶但不造)，持戒离(由于持戒不造恶)，正断离(出世间心)",
+            note: "只出现于欲界8大善心，及8出世间心。8出世间心必然同时生起3离心所，而欲界善心则视情况生起且一次只能生起一个。离有三种：自然离(有机会造恶但不造)，持戒离(由于持戒不造恶)，正断离(出世间心)",
             children: [
               {
                 "name": "正语",
-                "char_mark": "",
-                "function": "",
-                "appearance": "",
-                "proximate_cause": "",
+                "char_mark": "远离、摆脱不正语",
+                "function": "远离恶语",
+                "appearance": "不造恶语",
+                "proximate_cause": "信、惭、愧、知足等",
                 "note": "",
               },
               {
                 "name": "正业",
-                "char_mark": "",
-                "function": "",
-                "appearance": "",
-                "proximate_cause": "",
+                "char_mark": "远离、摆脱不正业",
+                "function": "远离身恶行",
+                "appearance": "不造身恶行",
+                "proximate_cause": "信、惭、愧、知足等",
                 "note": "",
               },
               {
                 "name": "正命",
-                "char_mark": "",
-                "function": "",
-                "appearance": "",
-                "proximate_cause": "",
+                "char_mark": "远离、摆脱不正命",
+                "function": "远离邪命",
+                "appearance": "不造邪命",
+                "proximate_cause": "信、惭、愧、知足等",
                 "note": "",
               }
             ]
@@ -654,18 +654,18 @@ const cittas = [
             children: [
               {
                 "name": "悲悯",
-                "char_mark": "",
-                "function": "",
-                "appearance": "",
-                "proximate_cause": "",
+                "char_mark": "悲悯，拔除自他之苦",
+                "function": "不忍见自他之苦",
+                "appearance": "不残忍，或导致自他不残忍",
+                "proximate_cause": "如理作意见受尽苦难的自他没有依归",
                 "note": "",
               },
               {
                 "name": "随喜",
-                "char_mark": "",
-                "function": "",
-                "appearance": "",
-                "proximate_cause": "",
+                "char_mark": "随喜自他利益、成就而生喜悦",
+                "function": "不嫉妒自他的成就",
+                "appearance": "对自他的成就无厌恶",
+                "proximate_cause": "见到自他的成就",
                 "note": "",
               }
             ]
@@ -675,10 +675,10 @@ const cittas = [
             children: [
               {
                 "name": "慧根",
-                "char_mark": "",
-                "function": "",
-                "appearance": "",
-                "proximate_cause": "",
+                "char_mark": "1.透彻地如实知见究竟法的自性相与共相;2.毫无瑕疵地彻知究竟法，如神射手般一箭贯穿目标",
+                "function": "如油灯般照亮目标（意即驱除遮蔽目标的黑暗愚痴)",
+                "appearance": "对目标无迷惑（如受到好向导指示森林的途径）",
+                "proximate_cause": "定",
                 "note": "出现于欲界12智相应心、一切色界心、无色界心与出世间心",
               }
             ]
