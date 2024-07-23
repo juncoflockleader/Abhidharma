@@ -129,6 +129,7 @@ const cittas =
                 name: "8大善心",
                 realm: "欲",
                 category: ["善"],
+                cetasika: ["寻", "伺", "胜解", "精进"],
                 children: [
                     {
                       "name": "悦俱智相应无行心",
@@ -136,8 +137,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"],
                       "notes": ["悦", "俱", "智", "相应", "无行"]
                     },
                     {
@@ -146,8 +146,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"],
                       "notes": ["悦", "俱", "智", "相应", "有行"]
                     },
                     {
@@ -156,8 +155,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"],
                       "notes": ["悦", "俱", "智", "不相应", "无行"]
                     },
                     {
@@ -166,8 +164,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["喜", "欲"],
                       "notes": ["悦", "俱", "智", "不相应", "有行"]
                     },
                     {
@@ -176,8 +173,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"],
                       "notes": ["舍", "俱", "智", "相应", "无行"]
                     },
                     {
@@ -186,8 +182,7 @@ const cittas =
                       "root": "慧",
                       "condition": "相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"],
                       "notes": ["舍", "俱", "智", "相应", "有行"]
                     },
                     {
@@ -196,8 +191,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "无行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"],
                       "notes": ["悦", "俱", "智", "不相应", "无行"]
                     },
                     {
@@ -206,8 +200,7 @@ const cittas =
                       "root": "慧",
                       "condition": "不相应",
                       "volition": "有行",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["欲"],
                       "notes": ["悦", "俱", "智", "不相应", "有行"]
                     }
                 ]
@@ -351,81 +344,44 @@ const cittas =
                     {
                       "name": "眼识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "耳识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "鼻识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "舌识",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["舍", "俱", "五识"]
                     },
                     {
                       "name": "身识",
                       "feeling": "乐",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
                       "notes": ["乐", "俱", "五识"]
                     },
                     {
                       "name": "舍俱领受心",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "领受心"]
                     },
                     {
                       "name": "舍俱推度心",
                       "feeling": "舍",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解"],
                       "notes": ["舍", "俱", "推度心"]
                     },
                     {
                       "name": "悦俱推度心",
                       "feeling": "悦",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解", "喜"],
                       "notes": ["悦", "俱", "推度心"]
                     }
                 ]
@@ -526,32 +482,17 @@ const cittas =
                 children: [
                     {
                       "name": "五门转向心",
-                      "feeling": "",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解"],
                       "notes": ["五门转向心"]
                     },
                     {
                       "name": "意门转向心",
-                      "feeling": "",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解", "精进"],
                       "notes": ["意门转向心"]
                     },
                     {
                       "name": "生笑心",
-                      "feeling": "",
-                      "root": "",
-                      "condition": "",
-                      "volition": "",
-                      "note": "",
-                      "example": "",
+                      cetasika: ["寻", "伺", "胜解", "精进", "喜"],
                       "notes": ["生笑心"]
                     }
                 ]
