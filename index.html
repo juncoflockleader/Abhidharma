@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complex Chart</title>
+  <style>
+    /* Tooltip styling */
+    #tooltip {
+      position: absolute;
+      text-align: left;
+      padding: 2px;
+      font: 12px sans-serif;
+      background: lightsteelblue;
+      border: 0px;
+      border-radius: 8px;
+      pointer-events: none;
+      opacity: 0.9;
+      visibility: hidden; /* Ensure it starts as hidden */
+      z-index: 1000; /* Ensure it's above other elements */
+      white-space: pre-line; /* Ensure text wraps */
+    }
+  </style>
+</head>
+<body>
+<div id="tooltip" style="position: absolute; visibility: hidden; padding: 10px; background: white; border: 1px solid #ccc; border-radius: 5px; pointer-events: none;"></div>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
