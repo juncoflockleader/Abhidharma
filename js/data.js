@@ -399,6 +399,7 @@ const cittas =
         {
           name: "8无因善果报心",
           realm: "欲",
+          "object_time": ["现在"],
           category: ["无记", "果报", "无因"],
           children: [
             {
