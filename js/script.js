@@ -1,14 +1,15 @@
 
 // Set up SVG container
-const columnWidth = 210;
-const rowHeight = 110;
-const exHeight = 100; // extra height for the first row
+const rowHeaderWidth = 120;
+const columnWidths = [120, 120, 120, 220, 120, 120];
+const columnHeaderHeight = 105;
+const rowHeights = [210, 105, 105, 105];
 const columns = 6;
 const rows = 4;
-const tableWidth = columnWidth * columns + columnWidth;
-const tableHeight = rowHeight * rows + rowHeight + exHeight;
-const svgWidth = tableWidth;
-const svgHeight = tableHeight * 2;
+const tableWidth = rowHeaderWidth + columnWidths.reduce((accumulator, v) => accumulator + v, 0);
+const tableHeight = columnHeaderHeight + rowHeights.reduce((accumulator, v) => accumulator + v, 0);
+const svgWidth = 1600;
+const svgHeight = 1200;
 
 const tooltip = d3.select("#tooltip");
 
@@ -16,8 +17,8 @@ const svg = d3.select('body').append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
-function renderCell(x, y, w, h, color) {
-    return svg.append('rect')
+function renderCell(obj, x, y, w, h, color) {
+    return obj.append('rect')
         .attr('x', x)
         .attr('y', y)
         .attr('width', w)
@@ -27,8 +28,22 @@ function renderCell(x, y, w, h, color) {
         .attr('fill', color);
 }
 
+function renderText(obj, x, y, w, h, text, params={size: '16px', align:'middle'}) {
+    const rx = params.align == 'middle' ? x + w / 2 : x;
+    const ry = y + h / 2;
+    return obj.append('text')
+        .attr('x', rx)
+        .attr('y', ry)
+        .attr('text-anchor', params.align)
+        .attr('dominant-baseline', 'central')
+        .text(text)
+        .attr('font-size', params.size);
+}
+
 function renderFirstCell() {
-  renderCell(0, 0, columnWidth, rowHeight, 'lightblue');
+    const columnWidth = rowHeaderWidth;
+    const rowHeight = columnHeaderHeight;
+  renderCell(svg, 0, 0, columnWidth, rowHeight, 'lightblue');
   svg.append('line')
       .attr('x1', 0) // Start of line (x-coordinate)
       .attr('y1', 0) // Start of line (y-coordinate)
@@ -37,57 +52,46 @@ function renderFirstCell() {
       .attr('stroke', 'grey') // Line color
       .attr('stroke-width', 1); // Line width
 
-    // Calculate approximate centers of the two triangles
-    const centerX1 = columnWidth / 3;
-    const centerY1 = rowHeight / 3;
-    const centerX2 = columnWidth * 2 / 3;
-    const centerY2 = rowHeight * 2 / 3;
-
     // Add text to the first triangle
-      svg.append('text')
-          .attr('x', centerX1)
-          .attr('y', centerY2)
-          .attr('text-anchor', 'middle')
-          .attr('dominant-baseline', 'central')
-          .text(data.header.row_header);
-
-    // Add text to the second triangle
-      svg.append('text')
-          .attr('x', centerX2)
-          .attr('y', centerY1)
-          .attr('text-anchor', 'middle')
-          .attr('dominant-baseline', 'central')
-          .text(data.header.column_header);
+    renderText(svg, 0, rowHeight * 1/3, columnWidth * 2/3, rowHeight, data.header.row_header);
+    renderText(svg, columnWidth * 1/3, 0, columnWidth, rowHeight * 2 / 3, data.header.column_header);
 }
 
 function renderHeader(x, y, w, h, text) {
-  renderCell(x, y, w, h, 'lightcyan');
+  renderCell(svg, x, y, w, h, 'lightcyan');
+  renderText(svg, x, y, w, h, text);
+}
 
-    svg.append('text')
-        .attr('x', x + w / 2) // Position the text in the middle of the rectangle's width
-        .attr('y', y + h / 2) // Position the text in the middle of the rectangle's height
-        .attr('text-anchor', 'middle') // Center the text at the specified (x, y) position
-        .text(text);
-
+function subArraySum(array, start, end) {
+    let result = 0;
+    for (let i = start; i < end; ++i) {
+        result += array[i];
+    }
+    return result;
 }
 
 function renderColumnHeaders() {
-    for (let i = 0; i < 2; i++) {
-      renderHeader(columnWidth * (i + 1), 0, columnWidth, rowHeight, data.columns_header[i].name);
+    const rowHeight = columnHeaderHeight;
+    let x = rowHeaderWidth;
+    for (let i = 0; i < columns; ++i) {
+        let y = i >= 2 ? rowHeight / 3 * 2 : 0;
+        let height = i >= 2 ? rowHeight / 3 : rowHeight;
+        let name = i >= 2 ? data.columns_header[2].children[i < 4 ? 0 : 1].children[i % 2].name : data.columns_header[i].name;
+        renderHeader(x, y, columnWidths[i], height, name);
+        x += columnWidths[i];
     }
-    renderHeader(columnWidth * 3, 0, columnWidth*4, rowHeight / 3, data.columns_header[2].name);
-    for (let i = 0; i < 2; i++) {
-      renderHeader(columnWidth * (3 + i * 2), rowHeight / 3, columnWidth*2, rowHeight/3, data.columns_header[2].children[i].name);
-    }
-    for (let i = 0; i < 4; i++) {
-      renderHeader(columnWidth * (3 + i), rowHeight / 3 * 2, columnWidth, rowHeight / 3, data.columns_header[2].children[Math.floor(i / 2)].children[Math.floor(i % 2)].name);
-    }
+
+    renderHeader(rowHeaderWidth + subArraySum(columnWidths, 0, 2), rowHeight / 3, subArraySum(columnWidths, 2, 4), rowHeight/3, data.columns_header[2].children[0].name);
+    renderHeader(rowHeaderWidth + subArraySum(columnWidths, 0, 4), rowHeight / 3, subArraySum(columnWidths, 4, 6), rowHeight/3, data.columns_header[2].children[1].name);
+    renderHeader(rowHeaderWidth + subArraySum(columnWidths, 0, 2), 0, subArraySum(columnWidths, 2, 6), rowHeight / 3, data.columns_header[2].name);
 }
 
 
 function renderRowHeaders() {
+    const columnWidth = rowHeaderWidth;
     for (let i = 0; i < rows; i++) {
-      renderHeader(0, rowHeight * (i + 1) + (i > 0 ? exHeight : 0), columnWidth, rowHeight + (i === 0 ? exHeight : 0), data.rows_header[i]);
+        const rowHeight = rowHeights[i];
+      renderHeader(0, columnHeaderHeight + subArraySum(rowHeights, 0, i), columnWidth, rowHeight, data.rows_header[i]);
     }
 }
 
@@ -119,20 +123,8 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
   attrs.cetasika_opt_ext = cittaGroup.cetasika_opt_ext || [];
   let padding = 5;
   // Draw the header row
-  tableGroup.append('rect')
-      .attr('x', padding)
-      .attr('y', padding)
-      .attr('width', cellWidth - padding * 2)
-      .attr('height', headerHeight)
-      .attr('stroke', 'grey') // Line color
-      .attr('stroke-width', 1) // Line width
-      .attr('fill', 'lightgrey');
-  tableGroup.append('text')
-      .attr('x', 10) // Small padding from the left
-      .attr('y', padding + headerHeight / 2)
-      .attr('dominant-baseline', 'middle')
-      .text(cittaGroup.name)
-      .attr('font-size', '12px');
+  renderCell(tableGroup, padding, padding, cellWidth - padding * 2, headerHeight, 'lightgrey');
+  renderText(tableGroup, padding * 2, padding, cellWidth - padding * 2, headerHeight, cittaGroup.name, {size: '12px', align: 'left'});
 
   // Loop through the data items and draw each row
   cittaGroup.children.forEach((item, index) => {
@@ -154,50 +146,36 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
         });
 
     const yPosition = padding + headerHeight + index * rowHeight;
-    itemGroup.append('rect')
-        .attr('x', padding)
-        .attr('y', yPosition)
-        .attr('width', cellWidth - padding * 2)
-        .attr('height', rowHeight)
-        .attr('stroke', 'grey')
-        .attr('stroke-width', 1)
-        .attr('fill', 'white');
+    renderCell(itemGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white');
 
-    itemGroup.append('text')
-        .attr('x', 5)
-        .attr('y', yPosition + rowHeight / 2)
-        .attr('dominant-baseline', 'middle')
-        .text(item.name)
-        .attr('font-size', '10px');
+    renderText(itemGroup, padding * 2, yPosition, cellWidth - padding * 2, rowHeight, item.name, {size: '10px', align: 'left'});
   });
 }
 
 function renderGridCells() {
+    let y = columnHeaderHeight;
     // Loop through each row
-    for (let rowIndex = 1; rowIndex <= rows; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
+        let x = rowHeaderWidth;
+        const rowHeight = rowHeights[rowIndex];
         // Loop through each column
-        for (let colIndex = 1; colIndex <= columns; colIndex++) {
+        for (let colIndex = 0; colIndex < columns; colIndex++) {
             // Calculate x and y position for the cell
-            const x = colIndex * columnWidth;
-            let y = rowIndex * rowHeight;
-            if (rowIndex > 1) {
-              y += exHeight;
-            }
-
-            let rh = rowIndex === 1 ? rowHeight + exHeight : rowHeight;
+            const columnWidth = columnWidths[colIndex];
             // Render the cell with a default color
-            renderCell(x, y, columnWidth, rh, 'white');
+            renderCell(svg, x, y, columnWidth, rowHeight, 'white');
 
-            let cittasIndexes = data.cells_citta_group[rowIndex - 1][colIndex - 1];
+            let cittasIndexes = data.cells_citta_group[rowIndex][colIndex];
             if (cittasIndexes.length === 1) {
-              createTableInCell(x, y, columnWidth, rh, cittas, cittasIndexes[0]);
+              createTableInCell(x, y, columnWidth, rowHeight, cittas, cittasIndexes[0]);
             } else {
                 cittasIndexes.forEach((cittaIndex, index) => {
-                    createTableInCell(x  + index * columnWidth / 2, y, columnWidth / 2, rh, cittas, cittaIndex);
+                    createTableInCell(x  + index * columnWidth / 2, y, columnWidth / 2, rowHeight, cittas, cittaIndex);
                 });
             }
-
+            x += columnWidth;
         }
+        y += rowHeight;
     }
 }
 
@@ -211,11 +189,6 @@ function updateTooltipContent(tooltip, data) {
       .attr("x", 10); // Horizontal position; adjust as needed
 
   const lines = [
-    "分类: " + data.category,
-    "受: " + data.feeling,
-    "心所: " + data.cetasika.join(', '),
-    "可能心所:" + data.cetasika_opt_ext.join(', '),
-    "因: " + data.roots.join(', '),
     "作用: " + data.functions.join(', '),
     "门: " + data.gates.join(', '),
     "所缘: " + data.objects.join(', '),
@@ -234,22 +207,17 @@ function updateTooltipContent(tooltip, data) {
 }
 
 function renderCetasikaHeader(x, y, w, h, text) {
-  renderCell(x, y, w, h, 'lightcyan');
-
-  svg.append('text')
-      .attr('x', x + w / 2) // Position the text in the middle of the rectangle's width
-      .attr('y', y + h / 2) // Position the text in the middle of the rectangle's height
-      .attr('text-anchor', 'middle') // Center the text at the specified (x, y) position
-      .attr('font-size', '12px')
-      .text(text);
-
+  renderCell(svg, x, y, w, h, 'lightcyan');
+  renderText(svg, x, y, w, h, text, {size: '12px', align: 'middle'});
 }
 
 function renderCetasikaCell(x, y, w, h, text) {
-  let cell = renderCell(x, y, w, h, 'white');
+  let cell = renderCell(svg, x, y, w, h, 'white');
   cell.attr('class', 'cetasika-cell');
 
-  const textElement = svg.append('text')
+  // Start text at the top of the cell
+  const textElement = renderText(svg, x, y, w, 0, "", {size: '12px', align: 'middle'});
+  svg.append('text')
       .attr('x', x + w / 2) // Center the text horizontally in the cell
       .attr('y', y) // Start text at the top of the cell
       .attr('text-anchor', 'middle') // Center the text at the specified (x, y) position
@@ -272,8 +240,6 @@ function renderCetasikaTable() {
   let columnWidth = 25;
   let rowHeight = 30;
   renderCetasikaHeader(0, tableHeight + yoffset, columnWidth * 52, rowHeight, cetasika.name);
-
-
   renderCetasikaHeader(0, tableHeight + yoffset + rowHeight, columnWidth * 13, rowHeight, cetasika.children[0].name);
   renderCetasikaHeader(columnWidth * 13, tableHeight + yoffset + rowHeight, columnWidth * 14, rowHeight, cetasika.children[1].name);
   renderCetasikaHeader(columnWidth * 27, tableHeight + yoffset + rowHeight, columnWidth * 25, rowHeight, cetasika.children[2].name);
@@ -294,7 +260,7 @@ function renderCetasikaTable() {
     for (let j = 0; j < cetasika.children[i].children.length; j++) {
       for (let k = 0; k < cetasika.children[i].children[j].children.length; k++) {
         let name = cetasika.children[i].children[j].children[k].name;
-        let cell = renderCetasikaCell(x, tableHeight + yoffset + rowHeight * 3, columnWidth, rowHeight * 3, name);
+        let cell = renderCetasikaCell(x, tableHeight + yoffset + rowHeight * 3, columnWidth, rowHeight * 2.5, name);
         cetasikaLookup[name] = cell;
         x += columnWidth;
       }
@@ -303,11 +269,48 @@ function renderCetasikaTable() {
 
 }
 
+const feelingTableX = tableWidth + 20;
+const feelingWidth = 30;
+const feelingHeight = 30;
+let feelingText = null;
+let feelingColor = null;
+function renderFeelingBase() {
+    let x = feelingTableX;
+    let y = 0;
+    let w = feelingWidth;
+    let h = feelingHeight;
+    renderCell(svg, x, y, w, h, 'lightcyan');
+    renderText(svg, x, y, w, h, '受');
+    feelingColor = renderCell(svg, x, y + h, w, h, 'white');
+    feelingText = renderText(svg, x, y + h, w, h, '');
+}
+
+const causeTableX = feelingTableX + feelingWidth + 20;
+const causeWidth = 30;
+const causeHeight = 30;
+const causes = ['贪','嗔','痴','无贪','无嗔','无痴','无因'];
+let causeTableLookup = {};
+function renderCauseTable() {
+    let x = causeTableX;
+    let y = 0;
+    let w = causeWidth;
+    let h = causeHeight;
+    renderCell(svg, x, y, w * 7, h, 'lightcyan');
+    renderText(svg, x, y, w * 7, h, '因');
+    for (let i = 0; i < causes.length; ++i) {
+        causeTableLookup[causes[i]] = renderCell(svg, x + causeWidth * i, y + causeHeight, causeWidth, causeHeight, 'white');
+        renderText(svg, x + causeWidth * i, y + causeHeight, causeWidth, causeHeight, causes[i], {size: '14px', align: 'middle'});
+    }
+}
+
+
 renderFirstCell();
 renderColumnHeaders();
 renderRowHeaders();
 renderGridCells();
 renderCetasikaTable();
+renderFeelingBase();
+renderCauseTable();
 
 function highlightCetasika(data) {
   for (let i = 0; i < data.cetasika.length; i++) {
@@ -324,6 +327,43 @@ function clearCetasika() {
   }
 }
 
+function updateFeelingText(data) {
+    let text = data.feeling;
+    feelingText.text(text);
+    if (text == '悦' || text == '乐') {
+        feelingColor.attr('fill', 'lightgreen');
+    } else if (text == '苦' || text == '忧') {
+        feelingColor.attr('fill', 'red');
+    } else {
+        feelingColor.attr('fill', 'white');
+    }
+}
+
+function clearFeelingText(data) {
+    feelingText.text('');
+    feelingColor.attr('fill', 'white');
+}
+
+function updateCauseCells(a, color) {
+    for (let i = 0; i < a.length; ++i) {
+        let cell = causeTableLookup[a[i]];
+        cell.attr('fill', color);
+    }
+}
+
+function updateCause(data) {
+    let a = data.roots;
+    if (!a || a.length == 0) {
+        a = ['无因'];
+    }
+    updateCauseCells(a, 'indianred');
+}
+
+function clearCause(data) {
+    updateCauseCells(causes, 'white');
+}
+
+
 svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the selector as needed
     .on("mouseover", function(event, d) {
       d3.select(this).select('rect').attr('fill', 'yellow');
@@ -333,6 +373,8 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
           .style("top", (event.pageY - 10) + "px");
       updateTooltipContent(tooltip, data);
       highlightCetasika(data);
+      updateFeelingText(data);
+      updateCause(data);
     })
     .on("mousemove", function(event) {
       tooltip.style("left", (event.pageX + 10) + "px") // Update position on mouse move
@@ -343,4 +385,6 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
       tooltip.selectAll("text").remove();
       d3.select(this).select('rect').attr('fill', 'white');
       clearCetasika();
+      clearFeelingText();
+      clearCause();
     });
