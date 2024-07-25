@@ -284,12 +284,17 @@ function renderFeelingBase() {
     feelingText = renderText(svg, x, y + h, w, h, '');
 }
 
-function renderSubTable(x, y, w, h, lookupTable, keys, title, color) {
+const subW = 30;
+const subH = 30;
+const subPadding = 20;
+function renderSubTable(x, y, lookupTable, keys, title, color, extW) {
+    const w = subW + (extW ? extW : 0);
+    const h = subH;
     renderCell(svg, x, y, w * keys.length, h, 'lightcyan');
     renderText(svg, x, y, w * keys.length, h, title);
     for (let i = 0; i < keys.length; ++i) {
-        lookupTable[keys[i]] = renderCell(svg, x + timeWidth * i, y + timeHeight, timeWidth, timeHeight, 'white');
-        renderText(svg, x + timeWidth * i, y + timeHeight, timeWidth, timeHeight, keys[i], {size: '12px', align: 'middle'});
+        lookupTable[keys[i]] = renderCell(svg, x + w * i, y + h, w, h, 'white');
+        renderText(svg, x + w * i, y + h, w, h, keys[i], {size: '12px', align: 'middle'});
     }
     return {
         update: function (arr) {
@@ -307,31 +312,28 @@ function renderSubTable(x, y, w, h, lookupTable, keys, title, color) {
     };
 }
 
-const causeTableX = feelingTableX + feelingWidth + 20;
-const causeWidth = 30;
-const causeHeight = 30;
-const causes = ['贪','嗔','痴','无贪','无嗔','无痴','无因'];
+const causeTableX = feelingTableX + feelingWidth + subPadding;
 let causeTableLookup = {};
 function renderCauseTable() {
     let x = causeTableX;
     let y = 0;
-    let w = causeWidth;
-    let h = causeHeight;
-    return renderSubTable(x, y, w, h, causeTableLookup, causes, '因', 'indianred');
+    return renderSubTable(x, y, {}, ['贪','嗔','痴','无贪','无嗔','无痴','无因'], '因', 'indianred');
 }
 
 const timeTableX = feelingTableX;
-const timeTableY = 20 + feelingHeight * 2;
-const timeWidth = 30;
-const timeHeight = 30;
-const times = ['过去','现在','未来','离时'];
-let timeTableLookup = {};
+const timeTableY = subPadding + feelingHeight * 2;
 function renderTimeTable() {
     let x = timeTableX;
     let y = timeTableY;
-    let w = timeWidth;
-    let h = timeHeight;
-    return renderSubTable(x, y, w, h, timeTableLookup, times, '所缘之时', 'lavender');
+    return renderSubTable(x, y, {}, ['过去','现在','未来','离时'], '所缘之时', 'lavender');
+}
+
+const fiveObjectsTableX = timeTableX + 4 * subW + 20;
+const fiveObjectsTableY = timeTableY;
+function renderFiveObjectsTable() {
+    let x = fiveObjectsTableX;
+    let y = fiveObjectsTableY;
+    return renderSubTable(x, y, {}, ['色所缘','香所缘','声所缘','味所缘','触所缘'], '五所缘', 'lightskyblue', 10);
 }
 
 renderFirstCell();
@@ -342,6 +344,7 @@ renderCetasikaTable();
 renderFeelingBase();
 const ct = renderCauseTable();
 const tt = renderTimeTable();
+const fot = renderFiveObjectsTable();
 
 function highlightCetasika(data) {
   for (let i = 0; i < data.cetasika.length; i++) {
@@ -394,6 +397,7 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
       updateFeelingText(data);
       ct.update((data.roots && data.roots.length) ? data.roots : ['无因']);
       tt.update(data.object_time);
+      fot.update(data.objects == '五所缘' ? ['色所缘','香所缘','声所缘','味所缘','触所缘'] : data.objects);
     })
     .on("mousemove", function(event) {
       tooltip.style("left", (event.pageX + 10) + "px") // Update position on mouse move
@@ -407,4 +411,5 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
       clearFeelingText();
       ct.clear();
       tt.clear();
+      fot.clear();
     });
