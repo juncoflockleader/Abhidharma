@@ -193,7 +193,6 @@ function updateTooltipContent(tooltip, data) {
     "门: " + data.gates.join(', '),
     "所缘: " + data.objects.join(', '),
     "法所缘: " + data.mental_objects.join(', '),
-    "所缘之时: " + data.object_time.join(', '),
     "依处: " + data.basis,
     "升起之地: " + data.realms.join(', ')
   ];
@@ -270,7 +269,7 @@ function renderCetasikaTable() {
 }
 
 const feelingTableX = tableWidth + 20;
-const feelingWidth = 30;
+const feelingWidth = 100;
 const feelingHeight = 30;
 let feelingText = null;
 let feelingColor = null;
@@ -285,6 +284,29 @@ function renderFeelingBase() {
     feelingText = renderText(svg, x, y + h, w, h, '');
 }
 
+function renderSubTable(x, y, w, h, lookupTable, keys, title, color) {
+    renderCell(svg, x, y, w * keys.length, h, 'lightcyan');
+    renderText(svg, x, y, w * keys.length, h, title);
+    for (let i = 0; i < keys.length; ++i) {
+        lookupTable[keys[i]] = renderCell(svg, x + timeWidth * i, y + timeHeight, timeWidth, timeHeight, 'white');
+        renderText(svg, x + timeWidth * i, y + timeHeight, timeWidth, timeHeight, keys[i], {size: '12px', align: 'middle'});
+    }
+    return {
+        update: function (arr) {
+            for (let i = 0; i < arr.length; ++i) {
+                let cell = lookupTable[arr[i]];
+                cell.attr('fill', color);
+            }
+        },
+        clear: function () {
+            for (let i = 0; i < keys.length; ++i) {
+                let cell = lookupTable[keys[i]];
+                cell.attr('fill', 'white');
+            }
+        }
+    };
+}
+
 const causeTableX = feelingTableX + feelingWidth + 20;
 const causeWidth = 30;
 const causeHeight = 30;
@@ -295,14 +317,22 @@ function renderCauseTable() {
     let y = 0;
     let w = causeWidth;
     let h = causeHeight;
-    renderCell(svg, x, y, w * 7, h, 'lightcyan');
-    renderText(svg, x, y, w * 7, h, '因');
-    for (let i = 0; i < causes.length; ++i) {
-        causeTableLookup[causes[i]] = renderCell(svg, x + causeWidth * i, y + causeHeight, causeWidth, causeHeight, 'white');
-        renderText(svg, x + causeWidth * i, y + causeHeight, causeWidth, causeHeight, causes[i], {size: '14px', align: 'middle'});
-    }
+    return renderSubTable(x, y, w, h, causeTableLookup, causes, '因', 'indianred');
 }
 
+const timeTableX = feelingTableX;
+const timeTableY = 20 + feelingHeight * 2;
+const timeWidth = 30;
+const timeHeight = 30;
+const times = ['过去','现在','未来','离时'];
+let timeTableLookup = {};
+function renderTimeTable() {
+    let x = timeTableX;
+    let y = timeTableY;
+    let w = timeWidth;
+    let h = timeHeight;
+    return renderSubTable(x, y, w, h, timeTableLookup, times, '所缘之时', 'lavender');
+}
 
 renderFirstCell();
 renderColumnHeaders();
@@ -310,7 +340,8 @@ renderRowHeaders();
 renderGridCells();
 renderCetasikaTable();
 renderFeelingBase();
-renderCauseTable();
+const ct = renderCauseTable();
+const tt = renderTimeTable();
 
 function highlightCetasika(data) {
   for (let i = 0; i < data.cetasika.length; i++) {
@@ -339,30 +370,17 @@ function updateFeelingText(data) {
     }
 }
 
-function clearFeelingText(data) {
-    feelingText.text('');
-    feelingColor.attr('fill', 'white');
-}
-
-function updateCauseCells(a, color) {
-    for (let i = 0; i < a.length; ++i) {
-        let cell = causeTableLookup[a[i]];
+function updateCells(table, arr, color) {
+    for (let i = 0; i < arr.length; ++i) {
+        let cell = table[arr[i]];
         cell.attr('fill', color);
     }
 }
 
-function updateCause(data) {
-    let a = data.roots;
-    if (!a || a.length == 0) {
-        a = ['无因'];
-    }
-    updateCauseCells(a, 'indianred');
+function clearFeelingText(data) {
+    feelingText.text('');
+    feelingColor.attr('fill', 'white');
 }
-
-function clearCause(data) {
-    updateCauseCells(causes, 'white');
-}
-
 
 svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the selector as needed
     .on("mouseover", function(event, d) {
@@ -374,7 +392,8 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
       updateTooltipContent(tooltip, data);
       highlightCetasika(data);
       updateFeelingText(data);
-      updateCause(data);
+      ct.update((data.roots && data.roots.length) ? data.roots : ['无因']);
+      tt.update(data.object_time);
     })
     .on("mousemove", function(event) {
       tooltip.style("left", (event.pageX + 10) + "px") // Update position on mouse move
@@ -386,5 +405,6 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
       d3.select(this).select('rect').attr('fill', 'white');
       clearCetasika();
       clearFeelingText();
-      clearCause();
+      ct.clear();
+      tt.clear();
     });
