@@ -189,12 +189,6 @@ function updateTooltipContent(tooltip, data) {
       .attr("x", 10); // Horizontal position; adjust as needed
 
   const lines = [
-    "作用: " + data.functions.join(', '),
-    "门: " + data.gates.join(', '),
-    "所缘: " + data.objects.join(', '),
-    "法所缘: " + data.mental_objects.join(', '),
-    "依处: " + data.basis,
-    "升起之地: " + data.realms.join(', ')
   ];
 
   lines.forEach((line, index) => {
@@ -284,56 +278,150 @@ function renderFeelingBase() {
     feelingText = renderText(svg, x, y + h, w, h, '');
 }
 
-const subW = 30;
+const subW = 20;
 const subH = 30;
-const subPadding = 20;
-function renderSubTable(x, y, lookupTable, keys, title, color, extW) {
-    const w = subW + (extW ? extW : 0);
-    const h = subH;
-    renderCell(svg, x, y, w * keys.length, h, 'lightcyan');
-    renderText(svg, x, y, w * keys.length, h, title);
+const subPadding = 12;
+function renderSubTable(x, y, keys, title, color, specialUpdate, specialClear) {
+    let rectLookup = {};
+    let textLookup = {};
+    let widths = [];
     for (let i = 0; i < keys.length; ++i) {
-        lookupTable[keys[i]] = renderCell(svg, x + w * i, y + h, w, h, 'white');
-        renderText(svg, x + w * i, y + h, w, h, keys[i], {size: '12px', align: 'middle'});
+        let count = 0;
+        for (let char of keys[i]) {
+            if (/[\x00-\x7F]/.test(char)) {
+                count++;
+            } else {
+                count += 2;
+            }
+        }
+        widths = widths.concat([count * 6 + 3]);
+    }
+    let total = subArraySum(widths, 0, widths.length);
+
+    const h = subH;
+    renderCell(svg, x, y, total, h, 'lightcyan');
+    renderText(svg, x, y, total, h, title, {size: '14px', align: 'middle'});
+    let x0 = x;
+    for (let i = 0; i < keys.length; ++i) {
+        rectLookup[keys[i]] = renderCell(svg, x0, y + h, widths[i], h, 'white');
+        textLookup[keys[i]] = renderText(svg, x0, y + h, widths[i], h, keys[i], {size: '12px', align: 'middle'});
+        x0 += widths[i];
     }
     return {
         update: function (arr) {
             for (let i = 0; i < arr.length; ++i) {
-                let cell = lookupTable[arr[i]];
-                cell.attr('fill', color);
+                if (!specialUpdate || !specialUpdate(arr[i], textLookup, rectLookup)) {
+                    let cell = rectLookup[arr[i]];
+                    cell.attr('fill', color);
+                }
             }
         },
         clear: function () {
             for (let i = 0; i < keys.length; ++i) {
-                let cell = lookupTable[keys[i]];
+                let cell = rectLookup[keys[i]];
                 cell.attr('fill', 'white');
+                if (specialClear) {
+                    specialClear(keys[i], textLookup, rectLookup);
+                }
             }
-        }
+        },
+        endX: x + total,
+        endY: y + 2 * subH
     };
 }
 
-const causeTableX = feelingTableX + feelingWidth + subPadding;
-let causeTableLookup = {};
-function renderCauseTable() {
-    let x = causeTableX;
-    let y = 0;
-    return renderSubTable(x, y, {}, ['贪','嗔','痴','无贪','无嗔','无痴','无因'], '因', 'indianred');
+function renderCauseTable(x, y) {
+    return renderSubTable(x, y, ['贪','嗔','痴','无贪','无嗔','无痴','无因'], '因', 'indianred');
 }
 
-const timeTableX = feelingTableX;
-const timeTableY = subPadding + feelingHeight * 2;
-function renderTimeTable() {
-    let x = timeTableX;
-    let y = timeTableY;
-    return renderSubTable(x, y, {}, ['过去','现在','未来','离时'], '所缘之时', 'lavender');
+function renderTimeTable(x, y) {
+    return renderSubTable(x, y, ['过去','现在','未来','离时'], '所缘之时', 'lavender');
 }
 
-const fiveObjectsTableX = timeTableX + 4 * subW + 20;
-const fiveObjectsTableY = timeTableY;
-function renderFiveObjectsTable() {
-    let x = fiveObjectsTableX;
-    let y = fiveObjectsTableY;
-    return renderSubTable(x, y, {}, ['色所缘','香所缘','声所缘','味所缘','触所缘'], '五所缘', 'lightskyblue', 10);
+function renderFiveObjectsTable(x, y) {
+    return renderSubTable(x, y, ['色所缘','声所缘','香所缘','味所缘','触所缘'], '五所缘', 'lightskyblue');
+}
+
+function renderMentalObjectsTable(x, y) {
+    let specialUpdate = function (key, textLookup, rectLookup) {
+        if (key == '6出世间心') {
+            let key0 = '8出世间心';
+            let cell = rectLookup[key0];
+            cell.attr('fill', 'mediumpurple');
+            let text = textLookup[key0];
+            text.text(key);
+            return true;
+        }
+        return false;
+    }
+    let specialClear = function (key, textLookup, rectLookup) {
+        if (key == '8出世间心') {
+            let text = textLookup[key];
+            text.text(key);
+        }
+    }
+    var mot = renderSubTable(x, y, ['54欲界心','15色界心','12无色界心','8出世间心','52心所21色','涅槃','概念'], '法所缘', 'lightskyblue', specialUpdate, specialClear);
+    return mot;
+}
+
+function renderRealmTable(x, y) {
+    return renderSubTable(x, y, ['欲', '色', '无色'], '升起之地', 'violet');
+}
+
+function renderGateTable(x, y) {
+    let gates = ['眼门','耳门','鼻门','舌门','身门','意门','离门'];
+    let specialUpdate = function (key, textLookup, rectLookup) {
+        let ret = false;
+        if (key == '五门' || key == '六门') {
+            ret = true;
+            for (let i = 0; i < 5; ++i) {
+                let cell = rectLookup[gates[i]];
+                cell.attr('fill', 'tomato');
+            }
+        }
+        if (key == '六门') {
+            let cell = rectLookup[gates[5]];
+            cell.attr('fill', 'tomato');
+        }
+        return ret;
+    }
+    return renderSubTable(x, y, gates, '门', 'tomato', specialUpdate);
+}
+
+function renderBasisTable(x, y) {
+    let w = 60;
+    let h = 30;
+    renderCell(svg, x, y, w, h, 'lightcyan');
+    renderText(svg, x, y, w, h, '五净色', {size: '14px', align: 'middle'});
+    renderCell(svg, x + w, y, w, h, 'lightcyan');
+    renderText(svg, x + w, y, w, h, '心所依处', {size: '14px', align: 'middle'});
+    let basisCell = renderCell(svg, x, y + h, w, h, 'white');
+    let basisText = renderText(svg, x, y + h, w, h, '', {size: '12px', align: 'middle'});
+    let mentalBasisCell = renderCell(svg, x + w, y + h, w, h, 'white');
+    let mentalBasisText = renderText(svg, x + w, y + h, w, h, '', {size: '12px', align: 'middle'});
+    return {
+        update: function (basis) {
+            if (['眼净色','耳净色','鼻净色','舌净色','身净色'].includes(basis)) {
+                basisText.text(basis);
+                basisCell.attr('fill', 'olive');
+            } else {
+                mentalBasisText.text(basis);
+                mentalBasisCell.attr('fill', 'olive');
+            }
+        },
+        clear: function () {
+            basisCell.attr('fill', 'white');
+            mentalBasisCell.attr('fill', 'white');
+            basisText.text('');
+            mentalBasisText.text('');
+        },
+        endX: x + w * 2,
+        endY: y + h * 2
+    }
+}
+
+function renderFunctionTable(x, y) {
+    return renderSubTable(x, y, ['离路心', '速行', '转向', '见', '听', '嗅', '尝', '触觉', '领受', '推度', '彼所缘', '确定'], '作用', 'gold');
 }
 
 renderFirstCell();
@@ -342,9 +430,14 @@ renderRowHeaders();
 renderGridCells();
 renderCetasikaTable();
 renderFeelingBase();
-const ct = renderCauseTable();
-const tt = renderTimeTable();
-const fot = renderFiveObjectsTable();
+const ct = renderCauseTable(feelingTableX + feelingWidth + subPadding, 0);
+const tt = renderTimeTable(feelingTableX, subPadding + ct.endY);
+const fot = renderFiveObjectsTable(tt.endX + subPadding, subPadding + ct.endY);
+const mot = renderMentalObjectsTable(feelingTableX, tt.endY + subPadding);
+const rt = renderRealmTable(feelingTableX, mot.endY + subPadding);
+const gt = renderGateTable(rt.endX + subPadding, mot.endY + subPadding);
+const bt = renderBasisTable(feelingTableX, gt.endY + subPadding);
+const ft = renderFunctionTable(feelingTableX, bt.endY + subPadding);
 
 function highlightCetasika(data) {
   for (let i = 0; i < data.cetasika.length; i++) {
@@ -389,27 +482,44 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
     .on("mouseover", function(event, d) {
       d3.select(this).select('rect').attr('fill', 'yellow');
       const data = d3.select(this).datum();
+      /*
       tooltip.style("visibility", "visible")
           .style("left", (event.pageX + 10) + "px") // Position the tooltip
           .style("top", (event.pageY - 10) + "px");
+       */
       updateTooltipContent(tooltip, data);
       highlightCetasika(data);
       updateFeelingText(data);
       ct.update((data.roots && data.roots.length) ? data.roots : ['无因']);
       tt.update(data.object_time);
       fot.update(data.objects == '五所缘' ? ['色所缘','香所缘','声所缘','味所缘','触所缘'] : data.objects);
+      mot.update(data.mental_objects);
+      rt.update(data.realms);
+      gt.update(data.gates);
+      bt.update(data.basis);
+      ft.update(data.functions);
     })
     .on("mousemove", function(event) {
+        /*
       tooltip.style("left", (event.pageX + 10) + "px") // Update position on mouse move
           .style("top", (event.pageY - 10) + "px");
+
+         */
     })
     .on("mouseout", function() {
+        /*
       tooltip.style("visibility", "hidden");
       tooltip.selectAll("text").remove();
+      */
       d3.select(this).select('rect').attr('fill', 'white');
       clearCetasika();
       clearFeelingText();
       ct.clear();
       tt.clear();
       fot.clear();
+      mot.clear();
+      rt.clear();
+      gt.clear();
+      bt.clear();
+      ft.clear();
     });
