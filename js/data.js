@@ -107,6 +107,7 @@ const cittas =
               "roots": ["嗔"],
               "condition": "相应",
               "volition": "无行",
+              basis: '欲界依',
               cetasika:["胜解", "精进", "欲", "嗔"],
               cetasika_opt_ext: ["嫉", "悭", "恶作"],
               "notes": ["忧", "俱", "嗔恚", "相应", "无行"]
@@ -117,6 +118,7 @@ const cittas =
               "roots": ["嗔"],
               "condition": "相应",
               "volition": "有行",
+              basis: '欲界依',
               cetasika:["胜解", "精进", "欲", "嗔", "昏沉", "睡眠"],
               cetasika_opt_ext: ["嫉", "悭", "恶作"],
               "notes": ["忧", "俱", "嗔恚", "相应", "有行"]
@@ -151,7 +153,7 @@ const cittas =
           "object_time": ["过去","现在","未来","离时"],
           cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
           cetasika_opt_ext: ["正语", "正业", "正命", "悲悯", "随喜"],
-          basis: "心色",
+          basis: "有时依",
           realms: ["欲", "色", "无色"],
           children: [
             {
@@ -160,7 +162,7 @@ const cittas =
               "roots": ["无痴"],
               "condition": "相应",
               "volition": "无行",
-              "mental_objects": ["出世间心除阿罗汉道心果心", "涅槃"],
+              "mental_objects": ["6出世间心", "涅槃"],
               cetasika: ["喜", "欲", "慧"],
               "notes": ["悦", "俱", "智", "相应", "无行"]
             },
@@ -170,7 +172,7 @@ const cittas =
               "roots": ["无痴"],
               "condition": "相应",
               "volition": "有行",
-              "mental_objects": ["出世间心除阿罗汉道心果心", "涅槃"],
+              "mental_objects": ["6出世间心", "涅槃"],
               cetasika: ["喜", "欲", "慧"],
               "notes": ["悦", "俱", "智", "相应", "有行"]
             },
@@ -179,7 +181,7 @@ const cittas =
               "feeling": "悦",
               "condition": "不相应",
               "volition": "无行",
-              "mental_objects": ["出世间心除阿罗汉道心果心"],
+              "mental_objects": ["涅槃"],
               cetasika: ["喜", "欲"],
               "notes": ["悦", "俱", "智", "不相应", "无行"]
             },
@@ -188,7 +190,7 @@ const cittas =
               "feeling": "悦",
               "condition": "不相应",
               "volition": "有行",
-              "mental_objects": ["出世间心除阿罗汉道心果心"],
+              "mental_objects": ["涅槃"],
               cetasika: ["喜", "欲"],
               "notes": ["悦", "俱", "智", "不相应", "有行"]
             },
@@ -198,7 +200,7 @@ const cittas =
               "roots": ["无痴"],
               "condition": "相应",
               "volition": "无行",
-              "mental_objects": ["出世间心除阿罗汉道心果心", "涅槃"],
+              "mental_objects": ["6出世间心", "涅槃"],
               cetasika: ["欲", "慧"],
               "notes": ["舍", "俱", "智", "相应", "无行"]
             },
@@ -208,7 +210,7 @@ const cittas =
               "roots": ["无痴"],
               "condition": "相应",
               "volition": "有行",
-              "mental_objects": ["出世间心除阿罗汉道心果心", "涅槃"],
+              "mental_objects": ["6出世间心", "涅槃"],
               cetasika: ["欲", "慧"],
               "notes": ["舍", "俱", "智", "相应", "有行"]
             },
@@ -217,7 +219,7 @@ const cittas =
               "feeling": "舍",
               "condition": "不相应",
               "volition": "无行",
-              "mental_objects": ["出世间心除阿罗汉道心果心"],
+              "mental_objects": ["涅槃"],
               cetasika: ["欲"],
               "notes": ["悦", "俱", "智", "不相应", "无行"]
             },
@@ -225,7 +227,7 @@ const cittas =
               "name": "舍俱智不相应有行心",
               "feeling": "舍",
               "condition": "不相应",
-              "mental_objects": ["出世间心除阿罗汉道心果心"],
+              "mental_objects": ["涅槃"],
               "volition": "有行",
               cetasika: ["欲"],
               "notes": ["悦", "俱", "智", "不相应", "有行"]
@@ -243,7 +245,7 @@ const cittas =
           "mental_objects": ["54欲界心", "52心所21色"],
           "object_time": ["过去","现在","未来"],
           cetasika: ["寻", "伺", "胜解", "精进", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
-          basis: "心色",
+          basis: "欲界依",
           realms: ["欲"],
           children: [
             {
@@ -373,10 +375,11 @@ const cittas =
             {
               "name": "舍俱领受心",
               "feeling": "舍",
-              basis: "心色",
+              basis: "有时依",
               realms: ["色"],
               "functions": ["领受"],
               "gates": ["五门"],
+              basis: '依',
               "objects": ["五所缘"],
               cetasika: ["寻", "伺", "胜解"],
               "notes": ["舍", "俱", "领受心"]
@@ -384,13 +387,14 @@ const cittas =
             {
               "name": "舍俱推度心",
               "feeling": "舍",
-              basis: "心色",
+              basis: "有时依",
               realms: ["色"],
               "objects": ["五所缘"],
               "mental_objects": ["54欲界心", "52心所21色"],
               "object_time": ["过去", "未来"],
               "functions": ["离路心", "推度", "彼所缘"],
               "gates": ["六门", "离门"],
+              basis: '依',
               cetasika: ["寻", "伺", "胜解"],
               "notes": ["舍", "俱", "推度心"]
             }
@@ -452,9 +456,10 @@ const cittas =
             {
               "name": "舍俱领受心",
               "feeling": "舍",
-              basis: "心色",
+              basis: "有时依",
               realms: ["色"],
               "functions": ["领受"],
+              basis: '依',
               "gates": ["五门"],
               "objects": ["五所缘"],
               cetasika: ["寻", "伺", "胜解"],
@@ -463,7 +468,8 @@ const cittas =
             {
               "name": "舍俱推度心",
               "feeling": "舍",
-              basis: "心色",
+              basis: "有时依",
+              basis: '依',
               realms: ["色"],
               "functions": ["离路心", "推度", "彼所缘"],
               "gates": ["六门", "离门"],
@@ -476,7 +482,7 @@ const cittas =
             {
               "name": "悦俱推度心",
               "feeling": "悦",
-              basis: "心色",
+              basis: "有时依",
               realms: ["色"],
               "functions": ["推度", "彼所缘"],
               "gates": ["六门"],
@@ -493,7 +499,7 @@ const cittas =
           realm: "欲",
           "functions": ["速行"],
           "objects": ["五所缘"],
-          basis: "心色",
+          basis: "有时依",
           realms: ["欲", "色", "无色"],
           "mental_objects": ["54欲界心", "15色界心", "12无色界心", "52心所21色", "概念"],
           "object_time": ["过去","现在","未来","离时"],
@@ -584,7 +590,7 @@ const cittas =
           "objects": ["五所缘"],
           "object_time": ["现在"],
           category: ["无记", "唯作", "无因"],
-          basis: "心色",
+          basis: "有时依",
           realms: ["欲", "色"],
           children: [
             {
@@ -592,6 +598,7 @@ const cittas =
               "feeling": "舍",
               "functions": ["转向"],
               "gates": ["五门"],
+              basis: '依',
               cetasika: ["寻", "伺", "胜解"],
               "notes": ["五门转向心"]
             },
@@ -613,6 +620,7 @@ const cittas =
               "gates": ["六门"],
               "mental_objects": ["54欲界心", "52心所21色"],
               "object_time": ["过去", "未来"],
+              basis: '依',
               cetasika: ["寻", "伺", "胜解", "精进", "喜"],
               "notes": ["生笑心"]
             }
@@ -628,7 +636,7 @@ const cittas =
           category: ["善"],
           cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
           "roots": ["无贪", "无嗔", "无痴"],
-          basis: "心色",
+          basis: "依",
           realms: ["欲", "色"],
           children: [
             {
@@ -679,7 +687,7 @@ const cittas =
           "gates": ["离门"],
           category: ["无记", "果报", "有因"],
           "roots": ["无贪", "无嗔", "无痴"],
-          basis: "心色",
+          basis: "依",
           realms: ["色"],
           cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
           children: [
@@ -725,7 +733,7 @@ const cittas =
         {
           name: "5广大唯作心",
           realm: "色",
-          basis: "心色",
+          basis: "依",
           realms: ["欲", "色"],
           "mental_objects": ["概念"],
           "object_time": ["离时"],
@@ -783,7 +791,7 @@ const cittas =
           "roots": ["无贪", "无嗔", "无痴"],
           cetasika: ["胜解", "精进", "欲", "慧", "信", "念", "惭", "愧", "无贪", "无嗔", "中舍性", "心所轻安", "心轻安", "心所轻快性", "心轻快性", "心所柔软性", "心柔软性", "心所适应性", "心适应性", "心所练达性", "心练达性", "心所正直性", "心正直性"],
           "feeling": "悦",
-          basis: "心色",
+          basis: "有时依",
           realms: ["欲", "色", "无色"],
           children: [
             {
@@ -861,7 +869,7 @@ const cittas =
         {
           name: "4广大唯作心",
           realm: "无色",
-          basis: "心色",
+          basis: "有时依",
           realms: ["欲", "色", "无色"],
           "functions": ["速行"],
           "gates": ["意门"],
@@ -903,9 +911,9 @@ const cittas =
         {
           name: "4出世间善心",
           realm: "出世间",
-          basis: "心色",
+          basis: "有时依",
           realms: ["欲", "色"],
-          "objects": ["涅槃"],
+          "mental_objects": ["涅槃"],
           "object_time": ["离时"],
           "functions": ["速行"],
           "gates": ["意门"],
@@ -917,6 +925,7 @@ const cittas =
           children: [
             {
               "name": "须陀洹道心",
+              basis: "依",
               "note": "断三结",
               "notes": []
             },
@@ -943,9 +952,9 @@ const cittas =
         {
           name: "4出世间果报心",
           realm: "出世间",
-          basis: "心色",
+          basis: "无依",
           realms: ["欲", "色", "无色"],
-          "objects": ["涅槃"],
+          "mental_objects": ["涅槃"],
           "object_time": ["离时"],
           category: ["无记", "果报", "有因"],
           "roots": ["无贪", "无嗔", "无痴"],
