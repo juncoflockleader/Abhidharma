@@ -14,7 +14,7 @@ const cittas =
           "objects": ["五所缘"],
           "mental_objects": ["54欲界心", "15色界心", "12无色界心", "52心所21色", "概念"],
           "object_time": ["过去","现在","未来","离时"],
-          "basis": "心色",
+          "basis": "有时依",
           "realms": ["欲"],
           children: [
             {
