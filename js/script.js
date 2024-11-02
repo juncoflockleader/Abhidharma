@@ -266,6 +266,27 @@ function renderCetasikaCell(x, y, w, h, text) {
       });
     });
 
+  textElement.on("mouseover", function(event, d) {
+      cell.attr('fill', 'yellow');
+      cetasikaIndex[text].cittas.forEach(c => {
+          c.attr('fill', 'yellow');
+      });
+      cetasikaIndex[text].cittas_opt.forEach(c => {
+          c.attr('fill', 'lightyellow');
+      });
+    })
+    .on("mousemove", function(event) {
+    })
+    .on("mouseout", function() {
+      cell.attr('fill', 'white');
+      cetasikaIndex[text].cittas.forEach(c => {
+          c.attr('fill', 'white');
+      });
+      cetasikaIndex[text].cittas_opt.forEach(c => {
+          c.attr('fill', 'white');
+      });
+    });
+
   return cell;
 }
 
