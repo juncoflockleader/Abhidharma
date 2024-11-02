@@ -95,6 +95,8 @@ function renderRowHeaders() {
     }
 }
 
+let cetasikaIndex = {};
+let cittaLookup = {};
 function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
   // Define the table's header and item height
   const headerHeight = 20;
@@ -128,11 +130,13 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
 
   // Loop through the data items and draw each row
   cittaGroup.children.forEach((item, index) => {
+    const cetasika = attrs.cetasika.concat(item.cetasika || []);
+    const cetasika_opt_ext = attrs.cetasika_opt_ext.concat(item.cetasika_opt_ext || []);
     const itemGroup = tableGroup.append('g')
         .classed('table-cell', true)
         .datum({
           category: item.category || attrs.category ||  null,
-          cetasika: attrs.cetasika.concat(item.cetasika || []),
+          cetasika: cetasika,
           roots: attrs.roots.concat(item.roots || []),
           functions: attrs.functions.concat(item.functions || []),
           gates: attrs.gates.concat(item.gates || []),
@@ -141,13 +145,32 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
           object_time: attrs.object_time.concat(item.object_time || []),
           basis: item.basis || attrs.basis || null,
           realms: attrs.realms.concat(item.realms || []),
-          cetasika_opt_ext: attrs.cetasika_opt_ext.concat(item.cetasika_opt_ext || []),
+          cetasika_opt_ext: cetasika_opt_ext,
           feeling: item.feeling || attrs.feeling || null
         });
 
+    cetasika.forEach(
+        c => {
+            if(!cetasikaIndex[c]) cetasikaIndex[c] = {
+                cittas: [],
+                cittas_opt: []
+            };
+            cetasikaIndex[c].cittas.push(item.name);
+        }
+    );
+    cetasika_opt_ext.forEach(
+        c => {
+            if(!cetasikaIndex[c]) cetasikaIndex[c] = {
+                cittas: [],
+                cittas_opt: []
+            };
+            cetasikaIndex[c].cittas_opt.push(item.name);
+        }
+    );
     const yPosition = padding + headerHeight + index * rowHeight;
-    renderCell(itemGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white');
-
+    const cell = renderCell(itemGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white');
+    cittaLookup[item.name] = cell;
+      
     renderText(itemGroup, padding * 2, yPosition, cellWidth - padding * 2, rowHeight, item.name, {size: '10px', align: 'left'});
   });
 }
@@ -224,6 +247,23 @@ function renderCetasikaCell(x, y, w, h, text) {
         .text(char);
   });
 
+  cell.on("mouseover", function(event, d) {
+      d3.select(this).select('rect').attr('fill', 'yellow');
+      cetasikaIndex[text].citta.forEach(c => {
+          cittaLookup[c].attr('fill', 'yellow');
+      });
+      cetasikaIndex[text].citta_opt.forEach(c => {
+          cittaLookup[c].attr('fill', 'lightyellow');
+      });
+    })
+    .on("mousemove", function(event) {
+    })
+    .on("mouseout", function() {
+      for (let key in cittaLookup) {
+        cittaLookup[key].attr('fill', 'white');
+      }
+    });
+
   return cell;
 }
 
@@ -259,7 +299,6 @@ function renderCetasikaTable() {
       }
     }
   }
-
 }
 
 const feelingTableX = tableWidth + 20;
