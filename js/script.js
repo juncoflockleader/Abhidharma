@@ -96,7 +96,6 @@ function renderRowHeaders() {
 }
 
 let cetasikaIndex = {};
-let cittaLookup = {};
 function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
   // Define the table's header and item height
   const headerHeight = 20;
@@ -149,13 +148,15 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
           feeling: item.feeling || attrs.feeling || null
         });
 
+    const yPosition = padding + headerHeight + index * rowHeight;
+    const cell = renderCell(itemGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white');
     cetasika.forEach(
         c => {
             if(!cetasikaIndex[c]) cetasikaIndex[c] = {
                 cittas: [],
                 cittas_opt: []
             };
-            cetasikaIndex[c].cittas.push(item.name);
+            cetasikaIndex[c].cittas.push(cell);
         }
     );
     cetasika_opt_ext.forEach(
@@ -164,12 +165,9 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
                 cittas: [],
                 cittas_opt: []
             };
-            cetasikaIndex[c].cittas_opt.push(item.name);
+            cetasikaIndex[c].cittas_opt.push(cell);
         }
     );
-    const yPosition = padding + headerHeight + index * rowHeight;
-    const cell = renderCell(itemGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white');
-    cittaLookup[item.name] = cell;
       
     renderText(itemGroup, padding * 2, yPosition, cellWidth - padding * 2, rowHeight, item.name, {size: '10px', align: 'left'});
   });
@@ -250,10 +248,10 @@ function renderCetasikaCell(x, y, w, h, text) {
   cell.on("mouseover", function(event, d) {
       d3.select(this).select('rect').attr('fill', 'yellow');
       cetasikaIndex[text].cittas.forEach(c => {
-          cittaLookup[c].attr('fill', 'yellow');
+          c.attr('fill', 'yellow');
       });
       cetasikaIndex[text].cittas_opt.forEach(c => {
-          cittaLookup[c].attr('fill', 'lightyellow');
+          c.attr('fill', 'lightyellow');
       });
     })
     .on("mousemove", function(event) {
