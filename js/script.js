@@ -246,7 +246,7 @@ function renderCetasikaCell(x, y, w, h, text) {
   });
 
   cell.on("mouseover", function(event, d) {
-      d3.select(this).select('rect').attr('fill', 'yellow');
+      cell.attr('fill', 'yellow');
       cetasikaIndex[text].cittas.forEach(c => {
           c.attr('fill', 'yellow');
       });
@@ -257,6 +257,7 @@ function renderCetasikaCell(x, y, w, h, text) {
     .on("mousemove", function(event) {
     })
     .on("mouseout", function() {
+      cell.attr('fill', 'white');
       cetasikaIndex[text].cittas.forEach(c => {
           c.attr('fill', 'white');
       });
