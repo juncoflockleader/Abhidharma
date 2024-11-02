@@ -249,10 +249,10 @@ function renderCetasikaCell(x, y, w, h, text) {
 
   cell.on("mouseover", function(event, d) {
       d3.select(this).select('rect').attr('fill', 'yellow');
-      cetasikaIndex[text].citta.forEach(c => {
+      cetasikaIndex[text].cittas.forEach(c => {
           cittaLookup[c].attr('fill', 'yellow');
       });
-      cetasikaIndex[text].citta_opt.forEach(c => {
+      cetasikaIndex[text].cittas_opt.forEach(c => {
           cittaLookup[c].attr('fill', 'lightyellow');
       });
     })
