@@ -257,9 +257,12 @@ function renderCetasikaCell(x, y, w, h, text) {
     .on("mousemove", function(event) {
     })
     .on("mouseout", function() {
-      for (let key in cittaLookup) {
-        cittaLookup[key].attr('fill', 'white');
-      }
+      cetasikaIndex[text].cittas.forEach(c => {
+          c.attr('fill', 'white');
+      });
+      cetasikaIndex[text].cittas_opt.forEach(c => {
+          c.attr('fill', 'white');
+      });
     });
 
   return cell;
