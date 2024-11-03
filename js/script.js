@@ -10,6 +10,9 @@ const tableWidth = rowHeaderWidth + columnWidths.reduce((accumulator, v) => accu
 const tableHeight = columnHeaderHeight + rowHeights.reduce((accumulator, v) => accumulator + v, 0);
 const svgWidth = 1600;
 const svgHeight = 1200;
+let locked = false;
+let lockedItem = null;
+let clearFunc = null;
 
 const tooltip = d3.select("#tooltip");
 
@@ -225,13 +228,15 @@ function renderCetasikaHeader(x, y, w, h, text) {
   renderText(svg, x, y, w, h, text, {size: '12px', align: 'middle'});
 }
 
-function renderCetasikaCell(x, y, w, h, text) {
-  let cell = renderCell(svg, x, y, w, h, 'white');
-  cell.attr('class', 'cetasika-cell');
+function renderCetasikaCell(x, y, w, h, text, counterTable) {
+  const itemGroup = svg.append('g');
+
+    let cell = renderCell(itemGroup, x, y, w, h, 'white');
+    cell.attr('class', 'cetasika-cell');
 
   // Start text at the top of the cell
-  const textElement = renderText(svg, x, y, w, 0, "", {size: '12px', align: 'middle'});
-  svg.append('text')
+  const textElement = renderText(itemGroup, x, y, w, 0, "", {size: '12px', align: 'middle'});
+  itemGroup.append('text')
       .attr('x', x + w / 2) // Center the text horizontally in the cell
       .attr('y', y) // Start text at the top of the cell
       .attr('text-anchor', 'middle') // Center the text at the specified (x, y) position
@@ -245,7 +250,7 @@ function renderCetasikaCell(x, y, w, h, text) {
         .text(char);
   });
 
-  cell.on("mouseover", function(event, d) {
+  function applyHighlights(text) {
       cell.attr('fill', 'yellow');
       cetasikaIndex[text].cittas.forEach(c => {
           c.attr('fill', 'yellow');
@@ -253,31 +258,10 @@ function renderCetasikaCell(x, y, w, h, text) {
       cetasikaIndex[text].cittas_opt.forEach(c => {
           c.attr('fill', 'lightyellow');
       });
-    })
-    .on("mousemove", function(event) {
-    })
-    .on("mouseout", function() {
-      cell.attr('fill', 'white');
-      cetasikaIndex[text].cittas.forEach(c => {
-          c.attr('fill', 'white');
-      });
-      cetasikaIndex[text].cittas_opt.forEach(c => {
-          c.attr('fill', 'white');
-      });
-    });
+      counterTable.update(cetasikaIndex[text].cittas.length, cetasikaIndex[text].cittas_opt.length);
+  }
 
-  textElement.on("mouseover", function(event, d) {
-      cell.attr('fill', 'yellow');
-      cetasikaIndex[text].cittas.forEach(c => {
-          c.attr('fill', 'yellow');
-      });
-      cetasikaIndex[text].cittas_opt.forEach(c => {
-          c.attr('fill', 'lightyellow');
-      });
-    })
-    .on("mousemove", function(event) {
-    })
-    .on("mouseout", function() {
+  function clearHighlights(text) {
       cell.attr('fill', 'white');
       cetasikaIndex[text].cittas.forEach(c => {
           c.attr('fill', 'white');
@@ -285,13 +269,43 @@ function renderCetasikaCell(x, y, w, h, text) {
       cetasikaIndex[text].cittas_opt.forEach(c => {
           c.attr('fill', 'white');
       });
+      counterTable.clear();
+  }
+
+  itemGroup.on("mouseover", function(event, d) {
+      if (locked) return;
+      applyHighlights(text);
+    })
+    .on("mousemove", function(event) {
+    })
+    .on("mouseout", function() {
+        if (locked) return;
+        clearHighlights(text);
+    })
+    .on("click", function() {
+        if (locked && lockedItem === this) {
+            locked = false;
+            lockedItem = null;
+            if (clearFunc) clearFunc();
+        } else {
+            if (locked && clearFunc) {
+                clearFunc();
+            }
+            locked = true;
+            lockedItem = this;
+            applyHighlights(text);
+            clearFunc = function() {
+                clearHighlights(text);
+            };
+        }
     });
 
   return cell;
 }
 
 let cetasikaLookup = {};
-function renderCetasikaTable() {
+let cetasikaTableBottom = 0;
+function renderCetasikaTable(counterTable) {
   let yoffset = 20
   let columnWidth = 25;
   let rowHeight = 30;
@@ -316,12 +330,13 @@ function renderCetasikaTable() {
     for (let j = 0; j < cetasika.children[i].children.length; j++) {
       for (let k = 0; k < cetasika.children[i].children[j].children.length; k++) {
         let name = cetasika.children[i].children[j].children[k].name;
-        let cell = renderCetasikaCell(x, tableHeight + yoffset + rowHeight * 3, columnWidth, rowHeight * 2.5, name);
+        let cell = renderCetasikaCell(x, tableHeight + yoffset + rowHeight * 3, columnWidth, rowHeight * 2.5, name, counterTable);
         cetasikaLookup[name] = cell;
         x += columnWidth;
       }
     }
   }
+  cetasikaTableBottom = tableHeight + yoffset + rowHeight * 5.5;
 }
 
 const feelingTableX = tableWidth + 20;
@@ -374,14 +389,14 @@ function renderSubTable(x, y, keys, title, color, specialUpdate, specialClear) {
             for (let i = 0; i < arr.length; ++i) {
                 if (!specialUpdate || !specialUpdate(arr[i], textLookup, rectLookup)) {
                     let cell = rectLookup[arr[i]];
-                    cell.attr('fill', color);
+                    if (cell) cell.attr('fill', color);
                 }
             }
         },
         clear: function () {
             for (let i = 0; i < keys.length; ++i) {
                 let cell = rectLookup[keys[i]];
-                cell.attr('fill', 'white');
+                if (cell) cell.attr('fill', 'white');
                 if (specialClear) {
                     specialClear(keys[i], textLookup, rectLookup);
                 }
@@ -486,11 +501,35 @@ function renderFunctionTable(x, y) {
     return renderSubTable(x, y, ['离路心', '速行', '转向', '见', '听', '嗅', '尝', '触觉', '领受', '推度', '彼所缘', '确定'], '作用', 'gold');
 }
 
+function renderCounterTable(x, y) {
+    let w = 60;
+    let h = 30;
+    renderCell(svg, x, y, w, h, 'lightcyan');
+    renderText(svg, x, y, w, h, '相应法', {size: '14px', align: 'middle'});
+    renderCell(svg, x + w, y, w, h, 'lightcyan');
+    renderText(svg, x + w, y, w, h, '可选', {size: '14px', align: 'middle'});
+    let counterCell = renderCell(svg, x, y + h, w, h, 'white');
+    let counterText = renderText(svg, x, y + h, w, h, '', {size: '12px', align: 'middle'});
+    let optCounterCell = renderCell(svg, x + w, y + h, w, h, 'white');
+    let optCounterText = renderText(svg, x + w, y + h, w, h, '', {size: '12px', align: 'middle'});
+    return {
+        update: function (counter, optCounter) {
+            counterText.text(counter);
+            optCounterText.text(optCounter);
+        },
+        clear: function () {
+            counterText.text('');
+            optCounterText.text('');
+        },
+        endX: x + w * 2,
+        endY: y + h * 2
+    }
+}
+
 renderFirstCell();
 renderColumnHeaders();
 renderRowHeaders();
 renderGridCells();
-renderCetasikaTable();
 renderFeelingBase();
 const ct = renderCauseTable(feelingTableX + feelingWidth + subPadding, 0);
 const tt = renderTimeTable(feelingTableX, subPadding + ct.endY);
@@ -500,6 +539,8 @@ const rt = renderRealmTable(feelingTableX, mot.endY + subPadding);
 const gt = renderGateTable(rt.endX + subPadding, mot.endY + subPadding);
 const bt = renderBasisTable(feelingTableX, gt.endY + subPadding);
 const ft = renderFunctionTable(feelingTableX, bt.endY + subPadding);
+const cntt = renderCounterTable(feelingTableX, ft.endY + subPadding);
+renderCetasikaTable(cntt);
 
 function highlightCetasika(data) {
   for (let i = 0; i < data.cetasika.length; i++) {
@@ -540,26 +581,47 @@ function clearFeelingText(data) {
     feelingColor.attr('fill', 'white');
 }
 
+function applyHighlights(item) {
+    item.select('rect').attr('fill', 'yellow');
+    const data = item.datum();
+    updateTooltipContent(tooltip, data);
+    highlightCetasika(data);
+    updateFeelingText(data);
+    ct.update((data.roots && data.roots.length) ? data.roots : ['无因']);
+    tt.update(data.object_time);
+    fot.update(data.objects == '五所缘' ? ['色所缘','香所缘','声所缘','味所缘','触所缘'] : data.objects);
+    mot.update(data.mental_objects);
+    rt.update(data.realms);
+    gt.update(data.gates);
+    bt.update(data.basis);
+    ft.update(data.functions);
+    cntt.update(data.cetasika.length, data.cetasika_opt_ext.length);
+}
+
+function clearHighlights(item) {
+    item.select('rect').attr('fill', 'white');
+    clearCetasika();
+    clearFeelingText();
+    ct.clear();
+    tt.clear();
+    fot.clear();
+    mot.clear();
+    rt.clear();
+    gt.clear();
+    bt.clear();
+    ft.clear();
+    cntt.clear();
+}
+
 svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the selector as needed
     .on("mouseover", function(event, d) {
-      d3.select(this).select('rect').attr('fill', 'yellow');
-      const data = d3.select(this).datum();
+      if (locked) return;
       /*
       tooltip.style("visibility", "visible")
           .style("left", (event.pageX + 10) + "px") // Position the tooltip
           .style("top", (event.pageY - 10) + "px");
        */
-      updateTooltipContent(tooltip, data);
-      highlightCetasika(data);
-      updateFeelingText(data);
-      ct.update((data.roots && data.roots.length) ? data.roots : ['无因']);
-      tt.update(data.object_time);
-      fot.update(data.objects == '五所缘' ? ['色所缘','香所缘','声所缘','味所缘','触所缘'] : data.objects);
-      mot.update(data.mental_objects);
-      rt.update(data.realms);
-      gt.update(data.gates);
-      bt.update(data.basis);
-      ft.update(data.functions);
+        applyHighlights(d3.select(this));
     })
     .on("mousemove", function(event) {
         /*
@@ -573,15 +635,42 @@ svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the se
       tooltip.style("visibility", "hidden");
       tooltip.selectAll("text").remove();
       */
-      d3.select(this).select('rect').attr('fill', 'white');
-      clearCetasika();
-      clearFeelingText();
-      ct.clear();
-      tt.clear();
-      fot.clear();
-      mot.clear();
-      rt.clear();
-      gt.clear();
-      bt.clear();
-      ft.clear();
+      if (locked) return;
+      clearHighlights(d3.select(this));
+    })
+    .on("click", function(event, d) {
+        if (locked && lockedItem === this) {
+            locked = false;
+            lockedItem = null;
+            if (clearFunc) clearFunc();
+        } else {
+            if (locked && clearFunc) {
+                clearFunc();
+            }
+            locked = true;
+            lockedItem = this;
+            const item = d3.select(this);
+            applyHighlights(item);
+            clearFunc = function() {
+                clearHighlights(item);
+            };
+        }
     });
+
+svg.append('a')
+    .attr('xlink:href', 'https://github.com/juncoflockleader/Abhidharma') // Use xlink:href for SVG links
+    .append('text')
+    .attr('x', 0) // Set x position
+    .attr('y', cetasikaTableBottom + 20) // Set y position
+    .text('Repo: https://github.com/juncoflockleader/Abhidharma')
+    .style('font-size', '16px') // Set font size
+    .style('fill', 'blue'); // Set text color
+
+svg.append('a')
+    .attr('xlink:href', 'https://juncoflockleader.github.io/Abhidharma/') // Use xlink:href for SVG links
+    .append('text')
+    .attr('x', 0) // Set x position
+    .attr('y', cetasikaTableBottom + 40) // Set y position
+    .text('This page: https://juncoflockleader.github.io/Abhidharma/')
+    .style('font-size', '16px') // Set font size
+    .style('fill', 'blue'); // Set text color0px');
