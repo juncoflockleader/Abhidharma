@@ -1,4 +1,3 @@
-
 // Set up SVG container
 const rowHeaderWidth = 120;
 const columnWidths = [120, 120, 120, 220, 120, 120];
