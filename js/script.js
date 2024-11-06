@@ -4,12 +4,17 @@ const rowHeaderWidth = 120;
 const columnWidths = [120, 120, 120, 220, 120, 120];
 const columnHeaderHeight = 105;
 const rowHeights = [210, 105, 105, 105];
-const columns = 6;
-const rows = 4;
+const cittaTableColumns = 6;
+const cittaTableRows = 4;
 const tableWidth = rowHeaderWidth + columnWidths.reduce((accumulator, v) => accumulator + v, 0);
 const tableHeight = columnHeaderHeight + rowHeights.reduce((accumulator, v) => accumulator + v, 0);
 const svgWidth = 1600;
 const svgHeight = 1200;
+
+let itemIndex = {};
+let noteIndex = {};
+let itemConnections = {};
+
 let locked = false;
 let lockedItem = null;
 let clearFunc = null;
@@ -20,8 +25,9 @@ const svg = d3.select('body').append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
-function renderCell(obj, x, y, w, h, color) {
-    return obj.append('rect')
+/** Helper functions **/
+function renderCell(parent, x, y, w, h, color) {
+    return parent.append('rect')
         .attr('x', x)
         .attr('y', y)
         .attr('width', w)
@@ -31,10 +37,10 @@ function renderCell(obj, x, y, w, h, color) {
         .attr('fill', color);
 }
 
-function renderText(obj, x, y, w, h, text, params={size: '16px', align:'middle'}) {
-    const rx = params.align == 'middle' ? x + w / 2 : x;
-    const ry = y + h / 2;
-    return obj.append('text')
+function renderText(parent, x, y, w, h, text, params={size: '16px', padding: 0, align:'middle', valign: 'middle'}) {
+    const rx = (params.align == 'middle' ? x + w / 2 : x) + (params.padding ? params.padding : 0);
+    const ry = params.valign == 'top' ? y : y + h / 2;
+    return parent.append('text')
         .attr('x', rx)
         .attr('y', ry)
         .attr('text-anchor', params.align)
@@ -43,6 +49,42 @@ function renderText(obj, x, y, w, h, text, params={size: '16px', align:'middle'}
         .attr('font-size', params.size);
 }
 
+function renderTextBox(parent, x, y, w, h, bgColor, text, params={size: '16px', padding: 0, align:'middle', valign: 'middle'}) {
+    let item = parent.append('g');
+    let cell = renderCell(item, x, y, w, h, bgColor);
+    let textElement = renderText(item, x, y, w, h, text, params);
+    item.setText = function(newText, px=12) {
+        let wordWidth = getWordLength(newText, px);
+        if (wordWidth < w) {
+            textElement.text(newText);
+            return;
+        }
+        const padding = 2;
+        let i = newText.length / 2;
+        const firstPart = newText.substring(0, i);
+        const secondPart = newText.substring(i);
+
+        textElement.selectAll('tspan').remove();
+        textElement.append('tspan')
+            .attr('x', x + w / 2) // Align all tspans to the center of the cell
+            .attr('y', y + padding + px / 2) // Move each character to a new line; adjust as needed
+            .text(firstPart);
+        textElement.append('tspan')
+            .attr('x', x + w / 2) // Align all tspans to the center of the cell
+            .attr('y', y + padding * 2 + px + px / 2) // Move each character to a new line; adjust as needed
+            .text(secondPart);
+    };
+    item.setColor = function(newColor) {
+        cell.attr('fill', newColor);
+    };
+    return item;
+}
+
+function highlightsTextBox(item, color='yellow') {
+    item.select('rect').attr('fill', color);
+}
+
+/** Render the Citta Table Headers **/
 function renderFirstCell() {
     const columnWidth = rowHeaderWidth;
     const rowHeight = columnHeaderHeight;
@@ -60,11 +102,6 @@ function renderFirstCell() {
     renderText(svg, columnWidth * 1/3, 0, columnWidth, rowHeight * 2 / 3, data.header.column_header);
 }
 
-function renderHeader(x, y, w, h, text) {
-  renderCell(svg, x, y, w, h, 'lightcyan');
-  renderText(svg, x, y, w, h, text);
-}
-
 function subArraySum(array, start, end) {
     let result = 0;
     for (let i = start; i < end; ++i) {
@@ -76,29 +113,50 @@ function subArraySum(array, start, end) {
 function renderColumnHeaders() {
     const rowHeight = columnHeaderHeight;
     let x = rowHeaderWidth;
-    for (let i = 0; i < columns; ++i) {
+    for (let i = 0; i < cittaTableColumns; ++i) {
         let y = i >= 2 ? rowHeight / 3 * 2 : 0;
         let height = i >= 2 ? rowHeight / 3 : rowHeight;
         let name = i >= 2 ? data.columns_header[2].children[i < 4 ? 0 : 1].children[i % 2].name : data.columns_header[i].name;
-        renderHeader(x, y, columnWidths[i], height, name);
+        renderTextBox(svg, x, y, columnWidths[i], height, 'lightcyan', name);
         x += columnWidths[i];
     }
 
-    renderHeader(rowHeaderWidth + subArraySum(columnWidths, 0, 2), rowHeight / 3, subArraySum(columnWidths, 2, 4), rowHeight/3, data.columns_header[2].children[0].name);
-    renderHeader(rowHeaderWidth + subArraySum(columnWidths, 0, 4), rowHeight / 3, subArraySum(columnWidths, 4, 6), rowHeight/3, data.columns_header[2].children[1].name);
-    renderHeader(rowHeaderWidth + subArraySum(columnWidths, 0, 2), 0, subArraySum(columnWidths, 2, 6), rowHeight / 3, data.columns_header[2].name);
+    renderTextBox(svg, rowHeaderWidth + subArraySum(columnWidths, 0, 2), rowHeight / 3, subArraySum(columnWidths, 2, 4), rowHeight/3, 'lightcyan', data.columns_header[2].children[0].name);
+    renderTextBox(svg, rowHeaderWidth + subArraySum(columnWidths, 0, 4), rowHeight / 3, subArraySum(columnWidths, 4, 6), rowHeight/3, 'lightcyan', data.columns_header[2].children[1].name);
+    renderTextBox(svg, rowHeaderWidth + subArraySum(columnWidths, 0, 2), 0, subArraySum(columnWidths, 2, 6), rowHeight / 3, 'lightcyan', data.columns_header[2].name);
 }
 
 
 function renderRowHeaders() {
     const columnWidth = rowHeaderWidth;
-    for (let i = 0; i < rows; i++) {
+    for (let i = 0; i < cittaTableRows; i++) {
         const rowHeight = rowHeights[i];
-      renderHeader(0, columnHeaderHeight + subArraySum(rowHeights, 0, i), columnWidth, rowHeight, data.rows_header[i]);
+        renderTextBox(svg, 0, columnHeaderHeight + subArraySum(rowHeights, 0, i), columnWidth, rowHeight, 'lightcyan', data.rows_header[i]);
     }
 }
 
-let cetasikaIndex = {};
+/** Fill in the Citta Table **/
+function renderGridCells() {
+    let y = columnHeaderHeight;
+    for (let rowIndex = 0; rowIndex < cittaTableRows; rowIndex++) {
+        let x = rowHeaderWidth;
+        const rowHeight = rowHeights[rowIndex];
+        for (let colIndex = 0; colIndex < cittaTableColumns; colIndex++) {
+            const columnWidth = columnWidths[colIndex];
+            renderCell(svg, x, y, columnWidth, rowHeight, 'white');
+
+            let cittasIndexes = data.cells_citta_group[rowIndex][colIndex];
+            cittasIndexes.forEach((cittaIndex, index) => {
+                const offsetX = cittasIndexes.length === 1 ? x : x + index * columnWidth / 2;
+                const width = cittasIndexes.length === 1 ? columnWidth : columnWidth / 2;
+                createTableInCell(offsetX, y, width, rowHeight, cittas, cittaIndex);
+            });
+            x += columnWidth;
+        }
+        y += rowHeight;
+    }
+}
+
 function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
   // Define the table's header and item height
   const headerHeight = 20;
@@ -108,99 +166,16 @@ function createTableInCell(cellX, cellY, cellWidth, cellHeight, cittas, index) {
   const tableGroup = svg.append('g')
       .attr('transform', `translate(${cellX}, ${cellY})`);
 
-  let attrs = {
-    cetasika: cittas.cetasika || [],
-  };
-
   const cittaGroup = cittas.children[index];
-  attrs.cetasika = attrs.cetasika.concat(cittaGroup.cetasika || []);
-  attrs.category = cittaGroup.category || null;
-  attrs.roots = cittaGroup.roots || [];
-  attrs.functions = cittaGroup.functions || [];
-  attrs.gates = cittaGroup.gates || [];
-  attrs.objects = cittaGroup.objects || [];
-  attrs.mental_objects = cittaGroup.mental_objects || [];
-  attrs.object_time = cittaGroup.object_time || [];
-  attrs.basis = cittaGroup.basis || null;
-  attrs.realms = cittaGroup.realms || [];
-  attrs.feeling = cittaGroup.feeling || null;
-  attrs.cetasika_opt_ext = cittaGroup.cetasika_opt_ext || [];
   let padding = 5;
   // Draw the header row
-  renderCell(tableGroup, padding, padding, cellWidth - padding * 2, headerHeight, 'lightgrey');
-  renderText(tableGroup, padding * 2, padding, cellWidth - padding * 2, headerHeight, cittaGroup.name, {size: '12px', align: 'left'});
-
+  renderTextBox(tableGroup, padding, padding, cellWidth - padding * 2, headerHeight, 'lightgrey', cittaGroup.name, {size: '12px', 'padding': padding, align: 'left'});
   // Loop through the data items and draw each row
   cittaGroup.children.forEach((item, index) => {
-    const cetasika = attrs.cetasika.concat(item.cetasika || []);
-    const cetasika_opt_ext = attrs.cetasika_opt_ext.concat(item.cetasika_opt_ext || []);
-    const itemGroup = tableGroup.append('g')
-        .classed('table-cell', true)
-        .datum({
-          category: item.category || attrs.category ||  null,
-          cetasika: cetasika,
-          roots: attrs.roots.concat(item.roots || []),
-          functions: attrs.functions.concat(item.functions || []),
-          gates: attrs.gates.concat(item.gates || []),
-          objects: attrs.objects.concat(item.objects || []),
-          mental_objects: attrs.mental_objects.concat(item.mental_objects || []),
-          object_time: attrs.object_time.concat(item.object_time || []),
-          basis: item.basis || attrs.basis || null,
-          realms: attrs.realms.concat(item.realms || []),
-          cetasika_opt_ext: cetasika_opt_ext,
-          feeling: item.feeling || attrs.feeling || null
-        });
-
     const yPosition = padding + headerHeight + index * rowHeight;
-    const cell = renderCell(itemGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white');
-    cetasika.forEach(
-        c => {
-            if(!cetasikaIndex[c]) cetasikaIndex[c] = {
-                cittas: [],
-                cittas_opt: []
-            };
-            cetasikaIndex[c].cittas.push(cell);
-        }
-    );
-    cetasika_opt_ext.forEach(
-        c => {
-            if(!cetasikaIndex[c]) cetasikaIndex[c] = {
-                cittas: [],
-                cittas_opt: []
-            };
-            cetasikaIndex[c].cittas_opt.push(cell);
-        }
-    );
-      
-    renderText(itemGroup, padding * 2, yPosition, cellWidth - padding * 2, rowHeight, item.name, {size: '10px', align: 'left'});
+    const itemGroup = renderTextBox(tableGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white', item.name, {size: '10px', 'padding': padding, align: 'left'});
+    itemIndex[item.id] = itemGroup;
   });
-}
-
-function renderGridCells() {
-    let y = columnHeaderHeight;
-    // Loop through each row
-    for (let rowIndex = 0; rowIndex < rows; rowIndex++) {
-        let x = rowHeaderWidth;
-        const rowHeight = rowHeights[rowIndex];
-        // Loop through each column
-        for (let colIndex = 0; colIndex < columns; colIndex++) {
-            // Calculate x and y position for the cell
-            const columnWidth = columnWidths[colIndex];
-            // Render the cell with a default color
-            renderCell(svg, x, y, columnWidth, rowHeight, 'white');
-
-            let cittasIndexes = data.cells_citta_group[rowIndex][colIndex];
-            if (cittasIndexes.length === 1) {
-              createTableInCell(x, y, columnWidth, rowHeight, cittas, cittasIndexes[0]);
-            } else {
-                cittasIndexes.forEach((cittaIndex, index) => {
-                    createTableInCell(x  + index * columnWidth / 2, y, columnWidth / 2, rowHeight, cittas, cittaIndex);
-                });
-            }
-            x += columnWidth;
-        }
-        y += rowHeight;
-    }
 }
 
 function updateTooltipContent(tooltip, data) {
@@ -223,315 +198,194 @@ function updateTooltipContent(tooltip, data) {
   });
 }
 
-function renderCetasikaHeader(x, y, w, h, text) {
-  renderCell(svg, x, y, w, h, 'lightcyan');
-  renderText(svg, x, y, w, h, text, {size: '12px', align: 'middle'});
-}
-
+const cetasikaIdIndex = {};
 function renderCetasikaCell(x, y, w, h, text, counterTable) {
-  const itemGroup = svg.append('g');
-
-    let cell = renderCell(itemGroup, x, y, w, h, 'white');
-    cell.attr('class', 'cetasika-cell');
-
-  // Start text at the top of the cell
-  const textElement = renderText(itemGroup, x, y, w, 0, "", {size: '12px', align: 'middle'});
-  itemGroup.append('text')
-      .attr('x', x + w / 2) // Center the text horizontally in the cell
-      .attr('y', y) // Start text at the top of the cell
-      .attr('text-anchor', 'middle') // Center the text at the specified (x, y) position
-      .attr('font-size', '12px');
+  const itemGroup = renderTextBox(svg, x, y, w, h, 'white', '', {size: '12px', align: 'middle', valign: 'top'});
 
   // Split the text into characters and create a tspan for each
   text.split('').forEach((char, index) => {
-    textElement.append('tspan')
+    itemGroup.select('text').append('tspan')
         .attr('x', x + w / 2) // Align all tspans to the center of the cell
         .attr('dy', '1em') // Move each character to a new line; adjust as needed
         .text(char);
   });
 
-  function applyHighlights(text) {
-      cell.attr('fill', 'yellow');
-      cetasikaIndex[text].cittas.forEach(c => {
-          c.attr('fill', 'yellow');
-      });
-      cetasikaIndex[text].cittas_opt.forEach(c => {
-          c.attr('fill', 'lightyellow');
-      });
-      counterTable.update(cetasikaIndex[text].cittas.length, cetasikaIndex[text].cittas_opt.length);
-  }
-
-  function clearHighlights(text) {
-      cell.attr('fill', 'white');
-      cetasikaIndex[text].cittas.forEach(c => {
-          c.attr('fill', 'white');
-      });
-      cetasikaIndex[text].cittas_opt.forEach(c => {
-          c.attr('fill', 'white');
-      });
-      counterTable.clear();
-  }
-
-  itemGroup.on("mouseover", function(event, d) {
-      if (locked) return;
-      applyHighlights(text);
-    })
-    .on("mousemove", function(event) {
-    })
-    .on("mouseout", function() {
-        if (locked) return;
-        clearHighlights(text);
-    })
-    .on("click", function() {
-        if (locked && lockedItem === this) {
-            locked = false;
-            lockedItem = null;
-            if (clearFunc) clearFunc();
-        } else {
-            if (locked && clearFunc) {
-                clearFunc();
-            }
-            locked = true;
-            lockedItem = this;
-            applyHighlights(text);
-            clearFunc = function() {
-                clearHighlights(text);
-            };
-        }
-    });
-
-  return cell;
+  return itemGroup;
 }
 
-let cetasikaLookup = {};
 let cetasikaTableBottom = 0;
 function renderCetasikaTable(counterTable) {
-  let yoffset = 20
+  let yoffset = 20;
   let columnWidth = 25;
   let rowHeight = 30;
-  renderCetasikaHeader(0, tableHeight + yoffset, columnWidth * 52, rowHeight, cetasika.name);
-  renderCetasikaHeader(0, tableHeight + yoffset + rowHeight, columnWidth * 13, rowHeight, cetasika.children[0].name);
-  renderCetasikaHeader(columnWidth * 13, tableHeight + yoffset + rowHeight, columnWidth * 14, rowHeight, cetasika.children[1].name);
-  renderCetasikaHeader(columnWidth * 27, tableHeight + yoffset + rowHeight, columnWidth * 25, rowHeight, cetasika.children[2].name);
-
+  renderTextBox(svg, 0, tableHeight + yoffset, columnWidth * 52, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
+  renderTextBox(svg, 0, tableHeight + yoffset + rowHeight, columnWidth * 13, rowHeight, 'lightcyan', cetasika.children[0].name, {size: '12px', align: 'middle'});
+  renderTextBox(svg, columnWidth * 13, tableHeight + yoffset + rowHeight, columnWidth * 14, rowHeight, 'lightcyan', cetasika.children[1].name, {size: '12px', align: 'middle'});
+  renderTextBox(svg, columnWidth * 27, tableHeight + yoffset + rowHeight, columnWidth * 25, rowHeight, 'lightcyan', cetasika.children[2].name, {size: '12px', align: 'middle'});
 
   let x = 0;
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < cetasika.children[i].children.length; j++) {
       let n = cetasika.children[i].children[j].children.length;
-      renderCetasikaHeader(x, tableHeight + yoffset + rowHeight * 2, columnWidth * n, rowHeight, cetasika.children[i].children[j].name);
+      renderTextBox(svg, x, tableHeight + yoffset + rowHeight * 2, columnWidth * n, rowHeight, 'lightcyan', cetasika.children[i].children[j].name, {size: '12px', align: 'middle'});
       x += columnWidth * n;
     }
   }
 
-
   x = 0;
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < cetasika.children[i].children.length; j++) {
-      for (let k = 0; k < cetasika.children[i].children[j].children.length; k++) {
-        let name = cetasika.children[i].children[j].children[k].name;
-        let cell = renderCetasikaCell(x, tableHeight + yoffset + rowHeight * 3, columnWidth, rowHeight * 2.5, name, counterTable);
-        cetasikaLookup[name] = cell;
+  cetasika.children.forEach(group => {
+    group.children.forEach(subGroup => {
+      subGroup.children.forEach(child => {
+        let name = child.name;
+        cetasikaIdIndex[name] = child.id;
+        let item = renderCetasikaCell(x, tableHeight + yoffset + rowHeight * 3, columnWidth, rowHeight * 2.5, name, counterTable);
+        itemIndex[child.id] = item;
+        noteIndex[child.id] = {
+            "char_mark": child.char_mark,
+            "function": child.function,
+            "appearance": child.appearance,
+            "proximate_cause": child.proximate_cause,
+        };
         x += columnWidth;
-      }
-    }
-  }
+      });
+    });
+  });
   cetasikaTableBottom = tableHeight + yoffset + rowHeight * 5.5;
 }
 
-const feelingTableX = tableWidth + 20;
-const feelingWidth = 100;
-const feelingHeight = 30;
-let feelingText = null;
-let feelingColor = null;
-function renderFeelingBase() {
-    let x = feelingTableX;
-    let y = 0;
-    let w = feelingWidth;
-    let h = feelingHeight;
-    renderCell(svg, x, y, w, h, 'lightcyan');
-    renderText(svg, x, y, w, h, '受');
-    feelingColor = renderCell(svg, x, y + h, w, h, 'white');
-    feelingText = renderText(svg, x, y + h, w, h, '');
+function getWordLength(text, px) {
+    let count = 0;
+    for (let char of text) {
+        if (/[\x00-\x7F]/.test(char)) {
+            count++;
+        } else {
+            count += 2;
+        }
+    }
+    return count * px / 2 + 3;
 }
+
+const feelingTableX = tableWidth + 20;
 
 const subW = 20;
 const subH = 30;
 const subPadding = 12;
-function renderSubTable(x, y, keys, title, color, specialUpdate, specialClear) {
-    let rectLookup = {};
-    let textLookup = {};
+function renderSubTableV2(x, y, def) {
+    const names = def.names;
     let widths = [];
-    for (let i = 0; i < keys.length; ++i) {
-        let count = 0;
-        for (let char of keys[i]) {
-            if (/[\x00-\x7F]/.test(char)) {
-                count++;
-            } else {
-                count += 2;
-            }
-        }
-        widths = widths.concat([count * 6 + 3]);
+    for (let i = 0; i < names.length; ++i) {
+        widths = widths.concat([getWordLength(names[i], 12)]);
     }
     let total = subArraySum(widths, 0, widths.length);
 
     const h = subH;
-    renderCell(svg, x, y, total, h, 'lightcyan');
-    renderText(svg, x, y, total, h, title, {size: '14px', align: 'middle'});
+    renderTextBox(svg, x, y, total, h, 'lightcyan', def.title, {size: '14px', align: 'middle'});
     let x0 = x;
-    for (let i = 0; i < keys.length; ++i) {
-        rectLookup[keys[i]] = renderCell(svg, x0, y + h, widths[i], h, 'white');
-        textLookup[keys[i]] = renderText(svg, x0, y + h, widths[i], h, keys[i], {size: '12px', align: 'middle'});
+    for (let i = 0; i < names.length; ++i) {
+        let item = renderTextBox(svg, x0, y + h, widths[i], h, 'white', names[i], {size: '12px', align: 'middle'});
+        itemIndex[def['index_base'] + i + 1] = item;
         x0 += widths[i];
     }
     return {
-        update: function (arr) {
-            for (let i = 0; i < arr.length; ++i) {
-                if (!specialUpdate || !specialUpdate(arr[i], textLookup, rectLookup)) {
-                    let cell = rectLookup[arr[i]];
-                    if (cell) cell.attr('fill', color);
-                }
-            }
-        },
-        clear: function () {
-            for (let i = 0; i < keys.length; ++i) {
-                let cell = rectLookup[keys[i]];
-                if (cell) cell.attr('fill', 'white');
-                if (specialClear) {
-                    specialClear(keys[i], textLookup, rectLookup);
-                }
-            }
-        },
         endX: x + total,
         endY: y + 2 * subH
     };
 }
 
+function renderFeelingTable(x, y) {
+    return renderSubTableV2(x, y, feelings);
+}
+
 function renderCauseTable(x, y) {
-    return renderSubTable(x, y, ['贪','嗔','痴','无贪','无嗔','无痴','无因'], '因', 'indianred');
+    return renderSubTableV2(x, y, causes);
 }
 
 function renderTimeTable(x, y) {
-    return renderSubTable(x, y, ['过去','现在','未来','离时'], '所缘之时', 'lavender');
+    return renderSubTableV2(x, y, times);
 }
 
 function renderFiveObjectsTable(x, y) {
-    return renderSubTable(x, y, ['色所缘','声所缘','香所缘','味所缘','触所缘'], '五所缘', 'lightskyblue');
+    return renderSubTableV2(x, y, objects);
 }
 
 function renderMentalObjectsTable(x, y) {
-    let specialUpdate = function (key, textLookup, rectLookup) {
-        if (key == '6出世间心') {
-            let key0 = '8出世间心';
-            let cell = rectLookup[key0];
-            cell.attr('fill', 'mediumpurple');
-            let text = textLookup[key0];
-            text.text(key);
-            return true;
-        }
-        return false;
-    }
-    let specialClear = function (key, textLookup, rectLookup) {
-        if (key == '8出世间心') {
-            let text = textLookup[key];
-            text.text(key);
-        }
-    }
-    var mot = renderSubTable(x, y, ['54欲界心','15色界心','12无色界心','8出世间心','52心所21色','涅槃','概念'], '法所缘', 'lightskyblue', specialUpdate, specialClear);
-    return mot;
+    return renderSubTableV2(x, y, mental_objects);
 }
 
 function renderRealmTable(x, y) {
-    return renderSubTable(x, y, ['欲', '色', '无色'], '升起之地', 'violet');
+    return renderSubTableV2(x, y, realms);
 }
 
 function renderGateTable(x, y) {
-    let gates = ['眼门','耳门','鼻门','舌门','身门','意门','离门'];
-    let specialUpdate = function (key, textLookup, rectLookup) {
-        let ret = false;
-        if (key == '五门' || key == '六门') {
-            ret = true;
-            for (let i = 0; i < 5; ++i) {
-                let cell = rectLookup[gates[i]];
-                cell.attr('fill', 'tomato');
-            }
-        }
-        if (key == '六门') {
-            let cell = rectLookup[gates[5]];
-            cell.attr('fill', 'tomato');
-        }
-        return ret;
-    }
-    return renderSubTable(x, y, gates, '门', 'tomato', specialUpdate);
+    return renderSubTableV2(x, y, gates);
 }
 
 function renderBasisTable(x, y) {
-    let w = 60;
-    let h = 30;
-    renderCell(svg, x, y, w, h, 'lightcyan');
-    renderText(svg, x, y, w, h, '五净色', {size: '14px', align: 'middle'});
-    renderCell(svg, x + w, y, w, h, 'lightcyan');
-    renderText(svg, x + w, y, w, h, '心所依处', {size: '14px', align: 'middle'});
-    let basisCell = renderCell(svg, x, y + h, w, h, 'white');
-    let basisText = renderText(svg, x, y + h, w, h, '', {size: '12px', align: 'middle'});
-    let mentalBasisCell = renderCell(svg, x + w, y + h, w, h, 'white');
-    let mentalBasisText = renderText(svg, x + w, y + h, w, h, '', {size: '12px', align: 'middle'});
-    return {
-        update: function (basis) {
-            if (['眼净色','耳净色','鼻净色','舌净色','身净色'].includes(basis)) {
-                basisText.text(basis);
-                basisCell.attr('fill', 'olive');
-            } else {
-                mentalBasisText.text(basis);
-                mentalBasisCell.attr('fill', 'olive');
-            }
-        },
-        clear: function () {
-            basisCell.attr('fill', 'white');
-            mentalBasisCell.attr('fill', 'white');
-            basisText.text('');
-            mentalBasisText.text('');
-        },
-        endX: x + w * 2,
-        endY: y + h * 2
-    }
+    return renderSubTableV2(x, y, basis);
 }
 
 function renderFunctionTable(x, y) {
-    return renderSubTable(x, y, ['离路心', '速行', '转向', '见', '听', '嗅', '尝', '触觉', '领受', '推度', '彼所缘', '确定'], '作用', 'gold');
+    return renderSubTableV2(x, y, functions);
 }
 
 function renderCounterTable(x, y) {
     let w = 60;
     let h = 30;
-    renderCell(svg, x, y, w, h, 'lightcyan');
-    renderText(svg, x, y, w, h, '相应法', {size: '14px', align: 'middle'});
-    renderCell(svg, x + w, y, w, h, 'lightcyan');
-    renderText(svg, x + w, y, w, h, '可选', {size: '14px', align: 'middle'});
-    let counterCell = renderCell(svg, x, y + h, w, h, 'white');
-    let counterText = renderText(svg, x, y + h, w, h, '', {size: '12px', align: 'middle'});
-    let optCounterCell = renderCell(svg, x + w, y + h, w, h, 'white');
-    let optCounterText = renderText(svg, x + w, y + h, w, h, '', {size: '12px', align: 'middle'});
+    renderTextBox(svg, x, y, w, h, 'lightcyan', '相应法', {size: '14px', align: 'middle'});
+    renderTextBox(svg, x + w, y, w, h, 'lightcyan', '可选', {size: '14px', align: 'middle'});
+    let counterTextBox = renderTextBox(svg, x, y + h, w, h, 'white', '', {size: '12px', align: 'middle'});
+    let optCounterTextBox = renderTextBox(svg, x + w, y + h, w, h, 'white', '', {size: '12px', align: 'middle'});
     return {
         update: function (counter, optCounter) {
-            counterText.text(counter);
-            optCounterText.text(optCounter);
+            counterTextBox.setText(counter.toString());
+            optCounterTextBox.setText(optCounter.toString());
         },
         clear: function () {
-            counterText.text('');
-            optCounterText.text('');
+            counterTextBox.setText('');
+            optCounterTextBox.setText('');
         },
         endX: x + w * 2,
         endY: y + h * 2
     }
 }
 
-renderFirstCell();
-renderColumnHeaders();
-renderRowHeaders();
-renderGridCells();
-renderFeelingBase();
-const ct = renderCauseTable(feelingTableX + feelingWidth + subPadding, 0);
+function renderNoteTable(x, y) {
+    let h0 = 20;
+
+    let w = 30;
+    let h = 30;
+    renderTextBox(svg, x, y + h0, w, h, 'lightcyan', '特相', {size: '14px', align: 'middle'});
+    renderTextBox(svg, x, y + h0 + h, w, h, 'lightcyan', '作用', {size: '14px', align: 'middle'});
+    renderTextBox(svg, x, y + h0 + 2 * h, w, h, 'lightcyan', '现起', {size: '14px', align: 'middle'});
+    renderTextBox(svg, x, y + h0 + 3 * h, w, h, 'lightcyan', '近因', {size: '14px', align: 'middle'});
+    let w0 = 320;
+    let charTextBox = renderTextBox(svg, x + w, y + h0, w0, h, 'white', '', {size: '12px', align: 'middle'});
+    let functionTextBox = renderTextBox(svg, x + w, y + h0 + h, w0, h, 'white', '', {size: '12px', align: 'middle'});
+    let appearanceTextBox = renderTextBox(svg, x + w, y + h0 + 2 * h, w0, h, 'white', '', {size: '12px', align: 'middle'});
+    let proximateCauseTextBox = renderTextBox(svg, x + w, y + h0 + 3 * h, w0, h, 'white', '', {size: '12px', align: 'middle'});
+    renderTextBox(svg, x, y, w + w0, h0, 'lightcyan', '心所注释', {size: '14px', align: 'middle'});
+    return {
+        update: function (itemId) {
+            if (noteIndex[itemId]) {
+                charTextBox.setText(noteIndex[itemId].char_mark);
+                functionTextBox.setText(noteIndex[itemId].function);
+                appearanceTextBox.setText(noteIndex[itemId].appearance);
+                proximateCauseTextBox.setText(noteIndex[itemId].proximate_cause);
+            }
+        },
+        clear: function () {
+            charTextBox.setText('');
+            functionTextBox.setText('');
+            appearanceTextBox.setText('');
+            proximateCauseTextBox.setText('');
+        },
+        endX: x + w,
+        endY: y + h
+    };
+}
+
+const fet = renderFeelingTable(feelingTableX, 0);
+const ct = renderCauseTable(fet.endX + subPadding, 0);
 const tt = renderTimeTable(feelingTableX, subPadding + ct.endY);
 const fot = renderFiveObjectsTable(tt.endX + subPadding, subPadding + ct.endY);
 const mot = renderMentalObjectsTable(feelingTableX, tt.endY + subPadding);
@@ -540,122 +394,109 @@ const gt = renderGateTable(rt.endX + subPadding, mot.endY + subPadding);
 const bt = renderBasisTable(feelingTableX, gt.endY + subPadding);
 const ft = renderFunctionTable(feelingTableX, bt.endY + subPadding);
 const cntt = renderCounterTable(feelingTableX, ft.endY + subPadding);
+const ntt = renderNoteTable(feelingTableX, cntt.endY + subPadding);
 renderCetasikaTable(cntt);
+renderFirstCell();
+renderColumnHeaders();
+renderRowHeaders();
+renderGridCells();
 
-function highlightCetasika(data) {
-  for (let i = 0; i < data.cetasika.length; i++) {
-    cetasikaLookup[data.cetasika[i]].attr('fill', 'yellow');
-  }
-  for (let i = 0; i < data.cetasika_opt_ext.length; i++) {
-    cetasikaLookup[data.cetasika_opt_ext[i]].attr('fill', 'lightyellow');
-  }
-}
+/** itemIndex is populated by now **/
+function calculateConnections() {
+    cittas.children.forEach((cittaGroup, index) => {
+        let groupAttrs = {
+            cetasika: (cittas.cetasika || []).concat(cittaGroup.cetasika || []),
+            category: cittaGroup.category || null,
+            roots: cittaGroup.roots || [],
+            functions: cittaGroup.functions || [],
+            gates: cittaGroup.gates || [],
+            objects: cittaGroup.objects || [],
+            mental_objects: cittaGroup.mental_objects || [],
+            object_time: cittaGroup.object_time || [],
+            basis: cittaGroup.basis || null,
+            realms: cittaGroup.realms || [],
+            feeling: cittaGroup.feeling || null,
+            cetasika_opt: (cittas.cetasika_opt || []).concat(cittaGroup.cetasika_opt || [])
+        };
 
-function clearCetasika() {
-  for (let key in cetasikaLookup) {
-    cetasikaLookup[key].attr('fill', 'white');
-  }
-}
-
-function updateFeelingText(data) {
-    let text = data.feeling;
-    feelingText.text(text);
-    if (text == '悦' || text == '乐') {
-        feelingColor.attr('fill', 'lightgreen');
-    } else if (text == '苦' || text == '忧') {
-        feelingColor.attr('fill', 'red');
-    } else {
-        feelingColor.attr('fill', 'white');
-    }
-}
-
-function updateCells(table, arr, color) {
-    for (let i = 0; i < arr.length; ++i) {
-        let cell = table[arr[i]];
-        cell.attr('fill', color);
-    }
-}
-
-function clearFeelingText(data) {
-    feelingText.text('');
-    feelingColor.attr('fill', 'white');
-}
-
-function applyHighlights(item) {
-    item.select('rect').attr('fill', 'yellow');
-    const data = item.datum();
-    updateTooltipContent(tooltip, data);
-    highlightCetasika(data);
-    updateFeelingText(data);
-    ct.update((data.roots && data.roots.length) ? data.roots : ['无因']);
-    tt.update(data.object_time);
-    fot.update(data.objects == '五所缘' ? ['色所缘','香所缘','声所缘','味所缘','触所缘'] : data.objects);
-    mot.update(data.mental_objects);
-    rt.update(data.realms);
-    gt.update(data.gates);
-    bt.update(data.basis);
-    ft.update(data.functions);
-    cntt.update(data.cetasika.length, data.cetasika_opt_ext.length);
-}
-
-function clearHighlights(item) {
-    item.select('rect').attr('fill', 'white');
-    clearCetasika();
-    clearFeelingText();
-    ct.clear();
-    tt.clear();
-    fot.clear();
-    mot.clear();
-    rt.clear();
-    gt.clear();
-    bt.clear();
-    ft.clear();
-    cntt.clear();
-}
-
-svg.selectAll(".table-cell") // Select all rectangles in your SVG; adjust the selector as needed
-    .on("mouseover", function(event, d) {
-      if (locked) return;
-      /*
-      tooltip.style("visibility", "visible")
-          .style("left", (event.pageX + 10) + "px") // Position the tooltip
-          .style("top", (event.pageY - 10) + "px");
-       */
-        applyHighlights(d3.select(this));
-    })
-    .on("mousemove", function(event) {
-        /*
-      tooltip.style("left", (event.pageX + 10) + "px") // Update position on mouse move
-          .style("top", (event.pageY - 10) + "px");
-
-         */
-    })
-    .on("mouseout", function() {
-        /*
-      tooltip.style("visibility", "hidden");
-      tooltip.selectAll("text").remove();
-      */
-      if (locked) return;
-      clearHighlights(d3.select(this));
-    })
-    .on("click", function(event, d) {
-        if (locked && lockedItem === this) {
-            locked = false;
-            lockedItem = null;
-            if (clearFunc) clearFunc();
-        } else {
-            if (locked && clearFunc) {
-                clearFunc();
+        // Loop through the data items and draw each row
+        cittaGroup.children.forEach((item, index) => {
+            function getIndex(def) {
+                let idIndex = {};
+                def.names.forEach((name, index) => {
+                    idIndex[name] = def.index_base + index + 1;
+                });
+                return idIndex;
             }
-            locked = true;
-            lockedItem = this;
-            const item = d3.select(this);
-            applyHighlights(item);
-            clearFunc = function() {
-                clearHighlights(item);
-            };
-        }
+
+            function addConnection(id, item_names, from_color, to_color, idIndex, params={reverse_color:false, opt:false}) {
+                let reverse_color = params.reverse_color;
+                if (!itemConnections[id]) {
+                    itemConnections[id] = {'from_color': from_color, 'connection_groups': [], counter: 0, opt_counter: 0};
+                }
+                let ids = [];
+                item_names.forEach(name => {
+                    let fc = reverse_color ?  to_color : from_color;
+                    let tc = reverse_color ?  from_color : to_color;
+                    let to_id = idIndex[name];
+                    ids.push(to_id);
+                    if (!itemConnections[to_id]) {
+                        itemConnections[to_id] = {'from_color': tc, 'connection_groups': [], counter: 0, opt_counter: 0};
+                    }
+                    let connectionGroup = itemConnections[to_id].connection_groups.find(group => group.to_color === fc);
+                    if (connectionGroup) {
+                        connectionGroup.ids.push(id);
+                    } else {
+                        itemConnections[to_id].connection_groups.push({'to_color': fc, 'ids': [id]});
+                    }
+                    if (params.opt) {
+                        itemConnections[to_id].opt_counter++;
+                    } else {
+                        itemConnections[to_id].counter++;
+                    }
+                });
+                itemConnections[id].connection_groups.push({'to_color':to_color, 'ids': ids});
+                if (params.opt) {
+                    itemConnections[id].opt_counter += ids.length;
+                } else {
+                    itemConnections[id].counter += ids.length;
+                }
+            }
+
+            const item_cetasika = groupAttrs.cetasika.concat(item.cetasika || []);
+            addConnection(item.id, item_cetasika, 'yellow', 'yellow', cetasikaIdIndex);
+            const item_cetasika_opt = groupAttrs.cetasika_opt.concat(item.cetasika_opt || []);
+            addConnection(item.id, item_cetasika_opt, 'yellow', 'lightyellow', cetasikaIdIndex, {reverse_color: true, opt: true});
+            const item_category = item.category || groupAttrs.category || [];
+            const item_roots = groupAttrs.roots.concat(item.roots || []);
+            addConnection(item.id, item_roots, 'yellow', 'lavender', getIndex(causes));
+
+            const item_functions = groupAttrs.functions.concat(item.functions || []);
+            addConnection(item.id, item_functions, 'yellow', 'orange', getIndex(functions));
+
+            const item_gates = groupAttrs.gates.concat(item.gates || []);
+            addConnection(item.id, item_gates, 'yellow', 'pink', getIndex(gates));
+
+            const item_objects = groupAttrs.objects.concat(item.objects || []);
+            addConnection(item.id, item_objects, 'yellow', 'lightgreen', getIndex(objects));
+
+            const item_mental_objects = groupAttrs.mental_objects.concat(item.mental_objects || []);
+            addConnection(item.id, item_mental_objects, 'yellow', 'lightblue', getIndex(mental_objects));
+
+            const item_object_time = groupAttrs.object_time.concat(item.object_time || []);
+            addConnection(item.id, item_object_time, 'yellow', 'lavender', getIndex(times));
+
+            const item_basis = item.basis || groupAttrs.basis ? [item.basis || groupAttrs.basis] : [];
+            addConnection(item.id, item_basis, 'yellow', 'lightblue', getIndex(basis));
+
+            const item_realms = groupAttrs.realms.concat(item.realms || []);
+            addConnection(item.id, item_realms, 'yellow', 'violet', getIndex(realms));
+
+            const item_feeling = item.feeling || groupAttrs.feeling ? [item.feeling || groupAttrs.feeling] : [];
+            addConnection(item.id, item_feeling, 'yellow', 'tomato', getIndex(feelings));
+        });
     });
+}
 
 svg.append('a')
     .attr('xlink:href', 'https://github.com/juncoflockleader/Abhidharma') // Use xlink:href for SVG links
@@ -674,3 +515,62 @@ svg.append('a')
     .text('This page: https://juncoflockleader.github.io/Abhidharma/')
     .style('font-size', '16px') // Set font size
     .style('fill', 'blue'); // Set text color0px');
+
+function setupHighlightsBehavior() {
+    calculateConnections();
+    for (let itemId in itemConnections) {
+        function highlightsConnections(connections) {
+            function setHighlights(connections, clear=false) {
+                let color = clear ? 'white' : connections.from_color
+                highlightsTextBox(itemIndex[itemId], color);
+                if (!clear) {
+                    cntt.update(connections.counter, connections.opt_counter);
+                    ntt.update(itemId);
+                }
+                else {
+                    cntt.clear();
+                    ntt.clear();
+                }
+                connections.connection_groups.forEach(connection => {
+                    connection.ids.forEach(id => {
+                        let color = clear ? 'white' : connection.to_color;
+                        highlightsTextBox(itemIndex[id], color);
+                    });
+                });
+            }
+            setHighlights(connections);
+            clearFunc = function() {
+                setHighlights(connections, true);
+            }
+        }
+
+        let connections = itemConnections[itemId];
+        let item = itemIndex[itemId];
+        item.on("mouseover", function(event, d) {
+            if (locked) return;
+            highlightsConnections(connections);
+        })
+        .on("mousemove", function(event) {
+        })
+        .on("mouseout", function() {
+            if (locked) return;
+            if (clearFunc) clearFunc();
+        })
+        .on("click", function() {
+            if (locked && lockedItem === this) {
+                locked = false;
+                lockedItem = null;
+                if (clearFunc) clearFunc();
+            } else {
+                if (locked && clearFunc) {
+                    clearFunc();
+                }
+                locked = true;
+                lockedItem = this;
+                highlightsConnections(connections);
+            }
+        });
+    }
+}
+
+setupHighlightsBehavior();
