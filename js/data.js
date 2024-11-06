@@ -1,4 +1,4 @@
-const cittas =
+const cittas = 
     {
       "name": "心",
       "cetasika": [
