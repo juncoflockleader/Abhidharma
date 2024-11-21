@@ -2439,6 +2439,9 @@ const cittas =
             "无嗔",
             "无痴"
           ],
+          "functions": [
+            "速行"
+          ],
           "feeling": "依禅那",
           "cetasika": [
             "正语",
