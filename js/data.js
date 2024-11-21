@@ -2434,13 +2434,13 @@ const cittas =
             "果报",
             "有因"
           ],
+          "functions": [
+            "速行"
+          ],
           "roots": [
             "无贪",
             "无嗔",
             "无痴"
-          ],
-          "functions": [
-            "速行"
           ],
           "feeling": "依禅那",
           "cetasika": [
