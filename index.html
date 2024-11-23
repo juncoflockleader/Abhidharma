@@ -5,27 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>阿毗达摩互动表解 v0.6.3</title>
   <style>
-    /* Tooltip styling */
-    #tooltip {
-      position: absolute;
+    body {
+      display: flex;
+      font-family: Arial, sans-serif;
+    }
+    .tabs {
+      width: 200px;
+      border-right: 1px solid #ccc;
+      padding: 10px;
+    }
+    .tabs button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      background: #f0f0f0;
+      cursor: pointer;
       text-align: left;
-      padding: 2px;
-      font: 12px sans-serif;
-      background: lightsteelblue;
-      border: 0px;
-      border-radius: 8px;
-      pointer-events: none;
-      opacity: 0.9;
-      visibility: hidden; /* Ensure it starts as hidden */
-      z-index: 1000; /* Ensure it's above other elements */
-      white-space: pre-line; /* Ensure text wraps */
+    }
+    .tabs button.active {
+      background: #d0d0f0;
+    }
+    .svg-container {
+      flex: 1;
+      padding: 10px;
+    }
+    svg {
+      display: none;
+    }
+    svg.active {
+      display: block;
     }
   </style>
 </head>
 <body>
-<div id="tooltip" style="position: absolute; visibility: hidden; padding: 10px; background: white; border: 1px solid #ccc; border-radius: 5px; pointer-events: none;"></div>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="js/data.js"></script>
-<script src="js/script.js"></script>
+<div class="tabs">
+  <button id="tab1" class="active">心与心所</button>
+  
+</div>
+<div class="svg-container">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/citta.js"></script>
+</div>
 </body>
 </html>
