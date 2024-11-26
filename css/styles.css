@@ -1,0 +1,75 @@
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+.tabs {
+    width: 200px;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+.tabs button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    text-align: left;
+}
+.tabs button.active {
+    background: #d0d0f0;
+}
+.svg-container {
+    flex: 1;
+    padding: 10px;
+}
+.svg-sub-container {
+    flex: 1;
+    padding: 10px;
+    display: none;
+}
+.svg-sub-container.active {
+    flex: 1;
+    padding: 10px;
+    display: block;
+}
+.node {
+    stroke: #fff;
+    stroke-width: 1.5px;
+}
+.link {
+    fill: none;
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+.radio-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+.radio-button.active {
+    background-color: #007bff;
+    color: white;
+}
+.radio-button:hover {
+    background-color: #e0e0e0;
+}
+/* Disabled state takes priority */
+.radio-button:disabled,
+.radio-button[disabled] {
+    background-color: #ccc; /* Example: gray background */
+    color: #666;
+    border: 1px solid #aaa;
+    cursor: not-allowed;
+}
+
+/* Combine disabled and active to prioritize disabled styling */
+.radio-button:disabled.active,
+.radio-button[disabled].active {
+    background-color: #ccc; /* Same as disabled background */
+    color: #666; /* Same as disabled text color */
+    border: 1px solid #aaa; /* Same as disabled border */
+}

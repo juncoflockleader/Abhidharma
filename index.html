@@ -3,52 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>阿毗达摩互动表解 v0.6.3</title>
-  <style>
-    body {
-      display: flex;
-      font-family: Arial, sans-serif;
-    }
-    .tabs {
-      width: 200px;
-      border-right: 1px solid #ccc;
-      padding: 10px;
-    }
-    .tabs button {
-      display: block;
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      border: none;
-      background: #f0f0f0;
-      cursor: pointer;
-      text-align: left;
-    }
-    .tabs button.active {
-      background: #d0d0f0;
-    }
-    .svg-container {
-      flex: 1;
-      padding: 10px;
-    }
-    svg {
-      display: none;
-    }
-    svg.active {
-      display: block;
-    }
-  </style>
+  <title>阿毗达摩互动表解 v0.7.0</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+<div id="tooltip" style="position: absolute; visibility: hidden; background-color: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; pointer-events: none;"></div>
 <div class="tabs">
   <button id="tab1" class="active">心与心所</button>
-  
+  <button id="tab2">欲界五门心路</button>
+  <button id="tab3">欲界意门心路</button>
 </div>
 <div class="svg-container">
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/common.js"></script>
-  <script src="js/citta.js"></script>
+  <div class ="svg-sub-container active" id="container1"></div>
+  <div class ="svg-sub-container" id="container2">
+    <div id="senseflow"></div>
+    <div id="senseflowcontrols"></div>
+  </div>
+  <div class ="svg-sub-container" id="container3">
+    <p id="value"></p>
+    <div id="mindflow"></div>
+    <div id="mindflowcontrols"></div>
+  </div>
 </div>
+<script src="libs/d3.v7.js"></script>
+<script src="libs/d3-simple-slider.js"></script>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script src="js/citta.js"></script>
+<script src="js/flows.js"></script>
+<script src="js/material.js"></script>
 </body>
 </html>

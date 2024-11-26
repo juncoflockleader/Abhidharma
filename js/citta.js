@@ -1,6 +1,5 @@
 let itemIndex = {};
 let noteIndex = {};
-let itemConnections = {};
 
 function renderCittaTable(parent) {
     const rowHeaderWidth = 120;
@@ -66,7 +65,7 @@ function renderCittaTable(parent) {
                 cittasIndexes.forEach((cittaIndex, index) => {
                     const offsetX = cittasIndexes.length === 1 ? x0 : x0 + index * columnWidth / 2;
                     const width = cittasIndexes.length === 1 ? columnWidth : columnWidth / 2;
-                    createTableInCell(parent, offsetX, y0, width, rowHeight, cittas.children[cittaIndex]);
+                    renderVerticalTable(parent, offsetX, y0, width, rowHeight, cittas.children[cittaIndex].name, cittas.children[cittaIndex].children, 5, itemIndex);
                 });
                 x0 += columnWidth;
             }
@@ -76,29 +75,6 @@ function renderCittaTable(parent) {
             endX: x0,
             endY: y0,
         }
-    }
-
-    function createTableInCell(parent, cellX, cellY, cellWidth, cellHeight, cittaGroup) {
-        // Define the table's header and item height
-        const headerHeight = 20;
-        const rowHeight = 15;
-
-        // Create a group for the table
-        const tableGroup = parent.append('g')
-            .attr('transform', `translate(${cellX}, ${cellY})`);
-
-        let padding = 5;
-        // Draw the header row
-        renderTextBox(tableGroup, padding, padding, cellWidth - padding * 2, headerHeight, 'lightgrey', cittaGroup.name, {size: '12px', 'padding': padding, align: 'left'});
-        // Loop through the data items and draw each row
-        cittaGroup.children.forEach((item, index) => {
-            const yPosition = padding + headerHeight + index * rowHeight;
-            itemIndex[item.id] = renderTextBox(tableGroup, padding, yPosition, cellWidth - padding * 2, rowHeight, 'white', item.name, {
-                size: '10px',
-                'padding': padding,
-                align: 'left'
-            });
-        });
     }
 
     const fs = renderFirstCell(parent, 0, 0, rowHeaderWidth, columnHeaderHeight);
@@ -298,6 +274,7 @@ renderCetasikaTable(ctt.endY + 20);
 
 /** itemIndex is populated by now **/
 function calculateConnections() {
+    let itemConnections = {};
     cittas.children.forEach((cittaGroup, index) => {
         let groupAttrs = {
             cetasika: (cittas.cetasika || []).concat(cittaGroup.cetasika || []),
@@ -391,6 +368,7 @@ function calculateConnections() {
             addConnection(item.id, item_feeling, 'yellow', 'tomato', getIndex(feelings));
         });
     });
+    return itemConnections;
 }
 
 cittaSvg.append('a')
@@ -411,11 +389,11 @@ cittaSvg.append('a')
     .style('font-size', '16px') // Set font size
     .style('fill', 'blue'); // Set text color0px');
 
-function setupHighlightsBehavior(itemGraph) {
+function setupHighlightsBehavior() {
     let locked = false;
     let lockedItem = null;
     let clearFunc = null;
-    calculateConnections();
+    const itemGraph = calculateConnections();
     for (let itemId in itemGraph) {
         function highlightsConnections(connections) {
             function setHighlights(connections, clear=false) {
@@ -471,4 +449,4 @@ function setupHighlightsBehavior(itemGraph) {
     }
 }
 
-setupHighlightsBehavior(itemConnections);
+setupHighlightsBehavior();
