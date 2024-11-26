@@ -56,7 +56,7 @@ const flowCittas = [
     {
         "id": 10,
         "name": "速行",
-        "color": "blue",
+        "color": "lightblue",
         "cittas": [{"class": "不善心", "cittas": ["悦俱邪见相应无行心", "悦俱邪见相应有行心", "悦俱邪见不相应无行心", "悦俱邪见不相应有行心",
             "舍俱邪见相应无行心", "舍俱邪见相应有行心", "舍俱邪见不相应无行心", "舍俱邪见不相应有行心", "忧俱嗔恚相应无行心", "忧俱嗔恚相应有行心",
             "舍俱疑相应心", "舍俱掉举相应心"], "matcher": {"arahant": false, "goodIntention": false}},
