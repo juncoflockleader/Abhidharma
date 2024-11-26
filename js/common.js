@@ -10,26 +10,32 @@ const cittaSvg = container.select('#container1').append('svg')
 const msSvg = container.select('#container2').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
-    .attr('height', svgHeight);
+    .attr('height', 1);
 
 const mmSvg = container.select('#container3').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
-    .attr('height', svgHeight);
+    .attr('height', 1);
 
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
 const svgs = d3.selectAll('.svg-sub-container');
 
+function showTab(tabIndex) {
+    // Update tab styles
+    tabs.classed('active', (d, i) => i === parseInt(tabIndex));
+
+    // Show/hide SVGs
+    svgs.classed('active', (d, i) => i === parseInt(tabIndex));
+}
+
 tabs.on('click', function () {
     const tabIndex = tabs.nodes().indexOf(this);
 
-    // Update tab styles
-    tabs.classed('active', (d, i) => i === tabIndex);
+    history.pushState(null, '', `#${tabIndex}`);
 
-    // Show/hide SVGs
-    svgs.classed('active', (d, i) => i === tabIndex);
+    showTab(tabIndex);
 });
 
 /** Helper functions **/

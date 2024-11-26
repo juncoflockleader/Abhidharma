@@ -257,21 +257,6 @@ function renderNoteTable(x, y) {
     };
 }
 
-const ctt = renderCittaTable(cittaSvg);
-const rx = ctt.endX + subPadding;
-const fet = renderFeelingTable(rx, 0);
-const ct = renderCauseTable(fet.endX + subPadding, 0);
-const tt = renderTimeTable(rx, subPadding + ct.endY);
-const fot = renderFiveObjectsTable(tt.endX + subPadding, subPadding + ct.endY);
-const mot = renderMentalObjectsTable(rx, tt.endY + subPadding);
-const rt = renderRealmTable(rx, mot.endY + subPadding);
-const gt = renderGateTable(rt.endX + subPadding, mot.endY + subPadding);
-const bt = renderBasisTable(rx, gt.endY + subPadding);
-const ft = renderFunctionTable(rx, bt.endY + subPadding);
-const cntt = renderCounterTable(rx, ft.endY + subPadding);
-const ntt = renderNoteTable(rx, cntt.endY + subPadding);
-renderCetasikaTable(ctt.endY + 20);
-
 /** itemIndex is populated by now **/
 function calculateConnections() {
     let itemConnections = {};
@@ -389,7 +374,7 @@ cittaSvg.append('a')
     .style('font-size', '16px') // Set font size
     .style('fill', 'blue'); // Set text color0px');
 
-function setupHighlightsBehavior() {
+function setupHighlightsBehavior(cntt, ntt) {
     let locked = false;
     let lockedItem = null;
     let clearFunc = null;
@@ -448,5 +433,3 @@ function setupHighlightsBehavior() {
         });
     }
 }
-
-setupHighlightsBehavior();
