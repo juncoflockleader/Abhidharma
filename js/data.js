@@ -1085,6 +1085,9 @@ const cittas =
             "果报",
             "无因"
           ],
+          "realms": [
+            "欲",
+          ],
           "children": [
             {
               "name": "眼识",
