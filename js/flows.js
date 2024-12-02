@@ -334,36 +334,14 @@ function renderFlow(state) {
         });
 
     const padding = 6;
-    const boxes = svg
-        .selectAll("boxes")
+    const labels = svg.selectAll("labels")
         .data(data.nodes)
-        .join("text")
+        .join("g")
         .attr("x", d => x(d.id))
         .attr("y", y + radius * 2)
         .each(function(d) {
             const w = 24;
-            d["label"] = renderCell(svg, x(d.id) - w / 2, y + radius + padding, w, 80, 'transparent');
-        });
-
-    const labels = svg
-        .selectAll("mylabels")
-        .data(data.nodes)
-        .join("text")
-        .attr("x", d => x(d.id))
-        .attr("y", y + radius * 2 + 2)
-        .style("text-anchor", "middle")
-        .each(function(d) {
-            const textElement = d3.select(this);
-            // Split the label text into individual characters
-            const characters = d.name.split("");
-
-            // Add each character as a separate <tspan> element
-            characters.forEach((char, i) => {
-                textElement.append("tspan")
-                    .attr("x", textElement.attr("x"))  // Keep the x position consistent
-                    .attr("dy", i === 0 ? "0" : "1.2em")  // No offset for the first character, vertical offset for subsequent ones
-                    .text(char);
-            });
+            d["label"] = renderTextBox(svg, x(d.id) - w / 2, y + radius + padding, w, 80, 'transparent', d.name, {vertical: true});
         });
 
     // Add the highlighting functionality
@@ -375,7 +353,7 @@ function renderFlow(state) {
                 .attr("r", radius * 1.2)             // increase the radius to make it look larger
                 .style("stroke", "black")  // add a black border
                 .style("stroke-width", 2); // set border thickness
-            node.label.style('fill', 'lightblue');
+            node.label.setColor('lightblue');
             if (node.ct) node.ct.setColor('lightblue');
         });
     }
@@ -383,7 +361,7 @@ function renderFlow(state) {
     function handleMouseOut(event, d) {
         data.nodes.forEach((node, i) => {
             if (node.fcid !== d.fcid) return;
-            node.label.style('fill', 'white');
+            node.label.setColor('transparent');
             node.circle.transition()
                 .duration(200)
                 .attr("r", radius)             // increase the radius to make it look larger
@@ -490,6 +468,43 @@ function renderFlow(state) {
     }
 }
 
+function renderButtonGroup(controlsContainer, buttonData, title, state, stateUpdater) {
+    const bg = controlsContainer.append('div')
+        .attr('class', 'button-group')
+        .style('border', '1px solid #ccc') // Add border for separation
+        .style('padding', '15px') // Add padding inside the box
+        .style('border-radius', '5px') // Rounded corners
+        .style('display', 'flex')
+        .style('flex-direction', 'column')
+        .style('position', 'relative')
+        .style('padding-top', '35px')
+        .style('background', '#f9f9f9'); // Light background for differentiation
+
+
+    bg.append('div')
+        .attr('class', 'group-label')
+        .text(title)
+        .style('position', 'absolute')
+        .style('top', '5px')
+        .style('left', '10px')
+        .style('font-weight', 'bold');
+
+    bg.selectAll("button")
+        .data(buttonData)
+        .enter()
+        .append("button")
+        .text(d => d.name)
+        .attr("class", d => d.id === 1 ? "radio-button active" : "radio-button")
+        .on("click", function (event, d) {
+            bg.selectAll(".radio-button").classed("active", false);
+            d3.select(this).classed("active", true);
+            stateUpdater(state, d);
+            return renderFlow(state);
+        });
+
+    return bg;
+}
+
 function renderControls(state, min, max) {
     const width = 90*3;
 
@@ -545,115 +560,14 @@ function renderControls(state, min, max) {
     renderTextBox(svg, 100+width, 30, 22, 120, 'cyan', '极细微所缘', {vertical: true, valign: 'top'});
 
     // Create a container for the button group
-    const likableButtonGroup = controlsContainer.append('div')
-        .attr('class', 'button-group')
-        .style('border', '1px solid #ccc') // Add border for separation
-        .style('padding', '15px') // Add padding inside the box
-        .style('border-radius', '5px') // Rounded corners
-        .style('display', 'flex')
-        .style('flex-direction', 'column')
-        .style('position', 'relative')
-        .style('background', '#f9f9f9'); // Light background for differentiation
-
-
-    likableButtonGroup.append('div')
-        .attr('class', 'group-label')
-        .text('所缘本性')
-        .style('position', 'absolute')
-        .style('top', '5px')
-        .style('left', '10px')
-        .style('font-weight', 'bold');
-
-    likableButtonGroup.style('padding-top', '35px');
-
-    const buttonData = [{ "id": 1, "name": "极可喜" }, { "id": 2, "name": "可喜" }, { "id": 3, "name": "不可喜" }];
-    likableButtonGroup.selectAll("button")
-        .data(buttonData)
-        .enter()
-        .append("button")
-        .text(d => d.name)
-        .attr("class", d => d.id === 1 ? "radio-button active" : "radio-button")
-        .on("click", function (event, d) {
-            likableButtonGroup.selectAll(".radio-button").classed("active", false);
-            d3.select(this).classed("active", true);
-            state.likable = d.id;
-            return renderFlow(state);
-        });
-
-    // Create a container for the button group
-    const intentButtonGroup = controlsContainer.append('div')
-        .attr('class', 'button-group')
-        .style('border', '1px solid #ccc') // Add border for separation
-        .style('padding', '15px') // Add padding inside the box
-        .style('border-radius', '5px') // Rounded corners
-        .style('display', 'flex')
-        .style('flex-direction', 'column')
-        .style('position', 'relative')
-        .style('background', '#f9f9f9'); // Light background for differentiation
-
-
-    intentButtonGroup.append('div')
-        .attr('class', 'group-label')
-        .text('作意')
-        .style('position', 'absolute')
-        .style('top', '5px')
-        .style('left', '10px')
-        .style('font-weight', 'bold');
-
-    intentButtonGroup.style('padding-top', '35px');
-
-    const intentButtonData = [{ "id": 1, "name": "如理作意" }, { "id": 2, "name": "不如理作意" }];
-    intentButtonGroup.selectAll("button")
-        .data(intentButtonData)
-        .enter()
-        .append("button")
-        .text(d => d.name)
-        .attr("class", d => d.id === 1 ? "radio-button active" : "radio-button")
-        .on("click", function (event, d) {
-            intentButtonGroup.selectAll(".radio-button").classed("active", false);
-            d3.select(this).classed("active", true);
-            state.goodIntention = d.id === 1;
-            return renderFlow(state);
-        });
-
-    // Create a container for the button group
-    const levelButtonGroup = controlsContainer.append('div')
-        .attr('class', 'button-group')
-        .style('border', '1px solid #ccc') // Add border for separation
-        .style('padding', '15px') // Add padding inside the box
-        .style('border-radius', '5px') // Rounded corners
-        .style('display', 'flex')
-        .style('flex-direction', 'column')
-        .style('position', 'relative')
-        .style('background', '#f9f9f9'); // Light background for differentiation
-
-
-    levelButtonGroup.append('div')
-        .attr('class', 'group-label')
-        .text('果位')
-        .style('position', 'absolute')
-        .style('top', '5px')
-        .style('left', '10px')
-        .style('font-weight', 'bold');
-
-    levelButtonGroup.style('padding-top', '35px');
-
-    const levelButtonData = [{ "id": 1, "name": "凡夫有学" }, { "id": 2, "name": "阿罗汉" }];
-    levelButtonGroup.selectAll("button")
-        .data(levelButtonData)
-        .enter()
-        .append("button")
-        .text(d => d.name)
-        .attr("class", d => d.id === 1 ? "radio-button active" : "radio-button")
-        .on("click", function (event, d) {
-            levelButtonGroup.selectAll(".radio-button").classed("active", false);
-            d3.select(this).classed("active", true);
-            state.arahant = d.id === 2;
-            if (state.arahant) {
-                intentButtonGroup.selectAll(".radio-button").attr("disabled", true);
-            } else {
-                intentButtonGroup.selectAll(".radio-button").attr("disabled", null);
-            }
-            return renderFlow(state);
-        });
+    renderButtonGroup(controlsContainer, [{ "id": 1, "name": "极可喜" }, { "id": 2, "name": "可喜" }, { "id": 3, "name": "不可喜" }], '所缘本性', state, (state, data) => {state.likable = data.id;});
+    const intentButtonGroup = renderButtonGroup(controlsContainer, [{ "id": 1, "name": "如理作意" }, { "id": 2, "name": "不如理作意" }], '作意', state, (state, data) => {state.goodIntention = data.id === 1;});
+    renderButtonGroup(controlsContainer, [{ "id": 1, "name": "凡夫有学" }, { "id": 2, "name": "阿罗汉" }], '果位', state, (state, data) => {
+        state.arahant = data.id === 2;
+        if (state.arahant) {
+            intentButtonGroup.selectAll(".radio-button").attr("disabled", true);
+        } else {
+            intentButtonGroup.selectAll(".radio-button").attr("disabled", null);
+        }
+    });
 }
