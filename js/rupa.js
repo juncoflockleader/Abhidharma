@@ -163,7 +163,7 @@ const rupa = {
                         {
                             name: "心色",
                             id: 16,
-                            alias: "心所依处色",
+                            alias: "心所依处",
                             character: "提供意界和意识界的依处",
                             functions: "作为意界和意识界的依处",
                             manifestation: "撑此意界和意识界",
@@ -308,42 +308,42 @@ const rupaClass = [
     {
         name: "内色",
         id: 101,
-        values: ["内色", "外色"],
+        values: ["内", "外"],
         notes: "作为名法之门的五净色",
         rupa: ["眼净色", "耳净色", "鼻净色", "舌净色", "身净色"]
     },
     {
         name: "所依色",
         id: 102,
-        values: ["所依色", "非所依色"],
+        values: ["所依", "非所依"],
         notes: "六识所依之色法",
         rupa: ["眼净色", "耳净色", "鼻净色", "舌净色", "身净色", "心色"]
     },
     {
         name: "门色",
         id: 103,
-        values: ["门色", "非门色"],
+        values: ["门", "非门"],
         notes: "五净色:心与目标之门;表色:造身语业之门",
         rupa: ["眼净色", "耳净色", "鼻净色", "舌净色", "身净色", "身表色", "语表色"]
     },
     {
         name: "根色",
         id: 104,
-        values: ["根色", "非根色"],
+        values: ["根", "非根"],
         notes: "有控制力",
         rupa: ["眼净色", "耳净色", "鼻净色", "舌净色", "身净色", "男根色", "女根色", "命根色"]
     },
     {
         name: "粗/近/有对色",
         id: 105,
-        values: ["粗/近/有对色", "细/远/非有对色"],
+        values: ["粗/近/有对", "细/远/非有对"],
         notes: "直接使根识生起的色法",
         rupa: ["地", "火", "风", "眼净色", "耳净色", "鼻净色", "舌净色", "身净色", "色", "声", "香", "味"]
     },
     {
         name: "执受色",
         id: 106,
-        values: ["执受色", "非执受色", "皆可"],
+        values: ["执受", "非执受", "皆可"],
         notes: "渴爱与邪见推动而造下的业的果报",
         rupa: ["眼净色", "耳净色", "鼻净色", "舌净色", "身净色", "男根色", "女根色", "心色", "命根色"],
         extra: ["地", "水", "火", "风", "色", "香", "味", "食色", "限界色"]
@@ -359,7 +359,7 @@ const rupaClass = [
     {
         name: "取境色",
         id: 108,
-        values: ["取/到达境色", "不取境色", "取/不到达境色"],
+        values: ["到达境", "不取境", "不到达境"],
         notes: "五净色取五境为目标",
         rupa: ["眼净色", "耳净色"],
         extra: ["鼻净色", "舌净色", "身净色"]
@@ -367,7 +367,7 @@ const rupaClass = [
     {
         name: "不分离色",
         id: 109,
-        values: ["不分离色", "分离色"],
+        values: ["不分离", "分离"],
         notes: "四大元素与色香味食色存在于一切色聚中",
         rupa: ["地", "水", "火", "风", "色", "香", "味", "食色"]
     },
@@ -547,14 +547,83 @@ function renderRupaAttrTable(parent) {
     const padding = 3;
     const unit = fontSize + padding * 2;
     const columnHeaderH = unit;
-    const rowHeaderW = unit + unit + 4 * fontSize + 2 * padding;
+    const rowHeaderW = unit + 7 * fontSize + 4 * padding;
     function renderCornerCell() {
-        renderCell(parent, 0, 0, rowHeaderW, columnHeaderH, 'white');
+        renderCell(parent, 0, 0, rowHeaderW, columnHeaderH, 'lightcyan');
     }
-    function renderColumnHeaders(x, y) {
 
+    const colx = [];
+    function renderColumnHeaders(x, y) {
+        let rx = x;
+        colx.push(rx);
+        rupaClass.forEach(function (data, i) {
+            let w = getWordLength(data.name, fontSize) + padding * 2;
+            if (i === 7) {
+                w += fontSize;
+            }
+            renderTextBox(parent, rx, y, w, columnHeaderH, 'lightcyan', data.name, {size: fontSize});
+            rx += w;
+            colx.push(rx);
+        });
+    }
+
+    let rupas = [];
+    function renderRowHeaderGroups(x, y, depth, data) {
+        if (!data.children) {
+            if (data.id > 0) {
+                rupas.push(data);
+            }
+            return {count: data.id > 0};
+        }
+        let count = 0;
+        const xOffset = depth === 0 ? 0 : unit;
+        data.children.forEach(d => {
+            const res = renderRowHeaderGroups(x + xOffset, y + count * unit, depth + 1, d);
+            count += res.count;
+        })
+        if (depth === 2) {
+            renderTextBox(parent, x, y, fontSize * 3 + padding * 2, unit * count, 'lightcyan', data.name, {size: fontSize});
+        } else if (depth === 1) {
+            renderTextBox(parent, x, y, unit, unit * count, 'lightcyan', data.name, {size: fontSize});
+        }
+        return {count: count};
+    }
+
+    function renderRowHeaders(x, y) {
+        rupas.forEach((d, i) => {
+            renderTextBox(parent, x, y + i * unit, fontSize * 4 + padding * 2, unit, 'lightcyan', d.alias || d.name, {size: fontSize});
+        });
+    }
+
+    function renderGrid() {
+        const rupaIndex = {};
+        rupas.forEach(d => {
+            rupaIndex[d.name] = d;
+        });
+        rupaClass.forEach(((d, i) => {
+            const x = colx[i];
+            // positive, negative, neutral
+            const colors = ['lightgreen', 'lightyellow', 'yellow'];
+            rupas.forEach((r, j) => {
+                const y = columnHeaderH + unit * j;
+                let color = colors[1];
+                let text = d.values[1];
+                if (d.rupa.includes(r.name)) {
+                    color = colors[0];
+                    text = d.values[0];
+                } else if (d.extra && d.extra.includes(r.name)) {
+                    color = colors[2];
+                    text = d.values[2];
+                }
+                renderTextBox(parent, x, y, colx[i + 1] - colx[i], unit, color, text, {size: fontSize});
+            });
+        }));
     }
 
     renderCornerCell();
+    renderColumnHeaders(rowHeaderW, 0);
+    renderRowHeaderGroups(0, columnHeaderH, 0, rupa);
+    renderRowHeaders(unit + fontSize * 3 + padding * 2, columnHeaderH);
+    renderGrid();
 }
 
