@@ -116,7 +116,7 @@ function renderCetasikaTable(y) {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < cetasika.children[i].children.length; j++) {
       let n = cetasika.children[i].children[j].children.length;
-      renderTextBox(cittaSvg, x, y + rowHeight * 2, columnWidth * n, rowHeight, 'lightcyan', cetasika.children[i].children[j].name, {size: '12px', align: 'middle'});
+      renderTextBox(cittaSvg, x, y + rowHeight * 2, columnWidth * n, rowHeight, 'lightcyan', cetasika.children[i].children[j].name, {size: '12px', wrap: false, align: 'middle'});
       x += columnWidth * n;
     }
   }
@@ -141,8 +141,7 @@ function renderCetasikaTable(y) {
   cetasikaTableBottom = y + rowHeight * 5.5;
 }
 
-const subH = 30;
-const subPadding = 6;
+
 function renderSubTableV2(x, y, def) {
     const names = def.names;
     let widths = [];
@@ -151,17 +150,19 @@ function renderSubTableV2(x, y, def) {
     }
     let total = subArraySum(widths, 0, widths.length);
 
-    const h = subH;
-    renderTextBox(cittaSvg, x, y, total, h, 'lightcyan', def.title, {size: '14px', align: 'middle'});
+    const h = 30;
+    renderTextBox(cittaSvg, x, y, total, h, 'lightcyan', def.title, {size: '14px', wrap: false, align: 'middle'});
     let x0 = x;
     for (let i = 0; i < names.length; ++i) {
-        let item = renderTextBox(cittaSvg, x0, y + h, widths[i], h, 'white', names[i], {size: '12px', align: 'middle'});
-        itemIndex[def['index_base'] + i + 1] = item;
+        itemIndex[def['index_base'] + i + 1] = renderTextBox(cittaSvg, x0, y + h, widths[i], h, 'white', names[i], {
+            size: '12px',
+            align: 'middle'
+        });
         x0 += widths[i];
     }
     return {
         endX: x + total,
-        endY: y + 2 * subH
+        endY: y + 2 * 30
     };
 }
 
@@ -227,16 +228,16 @@ function renderNoteTable(x, y) {
 
     let w = 30;
     let h = 30;
-    renderTextBox(cittaSvg, x, y + h0, w, h, 'lightcyan', '特相', {size: '14px', align: 'middle'});
-    renderTextBox(cittaSvg, x, y + h0 + h, w, h, 'lightcyan', '作用', {size: '14px', align: 'middle'});
-    renderTextBox(cittaSvg, x, y + h0 + 2 * h, w, h, 'lightcyan', '现起', {size: '14px', align: 'middle'});
-    renderTextBox(cittaSvg, x, y + h0 + 3 * h, w, h, 'lightcyan', '近因', {size: '14px', align: 'middle'});
+    renderTextBox(cittaSvg, x, y + h0, w, h, 'lightcyan', '特相', {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0 + h, w, h, 'lightcyan', '作用', {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0 + 2 * h, w, h, 'lightcyan', '现起', {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0 + 3 * h, w, h, 'lightcyan', '近因', {size: '14px'});
     let w0 = 320;
-    let charTextBox = renderTextBox(cittaSvg, x + w, y + h0, w0, h, 'white', '', {size: '12px', align: 'middle'});
-    let functionTextBox = renderTextBox(cittaSvg, x + w, y + h0 + h, w0, h, 'white', '', {size: '12px', align: 'middle'});
-    let appearanceTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 2 * h, w0, h, 'white', '', {size: '12px', align: 'middle'});
-    let proximateCauseTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 3 * h, w0, h, 'white', '', {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, x, y, w + w0, h0, 'lightcyan', '心所注释', {size: '14px', align: 'middle'});
+    let charTextBox = renderTextBox(cittaSvg, x + w, y + h0, w0, h, 'white', '', {size: '12px', wrap: true});
+    let functionTextBox = renderTextBox(cittaSvg, x + w, y + h0 + h, w0, h, 'white', '', {size: '12px', wrap: true});
+    let appearanceTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 2 * h, w0, h, 'white', '', {size: '12px', wrap: true});
+    let proximateCauseTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 3 * h, w0, h, 'white', '', {size: '12px', wrap: true});
+    renderTextBox(cittaSvg, x, y, w + w0, h0, 'lightcyan', '心所注释', {size: '14px'});
     return {
         update: function (itemId) {
             if (noteIndex[itemId]) {
@@ -383,7 +384,7 @@ function setupHighlightsBehavior(cntt, ntt) {
         function highlightsConnections(connections) {
             function setHighlights(connections, clear=false) {
                 let color = clear ? 'white' : connections.from_color
-                highlightsTextBox(itemIndex[itemId], color);
+                itemIndex[itemId].setColor(color);
                 if (!clear) {
                     cntt.update(connections.counter, connections.opt_counter);
                     ntt.update(itemId);
@@ -395,7 +396,7 @@ function setupHighlightsBehavior(cntt, ntt) {
                 connections.connection_groups.forEach(connection => {
                     connection.ids.forEach(id => {
                         let color = clear ? 'white' : connection.to_color;
-                        highlightsTextBox(itemIndex[id], color);
+                        itemIndex[id].setColor(color);
                     });
                 });
             }

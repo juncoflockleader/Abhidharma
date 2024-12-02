@@ -2,6 +2,7 @@
 
 // On page load, check the URL
 window.addEventListener('DOMContentLoaded', () => {
+    const subPadding = 6;
     const ctt = renderCittaTable(cittaSvg);
     const rx = ctt.endX + subPadding;
     const fet = renderFeelingTable(rx, 0);
@@ -24,6 +25,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     renderFlow(mindFlowState);
     renderControls(mindFlowState, 1, 6);
+
+    renderRupaAttrTable(rpSvg);
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);

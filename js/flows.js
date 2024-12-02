@@ -407,7 +407,7 @@ function renderFlow(state) {
                 .each(function() { handleMouseOut.call(this, event, d); });
         });
 
-    renderTextBox(svg, -10, -radius, 105, 20, 'orange', data.name, {vertical: true, align: 'left', padding: 2, valign: 'top'});
+    renderTextBox(svg, -10, -radius, 20, 105, 'orange', data.name, {vertical: true, valign: 'top'});
 
     if (state.renderEntity) {
         renderEntity(svg, x, y, radius, state);
@@ -538,11 +538,11 @@ function renderControls(state, min, max) {
         .attr('height', 150);
 
 
-    renderTextBox(svg, 0, 30, 120, 22, 'cyan', '极大所缘', {vertical: true, align: 'left', padding: 3, valign: 'top'});
+    renderTextBox(svg, 0, 30, 22, 120, 'cyan', '极大所缘', {vertical: true, valign: 'top'});
     svg.append('g')
         .attr('transform', 'translate(60,70)')
         .call(slider);
-    renderTextBox(svg, 100+width, 30, 120, 22, 'cyan', '极细微所缘', {vertical: true, align: 'left', padding: 3, valign: 'top'});
+    renderTextBox(svg, 100+width, 30, 22, 120, 'cyan', '极细微所缘', {vertical: true, valign: 'top'});
 
     // Create a container for the button group
     const likableButtonGroup = controlsContainer.append('div')

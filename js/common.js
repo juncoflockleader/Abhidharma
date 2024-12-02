@@ -17,6 +17,11 @@ const mmSvg = container.select('#container3').append('svg')
     .attr('width', svgWidth)
     .attr('height', 1);
 
+const rpSvg = container.select('#container4').append('svg')
+    .attr('class', 'svg-content')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
+
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
@@ -39,37 +44,32 @@ tabs.on('click', function () {
 });
 
 /** Helper functions **/
-function renderCell(parent, x, y, w, h, color, params = {}) {
-    if (params.vertical === undefined) params.vertical = false;
-    if (params.vertical) {
-        return parent.append('rect')
-            .attr('x', x)
-            .attr('y', y)
-            .attr('width', h) // Swap width and height for vertical
-            .attr('height', w)
-            .attr('stroke', 'grey')
-            .attr('stroke-width', 1)
-            .attr('fill', color);
-    } else {
-        return parent.append('rect')
-            .attr('x', x)
-            .attr('y', y)
-            .attr('width', w)
-            .attr('height', h)
-            .attr('stroke', 'grey')
-            .attr('stroke-width', 1)
-            .attr('fill', color);
-    }
+function renderCell(parent, x, y, w, h, color) {
+    return parent.append('rect')
+        .attr('x', x)
+        .attr('y', y)
+        .attr('width', w)
+        .attr('height', h)
+        .attr('stroke', 'grey')
+        .attr('stroke-width', 1)
+        .attr('fill', color);
 }
 
-function renderText(parent, x, y, w, h, text, params={}) {
+function updateParams(params={}) {
     if (params.size === undefined) params.size = '16px';
     if (params.padding === undefined) params.padding = 0;
     if (params.align === undefined) params.align = 'middle';
     if (params.valign === undefined) params.valign = 'middle';
     if (params.vertical === undefined) params.vertical = false;
+    if (params.wrap === undefined) params.wrap = true;
+    return params;
+}
+
+function renderText(parent, x, y, w, h, text, params={}) {
+    params = updateParams(params);
     const rx = (params.align === 'middle' ? x + w / 2 : x) + params.padding;
-    const ry = params.valign === 'top' ? y : y + h / 2;
+    const ry = params.valign === 'top' ? y : (params.wrap ? y + h / 4 : y + h / 2);
+    const px = parseInt(params.size);
     const textElement = parent.append('text')
         .attr('x', rx)
         .attr('y', ry)
@@ -81,56 +81,41 @@ function renderText(parent, x, y, w, h, text, params={}) {
         for (let i = 0; i < text.length; i++) {
             textElement.append('tspan')
                 .attr('x', rx)
-                .attr('y', y + ((i +1)* parseInt(params.size)) + (params.padding * (i + 1)))
+                .attr('y', y + (i +1)* px)
                 .text(text[i]);
+        }
+    } else if (params.wrap) {
+        textElement.selectAll('tspan').remove();
+        const n = Math.max(Math.ceil(getWordLength(text, px) / w), 1);
+        for (let j = 0; j < n; ++j) {
+            const ly = y + h / n / 2 + j * h / n;
+            const len = Math.floor(text.length / n);
+            const part = text.substring(j * len, Math.min((j + 1) * len, text.length));
+            textElement.append('tspan')
+                .attr('x', rx)
+                .attr('y', ly)
+                .text(part);
         }
     } else {
         textElement.text(text);
+        return textElement;
     }
     return textElement;
 }
 
 function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
-    if (params.size === undefined) params.size = '16px';
-    if (params.padding === undefined) params.padding = 0;
-    if (params.align === undefined) params.align = 'middle';
-    if (params.valign === undefined) params.valign = 'middle';
-    if (params.vertical === undefined) params.vertical = false;
+    params = updateParams(params);
     let item = parent.append('g');
-    let cell = renderCell(item, x, y, w, h, bgColor, params);
+    let cell = renderCell(item, x, y, w, h, bgColor);
     let textElement = renderText(item, x, y, w, h, text, params);
-    item.setText = function(newText, px=12) {
-        if (!params.vertical) {
-            let wordWidth = getWordLength(newText, px);
-            if (wordWidth < w) {
-                textElement.text(newText);
-                return;
-            }
-            const padding = 2;
-            let i = newText.length / 2;
-            const firstPart = newText.substring(0, i);
-            const secondPart = newText.substring(i);
-
-            textElement.selectAll('tspan').remove();
-            textElement.append('tspan')
-                .attr('x', x + w / 2) // Align all tspans to the center of the cell
-                .attr('y', y + padding + px / 2) // Move each character to a new line; adjust as needed
-                .text(firstPart);
-            textElement.append('tspan')
-                .attr('x', x + w / 2) // Align all tspans to the center of the cell
-                .attr('y', y + padding * 2 + px + px / 2) // Move each character to a new line; adjust as needed
-                .text(secondPart);
-        }
+    item.setText = function(newText) {
+        item.select("text").remove();
+        textElement = renderText(item, x, y, w, h, newText, params);
     };
     item.setColor = function(newColor) {
         cell.attr('fill', newColor);
     };
     return item;
-}
-
-
-function highlightsTextBox(item, color='yellow') {
-    item.select('rect').attr('fill', color);
 }
 
 function subArraySum(array, start, end) {
@@ -163,14 +148,14 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
         .attr('transform', `translate(${x}, ${y})`);
 
     // Draw the header row
-    renderTextBox(tableGroup, padding, padding, w - padding * 2, headerHeight, 'lightgrey', title, {size: '12px', 'padding': padding, align: 'left'});
+    renderTextBox(tableGroup, padding, padding, w - padding * 2, headerHeight, 'lightgrey', title, {size: '12px', padding: 2, align: 'left'});
     const boxes = [];
     // Loop through the data items and draw each row
     items.forEach((item, index) => {
         const yPosition = padding + headerHeight + index * rowHeight;
         const textbox = renderTextBox(tableGroup, padding, yPosition, w - padding * 2, rowHeight, 'white', item.name, {
             size: '10px',
-            'padding': padding,
+            padding: 2,
             align: 'left'
         });
         if (itemIndex) {
