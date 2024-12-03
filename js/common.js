@@ -86,10 +86,10 @@ function renderText(parent, x, y, w, h, text, params={}) {
         }
     } else if (params.wrap) {
         textElement.selectAll('tspan').remove();
-        const n = Math.max(Math.ceil(getWordLength(text, px) / w), 1);
+        const len = Math.floor(w / px);
+        const n = Math.max(Math.ceil(text.length / len), 1);
         for (let j = 0; j < n; ++j) {
             const ly = y + h / n / 2 + j * h / n;
-            const len = Math.floor(text.length / n);
             const part = text.substring(j * len, Math.min((j + 1) * len, text.length));
             textElement.append('tspan')
                 .attr('x', rx)
@@ -115,6 +115,16 @@ function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
     item.setColor = function(newColor) {
         cell.attr('fill', newColor);
     };
+    item.highlight = function () {
+        if (bgColor === 'white') {
+            cell.attr('fill', 'yellow');
+        } else {
+            cell.attr('fill', d3.color(bgColor).darker(0.5));
+        }
+    }
+    item.clear = function () {
+        cell.attr('fill', bgColor);
+    }
     return item;
 }
 

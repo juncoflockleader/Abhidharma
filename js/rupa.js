@@ -154,6 +154,7 @@ const rupa = {
                             character: "男性",
                             functions: "显示是男性",
                             manifestation: "男性、男相、男性行为、男性特征",
+                            cause: "同一粒色聚里的业生四大"
                         },
                     ]
                 },
@@ -167,7 +168,7 @@ const rupa = {
                             character: "提供意界和意识界的依处",
                             functions: "作为意界和意识界的依处",
                             manifestation: "撑此意界和意识界",
-                            cause: "同一粒色聚里的业生四大种"
+                            cause: "同一粒色聚里的业生四大"
                         },
                     ]
                 },
@@ -191,7 +192,7 @@ const rupa = {
                             name: "食色",
                             alias: "段食",
                             id: 18,
-                            character: "所吃食物里之营养(食素)",
+                            character: "所吃食物里之营养",
                             functions: "滋养色法",
                             manifestation: "制造食生色维持身体",
                             cause: "必须受到它滋养的处色"
@@ -218,18 +219,20 @@ const rupa = {
                         {
                             name: "身表色",
                             id: 20,
-                            character: "由心生风界带动动作，令俱生色身稳定或移动。（风界之力过强的心生大种）",
+                            character: "由心生风界带动动作，令俱生色身稳定或移动。",
                             functions: "通过动作表示自己的意志",
                             manifestation: "作为身体转动之因",
-                            cause: "心生风界"
+                            cause: "心生风界",
+                            extra: "（风界之力过强的心生大种）"
                         },
                         {
                             name: "语表色",
                             id: 21,
-                            character: "制造声音的地界互相撞击，而有语言的表达。（地界过强的心生大种）",
+                            character: "制造声音的地界互相撞击，而有语言的表达。",
                             functions: "通过语言表达自己的意志",
                             manifestation: "作为语言之因",
-                            cause: "心生地界"
+                            cause: "心生地界",
+                            extra: "（地界过强的心生大种）"
                         },
                     ]
                 },
@@ -292,9 +295,9 @@ const rupa = {
                         {
                             name: "色无常",
                             id: 28,
-                            character: "真是色法完全坏灭",
-                            functions: "令真是色法消失",
-                            manifestation: "真是色法灭尽",
+                            character: "真实色法完全坏灭",
+                            functions: "令真实色法消失",
+                            manifestation: "真实色法灭尽",
                             cause: "灭尽的真实色法"
                         },
                     ]
@@ -413,38 +416,47 @@ const rupaAgg =
                 children: [
                     {
                         name: "眼十法聚",
+                        id: 315,
                         rupa: ["眼净色"]
                     },
                     {
                         name: "耳十法聚",
+                        id: 316,
                         rupa: ["耳净色"]
                     },
                     {
                         name: "鼻十法聚",
+                        id: 317,
                         rupa: ["鼻净色"]
                     },
                     {
                         name: "舌十法聚",
+                        id: 318,
                         rupa: ["舌净色"]
                     },
                     {
                         name: "身十法聚",
+                        id: 319,
                         rupa: ["身净色"]
                     },
                     {
                         name: "女根色十法聚",
+                        id: 320,
                         rupa: ["女根色"]
                     },
                     {
                         name: "男根色十法聚",
+                        id: 321,
                         rupa: ["男根色"]
                     },
                     {
                         name: "心色十法聚",
+                        id: 322,
                         rupa: ["心色"]
                     },
                     {
                         name: "命九法聚",
+                        id: 323,
                         rupa: []
                     },
                 ]
@@ -540,16 +552,18 @@ const rupaAgg =
         ]
     };
 
-
-
+const interactiveItems = [];
+const highlightableItems = {};
+const rupaIndex = {};
 function renderRupaAttrTable(parent) {
     const fontSize = 12; // px
     const padding = 3;
     const unit = fontSize + padding * 2;
     const columnHeaderH = unit;
+    const subRowHeadersW = fontSize * 4 + padding * 2;
     const rowHeaderW = unit + 7 * fontSize + 4 * padding;
-    function renderCornerCell() {
-        renderCell(parent, 0, 0, rowHeaderW, columnHeaderH, 'lightcyan');
+    function renderCornerCell(x, w) {
+        renderCell(parent, x, 0, w, columnHeaderH, 'lightcyan');
     }
 
     const colx = [];
@@ -558,7 +572,7 @@ function renderRupaAttrTable(parent) {
         colx.push(rx);
         rupaClass.forEach(function (data, i) {
             let w = getWordLength(data.name, fontSize) + padding * 2;
-            if (i === 7) {
+            if (i === 7 || i === 4) {
                 w += fontSize;
             }
             renderTextBox(parent, rx, y, w, columnHeaderH, 'lightcyan', data.name, {size: fontSize});
@@ -591,19 +605,26 @@ function renderRupaAttrTable(parent) {
 
     function renderRowHeaders(x, y) {
         rupas.forEach((d, i) => {
-            renderTextBox(parent, x, y + i * unit, fontSize * 4 + padding * 2, unit, 'lightcyan', d.alias || d.name, {size: fontSize});
+            const item = renderTextBox(parent, x, y + i * unit, subRowHeadersW, unit, 'white', d.alias || d.name, {size: fontSize});
+            interactiveItems.push({
+                id: d.id,
+                item: item,
+            });
+            if (!highlightableItems[d.id]) {
+                highlightableItems[d.id] = [];
+            }
+            highlightableItems[d.id].push(item);
         });
     }
 
     function renderGrid() {
-        const rupaIndex = {};
         rupas.forEach(d => {
             rupaIndex[d.name] = d;
         });
         rupaClass.forEach(((d, i) => {
             const x = colx[i];
             // positive, negative, neutral
-            const colors = ['lightgreen', 'lightyellow', 'yellow'];
+            const colors = ['lightgreen', 'lightyellow', 'lightblue'];
             rupas.forEach((r, j) => {
                 const y = columnHeaderH + unit * j;
                 let color = colors[1];
@@ -615,15 +636,260 @@ function renderRupaAttrTable(parent) {
                     color = colors[2];
                     text = d.values[2];
                 }
-                renderTextBox(parent, x, y, colx[i + 1] - colx[i], unit, color, text, {size: fontSize});
+                const item = renderTextBox(parent, x, y, colx[i + 1] - colx[i], unit, color, text, {size: fontSize});
+                highlightableItems[r.id].push(item);
             });
         }));
     }
 
-    renderCornerCell();
+    renderCornerCell(0, rowHeaderW);
     renderColumnHeaders(rowHeaderW, 0);
     renderRowHeaderGroups(0, columnHeaderH, 0, rupa);
     renderRowHeaders(unit + fontSize * 3 + padding * 2, columnHeaderH);
+
+    // render again for rupa table
+    renderCornerCell(colx[9], subRowHeadersW);
+    renderRowHeaders(colx[9], columnHeaderH); //right side headers
+
     renderGrid();
+
+    const eightBasics = ["地", "水", "火", "风", "色", "香", "味", "食色"];
+    const ebIndex = [];
+    eightBasics.forEach((d) => {
+        ebIndex.push(rupaIndex[d].id);
+    });
+    const endX = colx[9] + subRowHeadersW;
+    let min = 99;
+    let max = 0;
+    const len = 20;
+    ebIndex.forEach(d => {
+        min = Math.min(min, d);
+        max = Math.max(max, d);
+        parent.append("line")
+            .attr("x1", endX)
+            .attr("y1", unit * d + unit / 2)
+            .attr("x2", endX + len)
+            .attr("y2", unit * d + unit / 2)
+            .attr("stroke", "black")
+            .attr("stroke-width", 1);
+    });
+    parent.append("line")
+        .attr("x1", endX + len)
+        .attr("y1", unit * min + unit / 2)
+        .attr("x2", endX + len)
+        .attr("y2", unit * max + unit / 2)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1);
+
+    parent.append("line")
+        .attr("x1", endX + len)
+        .attr("y1", unit * (min + 2) / 2 + unit / 2)
+        .attr("x2", endX + len * 2)
+        .attr("y2", unit * (min + 2) / 2 + unit / 2)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1);
+
+    renderTextBox(parent, endX + len * 2, unit * min, unit, unit * 4, 'lavender', '八不离色', {size: fontSize});
+
+
+    const threeChange = ["色轻快性", "色柔软性", "色适业性"];
+    const tcIndex = [];
+    threeChange.forEach((d) => {
+        tcIndex.push(rupaIndex[d].id);
+    });
+    let tcMin = 99;
+    let tcMax = 0;
+    tcIndex.forEach(d => {
+        tcMin = Math.min(tcMin, d);
+        tcMax = Math.max(tcMax, d);
+        parent.append("line")
+            .attr("x1", endX)
+            .attr("y1", unit * d + unit / 2)
+            .attr("x2", endX + len)
+            .attr("y2", unit * d + unit / 2)
+            .attr("stroke", "black")
+            .attr("stroke-width", 1);
+    });
+    parent.append("line")
+        .attr("x1", endX + len)
+        .attr("y1", unit * tcMin + unit / 2)
+        .attr("x2", endX + len)
+        .attr("y2", unit * tcMax + unit / 2)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1);
+    parent.append("line")
+        .attr("x1", endX + len)
+        .attr("y1", unit * (tcMin + tcMax) / 2 + unit / 2)
+        .attr("x2", endX + len * 2)
+        .attr("y2", unit * (tcMin + tcMax) / 2 + unit / 2)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1);
+    renderTextBox(parent, endX + len * 2, unit * tcMin, unit, unit * 3, 'lightblue', '变化色', {size: fontSize});
+
+    return {
+        endX: endX,
+        endY: unit * 29
+    };
 }
 
+function renderNotesTable(parent, x, y) {
+    const fontSize = 12; // px
+    const padding = 3;
+    const unit = fontSize * 2 + padding * 2;
+    const columnHeaderH = fontSize + padding * 2;
+    const columnW = fontSize * 11 + padding;
+    let rupas = [];
+    const subRowHeadersW = fontSize * 4 + padding * 2;
+    function gatherRupas(data) {
+        if (!data.children) {
+            rupas.push(data);
+            if (data.id < 0) {
+                highlightableItems[data.id] = [];
+            }
+            return;
+        }
+        data.children.forEach(d => {
+            gatherRupas(d);
+        });
+    }
+
+    function renderRowHeaders(x, y) {
+        rupas.forEach((d, i) => {
+            const item = renderTextBox(parent, x, y + i * unit, subRowHeadersW, unit, 'white', d.alias || d.name, {size: fontSize});
+            interactiveItems.push({
+                item: item,
+                id: d.id
+            });
+            highlightableItems[d.id].push(item);
+        });
+    }
+    function renderColumnHeaders(x, y) {
+        ["特相", "作用", "现起", "近因"].forEach(((d, i) => {
+            renderTextBox(parent, x + i * columnW, y, columnW, columnHeaderH, 'lightcyan', d, {size: fontSize});
+        }));
+    }
+    function renderGrid(x, y) {
+        rupas.forEach((d, i) => {
+            const cItem = renderTextBox(parent, x, y + i * unit, columnW, unit, 'lightyellow', d.character, {size: fontSize});
+            highlightableItems[d.id].push(cItem);
+            const fItem = renderTextBox(parent, x + columnW, y + i * unit, columnW, unit, 'lightyellow', d.functions, {size: fontSize});
+            highlightableItems[d.id].push(fItem);
+            const mItem = renderTextBox(parent, x + columnW * 2, y + i * unit, columnW, unit, 'lightyellow', d.manifestation, {size: fontSize});
+            highlightableItems[d.id].push(mItem);
+            const caItem = renderTextBox(parent, x + columnW * 3, y + i * unit, columnW, unit, 'lightyellow', d.cause, {size: fontSize});
+            highlightableItems[d.id].push(caItem);
+        });
+    }
+
+    gatherRupas(rupa);
+    renderCell(parent, x, y, subRowHeadersW, columnHeaderH, 'white');
+    renderRowHeaders(x, y + columnHeaderH);
+    renderColumnHeaders(x + subRowHeadersW, y);
+    renderGrid(x + subRowHeadersW, y + columnHeaderH);
+}
+
+function renderRupaAggTable(parent, x, y) {
+    const fontSize = 12; // px
+    const padding = 3;
+    const unit = fontSize + padding * 4;
+
+    function isSubset(array1, array2) {
+        // Check if every element of array2 is included in array1
+        return array2.every(element => array1.includes(element));
+    }
+
+    function setSubtraction(array1, array2) {
+        // Return elements in array1 that are not in array2
+        return array1.filter(element => !array2.includes(element));
+    }
+
+    function renderAgg(parent, x, y, data, rupas) {
+        if (!data.children) {
+            let ry = y;
+            const h1 = 13 * fontSize;
+            const item = renderTextBox(parent, x, ry, unit, h1, 'white', data.name, {vertical: true, size: fontSize});
+            interactiveItems.push({
+                item: item,
+                id: data.id
+            });
+            highlightableItems[data.id] = [item];
+            ry += h1;
+            const h2 = fontSize*4 + padding * 4;
+            renderTextBox(parent, x, ry, unit, h2, 'lavender', '八不离色', {vertical: true, size: fontSize});
+            ry += h2;
+            const changeRupa = ["色轻快性", "色柔软性", "色适业性"];
+            if (isSubset(rupas, changeRupa)) {
+                const h3 = fontSize*3 + padding * 4;
+                renderTextBox(parent, x, ry, unit, h3, 'lightblue', '变化色', {vertical: true, size: fontSize});
+                ry += h3;
+                changeRupa.forEach(d => {
+                    const items = highlightableItems[rupaIndex[d].id];
+                    highlightableItems[data.id].push(...items);
+                });
+
+            }
+            const eightBasics = ["地", "水", "火", "风", "色", "香", "味", "食色"];
+            eightBasics.forEach(d => {
+                const items = highlightableItems[rupaIndex[d].id];
+                highlightableItems[data.id].push(...items);
+            });
+            const otherRupas = setSubtraction(setSubtraction(rupas, eightBasics), changeRupa);
+            otherRupas.forEach((d, i) => {
+                const h = d.length * fontSize + padding*4;
+                renderTextBox(parent, x, ry, unit, h, i === 0 ? 'lightgreen' : "lightskyblue", d, {vertical: true, size: fontSize});
+                ry += h;
+                const items = highlightableItems[rupaIndex[d].id];
+                highlightableItems[data.id].push(...items);
+            });
+            return 1;
+        }
+        let count = 0;
+        data.children.forEach((data, i) => {
+            count += renderAgg(parent, x + count * unit, y + unit, data, rupas.concat(data.rupa));
+        });
+        renderTextBox(parent, x, y, count * unit, unit, 'lightcyan', data.name, {size: fontSize});
+        return count;
+    }
+
+    renderAgg(parent, x, y, rupaAgg, []);
+}
+
+let rupaLock = null;
+function setupRupaHighlightBehavior() {
+    interactiveItems.forEach((item, i) => {
+        item.highlight = function () {
+            const subItems = highlightableItems[item.id];
+            subItems.forEach((d, i) => {
+                d.highlight();
+            });
+        }
+        item.clear = function () {
+            const subItems = highlightableItems[item.id];
+            subItems.forEach((d, i) => {
+                d.clear();
+            });
+        }
+        item.item.on("mouseover", function(event, d) {
+                if (rupaLock) return;
+                item.highlight();
+            })
+            .on("mousemove", function(event) {
+            })
+            .on("mouseout", function() {
+                if (rupaLock) return;
+                item.clear();
+            })
+            .on("click", function() {
+                if (rupaLock === item) {
+                    rupaLock = null;
+                    item.clear();
+                } else {
+                    if (rupaLock) {
+                        rupaLock.clear();
+                    }
+                    rupaLock = item;
+                    item.highlight();
+                }
+            });
+    });
+}
