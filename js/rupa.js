@@ -190,7 +190,7 @@ const rupa = {
                     children: [
                         {
                             name: "食色",
-                            alias: "食素",
+                            alias: "段食",
                             id: 18,
                             character: "所吃食物里之营养",
                             functions: "滋养色法",
