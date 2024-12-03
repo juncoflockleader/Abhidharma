@@ -30,6 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
     renderNotesTable(rpSvg, rat.endX + 100, 0);
     renderRupaAggTable(rpSvg, 0, rat.endY + subPadding);
     setupRupaHighlightBehavior();
+    renderRupaOrigins(rpgSvg);
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);

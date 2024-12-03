@@ -22,6 +22,11 @@ const rpSvg = container.select('#container4').append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
+const rpgSvg = container.select("#container5").append('svg')
+    .attr('class', 'svg-content')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight);
+
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
@@ -87,7 +92,7 @@ function renderText(parent, x, y, w, h, text, params={}) {
     } else if (params.wrap) {
         textElement.selectAll('tspan').remove();
         const len = Math.floor(w / px);
-        const n = Math.max(Math.ceil(text.length / len), 1);
+        const n = len === 0 ? 1 : Math.max(Math.ceil(text.length / len), 1);
         for (let j = 0; j < n; ++j) {
             const ly = y + h / n / 2 + j * h / n;
             const part = text.substring(j * len, Math.min((j + 1) * len, text.length));
