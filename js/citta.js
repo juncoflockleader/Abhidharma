@@ -129,10 +129,10 @@ function renderCetasikaTable(y) {
         cetasikaIdIndex[name] = child.id;
         itemIndex[child.id] = renderCetasikaCell(x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, name);
         noteIndex[child.id] = {
-            "char_mark": child.char_mark,
-            "function": child.function,
-            "appearance": child.appearance,
-            "proximate_cause": child.proximate_cause,
+            'char_mark': child.char_mark,
+            'function': child.function,
+            'appearance': child.appearance,
+            'proximate_cause': child.proximate_cause,
         };
         x += columnWidth;
       });
@@ -390,17 +390,17 @@ function setupHighlightsBehavior(cntt, ntt) {
 
         let connections = itemGraph[itemId];
         let item = itemIndex[itemId];
-        item.on("mouseover", function(event, d) {
+        item.on('mouseover', function(event, d) {
             if (locked) return;
             highlightsConnections(connections);
         })
-        .on("mousemove", function(event) {
+        .on('mousemove', function(event) {
         })
-        .on("mouseout", function() {
+        .on('mouseout', function() {
             if (locked) return;
             if (clearFunc) clearFunc();
         })
-        .on("click", function() {
+        .on('click', function() {
             if (locked && lockedItem === this) {
                 locked = false;
                 lockedItem = null;

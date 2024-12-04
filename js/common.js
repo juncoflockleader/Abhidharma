@@ -19,16 +19,16 @@ const rpSvg = container.select('#container4').append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
-const rpgSvg = container.select("#container5").append('svg')
+const rpgSvg = container.select('#container5').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
-const rpnSvg = container.select("#simulation");
+const rpnSvg = container.select('#simulation');
 
-const rpnlSvg = container.select("#simulation-notes");
+const rpnlSvg = container.select('#simulation-notes');
 
-const rpnsSvg = container.select("#container6").append('svg')
+const rpnsSvg = container.select('#container6').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
     .attr('height', 1);
@@ -119,7 +119,7 @@ function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
     let cell = renderCell(item, x, y, w, h, bgColor);
     let textElement = renderText(item, x, y, w, h, text, params);
     item.setText = function(newText) {
-        item.select("text").remove();
+        item.select('text').remove();
         textElement = renderText(item, x, y, w, h, newText, params);
     };
     item.setColor = function(newColor) {

@@ -1,27 +1,27 @@
 const rupaAggs = [
     {
         id: 0,
-        name: "食生色聚",
-        fire: "食生火界",
-        food: "食生食素"
+        name: '食生色聚',
+        fire: '食生火界',
+        food: '食生食素'
     },
     {
         id: 1,
-        name: "心生色聚",
-        fire: "心生火界",
-        food: "心生食素"
+        name: '心生色聚',
+        fire: '心生火界',
+        food: '心生食素'
     },
     {
         id: 2,
-        name: "业生色聚",
-        fire: "业生火界",
-        food: "业生食素"
+        name: '业生色聚',
+        fire: '业生火界',
+        food: '业生食素'
     },
     {
         id: 3,
-        name: "时节生色聚",
-        fire: "时节生火界",
-        food: "时节生食素"
+        name: '时节生色聚',
+        fire: '时节生火界',
+        food: '时节生食素'
     }
 ];
 
@@ -30,56 +30,56 @@ function renderAgg(parent, x, y, data) {
     const rx = 90;
     const ry = 60;
     const colors = ['lightblue', 'lightcyan', 'lavender', 'skyblue'];
-    const main = group.append("ellipse")
-        .attr("cx", x)  // Center x
-        .attr("cy", y)  // Center y
-        .attr("rx", rx)  // Horizontal radius
-        .attr("ry", ry)   // Vertical radius
-        .style("fill", colors[data.id])
-        .style("stroke", "black");
+    const main = group.append('ellipse')
+        .attr('cx', x)  // Center x
+        .attr('cy', y)  // Center y
+        .attr('rx', rx)  // Horizontal radius
+        .attr('ry', ry)   // Vertical radius
+        .style('fill', colors[data.id])
+        .style('stroke', 'black');
 
-    group.append("text")
-        .attr("x", x)
-        .attr("y", y)
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .style("font-size", "16px")
+    group.append('text')
+        .attr('x', x)
+        .attr('y', y)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .style('font-size', '16px')
         .text(data.name);
 
     const fireX = x - ry/1.75;
     const fireY = y - ry/2;
-    group.append("ellipse")
-        .attr("cx", fireX) // Center x
-        .attr("cy", fireY) // Center y
-        .attr("rx", rx/3)  // Horizontal radius
-        .attr("ry", ry/3)   // Vertical radius
-        .style("fill", "pink")
-        .style("stroke", "black");
+    group.append('ellipse')
+        .attr('cx', fireX) // Center x
+        .attr('cy', fireY) // Center y
+        .attr('rx', rx/3)  // Horizontal radius
+        .attr('ry', ry/3)   // Vertical radius
+        .style('fill', 'pink')
+        .style('stroke', 'black');
 
-    group.append("text")
-        .attr("x", fireX)
-        .attr("y", fireY)
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .style("font-size", "12px")
+    group.append('text')
+        .attr('x', fireX)
+        .attr('y', fireY)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .style('font-size', '12px')
         .text(data.fire);
 
     const foodX = x + ry/1.75;
     const foodY = y + ry/2;
-    group.append("ellipse")
-        .attr("cx", foodX) // Center x
-        .attr("cy", foodY) // Center y
-        .attr("rx", rx/3)  // Horizontal radius
-        .attr("ry", ry/3)   // Vertical radius
-        .style("fill", "lightgreen")
-        .style("stroke", "black");
+    group.append('ellipse')
+        .attr('cx', foodX) // Center x
+        .attr('cy', foodY) // Center y
+        .attr('rx', rx/3)  // Horizontal radius
+        .attr('ry', ry/3)   // Vertical radius
+        .style('fill', 'lightgreen')
+        .style('stroke', 'black');
 
-    group.append("text")
-        .attr("x", foodX)
-        .attr("y", foodY)
-        .attr("text-anchor", "middle")
-        .attr("dominant-baseline", "middle")
-        .style("font-size", "12px")
+    group.append('text')
+        .attr('x', foodX)
+        .attr('y', foodY)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .style('font-size', '12px')
         .text(data.food);
 
     return {
@@ -92,10 +92,10 @@ function renderAgg(parent, x, y, data) {
         rx: rx,
         ry: ry,
         highlight: function () {
-            main.style("stroke-width", 2);
+            main.style('stroke-width', 2);
         },
         clear: function () {
-            main.style("stroke-width", 1);
+            main.style('stroke-width', 1);
         }
     };
 }
@@ -115,12 +115,12 @@ function renderCurve(parent, x1, y1, x2, y2, d, label, labelColor) {
                       Q ${midX} ${midY} 
                       ${x2} ${y2}`;
 
-    const curve = parent.append("path")
-        .attr("d", pathData)
-        .attr("fill", "none")
-        .attr("stroke", "black")
-        .attr("stroke-width", 1)
-        .attr("marker-end", "url(#rupa-arrowhead)");
+    const curve = parent.append('path')
+        .attr('d', pathData)
+        .attr('fill', 'none')
+        .attr('stroke', 'black')
+        .attr('stroke-width', 1)
+        .attr('marker-end', 'url(#rupa-arrowhead)');
 
     const px = 12;
     const padding = 3;
@@ -128,27 +128,27 @@ function renderCurve(parent, x1, y1, x2, y2, d, label, labelColor) {
 
     return {
         highlight: function () {
-            curve.attr("stroke-width", 2);
+            curve.attr('stroke-width', 2);
         },
         clear: function () {
-            curve.attr("stroke-width", 1);
+            curve.attr('stroke-width', 1);
         }
     }
 }
 
 function renderRupaOrigins(parent) {
-    parent.append("defs")
-        .append("marker")
-        .attr("id", "rupa-arrowhead")
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 10)
-        .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5")
-        .attr("fill", "black");
+    parent.append('defs')
+        .append('marker')
+        .attr('id', 'rupa-arrowhead')
+        .attr('viewBox', '0 -5 10 10')
+        .attr('refX', 10)
+        .attr('refY', 0)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M0,-5L10,0L0,5')
+        .attr('fill', 'black');
 
     const x0 = 400;
     const y0 = 100;
