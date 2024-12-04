@@ -357,24 +357,6 @@ function calculateConnections() {
     return itemConnections;
 }
 
-cittaSvg.append('a')
-    .attr('xlink:href', 'https://github.com/juncoflockleader/Abhidharma') // Use xlink:href for SVG links
-    .append('text')
-    .attr('x', 0) // Set x position
-    .attr('y', cetasikaTableBottom + 20) // Set y position
-    .text('Repo: https://github.com/juncoflockleader/Abhidharma')
-    .style('font-size', '16px') // Set font size
-    .style('fill', 'blue'); // Set text color
-
-cittaSvg.append('a')
-    .attr('xlink:href', 'https://juncoflockleader.github.io/Abhidharma/') // Use xlink:href for SVG links
-    .append('text')
-    .attr('x', 0) // Set x position
-    .attr('y', cetasikaTableBottom + 40) // Set y position
-    .text('This page: https://juncoflockleader.github.io/Abhidharma/')
-    .style('font-size', '16px') // Set font size
-    .style('fill', 'blue'); // Set text color0px');
-
 function setupHighlightsBehavior(cntt, ntt) {
     let locked = false;
     let lockedItem = null;

@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>阿毗达摩互动表解 v0.9.0</title>
+  <title>阿毗达摩互动表解 v0.9.1</title>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/favicon.png" type="image/png">
 </head>
 <body>
 <div id="tooltip" style="position: absolute; visibility: hidden; background-color: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; pointer-events: none;"></div>
@@ -14,10 +15,17 @@
   <button id="tab3">欲界意门心路</button>
   <button id="tab4">欲界色法</button>
   <button id="tab5">色法起源</button>
-  <button id="tab6">色法模拟</button>
+  <button id="tab6" style="display:none">色法模拟</button>
 </div>
 <div class="svg-container">
-  <div class ="svg-sub-container active" id="container1"></div>
+  <div class ="svg-sub-container active" id="container1">
+    <svg id="citta" width="1440" height="800"></svg>
+    <svg>
+      <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank">
+        <image href="images/github-square.svg" x="0" y="0" width="32" height="32"></image>
+      </a>
+    </svg>
+  </div>
   <div class ="svg-sub-container" id="container2">
     <div id="senseflow"></div>
     <div id="senseflowcontrols"></div>

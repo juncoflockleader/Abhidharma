@@ -1,11 +1,8 @@
 const container = d3.select('.svg-container');
 
-const svgWidth = 1600;
-const svgHeight = 1200;
-const cittaSvg = container.select('#container1').append('svg')
-    .attr('class', 'svg-content')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
+const svgWidth = 1440;
+const svgHeight = 1000;
+const cittaSvg = container.select('#citta');
 
 const msSvg = container.select('#container2').append('svg')
     .attr('class', 'svg-content')
