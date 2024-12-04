@@ -205,8 +205,8 @@ function renderFunctionTable(x, y) {
 function renderCounterTable(x, y) {
     let w = 60;
     let h = 30;
-    renderTextBox(cittaSvg, x, y, w, h, 'lightcyan', '相应法', {size: '14px', align: 'middle'});
-    renderTextBox(cittaSvg, x + w, y, w, h, 'lightcyan', '可选', {size: '14px', align: 'middle'});
+    renderTextBox(cittaSvg, x, y, w, h, 'lightcyan', t('string_id_1'), {size: '14px', align: 'middle'});
+    renderTextBox(cittaSvg, x + w, y, w, h, 'lightcyan', t('string_id_2'), {size: '14px', align: 'middle'});
     let counterTextBox = renderTextBox(cittaSvg, x, y + h, w, h, 'white', '', {size: '12px', align: 'middle'});
     let optCounterTextBox = renderTextBox(cittaSvg, x + w, y + h, w, h, 'white', '', {size: '12px', align: 'middle'});
     return {
@@ -228,16 +228,16 @@ function renderNoteTable(x, y) {
 
     let w = 30;
     let h = 30;
-    renderTextBox(cittaSvg, x, y + h0, w, h, 'lightcyan', '特相', {size: '14px'});
-    renderTextBox(cittaSvg, x, y + h0 + h, w, h, 'lightcyan', '作用', {size: '14px'});
-    renderTextBox(cittaSvg, x, y + h0 + 2 * h, w, h, 'lightcyan', '现起', {size: '14px'});
-    renderTextBox(cittaSvg, x, y + h0 + 3 * h, w, h, 'lightcyan', '近因', {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0, w, h, 'lightcyan', t('string_id_3'), {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0 + h, w, h, 'lightcyan', t('string_id_4'), {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0 + 2 * h, w, h, 'lightcyan', t('string_id_5'), {size: '14px'});
+    renderTextBox(cittaSvg, x, y + h0 + 3 * h, w, h, 'lightcyan', t('string_id_6'), {size: '14px'});
     let w0 = 320;
     let charTextBox = renderTextBox(cittaSvg, x + w, y + h0, w0, h, 'white', '', {size: '12px', wrap: true});
     let functionTextBox = renderTextBox(cittaSvg, x + w, y + h0 + h, w0, h, 'white', '', {size: '12px', wrap: true});
     let appearanceTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 2 * h, w0, h, 'white', '', {size: '12px', wrap: true});
     let proximateCauseTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 3 * h, w0, h, 'white', '', {size: '12px', wrap: true});
-    renderTextBox(cittaSvg, x, y, w + w0, h0, 'lightcyan', '心所注释', {size: '14px'});
+    renderTextBox(cittaSvg, x, y, w + w0, h0, 'lightcyan', t('string_id_7'), {size: '14px'});
     return {
         update: function (itemId) {
             if (noteIndex[itemId]) {

@@ -1,3 +1,9 @@
+let lang = 'cn'; // or 'en', depending on the user's language preference
+
+function t(id) {
+    return tr[id][lang];
+}
+
 const container = d3.select('.svg-container');
 
 const svgWidth = 1440;

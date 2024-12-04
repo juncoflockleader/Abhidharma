@@ -1,27 +1,27 @@
 const rupaAggs = [
     {
         id: 0,
-        name: '食生色聚',
-        fire: '食生火界',
-        food: '食生食素'
+        name: t('string_id_710'),
+        fire: t('string_id_711'),
+        food: t('string_id_712')
     },
     {
         id: 1,
-        name: '心生色聚',
-        fire: '心生火界',
-        food: '心生食素'
+        name: t('string_id_713'),
+        fire: t('string_id_714'),
+        food: t('string_id_715')
     },
     {
         id: 2,
-        name: '业生色聚',
-        fire: '业生火界',
-        food: '业生食素'
+        name: t('string_id_716'),
+        fire: t('string_id_717'),
+        food: t('string_id_718')
     },
     {
         id: 3,
-        name: '时节生色聚',
-        fire: '时节生火界',
-        food: '时节生食素'
+        name: t('string_id_719'),
+        fire: t('string_id_720'),
+        food: t('string_id_721')
     }
 ];
 
@@ -155,23 +155,23 @@ function renderRupaOrigins(parent) {
     const d = 20;
     const karma = renderAgg(parent, x0, y0, rupaAggs[2]);
     const food = renderAgg(parent, x0, y0 + 200, rupaAggs[0]);
-    const fk1 = renderCurve(parent, food.foodX, food.foodY - food.ry/3, karma.foodX, karma.foodY + karma.ry/3, d, '支助', 'orange');
+    const fk1 = renderCurve(parent, food.foodX, food.foodY - food.ry/3, karma.foodX, karma.foodY + karma.ry/3, d, t('string_id_722'), 'orange');
     const karmaFood = renderAgg(parent, x0 + 300, y0, rupaAggs[0]);
-    const kg1 = renderCurve(parent, karma.foodX + karma.rx / 3, karma.foodY, karmaFood.x - karmaFood.rx, karmaFood.y, d, '产生4-5代', 'orange');
+    const kg1 = renderCurve(parent, karma.foodX + karma.rx / 3, karma.foodY, karmaFood.x - karmaFood.rx, karmaFood.y, d, t('string_id_723'), 'orange');
     const karmaFire = renderAgg(parent, x0 - 300, y0, rupaAggs[3]);
-    const kg2 = renderCurve(parent, karma.fireX, karma.fireY - karma.ry / 3, karmaFire.x, karmaFire.y - karmaFire.ry, d, '产生4-5代', 'yellow');
+    const kg2 = renderCurve(parent, karma.fireX, karma.fireY - karma.ry / 3, karmaFire.x, karmaFire.y - karmaFire.ry, d, t('string_id_723'), 'yellow');
     const citta = renderAgg(parent, x0, y0 + 400, rupaAggs[1]);
-    const cf1 = renderCurve(parent, food.foodX, food.foodY + food.ry/3, citta.foodX, citta.foodY - karma.ry/3, d, '支助', 'cyan');
+    const cf1 = renderCurve(parent, food.foodX, food.foodY + food.ry/3, citta.foodX, citta.foodY - karma.ry/3, d, t('string_id_722'), 'cyan');
     const cittaFood = renderAgg(parent, x0, y0 + 600, rupaAggs[0]);
-    const ccf1 = renderCurve(parent, citta.foodX - citta.rx /3, citta.foodY, cittaFood.x, cittaFood.y - cittaFood.ry, d, '产生2-3代', 'cyan');
+    const ccf1 = renderCurve(parent, citta.foodX - citta.rx /3, citta.foodY, cittaFood.x, cittaFood.y - cittaFood.ry, d, t('string_id_724'), 'cyan');
     const cittaFire = renderAgg(parent, x0 - 300, y0 + 400, rupaAggs[3]);
-    const ccf2 = renderCurve(parent, citta.fireX, citta.fireY - citta.ry / 3, cittaFire.x, cittaFire.y - cittaFire.ry, d * 2, '产生2-3代', 'burlywood');
+    const ccf2 = renderCurve(parent, citta.fireX, citta.fireY - citta.ry / 3, cittaFire.x, cittaFire.y - cittaFire.ry, d * 2, t('string_id_724'), 'burlywood');
     const fire = renderAgg(parent, x0 + 300, y0 + 200, rupaAggs[3]);
-    const ff = renderCurve(parent, food.foodX + food.rx / 3, food.foodY, fire.foodX - fire.rx / 3, fire.foodY, d, '支助', 'Tomato');
+    const ff = renderCurve(parent, food.foodX + food.rx / 3, food.foodY, fire.foodX - fire.rx / 3, fire.foodY, d, t('string_id_722'), 'Tomato');
     const foodFireFood = renderAgg(parent, x0 + 700, y0 + 200, rupaAggs[0]);
-    const ffff = renderCurve(parent, fire.foodX + fire.rx / 3, fire.foodY, foodFireFood.x - foodFireFood.rx, foodFireFood.y, d * 2, '产生10-12代', 'Tomato');
+    const ffff = renderCurve(parent, fire.foodX + fire.rx / 3, fire.foodY, foodFireFood.x - foodFireFood.rx, foodFireFood.y, d * 2, t('string_id_725'), 'Tomato');
     const foodFire = renderAgg(parent, x0 - 300, y0 + 200, rupaAggs[3]);
-    const fff2 = renderCurve(parent, food.fireX, food.fireY - food.ry / 3, foodFire.x, foodFire.y - foodFire.ry, d, '产生10-12代', 'mistyrose');
+    const fff2 = renderCurve(parent, food.fireX, food.fireY - food.ry / 3, foodFire.x, foodFire.y - foodFire.ry, d, t('string_id_725'), 'mistyrose');
     const foodFood = renderAgg(parent, x0 + 300, y0 + 400, rupaAggs[0]);
-    const fff3 = renderCurve(parent, food.foodX + food.rx / 3, food.foodY, foodFood.x - foodFood.rx, foodFood.y, d, '产生10-12代', 'violet');
+    const fff3 = renderCurve(parent, food.foodX + food.rx / 3, food.foodY, foodFood.x - foodFood.rx, foodFood.y, d, t('string_id_725'), 'violet');
 }

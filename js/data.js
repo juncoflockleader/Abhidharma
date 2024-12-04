@@ -1,2119 +1,2119 @@
 const cittas =
     {
-      'name': '心',
+      'name': t('string_id_8'),
       'cetasika': [
-        '触',
-        '受',
-        '想',
-        '思',
-        '一境性',
-        '命根',
-        '作意'
+        t('string_id_9'),
+        t('string_id_10'),
+        t('string_id_11'),
+        t('string_id_12'),
+        t('string_id_13'),
+        t('string_id_14'),
+        t('string_id_15')
       ],
       'children': [
         {
-          'name': '12不善心',
-          'realm': '欲',
+          'name': t('string_id_16'),
+          'realm': t('string_id_17'),
           'category': [
-            '不善'
+            t('string_id_18')
           ],
           'roots': [
-            '痴'
+            t('string_id_19')
           ],
           'cetasika': [
-            '寻',
-            '伺',
-            '痴',
-            '无愧',
-            '无惭',
-            '掉举'
+            t('string_id_20'),
+            t('string_id_21'),
+            t('string_id_19'),
+            t('string_id_22'),
+            t('string_id_23'),
+            t('string_id_24')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '眼门','耳门','鼻门','舌门','身门','意门'
+            t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31')
           ],
           'objects': [
-            '色所缘','香所缘','声所缘','味所缘','触所缘'
+            t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
           ],
           'mental_objects': [
-            '54欲界心',
-            '15色界心',
-            '12无色界心',
-            '52心所21色',
-            '概念'
+            t('string_id_37'),
+            t('string_id_38'),
+            t('string_id_39'),
+            t('string_id_40'),
+            t('string_id_41')
           ],
           'object_time': [
-            '过去',
-            '现在',
-            '未来',
-            '离时'
+            t('string_id_42'),
+            t('string_id_43'),
+            t('string_id_44'),
+            t('string_id_45')
           ],
-          'basis': '有时依',
+          'basis': t('string_id_46'),
           'realms': [
-            '欲'
+            t('string_id_17')
           ],
           'children': [
             {
-              'name': '悦俱邪见相应无行心',
-              'feeling': '悦',
+              'name': t('string_id_47'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '喜',
-                '欲',
-                '邪见',
-                '贪'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_55'),
+                t('string_id_49')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '邪见',
-                '相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 1
             },
             {
-              'name': '悦俱邪见相应有行心',
-              'feeling': '悦',
+              'name': t('string_id_59'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '喜',
-                '欲',
-                '邪见',
-                '贪',
-                '昏沉',
-                '睡眠'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_55'),
+                t('string_id_49'),
+                t('string_id_61'),
+                t('string_id_62')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '邪见',
-                '相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 2
             },
             {
-              'name': '悦俱邪见不相应无行心',
-              'feeling': '悦',
+              'name': t('string_id_63'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '不相应',
-              'volition': '无行',
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '喜',
-                '欲',
-                '贪'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_49')
               ],
               'cetasika_opt': [
-                '慢'
+                t('string_id_65')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '邪见',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 3
             },
             {
-              'name': '悦俱邪见不相应有行心',
-              'feeling': '悦',
+              'name': t('string_id_66'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '不相应',
-              'volition': '有行',
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '喜',
-                '欲',
-                '贪',
-                '昏沉',
-                '睡眠'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_49'),
+                t('string_id_61'),
+                t('string_id_62')
               ],
               'cetasika_opt': [
-                '慢'
+                t('string_id_65')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '邪见',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 4
             },
             {
-              'name': '舍俱邪见相应无行心',
-              'feeling': '舍',
+              'name': t('string_id_67'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '欲',
-                '邪见',
-                '贪'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_17'),
+                t('string_id_55'),
+                t('string_id_49')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '邪见',
-                '相应',
-                '无行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 5
             },
             {
-              'name': '舍俱邪见相应有行心',
-              'feeling': '舍',
+              'name': t('string_id_69'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '欲',
-                '邪见',
-                '贪',
-                '昏沉',
-                '睡眠'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_17'),
+                t('string_id_55'),
+                t('string_id_49'),
+                t('string_id_61'),
+                t('string_id_62')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '邪见',
-                '相应',
-                '有行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 6
             },
             {
-              'name': '舍俱邪见不相应无行心',
-              'feeling': '舍',
+              'name': t('string_id_70'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '不相应',
-              'volition': '无行',
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '欲',
-                '贪'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_17'),
+                t('string_id_49')
               ],
               'cetasika_opt': [
-                '慢'
+                t('string_id_65')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '邪见',
-                '不相应',
-                '无行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 7
             },
             {
-              'name': '舍俱邪见不相应有行心',
-              'feeling': '舍',
+              'name': t('string_id_71'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '贪'
+                t('string_id_49')
               ],
-              'condition': '不相应',
-              'volition': '有行',
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '欲',
-                '贪',
-                '昏沉',
-                '睡眠'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_17'),
+                t('string_id_49'),
+                t('string_id_61'),
+                t('string_id_62')
               ],
               'cetasika_opt': [
-                '慢'
+                t('string_id_65')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '邪见',
-                '不相应',
-                '有行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_55'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 8
             },
             {
-              'name': '忧俱嗔恚相应无行心',
-              'feeling': '忧',
+              'name': t('string_id_72'),
+              'feeling': t('string_id_73'),
               'roots': [
-                '嗔'
+                t('string_id_74')
               ],
-              'condition': '相应',
-              'volition': '无行',
-              'basis': '欲界依',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
+              'basis': t('string_id_75'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '欲',
-                '嗔'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_17'),
+                t('string_id_74')
               ],
               'cetasika_opt': [
-                '嫉',
-                '悭',
-                '恶作'
+                t('string_id_76'),
+                t('string_id_77'),
+                t('string_id_78')
               ],
               'notes': [
-                '忧',
-                '俱',
-                '嗔恚',
-                '相应',
-                '无行'
+                t('string_id_73'),
+                t('string_id_58'),
+                t('string_id_79'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 9
             },
             {
-              'name': '忧俱嗔恚相应有行心',
-              'feeling': '忧',
+              'name': t('string_id_80'),
+              'feeling': t('string_id_73'),
               'roots': [
-                '嗔'
+                t('string_id_74')
               ],
-              'condition': '相应',
-              'volition': '有行',
-              'basis': '欲界依',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
+              'basis': t('string_id_75'),
               'cetasika': [
-                '胜解',
-                '精进',
-                '欲',
-                '嗔',
-                '昏沉',
-                '睡眠'
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_17'),
+                t('string_id_74'),
+                t('string_id_61'),
+                t('string_id_62')
               ],
               'cetasika_opt': [
-                '嫉',
-                '悭',
-                '恶作'
+                t('string_id_76'),
+                t('string_id_77'),
+                t('string_id_78')
               ],
               'notes': [
-                '忧',
-                '俱',
-                '嗔恚',
-                '相应',
-                '有行'
+                t('string_id_73'),
+                t('string_id_58'),
+                t('string_id_79'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 10
             },
             {
-              'name': '舍俱疑相应心',
-              'feeling': '舍',
-              'condition': '相应',
+              'name': t('string_id_81'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_50'),
               'cetasika': [
-                '精进',
-                '疑'
+                t('string_id_53'),
+                t('string_id_82')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '疑',
-                '相应'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_82'),
+                t('string_id_50')
               ],
               'id': 11
             },
             {
-              'name': '舍俱掉举相应心',
-              'feeling': '舍',
-              'condition': '相应',
+              'name': t('string_id_83'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_50'),
               'cetasika': [
-                '胜解',
-                '精进'
+                t('string_id_52'),
+                t('string_id_53')
               ],
               'realms': [
-                '色',
-                '无色'
+                t('string_id_56'),
+                t('string_id_57')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '掉举',
-                '相应'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_24'),
+                t('string_id_50')
               ],
               'id': 12
             }
           ]
         },
         {
-          'name': '8大善心',
-          'realm': '欲',
+          'name': t('string_id_84'),
+          'realm': t('string_id_17'),
           'category': [
-            '善'
+            t('string_id_85')
           ],
           'roots': [
-            '无贪',
-            '无嗔'
+            t('string_id_86'),
+            t('string_id_87')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '眼门','耳门','鼻门','舌门','身门','意门'
+            t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31')
           ],
           'objects': [
-            '色所缘','香所缘','声所缘','味所缘','触所缘'
+            t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
           ],
           'mental_objects': [
-            '54欲界心',
-            '15色界心',
-            '12无色界心',
-            '52心所21色',
-            '概念'
+            t('string_id_37'),
+            t('string_id_38'),
+            t('string_id_39'),
+            t('string_id_40'),
+            t('string_id_41')
           ],
           'object_time': [
-            '过去',
-            '现在',
-            '未来',
-            '离时'
+            t('string_id_42'),
+            t('string_id_43'),
+            t('string_id_44'),
+            t('string_id_45')
           ],
           'cetasika': [
-            '寻',
-            '伺',
-            '胜解',
-            '精进',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_20'),
+            t('string_id_21'),
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'cetasika_opt': [
-            '正语',
-            '正业',
-            '正命',
-            '悲悯',
-            '随喜'
+            t('string_id_105'),
+            t('string_id_106'),
+            t('string_id_107'),
+            t('string_id_108'),
+            t('string_id_109')
           ],
-          'basis': '有时依',
+          'basis': t('string_id_46'),
           'realms': [
-            '欲',
-            '色',
-            '无色'
+            t('string_id_17'),
+            t('string_id_56'),
+            t('string_id_57')
           ],
           'children': [
             {
-              'name': '悦俱智相应无行心',
-              'feeling': '悦',
+              'name': t('string_id_110'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'mental_objects': [
-                '6出世间心',
-                '涅槃'
+                t('string_id_112'),
+                t('string_id_113')
               ],
               'cetasika': [
-                '喜',
-                '欲',
-                '慧'
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 13
             },
             {
-              'name': '悦俱智相应有行心',
-              'feeling': '悦',
+              'name': t('string_id_116'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'mental_objects': [
-                '6出世间心',
-                '涅槃'
+                t('string_id_112'),
+                t('string_id_113')
               ],
               'cetasika': [
-                '喜',
-                '欲',
-                '慧'
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 14
             },
             {
-              'name': '悦俱智不相应无行心',
-              'feeling': '悦',
-              'condition': '不相应',
-              'volition': '无行',
+              'name': t('string_id_117'),
+              'feeling': t('string_id_48'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'mental_objects': [
-                '涅槃'
+                t('string_id_113')
               ],
               'cetasika': [
-                '喜',
-                '欲'
+                t('string_id_54'),
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 15
             },
             {
-              'name': '悦俱智不相应有行心',
-              'feeling': '悦',
-              'condition': '不相应',
-              'volition': '有行',
+              'name': t('string_id_118'),
+              'feeling': t('string_id_48'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'mental_objects': [
-                '涅槃'
+                t('string_id_113')
               ],
               'cetasika': [
-                '喜',
-                '欲'
+                t('string_id_54'),
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 16
             },
             {
-              'name': '舍俱智相应无行心',
-              'feeling': '舍',
+              'name': t('string_id_119'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'mental_objects': [
-                '6出世间心',
-                '涅槃'
+                t('string_id_112'),
+                t('string_id_113')
               ],
               'cetasika': [
-                '欲',
-                '慧'
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '智',
-                '相应',
-                '无行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 17
             },
             {
-              'name': '舍俱智相应有行心',
-              'feeling': '舍',
+              'name': t('string_id_120'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'mental_objects': [
-                '6出世间心',
-                '涅槃'
+                t('string_id_112'),
+                t('string_id_113')
               ],
               'cetasika': [
-                '欲',
-                '慧'
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '智',
-                '相应',
-                '有行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 18
             },
             {
-              'name': '舍俱智不相应无行心',
-              'feeling': '舍',
-              'condition': '不相应',
-              'volition': '无行',
+              'name': t('string_id_121'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'mental_objects': [
-                '涅槃'
+                t('string_id_113')
               ],
               'cetasika': [
-                '欲'
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 19
             },
             {
-              'name': '舍俱智不相应有行心',
-              'feeling': '舍',
-              'condition': '不相应',
+              'name': t('string_id_122'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_64'),
               'mental_objects': [
-                '涅槃'
+                t('string_id_113')
               ],
-              'volition': '有行',
+              'volition': t('string_id_60'),
               'cetasika': [
-                '欲'
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 20
             }
           ]
         },
         {
-          'name': '8大果报心',
-          'realm': '欲',
+          'name': t('string_id_123'),
+          'realm': t('string_id_17'),
           'category': [
-            '无记',
-            '果报',
-            '有因'
+            t('string_id_124'),
+            t('string_id_125'),
+            t('string_id_126')
           ],
           'roots': [
-            '无贪',
-            '无嗔'
+            t('string_id_86'),
+            t('string_id_87')
           ],
           'functions': [
-            '离路心',
-            '彼所缘'
+            t('string_id_127'),
+            t('string_id_128')
           ],
           'gates': [
-            '眼门','耳门','鼻门','舌门','身门','意门',
-            '离门'
+            t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31'),
+            t('string_id_129')
           ],
           'objects': [
-            '色所缘','香所缘','声所缘','味所缘','触所缘'
+            t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
           ],
           'mental_objects': [
-            '54欲界心',
-            '52心所21色'
+            t('string_id_37'),
+            t('string_id_40')
           ],
           'object_time': [
-            '过去',
-            '现在',
-            '未来'
+            t('string_id_42'),
+            t('string_id_43'),
+            t('string_id_44')
           ],
           'cetasika': [
-            '寻',
-            '伺',
-            '胜解',
-            '精进',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_20'),
+            t('string_id_21'),
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
-          'basis': '欲界依',
+          'basis': t('string_id_75'),
           'realms': [
-            '欲'
+            t('string_id_17')
           ],
           'children': [
             {
-              'name': '悦俱智相应无行心',
-              'feeling': '悦',
+              'name': t('string_id_110'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '喜',
-                '欲',
-                '慧'
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 21
             },
             {
-              'name': '悦俱智相应有行心',
-              'feeling': '悦',
+              'name': t('string_id_116'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '喜',
-                '欲',
-                '慧'
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 22
             },
             {
-              'name': '悦俱智不相应无行心',
-              'feeling': '悦',
-              'condition': '不相应',
-              'volition': '无行',
+              'name': t('string_id_117'),
+              'feeling': t('string_id_48'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '喜',
-                '欲'
+                t('string_id_54'),
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 23
             },
             {
-              'name': '悦俱智不相应有行心',
-              'feeling': '悦',
-              'condition': '不相应',
-              'volition': '有行',
+              'name': t('string_id_118'),
+              'feeling': t('string_id_48'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '喜',
-                '欲'
+                t('string_id_54'),
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 24
             },
             {
-              'name': '舍俱智相应无行心',
-              'feeling': '舍',
+              'name': t('string_id_119'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '欲',
-                '慧'
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '智',
-                '相应',
-                '无行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 25
             },
             {
-              'name': '舍俱智相应有行心',
-              'feeling': '舍',
+              'name': t('string_id_120'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '欲',
-                '慧'
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '智',
-                '相应',
-                '有行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 26
             },
             {
-              'name': '舍俱智不相应无行心',
-              'feeling': '舍',
-              'condition': '不相应',
-              'volition': '无行',
+              'name': t('string_id_121'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '欲'
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 27
             },
             {
-              'name': '舍俱智不相应有行心',
-              'feeling': '舍',
-              'condition': '不相应',
-              'volition': '有行',
+              'name': t('string_id_122'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '欲'
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 28
             }
           ]
         },
         {
-          'name': '7无因不善果报心',
-          'realm': '欲',
+          'name': t('string_id_130'),
+          'realm': t('string_id_17'),
           'roots': [
-            '无因'
+            t('string_id_131')
           ],
           'category': [
-            '无记',
-            '果报',
-            '无因'
+            t('string_id_124'),
+            t('string_id_125'),
+            t('string_id_131')
           ],
           'object_time': [
-            '现在'
+            t('string_id_43')
           ],
           'realms': [
-            '欲'
+            t('string_id_17')
           ],
           'children': [
             {
-              'name': '眼识',
-              'feeling': '舍',
-              'basis': '眼净色',
+              'name': t('string_id_132'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_133'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'objects': [
-                '色所缘'
+                t('string_id_32')
               ],
               'functions': [
-                '见'
+                t('string_id_134')
               ],
               'gates': [
-                '眼门'
+                t('string_id_26')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 29
             },
             {
-              'name': '耳识',
-              'feeling': '舍',
+              'name': t('string_id_136'),
+              'feeling': t('string_id_68'),
               'objects': [
-                '声所缘'
+                t('string_id_34')
               ],
-              'basis': '耳净色',
+              'basis': t('string_id_137'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'functions': [
-                '听'
+                t('string_id_138')
               ],
               'gates': [
-                '耳门'
+                t('string_id_27')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 30
             },
             {
-              'name': '鼻识',
-              'feeling': '舍',
-              'basis': '鼻净色',
+              'name': t('string_id_139'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_140'),
               'objects': [
-                '香所缘'
+                t('string_id_33')
               ],
               'functions': [
-                '嗅'
+                t('string_id_141')
               ],
               'gates': [
-                '鼻门'
+                t('string_id_28')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 31
             },
             {
-              'name': '舌识',
-              'feeling': '舍',
-              'basis': '舌净色',
+              'name': t('string_id_142'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_143'),
               'objects': [
-                '味所缘'
+                t('string_id_35')
               ],
               'functions': [
-                '尝'
+                t('string_id_144')
               ],
               'gates': [
-                '舌门'
+                t('string_id_29')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 32
             },
             {
-              'name': '身识',
-              'feeling': '苦',
-              'basis': '身净色',
+              'name': t('string_id_145'),
+              'feeling': t('string_id_146'),
+              'basis': t('string_id_147'),
               'functions': [
-                '触'
+                t('string_id_9')
               ],
               'objects': [
-                '触所缘'
+                t('string_id_36')
               ],
               'gates': [
-                '身门'
+                t('string_id_30')
               ],
               'notes': [
-                '苦',
-                '俱',
-                '五识'
+                t('string_id_146'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 33
             },
             {
-              'name': '舍俱领受心',
-              'feeling': '舍',
-              'basis': '依',
+              'name': t('string_id_148'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_149'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'functions': [
-                '领受'
+                t('string_id_150')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30')
               ],
               'objects': [
-                '色所缘','香所缘','声所缘','味所缘','触所缘'
+                t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
               ],
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '领受心'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_151')
               ],
               'id': 34
             },
             {
-              'name': '舍俱推度心',
-              'feeling': '舍',
-              'basis': '依',
+              'name': t('string_id_152'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_149'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'objects': [
-                '色所缘','香所缘','声所缘','味所缘','触所缘'
+                t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
               ],
               'mental_objects': [
-                '54欲界心',
-                '52心所21色'
+                t('string_id_37'),
+                t('string_id_40')
               ],
               'object_time': [
-                '过去',
-                '未来'
+                t('string_id_42'),
+                t('string_id_44')
               ],
               'functions': [
-                '离路心',
-                '推度',
-                '彼所缘'
+                t('string_id_127'),
+                t('string_id_153'),
+                t('string_id_128')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门','意门',
-                '离门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31'),
+                t('string_id_129')
               ],
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '推度心'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_154')
               ],
               'id': 35
             }
           ]
         },
         {
-          'name': '8无因善果报心',
-          'realm': '欲',
+          'name': t('string_id_155'),
+          'realm': t('string_id_17'),
           'roots': [
-            '无因'
+            t('string_id_131')
           ],
           'object_time': [
-            '现在'
+            t('string_id_43')
           ],
           'category': [
-            '无记',
-            '果报',
-            '无因'
+            t('string_id_124'),
+            t('string_id_125'),
+            t('string_id_131')
           ],
           'realms': [
-            '欲',
+            t('string_id_17'),
           ],
           'children': [
             {
-              'name': '眼识',
-              'feeling': '舍',
-              'basis': '眼净色',
+              'name': t('string_id_132'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_133'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'objects': [
-                '色所缘'
+                t('string_id_32')
               ],
               'functions': [
-                '见'
+                t('string_id_134')
               ],
               'gates': [
-                '眼门'
+                t('string_id_26')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 36
             },
             {
-              'name': '耳识',
-              'feeling': '舍',
+              'name': t('string_id_136'),
+              'feeling': t('string_id_68'),
               'objects': [
-                '声所缘'
+                t('string_id_34')
               ],
-              'basis': '耳净色',
+              'basis': t('string_id_137'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'functions': [
-                '听'
+                t('string_id_138')
               ],
               'gates': [
-                '耳门'
+                t('string_id_27')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 37
             },
             {
-              'name': '鼻识',
-              'feeling': '舍',
-              'basis': '鼻净色',
+              'name': t('string_id_139'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_140'),
               'objects': [
-                '香所缘'
+                t('string_id_33')
               ],
               'functions': [
-                '嗅'
+                t('string_id_141')
               ],
               'gates': [
-                '鼻门'
+                t('string_id_28')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 38
             },
             {
-              'name': '舌识',
-              'feeling': '舍',
-              'basis': '舌净色',
+              'name': t('string_id_142'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_143'),
               'objects': [
-                '味所缘'
+                t('string_id_35')
               ],
               'functions': [
-                '尝'
+                t('string_id_144')
               ],
               'gates': [
-                '舌门'
+                t('string_id_29')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '五识'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 39
             },
             {
-              'name': '身识',
-              'feeling': '乐',
-              'basis': '身净色',
+              'name': t('string_id_145'),
+              'feeling': t('string_id_156'),
+              'basis': t('string_id_147'),
               'objects': [
-                '触所缘'
+                t('string_id_36')
               ],
               'functions': [
-                '触'
+                t('string_id_9')
               ],
               'gates': [
-                '身门'
+                t('string_id_30')
               ],
               'notes': [
-                '乐',
-                '俱',
-                '五识'
+                t('string_id_156'),
+                t('string_id_58'),
+                t('string_id_135')
               ],
               'id': 40
             },
             {
-              'name': '舍俱领受心',
-              'feeling': '舍',
-              'basis': '依',
+              'name': t('string_id_148'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_149'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'functions': [
-                '领受'
+                t('string_id_150')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30')
               ],
               'objects': [
-                '色所缘','香所缘','声所缘','味所缘','触所缘'
+                t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
               ],
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '领受心'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_151')
               ],
               'id': 41
             },
             {
-              'name': '舍俱推度心',
-              'feeling': '舍',
-              'basis': '依',
+              'name': t('string_id_152'),
+              'feeling': t('string_id_68'),
+              'basis': t('string_id_149'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'functions': [
-                '离路心',
-                '推度',
-                '彼所缘'
+                t('string_id_127'),
+                t('string_id_153'),
+                t('string_id_128')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门','意门',
-                '离门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31'),
+                t('string_id_129')
               ],
               'objects': [
-                '色所缘','香所缘','声所缘','味所缘','触所缘'
+                t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
               ],
               'mental_objects': [
-                '54欲界心',
-                '52心所21色'
+                t('string_id_37'),
+                t('string_id_40')
               ],
               'object_time': [
-                '过去',
-                '未来'
+                t('string_id_42'),
+                t('string_id_44')
               ],
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '推度心'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_154')
               ],
               'id': 42
             },
             {
-              'name': '悦俱推度心',
-              'feeling': '悦',
-              'basis': '有时依',
+              'name': t('string_id_157'),
+              'feeling': t('string_id_48'),
+              'basis': t('string_id_46'),
               'realms': [
-                '色'
+                t('string_id_56')
               ],
               'functions': [
-                '推度',
-                '彼所缘'
+                t('string_id_153'),
+                t('string_id_128')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门','意门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31')
               ],
               'objects': [
-                '色所缘','香所缘','声所缘','味所缘','触所缘'
+                t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
               ],
               'mental_objects': [
-                '54欲界心',
-                '52心所21色'
+                t('string_id_37'),
+                t('string_id_40')
               ],
               'object_time': [
-                '过去',
-                '未来'
+                t('string_id_42'),
+                t('string_id_44')
               ],
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解',
-                '喜'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52'),
+                t('string_id_54')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '推度心'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_154')
               ],
               'id': 43
             }
           ]
         },
         {
-          'name': '8大唯作心',
-          'realm': '欲',
+          'name': t('string_id_158'),
+          'realm': t('string_id_17'),
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'objects': [
-            '色所缘','香所缘','声所缘','味所缘','触所缘'
+            t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
           ],
-          'basis': '有时依',
+          'basis': t('string_id_46'),
           'realms': [
-            '欲',
-            '色',
-            '无色'
+            t('string_id_17'),
+            t('string_id_56'),
+            t('string_id_57')
           ],
           'mental_objects': [
-            '54欲界心',
-            '15色界心',
-            '12无色界心',
-            '52心所21色',
-            '概念'
+            t('string_id_37'),
+            t('string_id_38'),
+            t('string_id_39'),
+            t('string_id_40'),
+            t('string_id_41')
           ],
           'object_time': [
-            '过去',
-            '现在',
-            '未来',
-            '离时'
+            t('string_id_42'),
+            t('string_id_43'),
+            t('string_id_44'),
+            t('string_id_45')
           ],
           'gates': [
-            '眼门','耳门','鼻门','舌门','身门','意门'
+            t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31')
           ],
           'cetasika': [
-            '寻',
-            '伺',
-            '胜解',
-            '精进',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_20'),
+            t('string_id_21'),
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'cetasika_opt': [
-            '悲悯',
-            '随喜'
+            t('string_id_108'),
+            t('string_id_109')
           ],
-          'note': '有因唯作心是阿罗汉独有',
+          'note': t('string_id_159'),
           'category': [
-            '无记',
-            '唯作',
-            '有因'
+            t('string_id_124'),
+            t('string_id_160'),
+            t('string_id_126')
           ],
           'roots': [
-            '无贪',
-            '无嗔'
+            t('string_id_86'),
+            t('string_id_87')
           ],
           'children': [
             {
-              'name': '悦俱智相应无行心',
-              'feeling': '悦',
+              'name': t('string_id_110'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'mental_objects': [
-                '8出世间心',
-                '涅槃'
+                t('string_id_161'),
+                t('string_id_113')
               ],
               'cetasika': [
-                '喜',
-                '欲',
-                '慧'
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 44
             },
             {
-              'name': '悦俱智相应有行心',
-              'feeling': '悦',
+              'name': t('string_id_116'),
+              'feeling': t('string_id_48'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'mental_objects': [
-                '8出世间心',
-                '涅槃'
+                t('string_id_161'),
+                t('string_id_113')
               ],
               'cetasika': [
-                '喜',
-                '欲',
-                '慧'
+                t('string_id_54'),
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 45
             },
             {
-              'name': '悦俱智不相应无行心',
-              'feeling': '悦',
-              'condition': '不相应',
-              'volition': '无行',
+              'name': t('string_id_117'),
+              'feeling': t('string_id_48'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '喜',
-                '欲'
+                t('string_id_54'),
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 46
             },
             {
-              'name': '悦俱智不相应有行心',
-              'feeling': '悦',
-              'condition': '不相应',
-              'volition': '有行',
+              'name': t('string_id_118'),
+              'feeling': t('string_id_48'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '喜',
-                '欲'
+                t('string_id_54'),
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 47
             },
             {
-              'name': '舍俱智相应无行心',
-              'feeling': '舍',
+              'name': t('string_id_119'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
               'mental_objects': [
-                '8出世间心',
-                '涅槃'
+                t('string_id_161'),
+                t('string_id_113')
               ],
-              'condition': '相应',
-              'volition': '无行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '欲',
-                '慧'
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '智',
-                '相应',
-                '无行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_51')
               ],
               'id': 48
             },
             {
-              'name': '舍俱智相应有行心',
-              'feeling': '舍',
+              'name': t('string_id_120'),
+              'feeling': t('string_id_68'),
               'roots': [
-                '无痴'
+                t('string_id_111')
               ],
               'mental_objects': [
-                '8出世间心',
-                '涅槃'
+                t('string_id_161'),
+                t('string_id_113')
               ],
-              'condition': '相应',
-              'volition': '有行',
+              'condition': t('string_id_50'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '欲',
-                '慧'
+                t('string_id_17'),
+                t('string_id_114')
               ],
               'notes': [
-                '舍',
-                '俱',
-                '智',
-                '相应',
-                '有行'
+                t('string_id_68'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_50'),
+                t('string_id_60')
               ],
               'id': 49
             },
             {
-              'name': '舍俱智不相应无行心',
-              'feeling': '舍',
-              'condition': '不相应',
-              'volition': '无行',
+              'name': t('string_id_121'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_51'),
               'cetasika': [
-                '欲'
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '无行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_51')
               ],
               'id': 50
             },
             {
-              'name': '舍俱智不相应有行心',
-              'feeling': '舍',
-              'condition': '不相应',
-              'volition': '有行',
+              'name': t('string_id_122'),
+              'feeling': t('string_id_68'),
+              'condition': t('string_id_64'),
+              'volition': t('string_id_60'),
               'cetasika': [
-                '欲'
+                t('string_id_17')
               ],
               'notes': [
-                '悦',
-                '俱',
-                '智',
-                '不相应',
-                '有行'
+                t('string_id_48'),
+                t('string_id_58'),
+                t('string_id_115'),
+                t('string_id_64'),
+                t('string_id_60')
               ],
               'id': 51
             }
           ]
         },
         {
-          'name': '3无因唯作心',
-          'realm': '欲',
+          'name': t('string_id_162'),
+          'realm': t('string_id_17'),
           'roots': [
-            '无因'
+            t('string_id_131')
           ],
           'objects': [
-            '色所缘','香所缘','声所缘','味所缘','触所缘'
+            t('string_id_32'),t('string_id_33'),t('string_id_34'),t('string_id_35'),t('string_id_36')
           ],
           'object_time': [
-            '现在'
+            t('string_id_43')
           ],
           'category': [
-            '无记',
-            '唯作',
-            '无因'
+            t('string_id_124'),
+            t('string_id_160'),
+            t('string_id_131')
           ],
-          'basis': '有时依',
+          'basis': t('string_id_46'),
           'realms': [
-            '欲',
-            '色'
+            t('string_id_17'),
+            t('string_id_56')
           ],
           'children': [
             {
-              'name': '五门转向心',
-              'feeling': '舍',
+              'name': t('string_id_163'),
+              'feeling': t('string_id_68'),
               'functions': [
-                '转向'
+                t('string_id_164')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30')
               ],
-              'basis': '依',
+              'basis': t('string_id_149'),
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52')
               ],
               'notes': [
-                '五门转向心'
+                t('string_id_163')
               ],
               'id': 52
             },
             {
-              'name': '意门转向心',
-              'feeling': '舍',
+              'name': t('string_id_165'),
+              'feeling': t('string_id_68'),
               'realms': [
-                '无色'
+                t('string_id_57')
               ],
               'functions': [
-                '转向',
-                '确定'
+                t('string_id_164'),
+                t('string_id_166')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门','意门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31')
               ],
               'mental_objects': [
-                '54欲界心',
-                '15色界心',
-                '12无色界心',
-                '8出世间心',
-                '52心所21色',
-                '涅槃',
-                '概念'
+                t('string_id_37'),
+                t('string_id_38'),
+                t('string_id_39'),
+                t('string_id_161'),
+                t('string_id_40'),
+                t('string_id_113'),
+                t('string_id_41')
               ],
               'object_time': [
-                '过去',
-                '未来',
-                '离时'
+                t('string_id_42'),
+                t('string_id_44'),
+                t('string_id_45')
               ],
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解',
-                '精进'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52'),
+                t('string_id_53')
               ],
               'notes': [
-                '意门转向心'
+                t('string_id_165')
               ],
               'id': 53
             },
             {
-              'name': '生笑心',
-              'feeling': '悦',
+              'name': t('string_id_167'),
+              'feeling': t('string_id_48'),
               'functions': [
-                '速行'
+                t('string_id_25')
               ],
               'gates': [
-                '眼门','耳门','鼻门','舌门','身门','意门'
+                t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31')
               ],
               'mental_objects': [
-                '54欲界心',
-                '52心所21色'
+                t('string_id_37'),
+                t('string_id_40')
               ],
               'object_time': [
-                '过去',
-                '未来'
+                t('string_id_42'),
+                t('string_id_44')
               ],
-              'basis': '依',
+              'basis': t('string_id_149'),
               'cetasika': [
-                '寻',
-                '伺',
-                '胜解',
-                '精进',
-                '喜'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_52'),
+                t('string_id_53'),
+                t('string_id_54')
               ],
               'notes': [
-                '生笑心'
+                t('string_id_167')
               ],
               'id': 54
             }
           ]
         },
         {
-          'name': '5广大善心',
-          'realm': '色',
+          'name': t('string_id_168'),
+          'realm': t('string_id_56'),
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '意门'
+            t('string_id_31')
           ],
           'mental_objects': [
-            '概念'
+            t('string_id_41')
           ],
           'object_time': [
-            '离时'
+            t('string_id_45')
           ],
           'category': [
-            '善'
+            t('string_id_85')
           ],
           'cetasika': [
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
-          'basis': '依',
+          'basis': t('string_id_149'),
           'realms': [
-            '欲',
-            '色'
+            t('string_id_17'),
+            t('string_id_56')
           ],
           'children': [
             {
-              'name': '初禅心',
-              'feeling': '悦',
+              'name': t('string_id_169'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '寻',
-                '伺',
-                '喜'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '寻、伺、喜、乐、一境性',
+              'note': t('string_id_170'),
               'notes': [],
               'id': 55
             },
             {
-              'name': '第二禅心',
-              'feeling': '悦',
+              'name': t('string_id_171'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '伺',
-                '喜'
+                t('string_id_21'),
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '伺、喜、乐、一境性',
+              'note': t('string_id_172'),
               'notes': [],
               'id': 56
             },
             {
-              'name': '第三禅心',
-              'feeling': '悦',
+              'name': t('string_id_173'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '喜'
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '喜、乐、一境性',
+              'note': t('string_id_174'),
               'notes': [],
               'id': 57
             },
             {
-              'name': '第四禅心',
-              'feeling': '悦',
+              'name': t('string_id_175'),
+              'feeling': t('string_id_48'),
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '乐、一境性',
+              'note': t('string_id_176'),
               'notes': [],
               'id': 58
             },
             {
-              'name': '第五禅心',
-              'feeling': '舍',
-              'note': '舍、一境性',
+              'name': t('string_id_177'),
+              'feeling': t('string_id_68'),
+              'note': t('string_id_178'),
               'notes': [],
               'id': 59
             }
           ]
         },
         {
-          'name': '5广大果报心',
-          'realm': '色',
+          'name': t('string_id_179'),
+          'realm': t('string_id_56'),
           'mental_objects': [
-            '概念'
+            t('string_id_41')
           ],
           'object_time': [
-            '离时'
+            t('string_id_45')
           ],
           'functions': [
-            '离路心'
+            t('string_id_127')
           ],
           'gates': [
-            '离门'
+            t('string_id_129')
           ],
           'category': [
-            '无记',
-            '果报',
-            '有因'
+            t('string_id_124'),
+            t('string_id_125'),
+            t('string_id_126')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
-          'basis': '依',
+          'basis': t('string_id_149'),
           'realms': [
-            '色'
+            t('string_id_56')
           ],
           'cetasika': [
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'children': [
             {
-              'name': '初禅心',
-              'feeling': '悦',
+              'name': t('string_id_169'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '寻',
-                '伺',
-                '喜'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '寻、伺、喜、乐、一境性',
+              'note': t('string_id_170'),
               'notes': [],
               'id': 60
             },
             {
-              'name': '第二禅心',
-              'feeling': '悦',
+              'name': t('string_id_171'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '伺',
-                '喜'
+                t('string_id_21'),
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '伺、喜、乐、一境性',
+              'note': t('string_id_172'),
               'notes': [],
               'id': 61
             },
             {
-              'name': '第三禅心',
-              'feeling': '悦',
+              'name': t('string_id_173'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '喜'
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '喜、乐、一境性',
+              'note': t('string_id_174'),
               'notes': [],
               'id': 62
             },
             {
-              'name': '第四禅心',
-              'feeling': '悦',
+              'name': t('string_id_175'),
+              'feeling': t('string_id_48'),
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '乐、一境性',
+              'note': t('string_id_176'),
               'notes': [],
               'id': 63
             },
             {
-              'name': '第五禅心',
-              'feeling': '舍',
-              'note': '舍、一境性',
+              'name': t('string_id_177'),
+              'feeling': t('string_id_68'),
+              'note': t('string_id_178'),
               'notes': [],
               'id': 64
             }
           ]
         },
         {
-          'name': '5广大唯作心',
-          'realm': '色',
-          'basis': '依',
+          'name': t('string_id_180'),
+          'realm': t('string_id_56'),
+          'basis': t('string_id_149'),
           'realms': [
-            '欲',
-            '色'
+            t('string_id_17'),
+            t('string_id_56')
           ],
           'mental_objects': [
-            '概念'
+            t('string_id_41')
           ],
           'object_time': [
-            '离时'
+            t('string_id_45')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '意门'
+            t('string_id_31')
           ],
           'category': [
-            '无记',
-            '唯作',
-            '有因'
+            t('string_id_124'),
+            t('string_id_160'),
+            t('string_id_126')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
           'cetasika': [
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'children': [
             {
-              'name': '初禅心',
-              'feeling': '悦',
+              'name': t('string_id_169'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '寻',
-                '伺',
-                '喜'
+                t('string_id_20'),
+                t('string_id_21'),
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '寻、伺、喜、乐、一境性',
+              'note': t('string_id_170'),
               'notes': [],
               'id': 65
             },
             {
-              'name': '第二禅心',
-              'feeling': '悦',
+              'name': t('string_id_171'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '伺',
-                '喜'
+                t('string_id_21'),
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '伺、喜、乐、一境性',
+              'note': t('string_id_172'),
               'notes': [],
               'id': 66
             },
             {
-              'name': '第三禅心',
-              'feeling': '悦',
+              'name': t('string_id_173'),
+              'feeling': t('string_id_48'),
               'cetasika': [
-                '喜'
+                t('string_id_54')
               ],
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '喜、乐、一境性',
+              'note': t('string_id_174'),
               'notes': [],
               'id': 67
             },
             {
-              'name': '第四禅心',
-              'feeling': '悦',
+              'name': t('string_id_175'),
+              'feeling': t('string_id_48'),
               'cetasika_opt': [
-                '悲悯',
-                '随喜'
+                t('string_id_108'),
+                t('string_id_109')
               ],
-              'note': '乐、一境性',
+              'note': t('string_id_176'),
               'notes': [],
               'id': 68
             },
             {
-              'name': '第五禅心',
-              'feeling': '舍',
-              'note': '舍、一境性',
+              'name': t('string_id_177'),
+              'feeling': t('string_id_68'),
+              'note': t('string_id_178'),
               'notes': [],
               'id': 69
             }
           ]
         },
         {
-          'name': '4广大善心',
-          'realm': '无色',
+          'name': t('string_id_181'),
+          'realm': t('string_id_57'),
           'category': [
-            '善'
+            t('string_id_85')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '意门'
+            t('string_id_31')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
           'cetasika': [
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
-          'feeling': '舍',
-          'basis': '有时依',
+          'feeling': t('string_id_68'),
+          'basis': t('string_id_46'),
           'realms': [
-            '欲',
-            '色',
-            '无色'
+            t('string_id_17'),
+            t('string_id_56'),
+            t('string_id_57')
           ],
           'children': [
             {
-              'name': '空无边处心',
-              'note': '舍、一境性',
+              'name': t('string_id_182'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '概念'
+                t('string_id_41')
               ],
               'object_time': [
-                '离时'
+                t('string_id_45')
               ],
               'notes': [],
               'id': 70
             },
             {
-              'name': '识无边处心',
-              'note': '舍、一境性',
+              'name': t('string_id_183'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '12无色界心'
+                t('string_id_39')
               ],
               'object_time': [
-                '过去'
+                t('string_id_42')
               ],
               'notes': [],
               'id': 71
             },
             {
-              'name': '无所有处心',
-              'note': '舍、一境性',
+              'name': t('string_id_184'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '概念'
+                t('string_id_41')
               ],
               'object_time': [
-                '离时'
+                t('string_id_45')
               ],
               'notes': [],
               'id': 72
             },
             {
-              'name': '非想非非想处心',
-              'note': '舍、一境性',
+              'name': t('string_id_185'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '12无色界心'
+                t('string_id_39')
               ],
               'object_time': [
-                '过去'
+                t('string_id_42')
               ],
               'notes': [],
               'id': 73
@@ -2121,99 +2121,99 @@ const cittas =
           ]
         },
         {
-          'name': '4广大果报心',
-          'realm': '无色',
-          'feeling': '舍',
+          'name': t('string_id_186'),
+          'realm': t('string_id_57'),
+          'feeling': t('string_id_68'),
           'realms': [
-            '无色'
+            t('string_id_57')
           ],
           'functions': [
-            '离路心'
+            t('string_id_127')
           ],
           'gates': [
-            '离门'
+            t('string_id_129')
           ],
-          'basis': '无',
+          'basis': t('string_id_187'),
           'category': [
-            '无记',
-            '果报',
-            '有因'
+            t('string_id_124'),
+            t('string_id_125'),
+            t('string_id_126')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
           'cetasika': [
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'children': [
             {
-              'name': '空无边处心',
-              'note': '舍、一境性',
+              'name': t('string_id_182'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '概念'
+                t('string_id_41')
               ],
               'object_time': [
-                '离时'
+                t('string_id_45')
               ],
               'notes': [],
               'id': 74
             },
             {
-              'name': '识无边处心',
-              'note': '舍、一境性',
+              'name': t('string_id_183'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '12无色界心'
+                t('string_id_39')
               ],
               'object_time': [
-                '过去'
+                t('string_id_42')
               ],
               'notes': [],
               'id': 75
             },
             {
-              'name': '无所有处心',
-              'note': '舍、一境性',
+              'name': t('string_id_184'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '概念'
+                t('string_id_41')
               ],
               'object_time': [
-                '离时'
+                t('string_id_45')
               ],
               'notes': [],
               'id': 76
             },
             {
-              'name': '非想非非想处心',
-              'note': '舍、一境性',
+              'name': t('string_id_185'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '12无色界心'
+                t('string_id_39')
               ],
               'object_time': [
-                '过去'
+                t('string_id_42')
               ],
               'notes': [],
               'id': 77
@@ -2221,101 +2221,101 @@ const cittas =
           ]
         },
         {
-          'name': '4广大唯作心',
-          'realm': '无色',
-          'basis': '有时依',
+          'name': t('string_id_188'),
+          'realm': t('string_id_57'),
+          'basis': t('string_id_46'),
           'realms': [
-            '欲',
-            '色',
-            '无色'
+            t('string_id_17'),
+            t('string_id_56'),
+            t('string_id_57')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '意门'
+            t('string_id_31')
           ],
           'category': [
-            '无记',
-            '唯作',
-            '有因'
+            t('string_id_124'),
+            t('string_id_160'),
+            t('string_id_126')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
-          'feeling': '舍',
+          'feeling': t('string_id_68'),
           'cetasika': [
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
           'children': [
             {
-              'name': '空无边处心',
-              'note': '舍、一境性',
+              'name': t('string_id_182'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '概念'
+                t('string_id_41')
               ],
               'object_time': [
-                '离时'
+                t('string_id_45')
               ],
               'notes': [],
               'id': 78
             },
             {
-              'name': '识无边处心',
-              'note': '舍、一境性',
+              'name': t('string_id_183'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '12无色界心'
+                t('string_id_39')
               ],
               'object_time': [
-                '过去'
+                t('string_id_42')
               ],
               'notes': [],
               'id': 79
             },
             {
-              'name': '无所有处心',
-              'note': '舍、一境性',
+              'name': t('string_id_184'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '概念'
+                t('string_id_41')
               ],
               'object_time': [
-                '离时'
+                t('string_id_45')
               ],
               'notes': [],
               'id': 80
             },
             {
-              'name': '非想非非想处心',
-              'note': '舍、一境性',
+              'name': t('string_id_185'),
+              'note': t('string_id_178'),
               'mental_objects': [
-                '12无色界心'
+                t('string_id_39')
               ],
               'object_time': [
-                '过去'
+                t('string_id_42')
               ],
               'notes': [],
               'id': 81
@@ -2323,183 +2323,183 @@ const cittas =
           ]
         },
         {
-          'name': '4出世间善心',
-          'realm': '出世间',
-          'basis': '有时依',
+          'name': t('string_id_189'),
+          'realm': t('string_id_190'),
+          'basis': t('string_id_46'),
           'realms': [
-            '欲',
-            '色'
+            t('string_id_17'),
+            t('string_id_56')
           ],
           'mental_objects': [
-            '涅槃'
+            t('string_id_113')
           ],
           'object_time': [
-            '离时'
+            t('string_id_45')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'gates': [
-            '意门'
+            t('string_id_31')
           ],
-          'feeling': '依禅那',
+          'feeling': t('string_id_191'),
           'category': [
-            '善'
+            t('string_id_85')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
           'cetasika': [
-            '正语',
-            '正业',
-            '正命',
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_105'),
+            t('string_id_106'),
+            t('string_id_107'),
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
-          'note': '依照禅定状态(121心)可能有寻、伺、喜心所',
+          'note': t('string_id_192'),
           'children': [
             {
-              'name': '须陀洹道心',
-              'basis': '依',
-              'note': '断三结',
+              'name': t('string_id_193'),
+              'basis': t('string_id_149'),
+              'note': t('string_id_194'),
               'notes': [],
               'id': 82
             },
             {
-              'name': '斯陀含道心',
-              'note': '断粗欲界贪、嗔',
+              'name': t('string_id_195'),
+              'note': t('string_id_196'),
               'realms': [
-                '无色'
+                t('string_id_57')
               ],
               'notes': [],
               'id': 83
             },
             {
-              'name': '阿那含道心',
+              'name': t('string_id_197'),
               'realms': [
-                '无色'
+                t('string_id_57')
               ],
-              'note': '断细欲界贪嗔',
+              'note': t('string_id_198'),
               'notes': [],
               'id': 84
             },
             {
-              'name': '阿罗汉道心',
+              'name': t('string_id_199'),
               'realms': [
-                '无色'
+                t('string_id_57')
               ],
-              'note': '断五上分结',
+              'note': t('string_id_200'),
               'notes': [],
               'id': 85
             }
           ]
         },
         {
-          'name': '4出世间果报心',
-          'realm': '出世间',
-          'basis': '无',
+          'name': t('string_id_201'),
+          'realm': t('string_id_190'),
+          'basis': t('string_id_187'),
           'realms': [
-            '欲',
-            '色',
-            '无色'
+            t('string_id_17'),
+            t('string_id_56'),
+            t('string_id_57')
           ],
           'mental_objects': [
-            '涅槃'
+            t('string_id_113')
           ],
           'object_time': [
-            '离时'
+            t('string_id_45')
           ],
           'category': [
-            '无记',
-            '果报',
-            '有因'
+            t('string_id_124'),
+            t('string_id_125'),
+            t('string_id_126')
           ],
           'functions': [
-            '速行'
+            t('string_id_25')
           ],
           'roots': [
-            '无贪',
-            '无嗔',
-            '无痴'
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_111')
           ],
-          'feeling': '依禅那',
+          'feeling': t('string_id_191'),
           'cetasika': [
-            '正语',
-            '正业',
-            '正命',
-            '胜解',
-            '精进',
-            '欲',
-            '慧',
-            '信',
-            '念',
-            '惭',
-            '愧',
-            '无贪',
-            '无嗔',
-            '中舍性',
-            '心所轻安',
-            '心轻安',
-            '心所轻快性',
-            '心轻快性',
-            '心所柔软性',
-            '心柔软性',
-            '心所适应性',
-            '心适应性',
-            '心所练达性',
-            '心练达性',
-            '心所正直性',
-            '心正直性'
+            t('string_id_105'),
+            t('string_id_106'),
+            t('string_id_107'),
+            t('string_id_52'),
+            t('string_id_53'),
+            t('string_id_17'),
+            t('string_id_114'),
+            t('string_id_88'),
+            t('string_id_89'),
+            t('string_id_90'),
+            t('string_id_91'),
+            t('string_id_86'),
+            t('string_id_87'),
+            t('string_id_92'),
+            t('string_id_93'),
+            t('string_id_94'),
+            t('string_id_95'),
+            t('string_id_96'),
+            t('string_id_97'),
+            t('string_id_98'),
+            t('string_id_99'),
+            t('string_id_100'),
+            t('string_id_101'),
+            t('string_id_102'),
+            t('string_id_103'),
+            t('string_id_104')
           ],
-          'note': '依照禅定状态(121心)可能有寻、伺、喜心所',
+          'note': t('string_id_192'),
           'children': [
             {
-              'name': '须陀洹果心',
-              'note': '断三结',
+              'name': t('string_id_202'),
+              'note': t('string_id_194'),
               'example': '',
               'notes': [],
               'id': 86
             },
             {
-              'name': '斯陀含果心',
-              'note': '断粗欲界贪、嗔',
+              'name': t('string_id_203'),
+              'note': t('string_id_196'),
               'example': '',
               'notes': [],
               'id': 87
             },
             {
-              'name': '阿那含果心',
-              'note': '断细欲界贪嗔',
+              'name': t('string_id_204'),
+              'note': t('string_id_198'),
               'example': '',
               'notes': [],
               'id': 88
             },
             {
-              'name': '阿罗汉果心',
-              'note': '断五上分结',
+              'name': t('string_id_205'),
+              'note': t('string_id_200'),
               'example': '',
               'notes': [],
               'id': 89
@@ -2509,202 +2509,139 @@ const cittas =
       ]
     };
 
-const notes = {
-  '悦': {
-    'note': 'somanassasahagata，受心所体验到乐受'
-  },
-  '舍': {
-    'note': 'upekkhàsahagata，受心所体验到舍受'
-  },
-  '忧': {
-    'note': 'domanassa，直译为不好的心意'
-  },
-  '乐': {
-    'note': '感受目标升起是快乐的感受，是受蕴'
-  },
-  '喜': {
-    'note': '喜欢目标，属于行蕴'
-  },
-  '智': {
-    'note': '慧心所'
-  },
-  '领受心': {
-    'note': '领受该印记'
-  },
-  '推度心': {
-    'note': '推度、考察该印记'
-  },
-  '五门转向心':{
-    'note': '转向心之一，把心转向该目标。若所缘呈现于五根门之一，则将心转向所缘的是五门转向心'
-  },
-  '意门转向心': {
-    'note': ''
-  },
-  '五识': {
-    'note': '五根之识，能识别色声香味触。在无因不善果报心和无因善果报心中各有一组，合称为双五识。双五识只在五门心路生起，且都是过去业的果报。眼耳鼻舌都是舍俱，身识由善不善果报分为乐俱苦俱'
-  },
-  '疑': {
-    'note': '对于佛、法、僧，对于业果法则方面的怀疑'
-  },
-  '掉举': {
-    'note': 'uddhacca是指心的散乱、不平静'
-  },
-  '邪见': {
-    'note': '不正确的见解'
-  },
-  '俱': {
-    'note': '伴随'
-  },
-  '相应': {
-    'note': '持有相应的见解。对邪见，不知道是邪见，算作相应；对智，知道是智，算作相应'
-  },
-  '不相应': {
-    'note': '未持有相应的见解。对邪见，知道是邪见，算作不相应；对智，不知道是智，算作不相应'
-  },
-  '有行': {
-    'note': '不用经过其他人怂恿、鼓励，或者自己没有刻意让它生起的贪心'
-  },
-  '无行': {
-    'note': '经过其他人怂恿'
-  },
-  '嗔恚': {
-    'note': '反击、嗔、怒、生气。有情升起嗔恚，使身心热恼，不得平静'
-  },
-};
-
 const cetasika = {
-  'name': '52心所',
-  'note': '心所是心的成份、因子，从属于心，是心的伴随者，附属物。心是不会单独生起的，必定有相应的心所伴随。每个心识刹那都会有一组心与心所生起，该组心与心所必定同时生、同时灭、同一所缘、同一依处。心与心所的聚合即称为名聚。',
+  'name': t('string_id_225'),
+  'note': t('string_id_226'),
   'children': [
     {
-      'name': '13通一切心所',
-      'note': '通一切心所的本质由同一名聚中的共存心所及心确定。与美心共存则成美心所，与不善心共存则成不善心所，与无记心共存则为无记心所',
+      'name': t('string_id_227'),
+      'note': t('string_id_228'),
       'children': [
         {
-          'name': '7遍一切心所',
-          'note': '遍一切心所是指伴随着每个心的心所。双五识是最基本的心，就只有这七个心所伴随着它们。',
+          'name': t('string_id_229'),
+          'note': t('string_id_230'),
           'children': [
             {
-              'name': '触',
-              'char_mark': '接触目标',
-              'function': '目标与识撞击',
-              'appearance': '1.因依处、目标与识集合生起; 2.导致受、想、行的生起',
-              'proximate_cause': '出现于诸门之境',
+              'name': t('string_id_9'),
+              'char_mark': t('string_id_231'),
+              'function': t('string_id_232'),
+              'appearance': t('string_id_233'),
+              'proximate_cause': t('string_id_234'),
               'note': '',
               'id': 101
             },
             {
-              'name': '受',
-              'char_mark': '被感受',
-              'function': '体验目标',
-              'appearance': '身心受乐、苦、平静',
-              'proximate_cause': '身根，即身净色的接触',
+              'name': t('string_id_10'),
+              'char_mark': t('string_id_235'),
+              'function': t('string_id_236'),
+              'appearance': t('string_id_237'),
+              'proximate_cause': t('string_id_238'),
               'note': '',
               'id': 102
             },
             {
-              'name': '想',
-              'char_mark': '在心里作标记或印记，知道目标之间的差别，如绿色、黄色等',
-              'function': '1.通过以前所做的标识来认得相同的所缘；2.对目标作印记，以便再次体会时能认出',
-              'appearance': '1.心所注意的记号;根据记号去注意目标;2.不深入地取目标，不取目标太久',
-              'proximate_cause': '目标的显现',
+              'name': t('string_id_11'),
+              'char_mark': t('string_id_239'),
+              'function': t('string_id_240'),
+              'appearance': t('string_id_241'),
+              'proximate_cause': t('string_id_242'),
               'note': '',
               'id': 103
             },
             {
-              'name': '思',
-              'char_mark': '催促或发动相应法朝向目标',
-              'function': '集合，以便相应法不会混乱',
-              'appearance': '指导',
-              'proximate_cause': '1.依处;2.目标;3.从触到作意作为显著的相应法',
+              'name': t('string_id_12'),
+              'char_mark': t('string_id_243'),
+              'function': t('string_id_244'),
+              'appearance': t('string_id_245'),
+              'proximate_cause': t('string_id_246'),
               'note': '',
               'id': 104
             },
             {
-              'name': '一境性',
-              'char_mark': '1.作为首领;2.稳定于目标，不散乱;3.是相应法对目标不散乱之因',
-              'function': '统一俱生法',
-              'appearance': '1.平静;寂止;2.智果生起之因',
-              'proximate_cause': '多数是乐受(禅定状态)',
+              'name': t('string_id_13'),
+              'char_mark': t('string_id_247'),
+              'function': t('string_id_248'),
+              'appearance': t('string_id_249'),
+              'proximate_cause': t('string_id_250'),
               'note': '',
               'id': 105
             },
             {
-              'name': '命根',
-              'char_mark': '维持相应名法',
-              'function': '令相应名法能够从生起至坏灭之间存在',
-              'appearance': '维持相应名法存在，直到坏灭',
-              'proximate_cause': '应受维持的名法',
+              'name': t('string_id_14'),
+              'char_mark': t('string_id_251'),
+              'function': t('string_id_252'),
+              'appearance': t('string_id_253'),
+              'proximate_cause': t('string_id_254'),
               'note': '',
               'id': 106
             },
             {
-              'name': '作意',
-              'char_mark': '推动或指挥法朝向目标',
-              'function': '把相应法与目标连接起来',
-              'appearance': '面对目标',
-              'proximate_cause': '目标',
+              'name': t('string_id_15'),
+              'char_mark': t('string_id_255'),
+              'function': t('string_id_256'),
+              'appearance': t('string_id_257'),
+              'proximate_cause': t('string_id_258'),
               'note': '',
               'id': 107
             }
           ]
         },
         {
-          'name': '6杂心所',
-          'note': '杂心所是指伴随着某些心的心所。',
+          'name': t('string_id_259'),
+          'note': t('string_id_260'),
           'children': [
             {
-              'name': '寻',
-              'char_mark': '把心投向或者导向目标',
-              'function': '全面地撞击目标',
-              'appearance': '把心导向目标',
-              'proximate_cause': '目标（或目标+依处+触）',
-              'note': '不出现于双五识及二禅以上的心',
+              'name': t('string_id_20'),
+              'char_mark': t('string_id_261'),
+              'function': t('string_id_262'),
+              'appearance': t('string_id_263'),
+              'proximate_cause': t('string_id_264'),
+              'note': t('string_id_265'),
               'id': 108
             },
             {
-              'name': '伺',
-              'char_mark': '一再地伺察于所缘',
-              'function': '重复地把相应名法置于目标',
-              'appearance': '令心继续于所缘',
-              'proximate_cause': '目标（或目标+依处+触）',
-              'note': '不出现于双五识及三禅以上的心',
+              'name': t('string_id_21'),
+              'char_mark': t('string_id_266'),
+              'function': t('string_id_267'),
+              'appearance': t('string_id_268'),
+              'proximate_cause': t('string_id_264'),
+              'note': t('string_id_269'),
               'id': 109
             },
             {
-              'name': '胜解',
-              'char_mark': '确信或确定目标',
-              'function': '不犹豫',
-              'appearance': '确定或决定',
-              'proximate_cause': '另一个需要抉择的目标',
-              'note': '不出现于双五识及疑心',
+              'name': t('string_id_52'),
+              'char_mark': t('string_id_270'),
+              'function': t('string_id_271'),
+              'appearance': t('string_id_272'),
+              'proximate_cause': t('string_id_273'),
+              'note': t('string_id_274'),
               'id': 110
             },
             {
-              'name': '精进',
-              'char_mark': '努力或者能忍受所面对的任何苦',
-              'function': '支持或稳固相应名法',
-              'appearance': '不放弃',
-              'proximate_cause': '1.悚惧智;2.精进事',
-              'note': '不出现于15无因果报心及1无因五门转向心',
+              'name': t('string_id_53'),
+              'char_mark': t('string_id_275'),
+              'function': t('string_id_276'),
+              'appearance': t('string_id_277'),
+              'proximate_cause': t('string_id_278'),
+              'note': t('string_id_279'),
               'id': 111
             },
             {
-              'name': '喜',
-              'char_mark': '喜欢目标',
-              'function': '1.令身与心喜悦;2.散播胜心生色至全身',
-              'appearance': '身与心的喜悦',
-              'proximate_cause': '目标（或目标+依处+触）',
-              'note': '悦俱(乐受)心，但悦俱第四禅心没有喜',
+              'name': t('string_id_54'),
+              'char_mark': t('string_id_280'),
+              'function': t('string_id_281'),
+              'appearance': t('string_id_282'),
+              'proximate_cause': t('string_id_264'),
+              'note': t('string_id_283'),
               'id': 112
             },
             {
-              'name': '欲',
-              'char_mark': '欲作',
-              'function': '寻找目标',
-              'appearance': '要目标；需要目标',
-              'proximate_cause': '所希求的目标',
-              'note': '不出现于18无因果报心及2痴心',
+              'name': t('string_id_17'),
+              'char_mark': t('string_id_284'),
+              'function': t('string_id_285'),
+              'appearance': t('string_id_286'),
+              'proximate_cause': t('string_id_287'),
+              'note': t('string_id_288'),
               'id': 113
             }
           ]
@@ -2712,158 +2649,158 @@ const cetasika = {
       ]
     },
     {
-      'name': '14不善心所',
-      'note': '只与不善心相应的心所',
+      'name': t('string_id_289'),
+      'note': t('string_id_290'),
       'children': [
         {
-          'name': '4遍一切不善心所',
-          'note': '遍一切不善心所是指伴随着每个不善心的心所',
+          'name': t('string_id_291'),
+          'note': t('string_id_292'),
           'children': [
             {
-              'name': '痴',
-              'char_mark': '1.心盲目，无法如实知见究竟法的真实性;2.或无智，即不能透彻地知见究竟法的真实性',
-              'function': '1.不能透彻地知见究竟法的真实性2.覆蔽究竟法的真实性',
-              'appearance': '1.导致错误的修行;2.令慧眼盲目',
-              'proximate_cause': '不如理作意,即作意目标(究竟法)为常、乐、我、净等',
+              'name': t('string_id_19'),
+              'char_mark': t('string_id_293'),
+              'function': t('string_id_294'),
+              'appearance': t('string_id_295'),
+              'proximate_cause': t('string_id_296'),
               'note': '',
               'id': 114
             },
             {
-              'name': '无惭',
-              'char_mark': '不厌恶或不耻于恶行',
-              'function': '无耻地为恶',
-              'appearance': '不退避于造恶',
-              'proximate_cause': '不尊重自己',
+              'name': t('string_id_23'),
+              'char_mark': t('string_id_297'),
+              'function': t('string_id_298'),
+              'appearance': t('string_id_299'),
+              'proximate_cause': t('string_id_300'),
               'note': '',
               'id': 115
             },
             {
-              'name': '无愧',
-              'char_mark': '不害怕恶行',
-              'function': '无惧地为恶',
-              'appearance': '不退避诸恶',
-              'proximate_cause': '不尊重他人',
+              'name': t('string_id_22'),
+              'char_mark': t('string_id_301'),
+              'function': t('string_id_302'),
+              'appearance': t('string_id_303'),
+              'proximate_cause': t('string_id_304'),
               'note': '',
               'id': 116
             },
             {
-              'name': '掉举',
-              'char_mark': '心不平静',
-              'function': '心不稳定',
-              'appearance': '混乱',
-              'proximate_cause': '对散乱之心不如理作意',
+              'name': t('string_id_24'),
+              'char_mark': t('string_id_305'),
+              'function': t('string_id_306'),
+              'appearance': t('string_id_307'),
+              'proximate_cause': t('string_id_308'),
               'note': '',
               'id': 117
             }
           ]
         },
         {
-          'name': '贪根',
+          'name': t('string_id_309'),
           'children': [
             {
-              'name': '贪',
-              'char_mark': '执着目标为「我的」',
-              'function': '粘着目标',
-              'appearance': '不能舍弃目标',
-              'proximate_cause': '认为诸结之法有乐味',
-              'note': '必然出现于8个贪心',
+              'name': t('string_id_49'),
+              'char_mark': t('string_id_310'),
+              'function': t('string_id_311'),
+              'appearance': t('string_id_312'),
+              'proximate_cause': t('string_id_313'),
+              'note': t('string_id_314'),
               'id': 118
             },
             {
-              'name': '邪见',
-              'char_mark': '错误地作意究竟法为常、乐、净、我',
-              'function': '错误地认为究竟法是常、乐、净、我',
-              'appearance': '错误地理解究竟法为常、乐、净、我',
-              'proximate_cause': '不想见圣者，如佛陀等',
-              'note': '邪见出现于4个邪见相应贪心',
+              'name': t('string_id_55'),
+              'char_mark': t('string_id_315'),
+              'function': t('string_id_316'),
+              'appearance': t('string_id_317'),
+              'proximate_cause': t('string_id_318'),
+              'note': t('string_id_319'),
               'id': 119
             },
             {
-              'name': '慢',
-              'char_mark': '骄傲',
-              'function': '高举自己;「称赞」、「奉承」相应名法',
-              'appearance': '欲自标榜',
-              'proximate_cause': '与见不相应的贪',
-              'note': '只出现于四个邪见不相应贪心，且可能不出现',
+              'name': t('string_id_65'),
+              'char_mark': t('string_id_320'),
+              'function': t('string_id_321'),
+              'appearance': t('string_id_322'),
+              'proximate_cause': t('string_id_323'),
+              'note': t('string_id_324'),
               'id': 120
             }
           ]
         },
         {
-          'name': '嗔根',
-          'note': '嫉、悭、恶作可能出现或不出现，且只能出现一个',
+          'name': t('string_id_325'),
+          'note': t('string_id_326'),
           'children': [
             {
-              'name': '嗔',
-              'char_mark': '粗野',
-              'function': '1.令自己挣扎与颤动;2.身体的挣扎与颤动;3.怒烧(嗔的)心所依处或身心',
-              'appearance': '毁坏身心;或毁坏自己与他人的福利',
-              'proximate_cause': '九或十种嗔怒事',
-              'note': '必然出现于两个嗔心',
+              'name': t('string_id_74'),
+              'char_mark': t('string_id_327'),
+              'function': t('string_id_328'),
+              'appearance': t('string_id_329'),
+              'proximate_cause': t('string_id_330'),
+              'note': t('string_id_331'),
               'id': 121
             },
             {
-              'name': '嫉',
-              'char_mark': '嫉羡他人的成就',
-              'function': '不喜他人的成就',
-              'appearance': '不能忍受看到他人成就；背向他人的成就',
-              'proximate_cause': '他人的成就',
-              'note': '与悭、恶作不共现',
+              'name': t('string_id_76'),
+              'char_mark': t('string_id_332'),
+              'function': t('string_id_333'),
+              'appearance': t('string_id_334'),
+              'proximate_cause': t('string_id_335'),
+              'note': t('string_id_336'),
               'id': 122
             },
             {
-              'name': '悭',
-              'char_mark': '隐秘自己已得或当得的利益',
-              'function': '不能忍受与他人分享自己的利益',
-              'appearance': '1.怨恨与吝啬(因为不乐于分享所得)2.或导致不乐、不喜与痛苦',
-              'proximate_cause': '自己所得',
-              'note': '与嫉、恶作不共现',
+              'name': t('string_id_77'),
+              'char_mark': t('string_id_337'),
+              'function': t('string_id_338'),
+              'appearance': t('string_id_339'),
+              'proximate_cause': t('string_id_340'),
+              'note': t('string_id_341'),
               'id': 123
             },
             {
-              'name': '恶作',
-              'char_mark': '追悔',
-              'function': '追悔以造的恶，以及没有实行的善',
-              'appearance': '不断忆起时感到后悔，或心感到不快',
-              'proximate_cause': '已造的恶及未行的善',
-              'note': '与悭、嫉不共现',
+              'name': t('string_id_78'),
+              'char_mark': t('string_id_342'),
+              'function': t('string_id_343'),
+              'appearance': t('string_id_344'),
+              'proximate_cause': t('string_id_345'),
+              'note': t('string_id_346'),
               'id': 124
             }
           ]
         },
         {
-          'name': '痴',
+          'name': t('string_id_19'),
           'children': [
             {
-              'name': '疑',
-              'char_mark': '怀疑三宝、缘起、因果(对八事、十六事怀疑)',
-              'function': '对八事起动摇',
-              'appearance': '导致对八事犹豫不决',
-              'proximate_cause': '对怀疑八事、十六事起不如理作意',
-              'note': '只出现于疑心',
+              'name': t('string_id_82'),
+              'char_mark': t('string_id_347'),
+              'function': t('string_id_348'),
+              'appearance': t('string_id_349'),
+              'proximate_cause': t('string_id_350'),
+              'note': t('string_id_351'),
               'id': 125
             }
           ]
         },
         {
-          'name': '有行',
-          'note': '只出现于4个有行贪心与1个有行嗔心',
+          'name': t('string_id_60'),
+          'note': t('string_id_352'),
           'children': [
             {
-              'name': '昏沉',
-              'char_mark': '不努力、不精进',
-              'function': '去除精进',
-              'appearance': '心的消沉，或办事的精进力减弱',
-              'proximate_cause': '对导致怠惰的所缘起不如理作意',
+              'name': t('string_id_61'),
+              'char_mark': t('string_id_353'),
+              'function': t('string_id_354'),
+              'appearance': t('string_id_355'),
+              'proximate_cause': t('string_id_356'),
               'note': '',
               'id': 126
             },
             {
-              'name': '睡眠',
-              'char_mark': '心所的不适业',
-              'function': '闭塞识门，或令相应法沉滞',
-              'appearance': '1.退离目标2.昏昏欲睡',
-              'proximate_cause': '对导致怠惰的所缘起不如理作意',
+              'name': t('string_id_62'),
+              'char_mark': t('string_id_357'),
+              'function': t('string_id_358'),
+              'appearance': t('string_id_359'),
+              'proximate_cause': t('string_id_356'),
               'note': '',
               'id': 127
             }
@@ -2872,253 +2809,253 @@ const cetasika = {
       ]
     },
     {
-      'name': '25美心所',
-      'note': '只与美心相应的心所',
+      'name': t('string_id_360'),
+      'note': t('string_id_361'),
       'children': [
         {
-          'name': '19遍一切美心心所',
-          'note': '59个美心必然有这19个心所伴随',
+          'name': t('string_id_362'),
+          'note': t('string_id_363'),
           'children': [
             {
-              'name': '信',
-              'char_mark': '对当信之事有信心或信仰',
-              'function': '1.使用相应名法对当信之事清楚;2.引发自己与相应名法对当信之事有信心，而不会退减，也不退避',
-              'appearance': '1.相应名法对当信之事不迷蒙;2.无疑、无不如理作意，以及不犹豫地确定当信之事，或使到对当信之事作出决定',
-              'proximate_cause': '当信之事',
+              'name': t('string_id_88'),
+              'char_mark': t('string_id_364'),
+              'function': t('string_id_365'),
+              'appearance': t('string_id_366'),
+              'proximate_cause': t('string_id_367'),
               'note': '',
               'id': 128
             },
             {
-              'name': '念',
-              'char_mark': '1.使相应法对目标念念分明而不流失;2.全心投入于善行',
-              'function': '去除会令目标消失的放逸;不令目标消失',
-              'appearance': '1.守护心，或守护禅修目标;2.心面对目标的状态',
-              'proximate_cause': '1.强而有力的想;2.或身念处等等',
+              'name': t('string_id_89'),
+              'char_mark': t('string_id_368'),
+              'function': t('string_id_369'),
+              'appearance': t('string_id_370'),
+              'proximate_cause': t('string_id_371'),
               'note': '',
               'id': 129
             },
             {
-              'name': '惭',
-              'char_mark': '对恶行感到厌恶',
-              'function': '耻于造恶',
-              'appearance': '退避诸恶',
-              'proximate_cause': '尊重自己',
+              'name': t('string_id_90'),
+              'char_mark': t('string_id_372'),
+              'function': t('string_id_373'),
+              'appearance': t('string_id_374'),
+              'proximate_cause': t('string_id_375'),
               'note': '',
               'id': 130
             },
             {
-              'name': '愧',
-              'char_mark': '对恶行感到害怕',
-              'function': '害怕造恶',
-              'appearance': '退避诸恶',
-              'proximate_cause': '尊重他人',
+              'name': t('string_id_91'),
+              'char_mark': t('string_id_376'),
+              'function': t('string_id_377'),
+              'appearance': t('string_id_374'),
+              'proximate_cause': t('string_id_378'),
               'note': '',
               'id': 131
             },
             {
-              'name': '无贪',
-              'char_mark': '心不贪求、不染着目标',
-              'function': '不执着目标为「我的」或「我的东西」',
-              'appearance': '不执着目标',
-              'proximate_cause': '目标（或依处+目标+触);或如理作意',
+              'name': t('string_id_86'),
+              'char_mark': t('string_id_379'),
+              'function': t('string_id_380'),
+              'appearance': t('string_id_381'),
+              'proximate_cause': t('string_id_382'),
               'note': '',
               'id': 132
             },
             {
-              'name': '无嗔',
-              'char_mark': '1.不粗野;2.不对抗',
-              'function': '去除怨根;去除怒火',
-              'appearance': '如满月般清澈祥和',
-              'proximate_cause': '目标（或依处+目标+触);或如理作意',
+              'name': t('string_id_87'),
+              'char_mark': t('string_id_383'),
+              'function': t('string_id_384'),
+              'appearance': t('string_id_385'),
+              'proximate_cause': t('string_id_382'),
               'note': '',
               'id': 133
             },
             {
-              'name': '中舍性',
-              'char_mark': '平衡性与心所、平等性',
-              'function': '1.防止过多或不足;2.去除偏差',
-              'appearance': '中舍',
-              'proximate_cause': '相应名法（或依处+目标+触);或如理作意',
+              'name': t('string_id_92'),
+              'char_mark': t('string_id_386'),
+              'function': t('string_id_387'),
+              'appearance': t('string_id_388'),
+              'proximate_cause': t('string_id_389'),
               'note': '',
               'id': 134
             },
             {
-              'name': '心所轻安',
-              'char_mark': '心所(受、想、行）轻安、镇静',
-              'function': '破除心所与心的不安',
-              'appearance': '心所与心的宁静、轻安、不颤动',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_93'),
+              'char_mark': t('string_id_390'),
+              'function': t('string_id_391'),
+              'appearance': t('string_id_392'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 135
             },
             {
-              'name': '心轻安',
-              'char_mark': '心的',
-              'function': '破除心所与心的不安',
-              'appearance': '心所与心的宁静、轻安、不颤动',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_94'),
+              'char_mark': t('string_id_394'),
+              'function': t('string_id_391'),
+              'appearance': t('string_id_392'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 136
             },
             {
-              'name': '心所轻快性',
-              'char_mark': '心所(受、想、行）的轻快',
-              'function': '破除心所与心的沉重',
-              'appearance': '心所与心',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_95'),
+              'char_mark': t('string_id_395'),
+              'function': t('string_id_396'),
+              'appearance': t('string_id_397'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 137
             },
             {
-              'name': '心轻快性',
-              'char_mark': '心的轻快',
-              'function': '破除心所与心的沉重',
-              'appearance': '心所与心',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_96'),
+              'char_mark': t('string_id_398'),
+              'function': t('string_id_396'),
+              'appearance': t('string_id_397'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 138
             },
             {
-              'name': '心所柔软性',
-              'char_mark': '心所(受、想、行）的柔软',
-              'function': '破除心所与心的僵硬性',
-              'appearance': '心所与心对目标无对抗及无阻碍',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_97'),
+              'char_mark': t('string_id_399'),
+              'function': t('string_id_400'),
+              'appearance': t('string_id_401'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 139
             },
             {
-              'name': '心柔软性',
-              'char_mark': '心的柔软',
-              'function': '破除心所与心的僵硬性',
-              'appearance': '心所与心对目标无抵抗及无阻碍',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_98'),
+              'char_mark': t('string_id_402'),
+              'function': t('string_id_400'),
+              'appearance': t('string_id_403'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 140
             },
             {
-              'name': '心所适应性',
-              'char_mark': '心所(受、想、行）具堪任性',
-              'function': '破除心所与心对善作业的不适应性',
-              'appearance': '心所与心成功取某所缘为目标',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_99'),
+              'char_mark': t('string_id_404'),
+              'function': t('string_id_405'),
+              'appearance': t('string_id_406'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 141
             },
             {
-              'name': '心适应性',
-              'char_mark': '心具堪任性',
-              'function': '破除心所与心对善作业的不适应性',
-              'appearance': '心所与心成功取某所缘为目标',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_100'),
+              'char_mark': t('string_id_407'),
+              'function': t('string_id_405'),
+              'appearance': t('string_id_406'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 142
             },
             {
-              'name': '心所练达性',
-              'char_mark': '心所(受、想、行）具熟练性',
-              'function': '破除心所与心的疾病',
-              'appearance': '心所与心毫无瑕疵',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_101'),
+              'char_mark': t('string_id_408'),
+              'function': t('string_id_409'),
+              'appearance': t('string_id_410'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 143
             },
             {
-              'name': '心练达性',
-              'char_mark': '心具熟练性',
-              'function': '破除心所与心的疾病',
-              'appearance': '心所与心毫无瑕疵',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_102'),
+              'char_mark': t('string_id_411'),
+              'function': t('string_id_409'),
+              'appearance': t('string_id_410'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 144
             },
             {
-              'name': '心所正直性',
-              'char_mark': '心所(受、想、行）正直',
-              'function': '破除心所与心的欺骗性',
-              'appearance': '心所与心不狡诈',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_103'),
+              'char_mark': t('string_id_412'),
+              'function': t('string_id_413'),
+              'appearance': t('string_id_414'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 145
             },
             {
-              'name': '心正直性',
-              'char_mark': '心正直',
-              'function': '破除心所与心的欺骗性',
-              'appearance': '心所与心不狡诈',
-              'proximate_cause': '心与心所',
+              'name': t('string_id_104'),
+              'char_mark': t('string_id_415'),
+              'function': t('string_id_413'),
+              'appearance': t('string_id_414'),
+              'proximate_cause': t('string_id_393'),
               'note': '',
               'id': 146
             }
           ]
         },
         {
-          'name': '离',
-          'note': '只出现于欲界8大善心，及8出世间心。8出世间心必然同时生起3离心所，而欲界善心则视情况生起且一次只能生起一个。离有三种：自然离(有机会造恶但不造)，持戒离(由于持戒不造恶)，正断离(出世间心)',
+          'name': t('string_id_416'),
+          'note': t('string_id_417'),
           'children': [
             {
-              'name': '正语',
-              'char_mark': '远离、摆脱不正语',
-              'function': '远离恶语',
-              'appearance': '不造恶语',
-              'proximate_cause': '信、惭、愧、知足等',
+              'name': t('string_id_105'),
+              'char_mark': t('string_id_418'),
+              'function': t('string_id_419'),
+              'appearance': t('string_id_420'),
+              'proximate_cause': t('string_id_421'),
               'note': '',
               'id': 147
             },
             {
-              'name': '正业',
-              'char_mark': '远离、摆脱不正业',
-              'function': '远离身恶行',
-              'appearance': '不造身恶行',
-              'proximate_cause': '信、惭、愧、知足等',
+              'name': t('string_id_106'),
+              'char_mark': t('string_id_422'),
+              'function': t('string_id_423'),
+              'appearance': t('string_id_424'),
+              'proximate_cause': t('string_id_421'),
               'note': '',
               'id': 148
             },
             {
-              'name': '正命',
-              'char_mark': '远离、摆脱不正命',
-              'function': '远离邪命',
-              'appearance': '不造邪命',
-              'proximate_cause': '信、惭、愧、知足等',
+              'name': t('string_id_107'),
+              'char_mark': t('string_id_425'),
+              'function': t('string_id_426'),
+              'appearance': t('string_id_427'),
+              'proximate_cause': t('string_id_421'),
               'note': '',
               'id': 149
             }
           ]
         },
         {
-          'name': '无量',
-          'note': '可能出现于28种心:欲界8大善心、8大唯作心及12禅心',
+          'name': t('string_id_428'),
+          'note': t('string_id_429'),
           'children': [
             {
-              'name': '悲悯',
-              'char_mark': '悲悯，拔除自他之苦',
-              'function': '不忍见自他之苦',
-              'appearance': '不残忍，或导致自他不残忍',
-              'proximate_cause': '如理作意见受尽苦难的自他没有依归',
+              'name': t('string_id_108'),
+              'char_mark': t('string_id_430'),
+              'function': t('string_id_431'),
+              'appearance': t('string_id_432'),
+              'proximate_cause': t('string_id_433'),
               'note': '',
               'id': 150
             },
             {
-              'name': '随喜',
-              'char_mark': '随喜自他利益、成就而生喜悦',
-              'function': '不嫉妒自他的成就',
-              'appearance': '对自他的成就无厌恶',
-              'proximate_cause': '见到自他的成就',
+              'name': t('string_id_109'),
+              'char_mark': t('string_id_434'),
+              'function': t('string_id_435'),
+              'appearance': t('string_id_436'),
+              'proximate_cause': t('string_id_437'),
               'note': '',
               'id': 151
             }
           ]
         },
         {
-          'name': '无痴',
+          'name': t('string_id_111'),
           'children': [
             {
-              'name': '慧',
-              'char_mark': '1.透彻地如实知见究竟法的自性相与共相;2.毫无瑕疵地彻知究竟法，如神射手般一箭贯穿目标',
-              'function': '如油灯般照亮目标（意即驱除遮蔽目标的黑暗愚痴)',
-              'appearance': '对目标无迷惑（如受到好向导指示森林的途径）',
-              'proximate_cause': '定',
-              'note': '出现于欲界12智相应心、色界心、无色界心与出世间心',
+              'name': t('string_id_114'),
+              'char_mark': t('string_id_438'),
+              'function': t('string_id_439'),
+              'appearance': t('string_id_440'),
+              'proximate_cause': t('string_id_441'),
+              'note': t('string_id_442'),
               'id': 152
             }
           ]
@@ -3130,68 +3067,68 @@ const cetasika = {
 
 const causes = {
   'index_base': 200,
-  'title': '因',
-  'names': ['贪','嗔','痴','无贪','无嗔','无痴','无因']
+  'title': t('string_id_443'),
+  'names': [t('string_id_49'),t('string_id_74'),t('string_id_19'),t('string_id_86'),t('string_id_87'),t('string_id_111'),t('string_id_131')]
 };
 
 const times = {
     'index_base': 300,
-    'title': '所缘之时',
-    'names':  ['过去','现在','未来','离时'],
+    'title': t('string_id_444'),
+    'names':  [t('string_id_42'),t('string_id_43'),t('string_id_44'),t('string_id_45')],
 };
 
 const objects = {
     'index_base': 400,
-    'title':  '五所缘',
-    'names': ['色所缘','声所缘','香所缘','味所缘','触所缘'],
+    'title':  t('string_id_445'),
+    'names': [t('string_id_32'),t('string_id_34'),t('string_id_33'),t('string_id_35'),t('string_id_36')],
 };
 
 const functions = {
     'index_base': 500,
-    'title': '作用',
-    'names':  ['离路心', '速行', '转向', '见', '听', '嗅', '尝', '触', '领受', '推度', '彼所缘', '确定'],
+    'title': t('string_id_4'),
+    'names':  [t('string_id_127'), t('string_id_25'), t('string_id_164'), t('string_id_134'), t('string_id_138'), t('string_id_141'), t('string_id_144'), t('string_id_9'), t('string_id_150'), t('string_id_153'), t('string_id_128'), t('string_id_166')],
 };
 
 const feelings = {
   'index_base': 600,
-  'title': '受',
-  'names': ['舍','苦','忧','乐','悦','依禅那']
+  'title': t('string_id_10'),
+  'names': [t('string_id_68'),t('string_id_146'),t('string_id_73'),t('string_id_156'),t('string_id_48'),t('string_id_191')]
 };
 
 const gates = {
     'index_base': 700,
-    'title': '门',
-    'names': ['眼门','耳门','鼻门','舌门','身门','意门','离门']
+    'title': t('string_id_446'),
+    'names': [t('string_id_26'),t('string_id_27'),t('string_id_28'),t('string_id_29'),t('string_id_30'),t('string_id_31'),t('string_id_129')]
 };
 
 const realms = {
     'index_base': 800,
-    'title': '升起之地',
-    'names': ['欲','色','无色']
+    'title': t('string_id_447'),
+    'names': [t('string_id_17'),t('string_id_56'),t('string_id_57')]
 };
 
 const basis = {
     'index_base': 900,
-    'title': '依处(净色/心所依处)',
-    'names': ['眼净色','耳净色','鼻净色','舌净色','身净色','依','有时依','欲界依','无']
+    'title': t('string_id_448'),
+    'names': [t('string_id_133'),t('string_id_137'),t('string_id_140'),t('string_id_143'),t('string_id_147'),t('string_id_149'),t('string_id_46'),t('string_id_75'),t('string_id_187')]
 };
 
 const mental_objects = {
   'index_base': 1000,
-  'title': '法所缘',
-  'names': ['54欲界心', '15色界心', '12无色界心', '6出世间心', '8出世间心', '52心所21色', '涅槃', '概念']
+  'title': t('string_id_449'),
+  'names': [t('string_id_37'), t('string_id_38'), t('string_id_39'), t('string_id_112'), t('string_id_161'), t('string_id_40'), t('string_id_113'), t('string_id_41')]
 };
 
 const data = {
   'header': {
-    'row_header': '界',
-    'column_header': '本性'
+    'row_header': t('string_id_450'),
+    'column_header': t('string_id_451')
   },
   'rows_header': [
-    '54欲界心', '15色界心', '12无色界心', '8出世间心'
+    t('string_id_37'), t('string_id_38'), t('string_id_39'), t('string_id_161')
   ],
   'columns_header': [
-    {name: '12不善心'}, {name: '21善心'}, {name: '56无记心', children: [{name: '36果报心', children: [{name: '21有因心'}, {name: '15无因心'}]}, {name: '20唯作心', children: [{name: '17有因心'}, {name: '3无因心'}]}]}
+    {name: t('string_id_16')}, {name: t('string_id_452')}, {name: t('string_id_453'), children: [{name: t('string_id_454'), children: [{name: t('string_id_455')}, {name: t('string_id_456')}]}, {name: t('string_id_457'), children: [{name: t('string_id_458')}, {name: t('string_id_459')}]}]}
   ],
   'cells_citta_group': [
     [[0], [1], [2], [3, 4], [5], [6]],

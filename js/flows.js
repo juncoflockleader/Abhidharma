@@ -1,113 +1,113 @@
 const flowCittas = [
     {
         'id': 1,
-        'name': '有分',
+        'name': t('string_id_460'),
         'color': 'dimgrey',
     },
     {
         'id': 2,
-        'name': '过去有分',
+        'name': t('string_id_461'),
         'color': 'grey',
     },
     {
         'id': 3,
-        'name': '有分波动',
+        'name': t('string_id_462'),
         'color': 'darkgrey',
     },
     {
         'id': 4,
-        'name': '有分断',
+        'name': t('string_id_463'),
         'color': 'lightgrey',
     },
     {
         'id': 5,
-        'name': '五门转向',
+        'name': t('string_id_464'),
         'color': 'palevioletred',
-        'cittas': [{'class': '无因唯作心', 'cittas': ['五门转向心']}]
+        'cittas': [{'class': t('string_id_465'), 'cittas': [t('string_id_163')]}]
     },
     {
         'id': 6,
-        'name': '五识',
+        'name': t('string_id_135'),
         'color': 'tomato',
-        'cittas': [{'class': '无因不善果报心', 'cittas': ['眼识', '耳识', '鼻识', '舌识', '身识'], 'matcher': {'likable': 3}},
-            {'class': '无因善果报心', 'cittas': ['眼识', '耳识', '鼻识', '舌识', '身识']}]
+        'cittas': [{'class': t('string_id_466'), 'cittas': [t('string_id_132'), t('string_id_136'), t('string_id_139'), t('string_id_142'), t('string_id_145')], 'matcher': {'likable': 3}},
+            {'class': t('string_id_467'), 'cittas': [t('string_id_132'), t('string_id_136'), t('string_id_139'), t('string_id_142'), t('string_id_145')]}]
     },
     {
         'id': 7,
-        'name': '领受',
+        'name': t('string_id_150'),
         'color': 'gold',
-        'cittas': [{'class': '无因不善果报心', 'cittas': ['舍俱领受心'], 'matcher': {'likable': 3}},
-            {'class': '无因善果报心', 'cittas': ['舍俱领受心']}]
+        'cittas': [{'class': t('string_id_466'), 'cittas': [t('string_id_148')], 'matcher': {'likable': 3}},
+            {'class': t('string_id_467'), 'cittas': [t('string_id_148')]}]
     },
     {
         'id': 8,
-        'name': '推度',
+        'name': t('string_id_153'),
         'color': 'darkseagreen',
-        'cittas': [{'class': '无因不善果报心', 'cittas': ['舍俱领受心'], 'matcher': {'likable': 3}},
-            {'class': '无因善果报心', 'cittas': ['舍俱领受心'], 'matcher': {'likable': 2}},
-            {'class': '无因善果报心', 'cittas': ['悦俱推度心']}]
+        'cittas': [{'class': t('string_id_466'), 'cittas': [t('string_id_148')], 'matcher': {'likable': 3}},
+            {'class': t('string_id_467'), 'cittas': [t('string_id_148')], 'matcher': {'likable': 2}},
+            {'class': t('string_id_467'), 'cittas': [t('string_id_157')]}]
     },
     {
         'id': 9,
-        'name': '确定',
+        'name': t('string_id_166'),
         'color': 'cyan',
-        'cittas': [{'class': '无因唯作心', 'cittas': ['意门转向心']}]
+        'cittas': [{'class': t('string_id_465'), 'cittas': [t('string_id_165')]}]
     },
     {
         'id': 10,
-        'name': '速行',
+        'name': t('string_id_25'),
         'color': 'lightblue',
-        'cittas': [{'class': '不善心', 'cittas': ['悦俱邪见相应无行心', '悦俱邪见相应有行心', '悦俱邪见不相应无行心', '悦俱邪见不相应有行心',
-            '舍俱邪见相应无行心', '舍俱邪见相应有行心', '舍俱邪见不相应无行心', '舍俱邪见不相应有行心', '忧俱嗔恚相应无行心', '忧俱嗔恚相应有行心',
-            '舍俱疑相应心', '舍俱掉举相应心'], 'matcher': {'arahant': false, 'goodIntention': false}},
-            {'class': '善心', 'cittas': ['悦俱智相应无行心', '悦俱智相应有行心', '悦俱智不相应无行心',
-                '悦俱智不相应有行心', '舍俱智相应无行心', '舍俱智相应有行心', '舍俱智不相应无行心',
-                '舍俱智不相应有行心'], 'matcher': {'arahant': false, 'goodIntention': true}},
-            {'class': '唯作心', 'cittas': ['悦俱智相应无行心', '悦俱智相应有行心', '悦俱智不相应无行心',
-                    '悦俱智不相应有行心', '舍俱智相应无行心', '舍俱智相应有行心', '舍俱智不相应无行心',
-                    '舍俱智不相应有行心', '生笑心'], 'matcher': {'arahant': true}}]
+        'cittas': [{'class': t('string_id_468'), 'cittas': [t('string_id_47'), t('string_id_59'), t('string_id_63'), t('string_id_66'),
+            t('string_id_67'), t('string_id_69'), t('string_id_70'), t('string_id_71'), t('string_id_72'), t('string_id_80'),
+            t('string_id_81'), t('string_id_83')], 'matcher': {'arahant': false, 'goodIntention': false}},
+            {'class': t('string_id_469'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'),
+                t('string_id_118'), t('string_id_119'), t('string_id_120'), t('string_id_121'),
+                t('string_id_122')], 'matcher': {'arahant': false, 'goodIntention': true}},
+            {'class': t('string_id_470'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'),
+                    t('string_id_118'), t('string_id_119'), t('string_id_120'), t('string_id_121'),
+                    t('string_id_122'), t('string_id_167')], 'matcher': {'arahant': true}}]
     },
     {
         'id': 11,
-        'name': '彼所缘',
+        'name': t('string_id_128'),
         'color': 'mediumslateblue',
-        'cittas': [{'class': '不善果报心', 'cittas': ['舍俱智相应无行心', '舍俱智相应有行心', '舍俱智不相应无行心','舍俱智不相应有行心', '舍俱推度心'], 'matcher': {'likable': 3}},
-            {'class': '善果报心', 'cittas': ['悦俱智相应无行心', '悦俱智相应有行心', '悦俱智不相应无行心', '悦俱智不相应有行心', '舍俱推度心'], 'matcher': {'likable': 2}},
-            {'class': '善果报心', 'cittas': ['悦俱智相应无行心', '悦俱智相应有行心', '悦俱智不相应无行心', '悦俱智不相应有行心', '悦俱推度心']}]
+        'cittas': [{'class': t('string_id_471'), 'cittas': [t('string_id_119'), t('string_id_120'), t('string_id_121'),t('string_id_122'), t('string_id_152')], 'matcher': {'likable': 3}},
+            {'class': t('string_id_472'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'), t('string_id_118'), t('string_id_152')], 'matcher': {'likable': 2}},
+            {'class': t('string_id_472'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'), t('string_id_118'), t('string_id_157')]}]
     },
     {
         'id': 12,
-        'name': '意门转向',
+        'name': t('string_id_473'),
         'color': 'cornflowerblue',
-        'cittas': [{'class': '无因唯作心', 'cittas': ['意门转向心']}]
+        'cittas': [{'class': t('string_id_465'), 'cittas': [t('string_id_165')]}]
     }
 ];
 
 const fiveDoorFlows = [
-    {'id': 1, 'class': '彼所缘时分', 'flowCittas': [1, 2, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, {'id': 11, 'count': 2}, 1]},
-    {'id': 2, 'class': '速行时分', 'flowCittas': [1, {'id': 2, 'count': 2}, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, {'id': 1, 'count': 2}]},
-    {'id': 3, 'class': '速行时分', 'flowCittas': [1, {'id': 2, 'count': 3}, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, 1]},
-    {'id': 4, 'class': '确定时分', 'flowCittas': [1, {'id': 2, 'count': 4}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 5}]},
-    {'id': 5, 'class': '确定时分', 'flowCittas': [1, {'id': 2, 'count': 5}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 4}]},
-    {'id': 6, 'class': '确定时分', 'flowCittas': [1, {'id': 2, 'count': 6}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 3}]},
-    {'id': 7, 'class': '确定时分', 'flowCittas': [1, {'id': 2, 'count': 7}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 2}]},
-    {'id': 8, 'class': '确定时分', 'flowCittas': [1, {'id': 2, 'count': 8}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 1}]},
-    {'id': 9, 'class': '确定时分', 'flowCittas': [1, {'id': 2, 'count': 9}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 2}, {'id': 1, 'count': 1}]},
-    {'id': 10, 'class': '无效时分', 'flowCittas': [1, {'id': 2, 'count': 10}, {'id': 3, 'count': 2}, {'id': 1, 'count': 6}]},
-    {'id': 11, 'class': '无效时分', 'flowCittas': [1, {'id': 2, 'count': 11}, {'id': 3, 'count': 2}, {'id': 1, 'count': 5}]},
-    {'id': 12, 'class': '无效时分', 'flowCittas': [1, {'id': 2, 'count': 12}, {'id': 3, 'count': 2}, {'id': 1, 'count': 4}]},
-    {'id': 13, 'class': '无效时分', 'flowCittas': [1, {'id': 2, 'count': 13}, {'id': 3, 'count': 2}, {'id': 1, 'count': 3}]},
-    {'id': 14, 'class': '无效时分', 'flowCittas': [1, {'id': 2, 'count': 14}, {'id': 3, 'count': 2}, {'id': 1, 'count': 2}]},
-    {'id': 15, 'class': '无效时分', 'flowCittas': [1, {'id': 2, 'count': 15}, {'id': 3, 'count': 2}, {'id': 1, 'count': 1}]},
+    {'id': 1, 'class': t('string_id_474'), 'flowCittas': [1, 2, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, {'id': 11, 'count': 2}, 1]},
+    {'id': 2, 'class': t('string_id_475'), 'flowCittas': [1, {'id': 2, 'count': 2}, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, {'id': 1, 'count': 2}]},
+    {'id': 3, 'class': t('string_id_475'), 'flowCittas': [1, {'id': 2, 'count': 3}, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, 1]},
+    {'id': 4, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 4}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 5}]},
+    {'id': 5, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 5}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 4}]},
+    {'id': 6, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 6}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 3}]},
+    {'id': 7, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 7}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 2}]},
+    {'id': 8, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 8}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 1}]},
+    {'id': 9, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 9}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 2}, {'id': 1, 'count': 1}]},
+    {'id': 10, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 10}, {'id': 3, 'count': 2}, {'id': 1, 'count': 6}]},
+    {'id': 11, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 11}, {'id': 3, 'count': 2}, {'id': 1, 'count': 5}]},
+    {'id': 12, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 12}, {'id': 3, 'count': 2}, {'id': 1, 'count': 4}]},
+    {'id': 13, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 13}, {'id': 3, 'count': 2}, {'id': 1, 'count': 3}]},
+    {'id': 14, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 14}, {'id': 3, 'count': 2}, {'id': 1, 'count': 2}]},
+    {'id': 15, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 15}, {'id': 3, 'count': 2}, {'id': 1, 'count': 1}]},
 ];
 
 const mindDoorFlows = [
-    {'id': 1, 'class': '极清晰', 'flowCittas': [1, 2, 3, 4, 12, {'id': 10, 'count': 7}, {'id': 11, 'count': 2}, 1]},
-    {'id': 2, 'class': '清晰', 'flowCittas': [1, 2, 3, 4, 12, {'id': 10, 'count': 7},  {'id': 1, 'count': 3}]},
-    {'id': 3, 'class': '不清晰', 'flowCittas': [1, 2, {'id': 12, 'count': 3}, {'id': 1, 'count': 10}]},
-    {'id': 4, 'class': '不清晰', 'flowCittas': [1, 2, {'id': 12, 'count': 2}, {'id': 1, 'count': 11}]},
-    {'id': 5, 'class': '极不清晰', 'flowCittas': [1, 2, {'id': 3, 'count': 3},  {'id': 1, 'count': 10}]},
-    {'id': 6, 'class': '极不清晰', 'flowCittas': [1, 2, {'id': 3, 'count': 2},  {'id': 1, 'count': 11}]},
+    {'id': 1, 'class': t('string_id_478'), 'flowCittas': [1, 2, 3, 4, 12, {'id': 10, 'count': 7}, {'id': 11, 'count': 2}, 1]},
+    {'id': 2, 'class': t('string_id_479'), 'flowCittas': [1, 2, 3, 4, 12, {'id': 10, 'count': 7},  {'id': 1, 'count': 3}]},
+    {'id': 3, 'class': t('string_id_480'), 'flowCittas': [1, 2, {'id': 12, 'count': 3}, {'id': 1, 'count': 10}]},
+    {'id': 4, 'class': t('string_id_480'), 'flowCittas': [1, 2, {'id': 12, 'count': 2}, {'id': 1, 'count': 11}]},
+    {'id': 5, 'class': t('string_id_481'), 'flowCittas': [1, 2, {'id': 3, 'count': 3},  {'id': 1, 'count': 10}]},
+    {'id': 6, 'class': t('string_id_481'), 'flowCittas': [1, 2, {'id': 3, 'count': 2},  {'id': 1, 'count': 11}]},
 ];
 
 const senseFlowState = {
@@ -216,7 +216,7 @@ function renderEntity(svg, x, y, radius, state) {
         .style('fill', 'black')
         .style('text-anchor', 'middle')
         .attr('dominant-baseline', 'middle')
-        .text('色法');
+        .text(t('string_id_482'));
 
 
     svg.append('line')
@@ -227,7 +227,7 @@ function renderEntity(svg, x, y, radius, state) {
         .attr('stroke', 'black')
         .attr('stroke-width', 2)
         .attr('marker-end', 'url(#'+ state.markerName+ ')');
-    renderTextBox(svg, x(1) + 3, y / 2 - 20, 120, 20, 'red', '撞击净色及有分')
+    renderTextBox(svg, x(1) + 3, y / 2 - 20, 120, 20, 'red', t('string_id_483'))
 
     svg.append('line')
         .attr('x1', x(1) + radius)
@@ -236,7 +236,7 @@ function renderEntity(svg, x, y, radius, state) {
         .attr('y2', 0)
         .attr('stroke', 'black')
         .attr('stroke-width', 2);
-    renderTextBox(svg, (x(1) + radius + x(17)) / 2 - 50, -25, 100, 20, 'red', '色法寿命');
+    renderTextBox(svg, (x(1) + radius + x(17)) / 2 - 50, -25, 100, 20, 'red', t('string_id_484'));
 
     svg.append('line')
         .attr('x1', x(17))
@@ -464,7 +464,7 @@ function renderFlow(state) {
 
         const w = 120;
         const h = 20;
-        renderTextBox(svg, (x(left) + x(right)) / 2 - w / 2, y - 2 * radius - h- 5, w, h, 'yellow', '造善恶业或唯作');
+        renderTextBox(svg, (x(left) + x(right)) / 2 - w / 2, y - 2 * radius - h- 5, w, h, 'yellow', t('string_id_486'));
     }
 }
 
@@ -541,7 +541,7 @@ function renderControls(state, min, max) {
 
     sliderGroup.append('div')
         .attr('class', 'group-label')
-        .text('所缘强度')
+        .text(t('string_id_487'))
         .style('position', 'absolute')
         .style('top', '5px')
         .style('left', '10px')
@@ -553,16 +553,16 @@ function renderControls(state, min, max) {
         .attr('height', 150);
 
 
-    renderTextBox(svg, 0, 30, 22, 120, 'cyan', '极大所缘', {vertical: true, valign: 'top'});
+    renderTextBox(svg, 0, 30, 22, 120, 'cyan', t('string_id_488'), {vertical: true, valign: 'top'});
     svg.append('g')
         .attr('transform', 'translate(60,70)')
         .call(slider);
-    renderTextBox(svg, 100+width, 30, 22, 120, 'cyan', '极细微所缘', {vertical: true, valign: 'top'});
+    renderTextBox(svg, 100+width, 30, 22, 120, 'cyan', t('string_id_489'), {vertical: true, valign: 'top'});
 
     // Create a container for the button group
-    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': '极可喜' }, { 'id': 2, 'name': '可喜' }, { 'id': 3, 'name': '不可喜' }], '所缘本性', state, (state, data) => {state.likable = data.id;});
-    const intentButtonGroup = renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': '如理作意' }, { 'id': 2, 'name': '不如理作意' }], '作意', state, (state, data) => {state.goodIntention = data.id === 1;});
-    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': '凡夫有学' }, { 'id': 2, 'name': '阿罗汉' }], '果位', state, (state, data) => {
+    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_490') }, { 'id': 2, 'name': t('string_id_491') }, { 'id': 3, 'name': t('string_id_492') }], t('string_id_493'), state, (state, data) => {state.likable = data.id;});
+    const intentButtonGroup = renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_494') }, { 'id': 2, 'name': t('string_id_495') }], t('string_id_15'), state, (state, data) => {state.goodIntention = data.id === 1;});
+    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_496') }, { 'id': 2, 'name': t('string_id_497') }], t('string_id_498'), state, (state, data) => {
         state.arahant = data.id === 2;
         if (state.arahant) {
             intentButtonGroup.selectAll('.radio-button').attr('disabled', true);
