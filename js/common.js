@@ -27,6 +27,14 @@ const rpgSvg = container.select("#container5").append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight);
 
+const rpnSvg = container.select("#simulation");
+
+const rpnlSvg = container.select("#simulation-notes");
+
+const rpnsSvg = container.select("#container6").append('svg')
+    .attr('class', 'svg-content')
+    .attr('width', svgWidth)
+    .attr('height', 1);
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');

@@ -31,6 +31,9 @@ window.addEventListener('DOMContentLoaded', () => {
     renderRupaAggTable(rpSvg, 0, rat.endY + subPadding);
     setupRupaHighlightBehavior();
     renderRupaOrigins(rpgSvg);
+
+    createLegend();
+    createProgressUpdater();
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);
