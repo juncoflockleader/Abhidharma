@@ -18,7 +18,7 @@ function renderCittaTable(parent) {
 
         // Add text to the first triangle
         renderText(parent, x, y + h/3, w * 2/3, h, data.header.row_header);
-        renderText(parent, x + w/3, y, w, h * 2 / 3, data.header.column_header);
+        renderText(parent, x + w/4, y, w, h * 2 / 3, data.header.column_header);
         return {
             endX: w,
             endY: h
@@ -89,22 +89,16 @@ function renderCittaTable(parent) {
 }
 
 const cetasikaIdIndex = {};
-function renderCetasikaCell(x, y, w, h, text) {
-  const itemGroup = renderTextBox(cittaSvg, x, y, w, h, 'white', '', {size: '12px', align: 'middle', valign: 'top'});
-
-  // Split the text into characters and create a tspan for each
-  text.split('').forEach((char, index) => {
-    itemGroup.select('text').append('tspan')
-        .attr('x', x + w / 2) // Align all tspans to the center of the cell
-        .attr('dy', '1em') // Move each character to a new line; adjust as needed
-        .text(char);
-  });
-
-  return itemGroup;
-}
-
 let cetasikaTableBottom = 0;
 function renderCetasikaTable(y) {
+    if (getLang().fixed) {
+        renderCetasikaTableCn(y);
+    } else {
+        renderCetasikaTableEn(y);
+    }
+}
+
+function renderCetasikaTableCn(y) {
   let columnWidth = 25;
   let rowHeight = 30;
   renderTextBox(cittaSvg, 0, y, columnWidth * 52, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
@@ -127,7 +121,7 @@ function renderCetasikaTable(y) {
       subGroup.children.forEach(child => {
         let name = child.name;
         cetasikaIdIndex[name] = child.id;
-        itemIndex[child.id] = renderCetasikaCell(x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, name);
+        itemIndex[child.id] = renderTextBox(cittaSvg, x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, 'white', name, {size: '12px', vertical: true});
         noteIndex[child.id] = {
             'char_mark': child.char_mark,
             'function': child.function,
@@ -141,8 +135,117 @@ function renderCetasikaTable(y) {
   cetasikaTableBottom = y + rowHeight * 5.5;
 }
 
+function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations) {
+    renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, 'lightcyan', 'glossary', {size: '12px', wrap: false, align: 'middle'});
+    renderTextBox(cittaSvg, x + columnWidth, y, columnWidth / 3, rowHeight, 'lightcyan', 'abbrev.', {size: '12px', wrap: false, align: 'middle'});
+    let r = 0;
+    for (const key in abbreviations) {
+        const color = r % 2 === 0 ? 'white' : 'lightgrey';
+        y += rowHeight;
+        itemIndex[key] = renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, color, abbreviations[key], {
+            size: '12px',
+            wrap: false,
+            align: 'middle'
+        });
+        renderTextBox(cittaSvg, x + columnWidth, y, columnWidth / 3, rowHeight, color, key, {size: '12px', wrap: false, align: 'middle'});
+        r++;
+    }
+}
+
+function renderCetasikaTableEn(y) {
+    let columnWidth = 140;
+    let rowHeight = 14;
+    renderTextBox(cittaSvg, 0, y, columnWidth * 7, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', cetasika.children[0].name, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, columnWidth * 2, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', cetasika.children[1].name, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, columnWidth * 4, y + rowHeight, columnWidth * 3, rowHeight, 'lightcyan', cetasika.children[2].name, {size: '12px', align: 'middle'});
+
+    const maxRowCount = 10;
+    let x = 0;
+    for (let i = 0; i < 3; i++) {
+        const group = cetasika.children[i].children;
+        let y0 = y + rowHeight * 2;
+        let rowCount = 0;
+        let breakPoint = 0;
+        for (let j = 0; j < group.length; j++) {
+            const subGroup = group[j];
+            renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'lavender', subGroup.name, {size: '12px', wrap: false, align: 'middle'});
+            rowCount++;
+            y0 += rowHeight;
+            for (; breakPoint < subGroup.children.length; breakPoint++) {
+                let child = subGroup.children[breakPoint];
+                let name = child.name;
+                cetasikaIdIndex[name] = child.id;
+                itemIndex[child.id] = renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'white', name, {size: '12px', wrap: false});
+                noteIndex[child.id] = {
+                    'char_mark': child.char_mark,
+                    'function': child.function,
+                    'appearance': child.appearance,
+                    'proximate_cause': child.proximate_cause,
+                };
+                y0 += rowHeight;
+                rowCount++;
+                if (rowCount > maxRowCount) {
+                    break;
+                }
+            }
+            if (breakPoint < subGroup.children.length - 1 || j === group.length - 1 || rowCount + group[j+1].children.length >= maxRowCount) {
+                y0 = y + rowHeight * 2;
+                x += columnWidth;
+                rowCount = 0;
+            }
+            if (breakPoint >= subGroup.children.length - 1) {
+                breakPoint = 0;
+            } else {
+                breakPoint++;
+                j = j - 1;
+            }
+        }
+    }
+
+    const abbreviations = {
+        "MFact": "Mental Factor",
+        "Consc": "Consciousness",
+        "AccW": "Accompanied With",
+        "NAccW": "Not Accompanied With",
+        "Whsm": "Wholesome",
+        "Uwhsm": "Unwholesome",
+        "Joy": "Joyful",
+        "Eq": "Equanimity",
+        "Wis": "Wisdom",
+        "Pr": "Prompted",
+        "UnPr": "Unprompted",
+        "WrVw": "Wrong View",
+    };
+    renderAbbrev(columnWidth * 7 + 5, y, columnWidth*0.9, rowHeight, abbreviations);
+    const abbreviations2 = {
+        "BsOf":"Base of",
+        "Investg": "Investigation",
+        "Recv": "Receiving",
+        "Restlss": "Restlessness",
+        "NPNNP": "Neither-perception-nor-no-perception",
+        "SupraM": "Supramundane",
+        "Immat": "Immaterial",
+        "Funct": "Functional",
+        "Rootlss": "Rootless",
+        "Hate": "Hatred",
+        "Distr": "Distress",
+        "MattPhenm": "Matter Phenomena",
+    }
+
+    renderAbbrev(columnWidth * 8.3, y, columnWidth*1.4, rowHeight, abbreviations2);
+    cetasikaTableBottom = y + rowHeight * 5.5;
+}
 
 function renderSubTableV2(x, y, def) {
+    if (getLang().fixed) { // fixed width fonts
+        return renderSubTableV2CN(x, y, def);
+    } else {
+        return renderSubTableV2En(x, y, def);
+    }
+}
+
+function renderSubTableV2CN(x, y, def) {
     const names = def.names;
     let widths = [];
     for (let i = 0; i < names.length; ++i) {
@@ -163,6 +266,31 @@ function renderSubTableV2(x, y, def) {
     return {
         endX: x + total,
         endY: y + 2 * 30
+    };
+}
+
+function renderSubTableV2En(x, y, def) {
+    const names = def.names;
+    let width = 0;
+    const padding = 5;
+    for (let i = 0; i < names.length; ++i) {
+        width = Math.max(width, getWordLength(names[i], 12));
+    }
+    width += padding;
+    width = Math.max(width, getWordLength(def.title, 14));
+    let height = 12 + padding;
+
+    renderTextBox(cittaSvg, x, y, width, height, 'lightcyan', def.title, {size: '14px', wrap: false, align: 'middle'});
+    for (let i = 0; i < names.length; ++i) {
+        itemIndex[def['index_base'] + i + 1] = renderTextBox(cittaSvg, x, y + height * (i + 1), width, height, 'white', names[i], {
+            size: '12px',
+            align: 'middle',
+            wrap: false
+        });
+    }
+    return {
+        endX: x + width,
+        endY: y + height * (names.length + 1)
     };
 }
 
@@ -202,11 +330,13 @@ function renderFunctionTable(x, y) {
     return renderSubTableV2(x, y, functions);
 }
 
-function renderCounterTable(x, y) {
-    let w = 60;
+function renderCounterTable(x, y, w, titlepx=14) {
+    if (!w) {
+        w = 60;
+    }
     let h = 30;
-    renderTextBox(cittaSvg, x, y, w, h, 'lightcyan', t('string_id_1'), {size: '14px', align: 'middle'});
-    renderTextBox(cittaSvg, x + w, y, w, h, 'lightcyan', t('string_id_2'), {size: '14px', align: 'middle'});
+    renderTextBox(cittaSvg, x, y, w, h, 'lightcyan', t('string_id_1'), {size: titlepx, align: 'middle'});
+    renderTextBox(cittaSvg, x + w, y, w, h, 'lightcyan', t('string_id_2'), {size: titlepx, align: 'middle'});
     let counterTextBox = renderTextBox(cittaSvg, x, y + h, w, h, 'white', '', {size: '12px', align: 'middle'});
     let optCounterTextBox = renderTextBox(cittaSvg, x + w, y + h, w, h, 'white', '', {size: '12px', align: 'middle'});
     return {
@@ -223,16 +353,18 @@ function renderCounterTable(x, y) {
     }
 }
 
-function renderNoteTable(x, y) {
+function renderNoteTable(x, y, w, titlepx=14) {
     let h0 = 20;
 
-    let w = 30;
+    if (!w) {
+        w = 30;
+    }
     let h = 30;
-    renderTextBox(cittaSvg, x, y + h0, w, h, 'lightcyan', t('string_id_3'), {size: '14px'});
-    renderTextBox(cittaSvg, x, y + h0 + h, w, h, 'lightcyan', t('string_id_4'), {size: '14px'});
-    renderTextBox(cittaSvg, x, y + h0 + 2 * h, w, h, 'lightcyan', t('string_id_5'), {size: '14px'});
-    renderTextBox(cittaSvg, x, y + h0 + 3 * h, w, h, 'lightcyan', t('string_id_6'), {size: '14px'});
-    let w0 = 320;
+    renderTextBox(cittaSvg, x, y + h0, w, h, 'lightcyan', t('string_id_3'), {size: titlepx});
+    renderTextBox(cittaSvg, x, y + h0 + h, w, h, 'lightcyan', t('string_id_4'), {size: titlepx});
+    renderTextBox(cittaSvg, x, y + h0 + 2 * h, w, h, 'lightcyan', t('string_id_5'), {size: titlepx});
+    renderTextBox(cittaSvg, x, y + h0 + 3 * h, w, h, 'lightcyan', t('string_id_6'), {size: titlepx});
+    let w0 = 350 - w;
     let charTextBox = renderTextBox(cittaSvg, x + w, y + h0, w0, h, 'white', '', {size: '12px', wrap: true});
     let functionTextBox = renderTextBox(cittaSvg, x + w, y + h0 + h, w0, h, 'white', '', {size: '12px', wrap: true});
     let appearanceTextBox = renderTextBox(cittaSvg, x + w, y + h0 + 2 * h, w0, h, 'white', '', {size: '12px', wrap: true});
@@ -253,8 +385,8 @@ function renderNoteTable(x, y) {
             appearanceTextBox.setText('');
             proximateCauseTextBox.setText('');
         },
-        endX: x + w,
-        endY: y + h
+        endX: x + w + w0,
+        endY: y + h * 4 + h0
     };
 }
 
@@ -352,6 +484,16 @@ function calculateConnections() {
 
             const item_feeling = item.feeling || groupAttrs.feeling ? [item.feeling || groupAttrs.feeling] : [];
             addConnection(item.id, item_feeling, 'yellow', 'tomato', getIndex(feelings));
+
+            const item_name = item.name;
+            const words = item_name.replace(/[,\\-]/g, ' ').split(' ');
+            words.forEach(word => {
+                if (itemIndex[word]) {
+                    let idIndex = {};
+                    idIndex[word] = word;
+                    addConnection(item.id, [word], 'yellow', 'yellow', idIndex);
+                }
+            });
         });
     });
     return itemConnections;

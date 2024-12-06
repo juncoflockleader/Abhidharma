@@ -95,7 +95,7 @@ const rupa = {
                     name: t('string_id_541'),
                     children: [
                         {
-                            name: t('string_id_56'),
+                            name: t('string_id_729'),
                             id: 10,
                             character: t('string_id_542'),
                             functions: t('string_id_543'),
@@ -325,7 +325,7 @@ const rupaClass = [
     {
         name: t('string_id_651'),
         id: 103,
-        values: [t('string_id_446'), t('string_id_652')],
+        values: [t('string_id_728'), t('string_id_652')],
         notes: t('string_id_653'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_594'), t('string_id_600')]
     },
@@ -341,7 +341,7 @@ const rupaClass = [
         id: 105,
         values: [t('string_id_659'), t('string_id_660')],
         notes: t('string_id_661'),
-        rupa: [t('string_id_502'), t('string_id_511'), t('string_id_515'), t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_56'), t('string_id_546'), t('string_id_550'), t('string_id_554')]
+        rupa: [t('string_id_502'), t('string_id_511'), t('string_id_515'), t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_729'), t('string_id_546'), t('string_id_550'), t('string_id_554')]
     },
     {
         name: t('string_id_662'),
@@ -349,7 +349,7 @@ const rupaClass = [
         values: [t('string_id_663'), t('string_id_664'), t('string_id_665')],
         notes: t('string_id_666'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_568'), t('string_id_563'), t('string_id_572'), t('string_id_577')],
-        extra: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_56'), t('string_id_550'), t('string_id_554'), t('string_id_581'), t('string_id_587')]
+        extra: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581'), t('string_id_587')]
     },
     {
         name: t('string_id_667'),
@@ -357,7 +357,7 @@ const rupaClass = [
         values: [t('string_id_668'), t('string_id_669'), t('string_id_665')],
         notes: t('string_id_670'),
         rupa: [],
-        extra: [t('string_id_56')]
+        extra: [t('string_id_729')]
     },
     {
         name: t('string_id_671'),
@@ -372,13 +372,13 @@ const rupaClass = [
         id: 109,
         values: [t('string_id_677'), t('string_id_678')],
         notes: t('string_id_679'),
-        rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_56'), t('string_id_550'), t('string_id_554'), t('string_id_581')]
+        rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')]
     },
 ];
 
 const rupaCause = {
     name: t('string_id_680'),
-    rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_56'), t('string_id_550'), t('string_id_554'), t('string_id_581')],
+    rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')],
     children: [
         {
             name: t('string_id_681'),
@@ -408,7 +408,7 @@ const rupaCause = {
 const rupaAgg =
     {
         name: t('string_id_685'),
-        rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_56'), t('string_id_550'), t('string_id_554'), t('string_id_581')],
+        rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')],
         children: [
             {
                 name: t('string_id_686'),
@@ -556,12 +556,16 @@ const interactiveItems = [];
 const highlightableItems = {};
 const rupaIndex = {};
 function renderRupaAttrTable(parent) {
+    const lang = getLang();
     const fontSize = 12; // px
     const padding = 3;
     const unit = fontSize + padding * 2;
-    const columnHeaderH = unit;
-    const subRowHeadersW = fontSize * 4 + padding * 2;
-    const rowHeaderW = unit + 7 * fontSize + 4 * padding;
+    const columnHeaderLines = (lang.wide ? 2 : 2.5);
+    const columnHeaderH = unit * columnHeaderLines;
+    const w1 = lang.wide ? unit : fontSize * 4 + padding * 2;
+    const w2 = lang.wide ? fontSize * 3 + padding * 2 : fontSize * 5 + padding * 2;
+    const subRowHeadersW = lang.wide ? fontSize * 4 + padding * 2 : fontSize * 8 + padding * 2;
+    const rowHeaderW = w1 + w2 + subRowHeadersW;
     function renderCornerCell(x, w) {
         renderCell(parent, x, 0, w, columnHeaderH, 'lightcyan');
     }
@@ -571,8 +575,12 @@ function renderRupaAttrTable(parent) {
         let rx = x;
         colx.push(rx);
         rupaClass.forEach(function (data, i) {
-            let w = getWordLength(data.name, fontSize) + padding * 2;
-            if (i === 7 || i === 4) {
+            let w = getWordLength(data.name, fontSize) / columnHeaderLines + padding * 3;
+            data.values.forEach(d => {
+                let dw = getWordLength(d, fontSize) + padding * 3;
+                w = Math.max(w, dw);
+            });
+            if (lang.wide && (i === 7 || i === 4)) {
                 w += fontSize;
             }
             renderTextBox(parent, rx, y, w, columnHeaderH, 'lightcyan', data.name, {size: fontSize});
@@ -590,22 +598,22 @@ function renderRupaAttrTable(parent) {
             return {count: data.id > 0};
         }
         let count = 0;
-        const xOffset = depth === 0 ? 0 : unit;
+        const xOffset = depth === 0 ? 0 : w1;
         data.children.forEach(d => {
             const res = renderRowHeaderGroups(x + xOffset, y + count * unit, depth + 1, d);
             count += res.count;
         })
         if (depth === 2) {
-            renderTextBox(parent, x, y, fontSize * 3 + padding * 2, unit * count, 'lightcyan', data.name, {size: fontSize});
+            renderTextBox(parent, x, y, w2, unit * count, 'lightcyan', data.name, {size: fontSize});
         } else if (depth === 1) {
-            renderTextBox(parent, x, y, unit, unit * count, 'lightcyan', data.name, {size: fontSize});
+            renderTextBox(parent, x, y, w1, unit * count, 'lightcyan', data.name, {size: fontSize});
         }
         return {count: count};
     }
 
     function renderRowHeaders(x, y) {
         rupas.forEach((d, i) => {
-            const item = renderTextBox(parent, x, y + i * unit, subRowHeadersW, unit, 'white', d.alias || d.name, {size: fontSize});
+            const item = renderTextBox(parent, x, y + i * unit, subRowHeadersW, unit, 'white', d.alias || d.name, {wrap: false, size: fontSize});
             interactiveItems.push({
                 id: d.id,
                 item: item,
@@ -645,7 +653,7 @@ function renderRupaAttrTable(parent) {
     renderCornerCell(0, rowHeaderW);
     renderColumnHeaders(rowHeaderW, 0);
     renderRowHeaderGroups(0, columnHeaderH, 0, rupa);
-    renderRowHeaders(unit + fontSize * 3 + padding * 2, columnHeaderH);
+    renderRowHeaders(w1 + w2, columnHeaderH);
 
     // render again for rupa table
     renderCornerCell(colx[9], subRowHeadersW);
@@ -653,7 +661,7 @@ function renderRupaAttrTable(parent) {
 
     renderGrid();
 
-    const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_56'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
+    const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
     const ebIndex = [];
     eightBasics.forEach((d) => {
         ebIndex.push(rupaIndex[d].id);
@@ -662,34 +670,38 @@ function renderRupaAttrTable(parent) {
     let min = 99;
     let max = 0;
     const len = 20;
+    const b = columnHeaderLines * unit;
     ebIndex.forEach(d => {
         min = Math.min(min, d);
         max = Math.max(max, d);
         parent.append('line')
             .attr('x1', endX)
-            .attr('y1', unit * d + unit / 2)
+            .attr('y1', b + unit * d - unit / 2)
             .attr('x2', endX + len)
-            .attr('y2', unit * d + unit / 2)
+            .attr('y2', b + unit * d - unit / 2)
             .attr('stroke', 'black')
             .attr('stroke-width', 1);
     });
     parent.append('line')
         .attr('x1', endX + len)
-        .attr('y1', unit * min + unit / 2)
+        .attr('y1', b + unit * min - unit / 2)
         .attr('x2', endX + len)
-        .attr('y2', unit * max + unit / 2)
+        .attr('y2', b + unit * max - unit / 2)
         .attr('stroke', 'black')
         .attr('stroke-width', 1);
 
     parent.append('line')
         .attr('x1', endX + len)
-        .attr('y1', unit * (min + 2) / 2 + unit / 2)
+        .attr('y1', b + unit * (min + 2) / 2 - unit / 2)
         .attr('x2', endX + len * 2)
-        .attr('y2', unit * (min + 2) / 2 + unit / 2)
+        .attr('y2', b + unit * (min + 2) / 2 - unit / 2)
         .attr('stroke', 'black')
         .attr('stroke-width', 1);
 
-    renderTextBox(parent, endX + len * 2, unit * min, unit, unit * 4, 'lavender', t('string_id_709'), {size: fontSize});
+    const vertical = lang.vertical;
+    const tbW = vertical ? unit : unit * 4;
+    const tbH = vertical ? unit * 4 : unit * 2;
+    renderTextBox(parent, endX + len * 2, b + unit * min- unit / 2, tbW, tbH, 'lavender', t('string_id_709'), {size: fontSize});
 
 
     const threeChange = [t('string_id_607'), t('string_id_612'), t('string_id_617')];
@@ -704,31 +716,33 @@ function renderRupaAttrTable(parent) {
         tcMax = Math.max(tcMax, d);
         parent.append('line')
             .attr('x1', endX)
-            .attr('y1', unit * d + unit / 2)
+            .attr('y1', b + unit * d - unit / 2)
             .attr('x2', endX + len)
-            .attr('y2', unit * d + unit / 2)
+            .attr('y2', b + unit * d - unit / 2)
             .attr('stroke', 'black')
             .attr('stroke-width', 1);
     });
     parent.append('line')
         .attr('x1', endX + len)
-        .attr('y1', unit * tcMin + unit / 2)
+        .attr('y1', b + unit * tcMin - unit / 2)
         .attr('x2', endX + len)
-        .attr('y2', unit * tcMax + unit / 2)
+        .attr('y2', b + unit * tcMax - unit / 2)
         .attr('stroke', 'black')
         .attr('stroke-width', 1);
     parent.append('line')
         .attr('x1', endX + len)
-        .attr('y1', unit * (tcMin + tcMax) / 2 + unit / 2)
+        .attr('y1', b + unit * (tcMin + tcMax) / 2 - unit / 2)
         .attr('x2', endX + len * 2)
-        .attr('y2', unit * (tcMin + tcMax) / 2 + unit / 2)
+        .attr('y2', b + unit * (tcMin + tcMax) / 2 - unit / 2)
         .attr('stroke', 'black')
         .attr('stroke-width', 1);
-    renderTextBox(parent, endX + len * 2, unit * tcMin, unit, unit * 3, 'lightblue', t('string_id_606'), {size: fontSize});
+    const tbW2 = vertical ? unit : unit * 4;
+    const tbH2 = vertical ? unit * 3 : unit * 2;
+    renderTextBox(parent, endX + len * 2, columnHeaderH + unit * (tcMin + tcMax) / 2 - unit/2 - tbH2/2, tbW2, tbH2, 'lightblue', t('string_id_606'), {size: fontSize});
 
     return {
         endX: endX,
-        endY: unit * 29
+        endY: unit * 28 + columnHeaderH
     };
 }
 
@@ -739,7 +753,8 @@ function renderNotesTable(parent, x, y) {
     const columnHeaderH = fontSize + padding * 2;
     const columnW = fontSize * 11 + padding;
     let rupas = [];
-    const subRowHeadersW = fontSize * 4 + padding * 2;
+    const lang = getLang();
+    const subRowHeadersW = lang.wide ? fontSize * 4 + padding * 2 : fontSize * 8 + padding * 2;
     function gatherRupas(data) {
         if (!data.children) {
             rupas.push(data);
@@ -804,6 +819,65 @@ function renderRupaAggTable(parent, x, y) {
     }
 
     function renderAgg(parent, x, y, data, rupas) {
+        const lang = getLang();
+        if (lang.fixed) {
+            renderAggCN(parent, x, y, data, rupas);
+        } else {
+            renderAggEN(parent, x, y, data, rupas);
+        }
+    }
+
+    function renderAggEN(parent, x, y, data, rupas) {
+        const w = 250;
+        if (!data.children) {
+            let ry = y;
+            let rx = x;
+            const item = renderTextBox(parent, rx, ry, w, unit, 'white', data.name, {size: fontSize});
+            interactiveItems.push({
+                item: item,
+                id: data.id
+            });
+            highlightableItems[data.id] = [item];
+            ry += unit;
+            renderTextBox(parent, rx, ry, w * 0.4, unit, 'lavender', t('string_id_709'), {size: fontSize});
+            rx = x + w * 0.4;
+            const changeRupa = [t('string_id_607'), t('string_id_612'), t('string_id_617')];
+            if (isSubset(rupas, changeRupa)) {
+                renderTextBox(parent, rx, ry, w * 0.3, unit, 'lightblue', t('string_id_606'), {size: fontSize});
+                rx += w * 0.3;
+                changeRupa.forEach(d => {
+                    const items = highlightableItems[rupaIndex[d].id];
+                    highlightableItems[data.id].push(...items);
+                });
+
+            }
+            const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
+            eightBasics.forEach(d => {
+                const items = highlightableItems[rupaIndex[d].id];
+                highlightableItems[data.id].push(...items);
+            });
+            const otherRupas = setSubtraction(setSubtraction(rupas, eightBasics), changeRupa);
+            const rw = (w - (rx - x)) / Math.max(otherRupas.length, 1);
+            otherRupas.forEach((d, i) => {
+                renderTextBox(parent, rx, ry, rw, unit, i === 0 ? 'lightgreen' : 'lightskyblue', d, {size: fontSize});
+                rx += rw;
+                const items = highlightableItems[rupaIndex[d].id];
+                highlightableItems[data.id].push(...items);
+            });
+            return 0;
+        }
+        let count = 0;
+        data.children.forEach((data, i) => {
+            const dx = data.children ? count * w : 0;
+            const dy =  data.children ? 0 : i * 2 * unit;
+            count += renderAggEN(parent, x + dx, y + unit + dy, data, rupas.concat(data.rupa));
+        });
+        count = Math.max(1, count);
+        renderTextBox(parent, x, y, count * w, unit, 'lightcyan', data.name, {size: fontSize});
+        return count;
+    }
+
+    function renderAggCN(parent, x, y, data, rupas) {
         if (!data.children) {
             let ry = y;
             const h1 = 13 * fontSize;
@@ -828,7 +902,7 @@ function renderRupaAggTable(parent, x, y) {
                 });
 
             }
-            const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_56'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
+            const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
             eightBasics.forEach(d => {
                 const items = highlightableItems[rupaIndex[d].id];
                 highlightableItems[data.id].push(...items);
@@ -845,7 +919,7 @@ function renderRupaAggTable(parent, x, y) {
         }
         let count = 0;
         data.children.forEach((data, i) => {
-            count += renderAgg(parent, x + count * unit, y + unit, data, rupas.concat(data.rupa));
+            count += renderAggCN(parent, x + count * unit, y + unit, data, rupas.concat(data.rupa));
         });
         renderTextBox(parent, x, y, count * unit, unit, 'lightcyan', data.name, {size: fontSize});
         return count;

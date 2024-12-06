@@ -13,7 +13,7 @@ const cittas =
       'children': [
         {
           'name': t('string_id_16'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'category': [
             t('string_id_18')
           ],
@@ -52,7 +52,7 @@ const cittas =
           ],
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17')
+            t('string_id_726')
           ],
           'children': [
             {
@@ -403,7 +403,7 @@ const cittas =
         },
         {
           'name': t('string_id_84'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'category': [
             t('string_id_85')
           ],
@@ -467,7 +467,7 @@ const cittas =
           ],
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56'),
             t('string_id_57')
           ],
@@ -660,7 +660,7 @@ const cittas =
         },
         {
           'name': t('string_id_123'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'category': [
             t('string_id_124'),
             t('string_id_125'),
@@ -717,7 +717,7 @@ const cittas =
           ],
           'basis': t('string_id_75'),
           'realms': [
-            t('string_id_17')
+            t('string_id_726')
           ],
           'children': [
             {
@@ -880,7 +880,7 @@ const cittas =
         },
         {
           'name': t('string_id_130'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'roots': [
             t('string_id_131')
           ],
@@ -893,7 +893,7 @@ const cittas =
             t('string_id_43')
           ],
           'realms': [
-            t('string_id_17')
+            t('string_id_726')
           ],
           'children': [
             {
@@ -1073,7 +1073,7 @@ const cittas =
         },
         {
           'name': t('string_id_155'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'roots': [
             t('string_id_131')
           ],
@@ -1086,7 +1086,7 @@ const cittas =
             t('string_id_131')
           ],
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
           ],
           'children': [
             {
@@ -1304,7 +1304,7 @@ const cittas =
         },
         {
           'name': t('string_id_158'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'functions': [
             t('string_id_25')
           ],
@@ -1313,7 +1313,7 @@ const cittas =
           ],
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56'),
             t('string_id_57')
           ],
@@ -1549,7 +1549,7 @@ const cittas =
         },
         {
           'name': t('string_id_162'),
-          'realm': t('string_id_17'),
+          'realm': t('string_id_726'),
           'roots': [
             t('string_id_131')
           ],
@@ -1566,7 +1566,7 @@ const cittas =
           ],
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56')
           ],
           'children': [
@@ -1710,7 +1710,7 @@ const cittas =
           ],
           'basis': t('string_id_149'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56')
           ],
           'children': [
@@ -1904,7 +1904,7 @@ const cittas =
           'realm': t('string_id_56'),
           'basis': t('string_id_149'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56')
           ],
           'mental_objects': [
@@ -2065,7 +2065,7 @@ const cittas =
           'feeling': t('string_id_68'),
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56'),
             t('string_id_57')
           ],
@@ -2225,7 +2225,7 @@ const cittas =
           'realm': t('string_id_57'),
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56'),
             t('string_id_57')
           ],
@@ -2327,7 +2327,7 @@ const cittas =
           'realm': t('string_id_190'),
           'basis': t('string_id_46'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56')
           ],
           'mental_objects': [
@@ -2422,7 +2422,7 @@ const cittas =
           'realm': t('string_id_190'),
           'basis': t('string_id_187'),
           'realms': [
-            t('string_id_17'),
+            t('string_id_726'),
             t('string_id_56'),
             t('string_id_57')
           ],
@@ -3104,7 +3104,7 @@ const gates = {
 const realms = {
     'index_base': 800,
     'title': t('string_id_447'),
-    'names': [t('string_id_17'),t('string_id_56'),t('string_id_57')]
+    'names': [t('string_id_726'),t('string_id_56'),t('string_id_57')]
 };
 
 const basis = {
@@ -3128,7 +3128,7 @@ const data = {
     t('string_id_37'), t('string_id_38'), t('string_id_39'), t('string_id_161')
   ],
   'columns_header': [
-    {name: t('string_id_16')}, {name: t('string_id_452')}, {name: t('string_id_453'), children: [{name: t('string_id_454'), children: [{name: t('string_id_455')}, {name: t('string_id_456')}]}, {name: t('string_id_457'), children: [{name: t('string_id_458')}, {name: t('string_id_459')}]}]}
+    {name: t('string_id_727')}, {name: t('string_id_452')}, {name: t('string_id_453'), children: [{name: t('string_id_454'), children: [{name: t('string_id_455')}, {name: t('string_id_456')}]}, {name: t('string_id_457'), children: [{name: t('string_id_458')}, {name: t('string_id_459')}]}]}
   ],
   'cells_citta_group': [
     [[0], [1], [2], [3, 4], [5], [6]],

@@ -25,7 +25,7 @@ let tr = {
     },
     'string_id_7': {
         'cn': '心所注释',
-        'en': 'Commentary on Mental Factors'
+        'en': 'Notes on Mental Factors'
     },
     'string_id_8': {
         'cn': '心',
@@ -61,7 +61,7 @@ let tr = {
     },
     'string_id_16': {
         'cn': '12不善心',
-        'en': '12 Unwholesome Consciousnesses'
+        'en': '12 Sense-sphere'
     },
     'string_id_17': {
         'cn': '欲',
@@ -97,7 +97,7 @@ let tr = {
     },
     'string_id_25': {
         'cn': '速行',
-        'en': 'Running to Fruition'
+        'en': 'Impulsion'
     },
     'string_id_26': {
         'cn': '眼门',
@@ -125,39 +125,39 @@ let tr = {
     },
     'string_id_32': {
         'cn': '色所缘',
-        'en': 'Visual Object'
+        'en': 'Visual'
     },
     'string_id_33': {
         'cn': '香所缘',
-        'en': 'Odorous Object'
+        'en': 'Odorous'
     },
     'string_id_34': {
         'cn': '声所缘',
-        'en': 'Audible Object'
+        'en': 'Audible'
     },
     'string_id_35': {
         'cn': '味所缘',
-        'en': 'Gustatory Object'
+        'en': 'Gustatory'
     },
     'string_id_36': {
         'cn': '触所缘',
-        'en': 'Tactile Object'
+        'en': 'Tactile'
     },
     'string_id_37': {
         'cn': '54欲界心',
-        'en': '54 Sense-sphere Consciousnesses'
+        'en': 'Sense-sphere'
     },
     'string_id_38': {
         'cn': '15色界心',
-        'en': '15 Fine-material Consciousnesses'
+        'en': 'Fine-material'
     },
     'string_id_39': {
         'cn': '12无色界心',
-        'en': '12 Immaterial Consciousnesses'
+        'en': 'Immaterial'
     },
     'string_id_40': {
         'cn': '52心所21色',
-        'en': '52 Mental Factors and 21 Material Phenomena'
+        'en': '52 MFact and 21 MattPhenm'
     },
     'string_id_41': {
         'cn': '概念',
@@ -185,7 +185,7 @@ let tr = {
     },
     'string_id_47': {
         'cn': '悦俱邪见相应无行心',
-        'en': 'Joyful, Associated with Wrong View, Unprompted'
+        'en': 'Joy, AccW WrVw, UnPr'
     },
     'string_id_48': {
         'cn': '悦',
@@ -221,7 +221,7 @@ let tr = {
     },
     'string_id_56': {
         'cn': '色',
-        'en': 'Materiality'
+        'en': 'Fine Material'
     },
     'string_id_57': {
         'cn': '无色',
@@ -233,7 +233,7 @@ let tr = {
     },
     'string_id_59': {
         'cn': '悦俱邪见相应有行心',
-        'en': 'Joyful, Associated with Wrong View, Prompted'
+        'en': 'Joy, AccW WrVw, Pr'
     },
     'string_id_60': {
         'cn': '有行',
@@ -249,7 +249,7 @@ let tr = {
     },
     'string_id_63': {
         'cn': '悦俱邪见不相应无行心',
-        'en': 'Joyful, Not Associated with Wrong View, Unprompted'
+        'en': 'Joy,NAccW WrVw,UnPr'
     },
     'string_id_64': {
         'cn': '不相应',
@@ -261,11 +261,11 @@ let tr = {
     },
     'string_id_66': {
         'cn': '悦俱邪见不相应有行心',
-        'en': 'Joyful, Not Associated with Wrong View, Prompted'
+        'en': 'Joy, NAccW WrVw, Pr'
     },
     'string_id_67': {
         'cn': '舍俱邪见相应无行心',
-        'en': 'Equanimity, Associated with Wrong View, Unprompted'
+        'en': 'Eq, AccW WrVw, UnPr'
     },
     'string_id_68': {
         'cn': '舍',
@@ -273,23 +273,23 @@ let tr = {
     },
     'string_id_69': {
         'cn': '舍俱邪见相应有行心',
-        'en': 'Equanimity, Associated with Wrong View, Prompted'
+        'en': 'Eq, AccW WrVw, Pr'
     },
     'string_id_70': {
         'cn': '舍俱邪见不相应无行心',
-        'en': 'Equanimity, Not Associated with Wrong View, Unprompted'
+        'en': 'Eq, NAccW WrVw,UnPr'
     },
     'string_id_71': {
         'cn': '舍俱邪见不相应有行心',
-        'en': 'Equanimity, Not Associated with Wrong View, Prompted'
+        'en': 'Eq, NAccW WrVw, Pr'
     },
     'string_id_72': {
         'cn': '忧俱嗔恚相应无行心',
-        'en': 'Grief, Associated with Hatred, Unprompted'
+        'en': 'Distr, AccW Hate, UnPr'
     },
     'string_id_73': {
         'cn': '忧',
-        'en': 'Grief'
+        'en': 'Distress'
     },
     'string_id_74': {
         'cn': '嗔',
@@ -297,7 +297,7 @@ let tr = {
     },
     'string_id_75': {
         'cn': '欲界依',
-        'en': 'Sense Sphere Dependence'
+        'en': 'When Sense Sphere'
     },
     'string_id_76': {
         'cn': '嫉',
@@ -317,11 +317,11 @@ let tr = {
     },
     'string_id_80': {
         'cn': '忧俱嗔恚相应有行心',
-        'en': 'Grief, Associated with Hatred, Prompted'
+        'en': 'Distr, AccW Hate, Pr'
     },
     'string_id_81': {
         'cn': '舍俱疑相应心',
-        'en': 'Equanimity, Associated with Doubt'
+        'en': 'Eq, AccW Doubt'
     },
     'string_id_82': {
         'cn': '疑',
@@ -329,11 +329,11 @@ let tr = {
     },
     'string_id_83': {
         'cn': '舍俱掉举相应心',
-        'en': 'Equanimity, Associated with Restlessness'
+        'en': 'Eq, AccW Restlss'
     },
     'string_id_84': {
         'cn': '8大善心',
-        'en': '8 Great Wholesome Consciousnesses'
+        'en': '8 Sense-sphere'
     },
     'string_id_85': {
         'cn': '善',
@@ -369,7 +369,7 @@ let tr = {
     },
     'string_id_93': {
         'cn': '心所轻安',
-        'en': 'Mental Factor Tranquility'
+        'en': 'MFact Tranquility'
     },
     'string_id_94': {
         'cn': '心轻安',
@@ -377,7 +377,7 @@ let tr = {
     },
     'string_id_95': {
         'cn': '心所轻快性',
-        'en': 'Mental Factor Lightness'
+        'en': 'MFact Lightness'
     },
     'string_id_96': {
         'cn': '心轻快性',
@@ -385,7 +385,7 @@ let tr = {
     },
     'string_id_97': {
         'cn': '心所柔软性',
-        'en': 'Mental Factor Malleability'
+        'en': 'MFact Malleability'
     },
     'string_id_98': {
         'cn': '心柔软性',
@@ -393,7 +393,7 @@ let tr = {
     },
     'string_id_99': {
         'cn': '心所适应性',
-        'en': 'Mental Factor Fitness'
+        'en': 'MFact Fitness'
     },
     'string_id_100': {
         'cn': '心适应性',
@@ -405,11 +405,11 @@ let tr = {
     },
     'string_id_102': {
         'cn': '心练达性',
-        'en': 'Mental Factor Proficiency'
+        'en': 'MFact Proficiency'
     },
     'string_id_103': {
         'cn': '心所正直性',
-        'en': 'Mental Factor Uprightness'
+        'en': 'MFact Uprightness'
     },
     'string_id_104': {
         'cn': '心正直性',
@@ -437,7 +437,7 @@ let tr = {
     },
     'string_id_110': {
         'cn': '悦俱智相应无行心',
-        'en': 'Joyful, Associated with Wisdom, Unprompted'
+        'en': 'Joy, AccW Wis, UnPr'
     },
     'string_id_111': {
         'cn': '无痴',
@@ -445,7 +445,7 @@ let tr = {
     },
     'string_id_112': {
         'cn': '6出世间心',
-        'en': '6 Supramundane Consciousnesses'
+        'en': '6 Supramundane'
     },
     'string_id_113': {
         'cn': '涅槃',
@@ -461,35 +461,35 @@ let tr = {
     },
     'string_id_116': {
         'cn': '悦俱智相应有行心',
-        'en': 'Joyful, Associated with Wisdom, Prompted'
+        'en': 'Joy, AccW Wis, Pr'
     },
     'string_id_117': {
         'cn': '悦俱智不相应无行心',
-        'en': 'Joyful, Not Associated with Wisdom, Unprompted'
+        'en': 'Joy, NAccW Wis, UnPr'
     },
     'string_id_118': {
         'cn': '悦俱智不相应有行心',
-        'en': 'Joyful, Not Associated with Wisdom, Prompted'
+        'en': 'Joy, NAccW Wis, Pr'
     },
     'string_id_119': {
         'cn': '舍俱智相应无行心',
-        'en': 'Equanimity, Associated with Wisdom, Unprompted'
+        'en': 'Eq, AccW Wis, UnPr'
     },
     'string_id_120': {
         'cn': '舍俱智相应有行心',
-        'en': 'Equanimity, Associated with Wisdom, Prompted'
+        'en': 'Eq, AccW Wis, Pr'
     },
     'string_id_121': {
         'cn': '舍俱智不相应无行心',
-        'en': 'Equanimity, Not Associated with Wisdom, Unprompted'
+        'en': 'Eq, NAccW Wis, UnPr'
     },
     'string_id_122': {
         'cn': '舍俱智不相应有行心',
-        'en': 'Equanimity, Not Associated with Wisdom, Prompted'
+        'en': 'Eq, NAccW Wis, Pr'
     },
     'string_id_123': {
         'cn': '8大果报心',
-        'en': '8 Great Resultant Consciousnesses'
+        'en': '8 Fruition'
     },
     'string_id_124': {
         'cn': '无记',
@@ -497,7 +497,7 @@ let tr = {
     },
     'string_id_125': {
         'cn': '果报',
-        'en': 'Resultant'
+        'en': 'Fruition'
     },
     'string_id_126': {
         'cn': '有因',
@@ -509,15 +509,15 @@ let tr = {
     },
     'string_id_128': {
         'cn': '彼所缘',
-        'en': 'Object of That Moment'
+        'en': 'Register'
     },
     'string_id_129': {
         'cn': '离门',
-        'en': 'Abandonment'
+        'en': 'None'
     },
     'string_id_130': {
         'cn': '7无因不善果报心',
-        'en': '7 Rootless Unwholesome Resultant Consciousnesses'
+        'en': '7 Rootlss Uwhsm'
     },
     'string_id_131': {
         'cn': '无因',
@@ -525,7 +525,7 @@ let tr = {
     },
     'string_id_132': {
         'cn': '眼识',
-        'en': 'Eye-consciousness'
+        'en': 'Eye-Consc'
     },
     'string_id_133': {
         'cn': '眼净色',
@@ -537,11 +537,11 @@ let tr = {
     },
     'string_id_135': {
         'cn': '五识',
-        'en': 'Five Sense-consciousnesses'
+        'en': 'Five Sense Consciousness'
     },
     'string_id_136': {
         'cn': '耳识',
-        'en': 'Ear-consciousness'
+        'en': 'Ear-Consc'
     },
     'string_id_137': {
         'cn': '耳净色',
@@ -553,7 +553,7 @@ let tr = {
     },
     'string_id_139': {
         'cn': '鼻识',
-        'en': 'Nose-consciousness'
+        'en': 'Nose-Consc'
     },
     'string_id_140': {
         'cn': '鼻净色',
@@ -565,7 +565,7 @@ let tr = {
     },
     'string_id_142': {
         'cn': '舌识',
-        'en': 'Tongue-consciousness'
+        'en': 'Tongue-Consc'
     },
     'string_id_143': {
         'cn': '舌净色',
@@ -577,11 +577,11 @@ let tr = {
     },
     'string_id_145': {
         'cn': '身识',
-        'en': 'Body-consciousness'
+        'en': 'Body-Consc'
     },
     'string_id_146': {
         'cn': '苦',
-        'en': 'Painful Feeling'
+        'en': 'Painful'
     },
     'string_id_147': {
         'cn': '身净色',
@@ -589,7 +589,7 @@ let tr = {
     },
     'string_id_148': {
         'cn': '舍俱领受心',
-        'en': 'Equanimity, Receiving Consciousness'
+        'en': 'Eq, Recv Consc'
     },
     'string_id_149': {
         'cn': '依',
@@ -601,11 +601,11 @@ let tr = {
     },
     'string_id_151': {
         'cn': '领受心',
-        'en': 'Receiving Consciousness'
+        'en': 'Recv Consciousness'
     },
     'string_id_152': {
         'cn': '舍俱推度心',
-        'en': 'Equanimity, Investigating Consciousness'
+        'en': 'Eq, Investg Consc'
     },
     'string_id_153': {
         'cn': '推度',
@@ -617,19 +617,19 @@ let tr = {
     },
     'string_id_155': {
         'cn': '8无因善果报心',
-        'en': '8 Rootless Wholesome Resultant Consciousnesses'
+        'en': '8 Rootlss Whsm'
     },
     'string_id_156': {
         'cn': '乐',
-        'en': 'Pleasant Feeling'
+        'en': 'Pleasant'
     },
     'string_id_157': {
         'cn': '悦俱推度心',
-        'en': 'Joyful, Investigating Consciousness'
+        'en': 'Joy, Investg Consc'
     },
     'string_id_158': {
         'cn': '8大唯作心',
-        'en': '8 Great Functional Consciousnesses'
+        'en': '8 Funct Consc'
     },
     'string_id_159': {
         'cn': '有因唯作心是阿罗汉独有',
@@ -641,15 +641,15 @@ let tr = {
     },
     'string_id_161': {
         'cn': '8出世间心',
-        'en': '8 Supramundane Consciousnesses'
+        'en': 'Supramundane'
     },
     'string_id_162': {
         'cn': '3无因唯作心',
-        'en': '3 Rootless Functional Consciousnesses'
+        'en': '3 Rootlss Funct'
     },
     'string_id_163': {
         'cn': '五门转向心',
-        'en': 'Five-sense-door Adverting Consciousness'
+        'en': '5-sense-door Adverting'
     },
     'string_id_164': {
         'cn': '转向',
@@ -657,7 +657,7 @@ let tr = {
     },
     'string_id_165': {
         'cn': '意门转向心',
-        'en': 'Mind-door Adverting Consciousness'
+        'en': 'Mind-door Adverting'
     },
     'string_id_166': {
         'cn': '确定',
@@ -665,15 +665,15 @@ let tr = {
     },
     'string_id_167': {
         'cn': '生笑心',
-        'en': 'Smile-producing Consciousness'
+        'en': 'Smile-producing'
     },
     'string_id_168': {
         'cn': '5广大善心',
-        'en': '5 Jhana Wholesome Consciousnesses'
+        'en': '5 Jhana Whsm'
     },
     'string_id_169': {
         'cn': '初禅心',
-        'en': 'First Jhana Consciousness'
+        'en': '1st Jhana Consc'
     },
     'string_id_170': {
         'cn': '寻、伺、喜、乐、一境性',
@@ -681,7 +681,7 @@ let tr = {
     },
     'string_id_171': {
         'cn': '第二禅心',
-        'en': 'Second Jhana Consciousness'
+        'en': '2nd Jhana Consc'
     },
     'string_id_172': {
         'cn': '伺、喜、乐、一境性',
@@ -689,7 +689,7 @@ let tr = {
     },
     'string_id_173': {
         'cn': '第三禅心',
-        'en': 'Third Jhana Consciousness'
+        'en': '3rd Jhana Consc'
     },
     'string_id_174': {
         'cn': '喜、乐、一境性',
@@ -697,7 +697,7 @@ let tr = {
     },
     'string_id_175': {
         'cn': '第四禅心',
-        'en': 'Fourth Jhana Consciousness'
+        'en': '4th Jhana Consc'
     },
     'string_id_176': {
         'cn': '乐、一境性',
@@ -705,43 +705,43 @@ let tr = {
     },
     'string_id_177': {
         'cn': '第五禅心',
-        'en': 'Fifth Jhana Consciousness'
+        'en': '5th Jhana Consc'
     },
     'string_id_178': {
         'cn': '舍、一境性',
-        'en': 'Equanimity, One-pointedness'
+        'en': 'Eq, One-pointedness'
     },
     'string_id_179': {
         'cn': '5广大果报心',
-        'en': '5 Jhana Resultant Consciousnesses'
+        'en': '5 Jhana Fruition'
     },
     'string_id_180': {
         'cn': '5广大唯作心',
-        'en': '5 Jhana Functional Consciousnesses'
+        'en': '5 Jhana Funct'
     },
     'string_id_181': {
         'cn': '4广大善心',
-        'en': '4 Immaterial Wholesome Consciousnesses'
+        'en': '4 Immaterial Whsm'
     },
     'string_id_182': {
         'cn': '空无边处心',
-        'en': 'Base of Infinite Space Consciousness'
+        'en': 'BsOf Infinite Space'
     },
     'string_id_183': {
         'cn': '识无边处心',
-        'en': 'Base of Infinite Consciousness Consciousness'
+        'en': 'BsOf Infinite Mind'
     },
     'string_id_184': {
         'cn': '无所有处心',
-        'en': 'Base of Nothingness Consciousness'
+        'en': 'BsOf Nothingness'
     },
     'string_id_185': {
         'cn': '非想非非想处心',
-        'en': 'Base of Neither-perception-nor-non-perception Consciousness'
+        'en': 'BsOf NPNNP'
     },
     'string_id_186': {
         'cn': '4广大果报心',
-        'en': '4 Immaterial Resultant Consciousnesses'
+        'en': '4 Immaterial Fruit'
     },
     'string_id_187': {
         'cn': '无',
@@ -749,11 +749,11 @@ let tr = {
     },
     'string_id_188': {
         'cn': '4广大唯作心',
-        'en': '4 Immaterial Functional Consciousnesses'
+        'en': '4 Immaterial Funct'
     },
     'string_id_189': {
         'cn': '4出世间善心',
-        'en': '4 Supramundane Wholesome Consciousnesses'
+        'en': '4 SupraM Whsm'
     },
     'string_id_190': {
         'cn': '出世间',
@@ -761,7 +761,7 @@ let tr = {
     },
     'string_id_191': {
         'cn': '依禅那',
-        'en': 'Dependent on Jhana'
+        'en': 'Per Jhana'
     },
     'string_id_192': {
         'cn': '依照禅定状态(121心)可能有寻、伺、喜心所',
@@ -769,7 +769,7 @@ let tr = {
     },
     'string_id_193': {
         'cn': '须陀洹道心',
-        'en': 'Stream-entry Path Consciousness'
+        'en': 'Stream-entry Path'
     },
     'string_id_194': {
         'cn': '断三结',
@@ -777,7 +777,7 @@ let tr = {
     },
     'string_id_195': {
         'cn': '斯陀含道心',
-        'en': 'Once-returner Path Consciousness'
+        'en': 'Once-returner Path'
     },
     'string_id_196': {
         'cn': '断粗欲界贪、嗔',
@@ -785,7 +785,7 @@ let tr = {
     },
     'string_id_197': {
         'cn': '阿那含道心',
-        'en': 'Non-returner Path Consciousness'
+        'en': 'Non-returner Path'
     },
     'string_id_198': {
         'cn': '断细欲界贪嗔',
@@ -793,7 +793,7 @@ let tr = {
     },
     'string_id_199': {
         'cn': '阿罗汉道心',
-        'en': 'Arahant Path Consciousness'
+        'en': 'Arahant Path'
     },
     'string_id_200': {
         'cn': '断五上分结',
@@ -801,23 +801,23 @@ let tr = {
     },
     'string_id_201': {
         'cn': '4出世间果报心',
-        'en': '4 Supramundane Resultant Consciousnesses'
+        'en': '4 SupraM Fruit'
     },
     'string_id_202': {
         'cn': '须陀洹果心',
-        'en': 'Stream-entry Fruition Consciousness'
+        'en': 'Stream-entry Fruition'
     },
     'string_id_203': {
         'cn': '斯陀含果心',
-        'en': 'Once-returner Fruition Consciousness'
+        'en': 'Once-returner Fruition'
     },
     'string_id_204': {
         'cn': '阿那含果心',
-        'en': 'Non-returner Fruition Consciousness'
+        'en': 'Non-returner Fruition'
     },
     'string_id_205': {
         'cn': '阿罗汉果心',
-        'en': 'Arahant Fruition Consciousness'
+        'en': 'Arahant Fruition'
     },
     'string_id_206': {
         'cn': 'somanassasahagata，受心所体验到乐受',
@@ -897,7 +897,7 @@ let tr = {
     },
     'string_id_225': {
         'cn': '52心所',
-        'en': '52 Mental Factors'
+        'en': '52 Mental Factors (MFact)'
     },
     'string_id_226': {
         'cn': '心所是心的成份、因子，从属于心，是心的伴随者，附属物。心是不会单独生起的，必定有相应的心所伴随。每个心识刹那都会有一组心与心所生起，该组心与心所必定同时生、同时灭、同一所缘、同一依处。心与心所的聚合即称为名聚。',
@@ -905,7 +905,7 @@ let tr = {
     },
     'string_id_227': {
         'cn': '13通一切心所',
-        'en': '13 Universal Mental Factors'
+        'en': '13 Common MFact'
     },
     'string_id_228': {
         'cn': '通一切心所的本质由同一名聚中的共存心所及心确定。与美心共存则成美心所，与不善心共存则成不善心所，与无记心共存则为无记心所',
@@ -913,7 +913,7 @@ let tr = {
     },
     'string_id_229': {
         'cn': '7遍一切心所',
-        'en': '7 Common Mental Factors'
+        'en': '7 Universal MFact'
     },
     'string_id_230': {
         'cn': '遍一切心所是指伴随着每个心的心所。双五识是最基本的心，就只有这七个心所伴随着它们。',
@@ -997,7 +997,7 @@ let tr = {
     },
     'string_id_250': {
         'cn': '多数是乐受(禅定状态)',
-        'en': 'Mostly Joyful Feeling in Jhana States'
+        'en': 'Mostly Joy Feeling in Jhana States'
     },
     'string_id_251': {
         'cn': '维持相应名法',
@@ -1033,7 +1033,7 @@ let tr = {
     },
     'string_id_259': {
         'cn': '6杂心所',
-        'en': '6 Additional Mental Factors'
+        'en': '6 Optional MFact'
     },
     'string_id_260': {
         'cn': '杂心所是指伴随着某些心的心所。',
@@ -1129,7 +1129,7 @@ let tr = {
     },
     'string_id_283': {
         'cn': '悦俱(乐受)心，但悦俱第四禅心没有喜',
-        'en': 'Absent in Fourth Jhana Joyful Mind'
+        'en': 'Absent in Fourth Jhana Joy Mind'
     },
     'string_id_284': {
         'cn': '欲作',
@@ -1149,11 +1149,11 @@ let tr = {
     },
     'string_id_288': {
         'cn': '不出现于18无因果报心及2痴心',
-        'en': 'Absent in 18 Rootless Resultant Minds'
+        'en': 'Absent in 18 Rootless Fruition Minds'
     },
     'string_id_289': {
         'cn': '14不善心所',
-        'en': '14 Unwholesome Mental Factors'
+        'en': '14 Unwholesome MFact'
     },
     'string_id_290': {
         'cn': '只与不善心相应的心所',
@@ -1161,7 +1161,7 @@ let tr = {
     },
     'string_id_291': {
         'cn': '4遍一切不善心所',
-        'en': '4 Universally Unwholesome Mental Factors'
+        'en': '4 Universal MFact'
     },
     'string_id_292': {
         'cn': '遍一切不善心所是指伴随着每个不善心的心所',
@@ -1233,7 +1233,7 @@ let tr = {
     },
     'string_id_309': {
         'cn': '贪根',
-        'en': 'Root of Greed'
+        'en': 'Greed Root'
     },
     'string_id_310': {
         'cn': '执着目标为「我的」',
@@ -1297,7 +1297,7 @@ let tr = {
     },
     'string_id_325': {
         'cn': '嗔根',
-        'en': 'Root of Hatred'
+        'en': 'Hatred Root'
     },
     'string_id_326': {
         'cn': '嫉、悭、恶作可能出现或不出现，且只能出现一个',
@@ -1437,7 +1437,7 @@ let tr = {
     },
     'string_id_360': {
         'cn': '25美心所',
-        'en': '25 Beautiful Mental Factors'
+        'en': '25 Beautiful MFact'
     },
     'string_id_361': {
         'cn': '只与美心相应的心所',
@@ -1445,7 +1445,7 @@ let tr = {
     },
     'string_id_362': {
         'cn': '19遍一切美心心所',
-        'en': '19 Universally Beautiful Mental Factors'
+        'en': '19 Universal MFact'
     },
     'string_id_363': {
         'cn': '59个美心必然有这19个心所伴随',
@@ -1709,7 +1709,7 @@ let tr = {
     },
     'string_id_428': {
         'cn': '无量',
-        'en': 'Immeasurable Mental Factors'
+        'en': 'Immeasurable'
     },
     'string_id_429': {
         'cn': '可能出现于28种心:欲界8大善心、8大唯作心及12禅心',
@@ -1789,7 +1789,7 @@ let tr = {
     },
     'string_id_448': {
         'cn': '依处(净色/心所依处)',
-        'en': 'Base (Substratum for Consciousness)'
+        'en': 'Base'
     },
     'string_id_449': {
         'cn': '法所缘',
@@ -1797,7 +1797,7 @@ let tr = {
     },
     'string_id_450': {
         'cn': '界',
-        'en': 'Sphere (Domain of Phenomena)'
+        'en': 'Sphere'
     },
     'string_id_451': {
         'cn': '本性',
@@ -1813,43 +1813,43 @@ let tr = {
     },
     'string_id_454': {
         'cn': '36果报心',
-        'en': '36 Resultant Consciousnesses'
+        'en': '36 Fruit Consiousnesses'
     },
     'string_id_455': {
         'cn': '21有因心',
-        'en': '21 Causal Consciousnesses'
+        'en': '21 Causal'
     },
     'string_id_456': {
         'cn': '15无因心',
-        'en': '15 Rootless Consciousnesses'
+        'en': '15 Rootless'
     },
     'string_id_457': {
         'cn': '20唯作心',
-        'en': '20 Functional Consciousnesses'
+        'en': '20 Functional Consiousnesses'
     },
     'string_id_458': {
         'cn': '17有因心',
-        'en': '17 Causal Consciousnesses'
+        'en': '17 Causal'
     },
     'string_id_459': {
         'cn': '3无因心',
-        'en': '3 Rootless Minds'
+        'en': '3 Rootless'
     },
     'string_id_460': {
         'cn': '有分',
-        'en': 'Life-continuum'
+        'en': 'Life Continuum'
     },
     'string_id_461': {
         'cn': '过去有分',
-        'en': 'Past Bhavanga (Life-continuum)'
+        'en': 'Past Life Continuum'
     },
     'string_id_462': {
         'cn': '有分波动',
-        'en': 'Vibrating Bhavanga'
+        'en': 'Vibrating Life Continuum'
     },
     'string_id_463': {
         'cn': '有分断',
-        'en': 'Arresting Bhavanga'
+        'en': 'Arresting Life Continuum'
     },
     'string_id_464': {
         'cn': '五门转向',
@@ -1857,15 +1857,15 @@ let tr = {
     },
     'string_id_465': {
         'cn': '无因唯作心',
-        'en': 'Rootless Functional Consciousness'
+        'en': 'Rootless Fuct'
     },
     'string_id_466': {
         'cn': '无因不善果报心',
-        'en': 'Rootless Unwholesome Resultant Consciousness'
+        'en': 'Rootless Uwhsm Fruition'
     },
     'string_id_467': {
         'cn': '无因善果报心',
-        'en': 'Rootless Wholesome Resultant Consciousness'
+        'en': 'Rootless Whsm Fruition'
     },
     'string_id_468': {
         'cn': '不善心',
@@ -1881,11 +1881,11 @@ let tr = {
     },
     'string_id_471': {
         'cn': '不善果报心',
-        'en': 'Unwholesome Resultant Consciousness'
+        'en': 'Unwholesome Fruitioniousness'
     },
     'string_id_472': {
         'cn': '善果报心',
-        'en': 'Wholesome Resultant Consciousness'
+        'en': 'Wholesome Fruitioniousness'
     },
     'string_id_473': {
         'cn': '意门转向',
@@ -1925,7 +1925,7 @@ let tr = {
     },
     'string_id_482': {
         'cn': '色法',
-        'en': 'Material Phenomena'
+        'en': 'Rūpa'
     },
     'string_id_483': {
         'cn': '撞击净色及有分',
@@ -1933,11 +1933,11 @@ let tr = {
     },
     'string_id_484': {
         'cn': '色法寿命',
-        'en': 'Material Life Span'
+        'en': 'Rūpa Life Span'
     },
     'string_id_486': {
         'cn': '造善恶业或唯作',
-        'en': 'Performing Good or Bad Kamma'
+        'en': 'Creating Good or Bad Kamma'
     },
     'string_id_487': {
         'cn': '所缘强度',
@@ -1945,11 +1945,11 @@ let tr = {
     },
     'string_id_488': {
         'cn': '极大所缘',
-        'en': 'Highly Prominent Object'
+        'en': 'Highly Prominent'
     },
     'string_id_489': {
         'cn': '极细微所缘',
-        'en': 'Extremely Subtle Object'
+        'en': 'Extremely Subtle'
     },
     'string_id_490': {
         'cn': '极可喜',
@@ -1977,7 +1977,7 @@ let tr = {
     },
     'string_id_496': {
         'cn': '凡夫有学',
-        'en': 'Worldling Under Training'
+        'en': 'Worldling or Under Training'
     },
     'string_id_497': {
         'cn': '阿罗汉',
@@ -1989,7 +1989,7 @@ let tr = {
     },
     'string_id_499': {
         'cn': '28色',
-        'en': '28 Types of Material Phenomena'
+        'en': '28 Rūpa'
     },
     'string_id_500': {
         'cn': '四大',
@@ -2065,15 +2065,15 @@ let tr = {
     },
     'string_id_518': {
         'cn': '带动其他俱生色法移位',
-        'en': 'Moving Co-arising Material Phenomena'
+        'en': 'Moving Co-arising Rūpa'
     },
     'string_id_519': {
         'cn': '四大所造色',
-        'en': 'Derived Material Phenomena'
+        'en': 'Derived Rūpa'
     },
     'string_id_520': {
         'cn': '净色',
-        'en': 'Sensitive Matter'
+        'en': 'Sensory Base'
     },
     'string_id_521': {
         'cn': '可接受色所缘撞击的四大种之净色',
@@ -2085,7 +2085,7 @@ let tr = {
     },
     'string_id_523': {
         'cn': '作为眼识的依处',
-        'en': 'Base for Eye-consciousness'
+        'en': 'Base for Eye-Consc'
     },
     'string_id_524': {
         'cn': '想见的因缘之业生种色(同一粒色聚里的四大)',
@@ -2101,7 +2101,7 @@ let tr = {
     },
     'string_id_527': {
         'cn': '作为耳识的依处',
-        'en': 'Base for Ear-consciousness'
+        'en': 'Base for Ear-Consc'
     },
     'string_id_528': {
         'cn': '想听的因缘之业生种色(同一粒色聚里的四大)',
@@ -2117,7 +2117,7 @@ let tr = {
     },
     'string_id_531': {
         'cn': '作为鼻识的依处',
-        'en': 'Base for Nose-consciousness'
+        'en': 'Base for Nose-Consc'
     },
     'string_id_532': {
         'cn': '想嗅的因缘之业生种色(同一粒色聚里的四大)',
@@ -2133,7 +2133,7 @@ let tr = {
     },
     'string_id_535': {
         'cn': '作为舌识的依处',
-        'en': 'Base for Tongue-consciousness'
+        'en': 'Base for Tongue-Consc'
     },
     'string_id_536': {
         'cn': '想尝的因缘之业生种色(同一粒色聚中的四大)',
@@ -2149,7 +2149,7 @@ let tr = {
     },
     'string_id_539': {
         'cn': '作为身识的依处',
-        'en': 'Base for Body-consciousness'
+        'en': 'Base for Body-Consc'
     },
     'string_id_540': {
         'cn': '想触的因缘之业生种色(同一粒色聚里的四大)',
@@ -2157,7 +2157,7 @@ let tr = {
     },
     'string_id_541': {
         'cn': '境色',
-        'en': 'Visible Form'
+        'en': 'Sense Fields'
     },
     'string_id_542': {
         'cn': '撞击眼净色',
@@ -2165,7 +2165,7 @@ let tr = {
     },
     'string_id_543': {
         'cn': '作为眼识的目标',
-        'en': 'Object of Eye-consciousness'
+        'en': 'Object of Eye-Consc'
     },
     'string_id_544': {
         'cn': '作为眼识之境',
@@ -2185,7 +2185,7 @@ let tr = {
     },
     'string_id_548': {
         'cn': '作为耳识的目标',
-        'en': 'Object of Ear-consciousness'
+        'en': 'Object of Ear-Consc'
     },
     'string_id_549': {
         'cn': '作为耳识之境',
@@ -2201,7 +2201,7 @@ let tr = {
     },
     'string_id_552': {
         'cn': '作为鼻识的目标',
-        'en': 'Object of Nose-consciousness'
+        'en': 'Object of Nose-Consc'
     },
     'string_id_553': {
         'cn': '作为鼻识之境',
@@ -2217,7 +2217,7 @@ let tr = {
     },
     'string_id_556': {
         'cn': '作为舌识的目标',
-        'en': 'Object of Tongue-consciousness'
+        'en': 'Object of Tongue-Consc'
     },
     'string_id_557': {
         'cn': '作为舌识之境',
@@ -2233,7 +2233,7 @@ let tr = {
     },
     'string_id_560': {
         'cn': '作为身识的目标',
-        'en': 'Object of Body-consciousness'
+        'en': 'Object of Body-Consc'
     },
     'string_id_561': {
         'cn': '作为身识之境',
@@ -2241,11 +2241,11 @@ let tr = {
     },
     'string_id_562': {
         'cn': '性根色',
-        'en': 'Gender Phenomena'
+        'en': 'Gender'
     },
     'string_id_563': {
         'cn': '女根色',
-        'en': 'Female Material Phenomena'
+        'en': 'Female'
     },
     'string_id_564': {
         'cn': '女性',
@@ -2265,7 +2265,7 @@ let tr = {
     },
     'string_id_568': {
         'cn': '男根色',
-        'en': 'Male Material Phenomena'
+        'en': 'Male'
     },
     'string_id_569': {
         'cn': '男性',
@@ -2281,11 +2281,11 @@ let tr = {
     },
     'string_id_572': {
         'cn': '心色',
-        'en': 'Heart-base'
+        'en': 'Mental'
     },
     'string_id_573': {
         'cn': '心所依处',
-        'en': 'Base for Mental Factors'
+        'en': 'Mental-base'
     },
     'string_id_574': {
         'cn': '提供意界和意识界的依处',
@@ -2301,11 +2301,11 @@ let tr = {
     },
     'string_id_577': {
         'cn': '命根色',
-        'en': 'Material Life Faculty'
+        'en': 'Life Faculty'
     },
     'string_id_578': {
         'cn': '维护在住时的俱生业生色',
-        'en': 'Maintains Co-arising Material Phenomena'
+        'en': 'Maintains Co-arising Rūpa'
     },
     'string_id_579': {
         'cn': '使到俱生业生色发生',
@@ -2317,11 +2317,11 @@ let tr = {
     },
     'string_id_581': {
         'cn': '食色',
-        'en': 'Edible Phenomena'
+        'en': 'Food'
     },
     'string_id_582': {
         'cn': '食素',
-        'en': 'Material Food'
+        'en': 'Food'
     },
     'string_id_583': {
         'cn': '所吃食物里之营养',
@@ -2329,7 +2329,7 @@ let tr = {
     },
     'string_id_584': {
         'cn': '滋养色法',
-        'en': 'Nourishes Material Phenomena'
+        'en': 'Nourishes Rūpa'
     },
     'string_id_585': {
         'cn': '制造食生色维持身体',
@@ -2341,15 +2341,15 @@ let tr = {
     },
     'string_id_587': {
         'cn': '限界色',
-        'en': 'Limiting Phenomena'
+        'en': 'Limiting'
     },
     'string_id_588': {
         'cn': '空界',
-        'en': 'Space Element'
+        'en': 'Space'
     },
     'string_id_589': {
         'cn': '划定色聚的界限',
-        'en': 'Defines Boundaries of Material Clusters'
+        'en': 'Defines Boundaries of Rūpa Clusters'
     },
     'string_id_590': {
         'cn': '显示色聚的边际',
@@ -2357,19 +2357,19 @@ let tr = {
     },
     'string_id_591': {
         'cn': '色聚的界限/之间的孔隙',
-        'en': 'Separates Material Clusters'
+        'en': 'Separates Rūpa Clusters'
     },
     'string_id_592': {
         'cn': '应被区划的色聚',
-        'en': 'Material Clusters to Be Separated'
+        'en': 'Rūpa Clusters to Be Separated'
     },
     'string_id_593': {
         'cn': '表色',
-        'en': 'Communicative Material Phenomena'
+        'en': 'Expression'
     },
     'string_id_594': {
         'cn': '身表色',
-        'en': 'Bodily Expression'
+        'en': 'Bodily'
     },
     'string_id_595': {
         'cn': '由心生风界带动动作，令俱生色身稳定或移动。',
@@ -2393,7 +2393,7 @@ let tr = {
     },
     'string_id_600': {
         'cn': '语表色',
-        'en': 'Verbal Expression'
+        'en': 'Verbal'
     },
     'string_id_601': {
         'cn': '制造声音的地界互相撞击，而有语言的表达。',
@@ -2417,11 +2417,11 @@ let tr = {
     },
     'string_id_606': {
         'cn': '变化色',
-        'en': 'Mutative Material Phenomena'
+        'en': 'Changeability'
     },
     'string_id_607': {
         'cn': '色轻快性',
-        'en': 'Lightness of Material Phenomena'
+        'en': 'Lightness'
     },
     'string_id_608': {
         'cn': '心生色、时节生色与食生色的不重与不迟钝',
@@ -2429,19 +2429,19 @@ let tr = {
     },
     'string_id_609': {
         'cn': '去除这些色法的重性',
-        'en': 'Removal of Heaviness in Material Phenomena'
+        'en': 'Removal of Heaviness in Rūpa'
     },
     'string_id_610': {
         'cn': '这些色法轻快地升起及变易',
-        'en': 'Quick and Flexible Arising of Phenomena'
+        'en': 'Quick and Flexible Arising of Rūpa'
     },
     'string_id_611': {
         'cn': '轻快的色',
-        'en': 'Light and Agile Phenomena'
+        'en': 'Light and Agile Rūpa'
     },
     'string_id_612': {
         'cn': '色柔软性',
-        'en': 'Softness of Material Phenomena'
+        'en': 'Softness'
     },
     'string_id_613': {
         'cn': '心生色、时节生色与食生色的不坚固与不粗',
@@ -2461,7 +2461,7 @@ let tr = {
     },
     'string_id_617': {
         'cn': '色适业性',
-        'en': 'Adaptability of Material Phenomena'
+        'en': 'Adaptability'
     },
     'string_id_618': {
         'cn': '心生色、时节生色与食生色的适应性',
@@ -2477,15 +2477,15 @@ let tr = {
     },
     'string_id_621': {
         'cn': '适业的色',
-        'en': 'Suitable Material Phenomena'
+        'en': 'Suitable Rūpa'
     },
     'string_id_622': {
         'cn': '相色',
-        'en': 'Mutual Manifestation'
+        'en': 'Characteristics'
     },
     'string_id_623': {
         'cn': '色积集',
-        'en': 'Formation of Material Aggregates'
+        'en': 'Formation'
     },
     'string_id_624': {
         'cn': '色法的起始/成长至诸根具足',
@@ -2493,7 +2493,7 @@ let tr = {
     },
     'string_id_625': {
         'cn': '令色法开始生起',
-        'en': 'Causes Material Formation'
+        'en': 'Causes Rūpa to Arise'
     },
     'string_id_626': {
         'cn': '起始或完成的状态',
@@ -2501,11 +2501,11 @@ let tr = {
     },
     'string_id_627': {
         'cn': '生起之色法',
-        'en': 'Arisen Material Phenomena'
+        'en': 'Arisen Rūpa'
     },
     'string_id_628': {
         'cn': '色相续',
-        'en': 'Continuation of Material Phenomena'
+        'en': 'Continuation'
     },
     'string_id_629': {
         'cn': '诸根具足后色法的持续',
@@ -2521,15 +2521,15 @@ let tr = {
     },
     'string_id_632': {
         'cn': '结合的色法',
-        'en': 'Connected Material Phenomena'
+        'en': 'Connected Rūpa'
     },
     'string_id_633': {
         'cn': '色老性',
-        'en': 'Aging Phenomena'
+        'en': 'Aging'
     },
     'string_id_634': {
         'cn': '色法成熟与老化',
-        'en': 'Maturity and Aging of Material Phenomena'
+        'en': 'Maturity and Aging of Rūpa'
     },
     'string_id_635': {
         'cn': '导致坏灭、死亡',
@@ -2541,11 +2541,11 @@ let tr = {
     },
     'string_id_637': {
         'cn': '正在衰老的色法',
-        'en': 'Decaying Material Phenomena'
+        'en': 'Decaying Rūpa'
     },
     'string_id_638': {
         'cn': '色无常',
-        'en': 'Impermanence of Material Phenomena'
+        'en': 'Impermanence'
     },
     'string_id_639': {
         'cn': '真实色法完全坏灭',
@@ -2561,11 +2561,11 @@ let tr = {
     },
     'string_id_642': {
         'cn': '灭尽的真实色法',
-        'en': 'Dissolved Material Phenomena'
+        'en': 'Dissolved Rūpa'
     },
     'string_id_643': {
-        'cn': '内色',
-        'en': 'Internal Material Phenomena'
+        'cn': '内/外色',
+        'en': 'Internal External'
     },
     'string_id_644': {
         'cn': '内',
@@ -2580,8 +2580,8 @@ let tr = {
         'en': 'Five Bases for Mind and Mental States'
     },
     'string_id_647': {
-        'cn': '所依色',
-        'en': 'Dependent Material Phenomena'
+        'cn': '所依/非所依色',
+        'en': 'Base'
     },
     'string_id_648': {
         'cn': '所依',
@@ -2589,27 +2589,27 @@ let tr = {
     },
     'string_id_649': {
         'cn': '非所依',
-        'en': 'Not a Base'
+        'en': 'Not'
     },
     'string_id_650': {
         'cn': '六识所依之色法',
-        'en': 'Material Base for Sixfold Consciousness'
+        'en': 'Rūpa Base for Sixfold Consciousness'
     },
     'string_id_651': {
-        'cn': '门色',
-        'en': 'Sense-door Phenomena'
+        'cn': '门/非门色',
+        'en': 'Sense door'
     },
     'string_id_652': {
         'cn': '非门',
-        'en': 'Not Sense-doors'
+        'en': 'Not'
     },
     'string_id_653': {
         'cn': '五净色:心与目标之门;表色:造身语业之门',
         'en': 'Five Bases and Communication Elements'
     },
     'string_id_654': {
-        'cn': '根色',
-        'en': 'Root Phenomena'
+        'cn': '根/非根色',
+        'en': 'Root'
     },
     'string_id_655': {
         'cn': '根',
@@ -2617,51 +2617,51 @@ let tr = {
     },
     'string_id_656': {
         'cn': '非根',
-        'en': 'Not Root'
+        'en': 'Not'
     },
     'string_id_657': {
         'cn': '有控制力',
         'en': 'Possessing Control'
     },
     'string_id_658': {
-        'cn': '粗/近/有对色',
-        'en': 'Coarse/Proximate/Object-dependent Phenomena'
+        'cn': '粗/近/有对/细/远/非有对色',
+        'en': 'Coarse Proximate Dependent'
     },
     'string_id_659': {
         'cn': '粗/近/有对',
-        'en': 'Coarse/Proximate/Object-dependent'
+        'en': 'C/P/OD'
     },
     'string_id_660': {
         'cn': '细/远/非有对',
-        'en': 'Fine/Distant/Object-independent'
+        'en': 'F/D/OI'
     },
     'string_id_661': {
         'cn': '直接使根识生起的色法',
-        'en': 'Material Phenomena Supporting Sense-consciousness'
+        'en': 'Rūpa Supporting Sense-Consc'
     },
     'string_id_662': {
-        'cn': '执受色',
-        'en': 'Receiving Material Phenomena'
+        'cn': '执受/非执受色',
+        'en': 'Karmic'
     },
     'string_id_663': {
         'cn': '执受',
-        'en': 'Receiving'
+        'en': 'Karmic'
     },
     'string_id_664': {
         'cn': '非执受',
-        'en': 'Not Receiving'
+        'en': 'Not'
     },
     'string_id_665': {
         'cn': '皆可',
-        'en': 'Applicable to All'
+        'en': 'Both'
     },
     'string_id_666': {
         'cn': '渴爱与邪见推动而造下的业的果报',
         'en': 'Result of Kamma Driven by Craving and Wrong View'
     },
     'string_id_667': {
-        'cn': '可见色',
-        'en': 'Visible Phenomena'
+        'cn': '可见/不可见色',
+        'en': 'Visible'
     },
     'string_id_668': {
         'cn': '可见',
@@ -2669,39 +2669,39 @@ let tr = {
     },
     'string_id_669': {
         'cn': '不可见',
-        'en': 'Not Visible'
+        'en': 'Not'
     },
     'string_id_670': {
         'cn': '可被眼见得知',
         'en': 'Perceivable by the Eye'
     },
     'string_id_671': {
-        'cn': '取境色',
-        'en': 'Grasping Visible Form'
+        'cn': '取境/不取境色',
+        'en': 'Grasping'
     },
     'string_id_672': {
         'cn': '到达境',
-        'en': 'Reaching the Object'
+        'en': 'Reaching'
     },
     'string_id_673': {
         'cn': '不取境',
-        'en': 'Not Grasping the Object'
+        'en': 'Not'
     },
     'string_id_674': {
         'cn': '不到达境',
-        'en': 'Not Reaching the Object'
+        'en': 'Not Reaching'
     },
     'string_id_675': {
         'cn': '五净色取五境为目标',
         'en': 'Five Bases Grasping Five Objects'
     },
     'string_id_676': {
-        'cn': '不分离色',
-        'en': 'Non-separable Phenomena'
+        'cn': '不分离/分离色',
+        'en': 'Inseparable Separable'
     },
     'string_id_677': {
         'cn': '不分离',
-        'en': 'Non-separable'
+        'en': 'Inseparable'
     },
     'string_id_678': {
         'cn': '分离',
@@ -2733,11 +2733,11 @@ let tr = {
     },
     'string_id_685': {
         'cn': '23色聚',
-        'en': '23 Types of Material Clusters'
+        'en': '23 Types of Rūpa Clusters (by origination)'
     },
     'string_id_686': {
         'cn': '业生',
-        'en': 'Kamma-originated'
+        'en': 'Kamma'
     },
     'string_id_687': {
         'cn': '眼十法聚',
@@ -2777,7 +2777,7 @@ let tr = {
     },
     'string_id_696': {
         'cn': '心生',
-        'en': 'Mind-originated'
+        'en': 'Mind'
     },
     'string_id_697': {
         'cn': '纯八法聚',
@@ -2813,7 +2813,7 @@ let tr = {
     },
     'string_id_705': {
         'cn': '时节生',
-        'en': 'Season-originated'
+        'en': 'Season'
     },
     'string_id_706': {
         'cn': '声九法聚',
@@ -2825,59 +2825,59 @@ let tr = {
     },
     'string_id_708': {
         'cn': '食生',
-        'en': 'Food-originated'
+        'en': 'Food'
     },
     'string_id_709': {
         'cn': '八不离色',
-        'en': 'Eight Inseparable Material Phenomena'
+        'en': 'Eight Inseparables'
     },
     'string_id_710': {
         'cn': '食生色聚',
-        'en': 'Food-originated Cluster'
+        'en': 'Food-originated'
     },
     'string_id_711': {
         'cn': '食生火界',
-        'en': 'Food-originated Fire Element'
+        'en': 'Fire'
     },
     'string_id_712': {
         'cn': '食生食素',
-        'en': 'Food-originated Nutritional Element'
+        'en': 'Food'
     },
     'string_id_713': {
         'cn': '心生色聚',
-        'en': 'Mind-originated Cluster'
+        'en': 'Mind-originated'
     },
     'string_id_714': {
         'cn': '心生火界',
-        'en': 'Mind-originated Fire Element'
+        'en': 'Fire'
     },
     'string_id_715': {
         'cn': '心生食素',
-        'en': 'Mind-originated Nutritional Element'
+        'en': 'Food'
     },
     'string_id_716': {
         'cn': '业生色聚',
-        'en': 'Kamma-originated Cluster'
+        'en': 'Kamma-originated'
     },
     'string_id_717': {
         'cn': '业生火界',
-        'en': 'Kamma-originated Fire Element'
+        'en': 'Fire'
     },
     'string_id_718': {
         'cn': '业生食素',
-        'en': 'Kamma-originated Nutritional Element'
+        'en': 'Food'
     },
     'string_id_719': {
         'cn': '时节生色聚',
-        'en': 'Season-originated Cluster'
+        'en': 'Season-originated'
     },
     'string_id_720': {
         'cn': '时节生火界',
-        'en': 'Season-originated Fire Element'
+        'en': 'Fire'
     },
     'string_id_721': {
         'cn': '时节生食素',
-        'en': 'Season-originated Nutritional Element'
+        'en': 'Food'
     },
     'string_id_722': {
         'cn': '支助',
@@ -2885,14 +2885,30 @@ let tr = {
     },
     'string_id_723': {
         'cn': '产生4-5代',
-        'en': 'Generates 4–5 Successive Groups'
+        'en': '4–5 Generations'
     },
     'string_id_724': {
         'cn': '产生2-3代',
-        'en': 'Generates 2–3 Successive Groups'
+        'en': '2–3 Generations'
     },
     'string_id_725': {
         'cn': '产生10-12代',
-        'en': 'Generates 10–12 Successive Groups'
-    }
+        'en': '10–12 Generations'
+    },
+    'string_id_726': {
+        'cn': '欲',
+        'en': 'Sense'
+    },
+    'string_id_727': {
+        'cn': '12不善心',
+        'en': '12 Unwholesome Consciousness'
+    },
+    'string_id_728': {
+        'cn': '门',
+        'en': 'Door'
+    },
+    'string_id_729': {
+        'cn': '色',
+        'en': 'Color'
+    },
 };

@@ -124,7 +124,8 @@ function renderCurve(parent, x1, y1, x2, y2, d, label, labelColor) {
 
     const px = 12;
     const padding = 3;
-    renderTextBox(parent, (x1 + x2) / 2 - px * 2, (y1 + y2) / 2 - px * 2, px * label.length + padding * 2, px + padding * 2, labelColor, label,{size: px});
+    const len = getWordLength(label, px);
+    renderTextBox(parent, (x1 + x2) / 2 - px * 2, (y1 + y2) / 2 - px * 2, len + padding * 2, px + padding * 2, labelColor, label,{size: px, wrap: false});
 
     return {
         highlight: function () {

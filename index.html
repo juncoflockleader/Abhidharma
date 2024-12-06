@@ -9,17 +9,34 @@
 </head>
 <body>
 <div id="tooltip" style="position: absolute; visibility: hidden; background-color: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; pointer-events: none;"></div>
-<div class="tabs">
-  <button id="tab1" class="active">心与心所</button>
-  <button id="tab2">欲界五门心路</button>
-  <button id="tab3">欲界意门心路</button>
-  <button id="tab4">欲界色法</button>
-  <button id="tab5">色法起源</button>
-  <button id="tab6" style="display:none">色法模拟</button>
+<div class="menu">
+  <div class="tabs">
+    <button id="tab1" class="active">心与心所</button>
+    <button id="tab2">欲界五门心路</button>
+    <button id="tab3">欲界意门心路</button>
+    <button id="tab4">欲界色法</button>
+    <button id="tab5">色法起源</button>
+    <button id="tab6" style="display:none">色法模拟</button>
+  </div>
+  <div class="lang">
+    <button id="en">
+      <svg height="32">
+        <image href="images/en.svg" x="0" y="0" width="28" height="28"></image>
+      </svg>
+    </button>
+    <button id="cn">
+      <svg height="32">
+        <image href="images/cn.svg" x="0" y="0" width="28" height="28"></image>
+      </svg>
+    </button>
+  </div>
+  <div class="test-div">
+    <svg id="test-svg" width="32" height="32"></svg>
+  </div>
 </div>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1">
-    <svg id="citta" width="1440" height="800"></svg>
+    <svg id="citta" width="1800" height="800"></svg>
     <svg>
       <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank">
         <image href="images/github-square.svg" x="0" y="0" width="32" height="32"></image>

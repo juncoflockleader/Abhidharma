@@ -1,12 +1,55 @@
-let lang = 'cn'; // or 'en', depending on the user's language preference
+const langCfg = {
+    'en': {
+        name: 'en',
+        fixed: false, // variable width fonts
+        px: 10,
+        vertical: false,
+        wrap: true,
+        wide: false,
+        index: 0
+    },
+    'cn': {
+        name: 'cn',
+        px: 14,
+        fixed: true, // fixed width fonts
+        vertical: true,
+        wrap: false,
+        wide: true,
+        index: 1
+    }
+};
+
+function getLangByIndex(index) {
+    for (let key in langCfg) {
+        if (langCfg[key].index === index) {
+            return langCfg[key];
+        }
+    }
+    return langCfg['cn'];
+}
+
+function getLang() {
+    if (localStorage) {
+        const lang = localStorage.getItem('lang');
+        if (langCfg[lang]) {
+            return langCfg[lang];
+        }
+        localStorage.setItem('lang', 'cn');
+    }
+    return langCfg['cn'];
+}
 
 function t(id) {
-    return tr[id][lang];
+    const lang = getLang();
+    if (!id || !tr[id]) {
+        return '';
+    }
+    return tr[id][lang.name] || tr[id]['cn'];
 }
 
 const container = d3.select('.svg-container');
 
-const svgWidth = 1440;
+const svgWidth = 1800;
 const svgHeight = 1000;
 const cittaSvg = container.select('#citta');
 
@@ -23,7 +66,7 @@ const mmSvg = container.select('#container3').append('svg')
 const rpSvg = container.select('#container4').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
-    .attr('height', svgHeight);
+    .attr('height', 1200);
 
 const rpgSvg = container.select('#container5').append('svg')
     .attr('class', 'svg-content')
@@ -38,6 +81,9 @@ const rpnsSvg = container.select('#container6').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
     .attr('height', 1);
+
+const testSvg = d3.select('#test-svg');
+const testDiv = d3.select('#test-div');
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
@@ -57,6 +103,25 @@ tabs.on('click', function () {
     history.pushState(null, '', `#${tabIndex}`);
 
     showTab(tabIndex);
+});
+
+
+const langs = d3.selectAll('.lang button');
+function setLang(langIndex) {
+    langs.classed('active', (d, i) => i === langIndex);
+    if (localStorage) {
+        localStorage.setItem('lang', getLangByIndex(langIndex).name);
+    }
+}
+
+langs.on('click', function () {
+    const langIndex = langs.nodes().indexOf(this);
+    const oldLang = getLang().name;
+    setLang(langIndex);
+    const newLang = getLang().name;
+    if (oldLang !== newLang) {
+        window.location.reload();
+    }
 });
 
 /** Helper functions **/
@@ -84,7 +149,7 @@ function updateParams(params={}) {
 function renderText(parent, x, y, w, h, text, params={}) {
     params = updateParams(params);
     const rx = (params.align === 'middle' ? x + w / 2 : x) + params.padding;
-    const ry = params.valign === 'top' ? y : (params.wrap ? y + h / 4 : y + h / 2);
+    const ry = params.valign === 'top' ? y : y + h / 2;
     const px = parseInt(params.size);
     const textElement = parent.append('text')
         .attr('x', rx)
@@ -102,19 +167,88 @@ function renderText(parent, x, y, w, h, text, params={}) {
         }
     } else if (params.wrap) {
         textElement.selectAll('tspan').remove();
-        const len = Math.floor(w / px);
-        const n = len === 0 ? 1 : Math.max(Math.ceil(text.length / len), 1);
-        for (let j = 0; j < n; ++j) {
-            const ly = y + h / n / 2 + j * h / n;
-            const part = text.substring(j * len, Math.min((j + 1) * len, text.length));
-            textElement.append('tspan')
-                .attr('x', rx)
-                .attr('y', ly)
-                .text(part);
+        const lang = getLang();
+        if (lang.fixed) {
+            const len = Math.floor(w / px);
+            const n = len === 0 ? 1 : Math.max(Math.ceil(text.length / len), 1);
+            for (let j = 0; j < n; ++j) {
+                const ly = y + h / n / 2 + j * h / n;
+                const part = text.substring(j * len, Math.min((j + 1) * len, text.length));
+                textElement.append('tspan')
+                    .attr('x', rx)
+                    .attr('y', ly)
+                    .text(part);
+            }
+        } else {
+            const testTE = testSvg.append('text')
+                .attr('x', 0)
+                .attr('y', 0)
+                .attr('text-anchor', params.align)
+                .attr('dominant-baseline', 'central')
+                .attr('font-size', params.size);
+            testTE.text(text);
+            const len = testTE.node().getComputedTextLength();
+            if (len <= w) {
+                textElement.text(text);
+            } else {
+                testTE.text('');
+                const words = text.split(' ');
+                let line = '';
+                let j = 0;
+                let k = 1;
+                for (let i = 0; i < words.length; i++) {
+                    const maybeLine = line + (line === '' ? '' : ' ') + words[i];
+                    const testTS = testTE.append('tspan')
+                        .text(maybeLine);
+                    const testLen = testTS.node().getComputedTextLength();
+                    testTS.remove();
+
+                    if (testLen > w) {
+                        let cur = line;
+                        let next = words[i];
+                        if (i === 0) {
+                            cur = maybeLine.substring(0, Math.floor(maybeLine.length *0.7)) + '-';
+                            next = '-' + maybeLine.substring(Math.floor(maybeLine.length * 0.7));
+                        }
+                        textElement.append('tspan')
+                            .attr('x', rx)
+                            .attr('y', y + (j + 1) * px)
+                            .text(cur);
+                        line = next;
+                        k = 1;
+                        j++;
+                        const testTS = testTE.append('tspan')
+                            .text(line);
+                        const testLen = testTS.node().getComputedTextLength();
+                        testTS.remove();
+                        if (testLen > w) {
+                            cur = line.substring(0, Math.floor(line.length *0.7)) + '-';
+                            next = '-' + line.substring(Math.floor(line.length * 0.7));
+                            textElement.append('tspan')
+                                .attr('x', rx)
+                                .attr('y', y + (j + 1) * px)
+                                .text(cur);
+                            line = next;
+                            k = 1;
+                            j++;
+                        }
+                    } else {
+                        line += (line === '' ? '' : ' ') + words[i];
+                        k++;
+                    }
+                    if (i === words.length - 1) {
+                        const ly = y + (j + 1) * px;
+                        textElement.append('tspan')
+                            .attr('x', rx)
+                            .attr('y', ly)
+                            .text(line);
+                    }
+                }
+            }
+            testTE.remove();
         }
     } else {
         textElement.text(text);
-        return textElement;
     }
     return textElement;
 }
@@ -153,15 +287,26 @@ function subArraySum(array, start, end) {
 }
 
 function getWordLength(text, px) {
-    let count = 0;
-    for (let char of text) {
-        if (/[\x00-\x7F]/.test(char)) {
-            count++;
-        } else {
-            count += 2;
+    const lang = getLang();
+    if (lang.fixed) {
+        let count = 0;
+        for (let char of text) {
+            if (/[\x00-\x7F]/.test(char)) {
+                count++;
+            } else {
+                count += 2;
+            }
         }
+        return count * px / 2 + 3;
     }
-    return count * px / 2 + 3;
+    const testTE = testSvg.append('text')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('font-size', px)
+        .text(text);
+    const len = testTE.node().getComputedTextLength();
+    testTE.remove();
+    return len;
 }
 
 function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemIndex) {

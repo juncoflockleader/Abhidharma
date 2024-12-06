@@ -202,6 +202,7 @@ function findMatch(cittas, state) {
 }
 
 function renderEntity(svg, x, y, radius, state) {
+    const cfg = getLang();
     // material
     svg.append('circle')
         .attr('cx', x(1))
@@ -210,13 +211,18 @@ function renderEntity(svg, x, y, radius, state) {
         .style('fill', 'red')
         .style('stroke', 'black')
         .style('stroke-width', 1);
-    svg.append('text')
-        .attr('x', x(1))
-        .attr('y', 0)
-        .style('fill', 'black')
-        .style('text-anchor', 'middle')
-        .attr('dominant-baseline', 'middle')
-        .text(t('string_id_482'));
+    if (cfg.wide) { // should add a field like concise or something
+        svg.append('text')
+            .attr('x', x(1))
+            .attr('y', 0)
+            .style('fill', 'black')
+            .style('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .text(t('string_id_482'));
+    } else {
+        renderTextBox(svg, x(1) - radius - 80, 0 - radius, 60, 20, 'red', t('string_id_482'));
+    }
+
 
 
     svg.append('line')
@@ -227,7 +233,8 @@ function renderEntity(svg, x, y, radius, state) {
         .attr('stroke', 'black')
         .attr('stroke-width', 2)
         .attr('marker-end', 'url(#'+ state.markerName+ ')');
-    renderTextBox(svg, x(1) + 3, y / 2 - 20, 120, 20, 'red', t('string_id_483'))
+    const h = cfg.wide ? 20 : 42;
+    renderTextBox(svg, x(1) + 3, y / 2 - 20, 120, h, 'red', t('string_id_483'))
 
     svg.append('line')
         .attr('x1', x(1) + radius)
@@ -236,7 +243,7 @@ function renderEntity(svg, x, y, radius, state) {
         .attr('y2', 0)
         .attr('stroke', 'black')
         .attr('stroke-width', 2);
-    renderTextBox(svg, (x(1) + radius + x(17)) / 2 - 50, -25, 100, 20, 'red', t('string_id_484'));
+    renderTextBox(svg, (x(1) + radius + x(17)) / 2 - 50, -h - 5, 100, h, 'red', t('string_id_484'));
 
     svg.append('line')
         .attr('x1', x(17))
@@ -249,9 +256,14 @@ function renderEntity(svg, x, y, radius, state) {
 }
 
 function renderFlow(state) {
+    const cfg = getLang();
+    const vertical = cfg.vertical;
+    const px = cfg.px;
+    const wrap = cfg.wrap;
+    const wide = cfg.wide;
     const data = getRenderData(state);
     d3.select(state.container).selectAll('*').remove();
-    const margin = {top: 30, right: 30, bottom: 20, left: 30},
+    const margin = vertical ? {top: 30, right: 30, bottom: 20, left: 30} : {top: 60, right: 30, bottom: 20, left: 30},
         width = 1200 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 
@@ -334,14 +346,16 @@ function renderFlow(state) {
         });
 
     const padding = 6;
+    let w = vertical ? 24 : 60;
+    let h = vertical ? 80 : 34;
+    let labelBottom = y + radius + padding + h;
     const labels = svg.selectAll('labels')
         .data(data.nodes)
         .join('g')
         .attr('x', d => x(d.id))
         .attr('y', y + radius * 2)
         .each(function(d) {
-            const w = 24;
-            d['label'] = renderTextBox(svg, x(d.id) - w / 2, y + radius + padding, w, 80, 'transparent', d.name, {vertical: true});
+            d['label'] = renderTextBox(svg, x(d.id) - w / 2, y + radius + padding, w, h, 'transparent', d.name, {vertical: vertical, size: px, wrap: wrap});
         });
 
     // Add the highlighting functionality
@@ -385,7 +399,13 @@ function renderFlow(state) {
                 .each(function() { handleMouseOut.call(this, event, d); });
         });
 
-    renderTextBox(svg, -10, -radius, 20, 105, 'orange', data.name, {vertical: true, valign: 'top'});
+    {
+        const w = vertical ? 20 : 120;
+        const h = vertical ? 105 : 34;
+        const yOffset = vertical ? 0 : 40
+        renderTextBox(svg, -10, -radius - yOffset, w, h, 'orange', data.name, {vertical: vertical, size: px + 2});
+
+    }
 
     if (state.renderEntity) {
         renderEntity(svg, x, y, radius, state);
@@ -410,7 +430,7 @@ function renderFlow(state) {
         const ty = 240 + ((node.id - first) % 2) * 110;
         svg.append('line')
             .attr('x1', x(node.id))
-            .attr('y1', y + 100 + padding)
+            .attr('y1', labelBottom)
             .attr('x2', x(node.id))
             .attr('y2', ty)
             .attr('stroke', 'black')
@@ -462,8 +482,9 @@ function renderFlow(state) {
             .attr('stroke-width', 2)
             .attr('marker-end', 'url(#'+ state.markerName+ ')');
 
+
         const w = 120;
-        const h = 20;
+        const h = wide ? 20 : 42;
         renderTextBox(svg, (x(left) + x(right)) / 2 - w / 2, y - 2 * radius - h- 5, w, h, 'yellow', t('string_id_486'));
     }
 }
@@ -553,11 +574,15 @@ function renderControls(state, min, max) {
         .attr('height', 150);
 
 
-    renderTextBox(svg, 0, 30, 22, 120, 'cyan', t('string_id_488'), {vertical: true, valign: 'top'});
+    const lang = getLang();
+    const w = lang.vertical ? 22 : 120;
+    const h = lang.vertical ? 120 : 22;
+    const xOffset = lang.vertical ? 0 : 120;
+    renderTextBox(svg, 0, 30, w, h, 'cyan', t('string_id_488'), {vertical: lang.vertical, size: lang.px + 2});
     svg.append('g')
         .attr('transform', 'translate(60,70)')
         .call(slider);
-    renderTextBox(svg, 100+width, 30, 22, 120, 'cyan', t('string_id_489'), {vertical: true, valign: 'top'});
+    renderTextBox(svg, 100+width-xOffset, 30, w, h, 'cyan', t('string_id_489'), {vertical: lang.vertical, size: lang.px + 2});
 
     // Create a container for the button group
     renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_490') }, { 'id': 2, 'name': t('string_id_491') }, { 'id': 3, 'name': t('string_id_492') }], t('string_id_493'), state, (state, data) => {state.likable = data.id;});
