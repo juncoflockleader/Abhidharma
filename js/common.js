@@ -172,11 +172,10 @@ function renderText(parent, x, y, w, h, text, params={}) {
             const len = Math.floor(w / px);
             const n = len === 0 ? 1 : Math.max(Math.ceil(text.length / len), 1);
             for (let j = 0; j < n; ++j) {
-                const ly = y + h / n / 2 + j * h / n;
                 const part = text.substring(j * len, Math.min((j + 1) * len, text.length));
                 textElement.append('tspan')
                     .attr('x', rx)
-                    .attr('y', ly)
+                    .attr('y', y + (j + 1) * px)
                     .text(part);
             }
         } else {
