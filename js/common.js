@@ -77,7 +77,9 @@ const rpnSvg = container.select('#simulation');
 
 const rpnlSvg = container.select('#simulation-notes');
 
-const rpnsSvg = container.select('#container6').append('svg')
+const doSvg = container.select('#dependent-origination');
+
+const rpnsSvg = container.select('#container7').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
     .attr('height', 1);
@@ -136,6 +138,16 @@ function renderCell(parent, x, y, w, h, color) {
         .attr('fill', color);
 }
 
+function renderCircle(parent, x, y, r, color) {
+    return parent.append('circle')
+        .attr('cx', x)
+        .attr('cy', y)
+        .attr('r', r)
+        .style('stroke', 'black')
+        .style('stroke-width', 1)
+        .attr('fill', color);
+}
+
 function updateParams(params={}) {
     if (params.size === undefined) params.size = '16px';
     if (params.padding === undefined) params.padding = 0;
@@ -168,8 +180,9 @@ function renderText(parent, x, y, w, h, text, params={}) {
     } else if (params.wrap) {
         textElement.selectAll('tspan').remove();
         const lang = getLang();
+        const aw = w - params.padding * 2;
         if (lang.fixed) {
-            const len = Math.floor(w / px);
+            const len = Math.floor(aw / px);
             const n = len === 0 ? 1 : Math.max(Math.ceil(text.length / len), 1);
             if (n === 1) {
                 textElement.text(text);
@@ -191,7 +204,7 @@ function renderText(parent, x, y, w, h, text, params={}) {
                 .attr('font-size', params.size);
             testTE.text(text);
             const len = testTE.node().getComputedTextLength();
-            if (len <= w) {
+            if (len <= aw) {
                 textElement.text(text);
             } else {
                 testTE.text('');
@@ -205,8 +218,7 @@ function renderText(parent, x, y, w, h, text, params={}) {
                         .text(maybeLine);
                     const testLen = testTS.node().getComputedTextLength();
                     testTS.remove();
-
-                    if (testLen > w) {
+                    if (testLen > aw) {
                         let cur = line;
                         let next = words[i];
                         if (i === 0) {
@@ -224,7 +236,7 @@ function renderText(parent, x, y, w, h, text, params={}) {
                             .text(line);
                         const testLen = testTS.node().getComputedTextLength();
                         testTS.remove();
-                        if (testLen > w) {
+                        if (testLen > aw) {
                             cur = line.substring(0, Math.floor(line.length *0.7)) + '-';
                             next = '-' + line.substring(Math.floor(line.length * 0.7));
                             textElement.append('tspan')
@@ -278,7 +290,67 @@ function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
     item.clear = function () {
         cell.attr('fill', bgColor);
     }
+    item.endX = x + w;
+    item.endY = y + h;
     return item;
+}
+
+function renderTextCircle(parent, x, y, r, bgColor, text, params = {}) {
+    params = updateParams(params);
+    let item = parent.append('g');
+    let cell = renderCircle(item, x, y, r, bgColor);
+    let textElement = renderText(item, x - r/1.414, y - r/1.414, r * 1.414, r * 1.414, text, params);
+    item.setText = function(newText) {
+        item.select('text').remove();
+        textElement = renderText(item, x - r/1.414, y - r/1.414, r * 1.414, r * 1.414, newText, params);
+    };
+    item.setColor = function(newColor) {
+        cell.attr('fill', newColor);
+    };
+    item.highlight = function () {
+        if (bgColor === 'white') {
+            cell.attr('fill', 'yellow');
+        } else {
+            cell.attr('fill', d3.color(bgColor).darker(0.5));
+        }
+    }
+    item.clear = function () {
+        cell.attr('fill', bgColor);
+    }
+    return item;
+}
+
+function setupArrowHead(svg, markerName) {
+    svg.append('defs')
+        .append('marker')
+        .attr('id', markerName)
+        .attr('viewBox', '0 0 10 10')
+        .attr('refX', 8)  // Adjust this to control the arrowhead positioning
+        .attr('refY', 5)
+        .attr('markerWidth', 6)
+        .attr('markerHeight', 6)
+        .attr('orient', 'auto')
+        .append('path')
+        .attr('d', 'M 0 0 L 10 5 L 0 10 Z') // Arrow shape
+        .attr('fill', 'black');
+}
+
+function connect(svg, x1, y1, x2, y2, markerName) {
+    return svg.append('path')
+        .attr('d', `M ${x1} ${y1} L ${x2} ${y2}`)
+        .attr('stroke', 'black')
+        .attr('stroke-width', 1)
+        .attr('marker-end', `url(#${markerName})`);
+}
+
+function line(svg, x1, y1, x2, y2) {
+    return svg.append('line')
+        .attr('x1', x1)
+        .attr('y1', y1)
+        .attr('x2', x2)
+        .attr('y2', y2)
+        .attr('stroke', 'black')
+        .attr('stroke-width', 1);
 }
 
 function subArraySum(array, start, end) {
@@ -316,6 +388,9 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
     // Define the table's header and item height
     const headerHeight = 20;
     const rowHeight = 15;
+    if (!padding) {
+        padding = 0;
+    }
 
     // Create a group for the table
     const tableGroup = parent.append('g')
@@ -342,5 +417,7 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
             box.setColor(color);
         })
     }
+    tableGroup.endX = x + w - padding;
+    tableGroup.endY = y + padding + headerHeight + items.length * rowHeight + padding;
     return tableGroup;
 }

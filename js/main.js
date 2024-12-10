@@ -64,6 +64,8 @@ function render() {
 
     createLegend();
     createProgressUpdater();
+
+    dependentOrigination(doSvg, dependentOriginData);
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);

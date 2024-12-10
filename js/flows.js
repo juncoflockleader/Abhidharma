@@ -292,18 +292,7 @@ function renderFlow(state) {
     });
 
     // Define the arrowhead marker
-    svg.append('defs')
-        .append('marker')
-        .attr('id', state.markerName)
-        .attr('viewBox', '0 0 10 10')
-        .attr('refX', 8)  // Adjust this to control the arrowhead positioning
-        .attr('refY', 5)
-        .attr('markerWidth', 6)
-        .attr('markerHeight', 6)
-        .attr('orient', 'auto')
-        .append('path')
-        .attr('d', 'M 0 0 L 10 5 L 0 10 Z') // Arrow shape
-        .attr('fill', 'black');
+    setupArrowHead(svg, state.markerName);
 
     svg.selectAll('nextarrow')
         .data(data.nodes.slice(0, -1))
