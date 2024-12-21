@@ -178,22 +178,19 @@ const conditions = {
                     },
                     effectSummary: '名聚',
                     effects: function (causes) {
-                        if (causes.length === 1) {
-                            // FIXME: need to be 2 or 3 roots
-                            return allCittas.filter(citta => {
-                                const cetasikas = new Set(subEffectIndex[citta.id]);
-
-                                if (cetasikas.has(118) && cetasikas.has(114) ||
-                                    cetasikas.has(121) && cetasikas.has(114) ||
-                                    cetasikas.has(132) && cetasikas.has(133)) {
-                                    return citta.functions.includes('root');
+                        const filteredCittas = allCittas.filter(citta => {
+                            const cetasikas = new Set(subEffectIndex[citta.id]);
+                            if (cetasikas.has(118) && cetasikas.has(114) ||
+                                cetasikas.has(121) && cetasikas.has(114) ||
+                                cetasikas.has(132) && cetasikas.has(133)) {
+                                if (causes.length === 1 && !cetasikas.has(causes[0])) {
+                                    return false;
                                 }
-                                return false;
-                            }).map(citta => citta.id);
-                        } else {
-                            // FIXME: need to be 2 or 3 roots
-                            return allCittas.map(citta => citta.id);
-                        }
+                                return citta.functions.includes('速行');
+                            }
+                            return false;
+                        })
+                        return filteredCittas.map(citta => citta.id);
                     },
                     group: '名俱生组',
                     note: '四增上之一作为2因或3因同一速行名聚里其余名法的增上缘'
@@ -212,7 +209,7 @@ const conditions = {
                     effectSummary: '心生色聚',
                     effects: function (causes) {
                         // TODO: implement
-                        return [];
+                        return [9301, 9302, 9303, 9304, 9305, 9306, 9307, 9308];
                     },
                     group: '名俱生组',
                     note: '四增上之一作为俱生心生色聚的增上缘'

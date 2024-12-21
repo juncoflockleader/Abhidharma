@@ -503,7 +503,7 @@ function calculateConnections() {
                 }
             });
             subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt].map(e => cetasikaIdIndex[e]);
-            allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt});
+            allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt, functions: item_functions});
         });
     });
     return itemConnections;
