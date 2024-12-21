@@ -292,7 +292,7 @@ function renderConditionsMapping(parent) {
 
     const hub = renderHub(parent, t.endX + 50, svgHeight / 2 - 110);
     const keywordsIndex = {};
-    renderKeywords(parent, t.endX + 30, 600, keywordsIndex);
+    renderKeywords(parent, t.endX + 26, 600, keywordsIndex);
 
     const effectIndex = {};
     render28Rupas(x + svgWidth / 2 - 160, 0, effectIndex);
