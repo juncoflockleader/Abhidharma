@@ -9,7 +9,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_502'),
-                            id: 1,
+                            id: 9001,
                             character: t('string_id_503'),
                             functions: t('string_id_504'),
                             manifestation: t('string_id_505'),
@@ -17,7 +17,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_507'),
-                            id: 2,
+                            id: 9002,
                             character: t('string_id_508'),
                             functions: t('string_id_509'),
                             manifestation: t('string_id_510'),
@@ -25,7 +25,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_511'),
-                            id: 3,
+                            id: 9003,
                             character: t('string_id_512'),
                             functions: t('string_id_513'),
                             manifestation: t('string_id_514'),
@@ -33,7 +33,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_515'),
-                            id: 4,
+                            id: 9004,
                             character: t('string_id_516'),
                             functions: t('string_id_517'),
                             manifestation: t('string_id_518'),
@@ -51,7 +51,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_133'),
-                            id: 5,
+                            id: 9005,
                             character: t('string_id_521'),
                             functions: t('string_id_522'),
                             manifestation: t('string_id_523'),
@@ -59,7 +59,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_137'),
-                            id: 6,
+                            id: 9006,
                             character: t('string_id_525'),
                             functions: t('string_id_526'),
                             manifestation: t('string_id_527'),
@@ -67,7 +67,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_140'),
-                            id: 7,
+                            id: 9007,
                             character: t('string_id_529'),
                             functions: t('string_id_530'),
                             manifestation: t('string_id_531'),
@@ -75,7 +75,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_143'),
-                            id: 8,
+                            id: 9008,
                             character: t('string_id_533'),
                             functions: t('string_id_534'),
                             manifestation: t('string_id_535'),
@@ -83,7 +83,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_147'),
-                            id: 9,
+                            id: 9009,
                             character: t('string_id_537'),
                             functions: t('string_id_538'),
                             manifestation: t('string_id_539'),
@@ -96,7 +96,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_729'),
-                            id: 10,
+                            id: 9010,
                             character: t('string_id_542'),
                             functions: t('string_id_543'),
                             manifestation: t('string_id_544'),
@@ -104,7 +104,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_546'),
-                            id: 11,
+                            id: 9011,
                             character: t('string_id_547'),
                             functions: t('string_id_548'),
                             manifestation: t('string_id_549'),
@@ -112,7 +112,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_550'),
-                            id: 12,
+                            id: 9012,
                             character: t('string_id_551'),
                             functions: t('string_id_552'),
                             manifestation: t('string_id_553'),
@@ -120,7 +120,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_554'),
-                            id: 13,
+                            id: 9013,
                             character: t('string_id_555'),
                             functions: t('string_id_556'),
                             manifestation: t('string_id_557'),
@@ -129,7 +129,7 @@ const rupa = {
                         {
                             name: t('string_id_9'),
                             alias: t('string_id_558'),
-                            id: -1,
+                            id: -9001,
                             character: t('string_id_559'),
                             functions: t('string_id_560'),
                             manifestation: t('string_id_561'),
@@ -142,7 +142,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_563'),
-                            id: 14,
+                            id: 9014,
                             character: t('string_id_564'),
                             functions: t('string_id_565'),
                             manifestation: t('string_id_566'),
@@ -150,7 +150,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_568'),
-                            id: 15,
+                            id: 9015,
                             character: t('string_id_569'),
                             functions: t('string_id_570'),
                             manifestation: t('string_id_571'),
@@ -163,7 +163,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_572'),
-                            id: 16,
+                            id: 9016,
                             alias: t('string_id_573'),
                             character: t('string_id_574'),
                             functions: t('string_id_575'),
@@ -177,7 +177,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_577'),
-                            id: 17,
+                            id: 9017,
                             character: t('string_id_578'),
                             functions: t('string_id_579'),
                             manifestation: t('string_id_580'),
@@ -191,7 +191,7 @@ const rupa = {
                         {
                             name: t('string_id_581'),
                             alias: t('string_id_582'),
-                            id: 18,
+                            id: 9018,
                             character: t('string_id_583'),
                             functions: t('string_id_584'),
                             manifestation: t('string_id_585'),
@@ -205,7 +205,7 @@ const rupa = {
                         {
                             name: t('string_id_587'),
                             alias: t('string_id_588'),
-                            id: 19,
+                            id: 9019,
                             character: t('string_id_589'),
                             functions: t('string_id_590'),
                             manifestation: t('string_id_591'),
@@ -218,7 +218,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_594'),
-                            id: 20,
+                            id: 9020,
                             character: t('string_id_595'),
                             functions: t('string_id_596'),
                             manifestation: t('string_id_597'),
@@ -227,7 +227,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_600'),
-                            id: 21,
+                            id: 9021,
                             character: t('string_id_601'),
                             functions: t('string_id_602'),
                             manifestation: t('string_id_603'),
@@ -241,7 +241,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_607'),
-                            id: 22,
+                            id: 9022,
                             character: t('string_id_608'),
                             functions: t('string_id_609'),
                             manifestation: t('string_id_610'),
@@ -249,7 +249,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_612'),
-                            id: 23,
+                            id: 9023,
                             character: t('string_id_613'),
                             functions: t('string_id_614'),
                             manifestation: t('string_id_615'),
@@ -257,7 +257,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_617'),
-                            id: 24,
+                            id: 9024,
                             character: t('string_id_618'),
                             functions: t('string_id_619'),
                             manifestation: t('string_id_620'),
@@ -270,7 +270,7 @@ const rupa = {
                     children: [
                         {
                             name: t('string_id_623'),
-                            id: 25,
+                            id: 9025,
                             character: t('string_id_624'),
                             functions: t('string_id_625'),
                             manifestation: t('string_id_626'),
@@ -278,7 +278,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_628'),
-                            id: 26,
+                            id: 9026,
                             character: t('string_id_629'),
                             functions: t('string_id_630'),
                             manifestation: t('string_id_631'),
@@ -286,7 +286,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_633'),
-                            id: 27,
+                            id: 9027,
                             character: t('string_id_634'),
                             functions: t('string_id_635'),
                             manifestation: t('string_id_636'),
@@ -294,7 +294,7 @@ const rupa = {
                         },
                         {
                             name: t('string_id_638'),
-                            id: 28,
+                            id: 9028,
                             character: t('string_id_639'),
                             functions: t('string_id_640'),
                             manifestation: t('string_id_641'),
@@ -310,42 +310,42 @@ const rupa = {
 const rupaClass = [
     {
         name: t('string_id_643'),
-        id: 101,
+        id: 9101,
         values: [t('string_id_644'), t('string_id_645')],
         notes: t('string_id_646'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147')]
     },
     {
         name: t('string_id_647'),
-        id: 102,
+        id: 9102,
         values: [t('string_id_648'), t('string_id_649')],
         notes: t('string_id_650'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_572')]
     },
     {
         name: t('string_id_651'),
-        id: 103,
+        id: 9103,
         values: [t('string_id_728'), t('string_id_652')],
         notes: t('string_id_653'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_594'), t('string_id_600')]
     },
     {
         name: t('string_id_654'),
-        id: 104,
+        id: 9104,
         values: [t('string_id_655'), t('string_id_656')],
         notes: t('string_id_657'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_568'), t('string_id_563'), t('string_id_577')]
     },
     {
         name: t('string_id_658'),
-        id: 105,
+        id: 9105,
         values: [t('string_id_659'), t('string_id_660')],
         notes: t('string_id_661'),
         rupa: [t('string_id_502'), t('string_id_511'), t('string_id_515'), t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_729'), t('string_id_546'), t('string_id_550'), t('string_id_554')]
     },
     {
         name: t('string_id_662'),
-        id: 106,
+        id: 9106,
         values: [t('string_id_663'), t('string_id_664'), t('string_id_665')],
         notes: t('string_id_666'),
         rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'), t('string_id_143'), t('string_id_147'), t('string_id_568'), t('string_id_563'), t('string_id_572'), t('string_id_577')],
@@ -353,7 +353,7 @@ const rupaClass = [
     },
     {
         name: t('string_id_667'),
-        id: 107,
+        id: 9107,
         values: [t('string_id_668'), t('string_id_669'), t('string_id_665')],
         notes: t('string_id_670'),
         rupa: [],
@@ -361,7 +361,7 @@ const rupaClass = [
     },
     {
         name: t('string_id_671'),
-        id: 108,
+        id: 9108,
         values: [t('string_id_672'), t('string_id_673'), t('string_id_674')],
         notes: t('string_id_675'),
         rupa: [t('string_id_133'), t('string_id_137')],
@@ -369,7 +369,7 @@ const rupaClass = [
     },
     {
         name: t('string_id_676'),
-        id: 109,
+        id: 9109,
         values: [t('string_id_677'), t('string_id_678')],
         notes: t('string_id_679'),
         rupa: [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')]
@@ -382,24 +382,24 @@ const rupaCause = {
     children: [
         {
             name: t('string_id_681'),
-            id: 201,
+            id: 9201,
             rupa: [t('string_id_133'), t('string_id_137'), t('string_id_140'),
                 t('string_id_143'), t('string_id_147'), t('string_id_563'), t('string_id_568'),
                 t('string_id_572'), t('string_id_577'), t('string_id_587')]
         },
         {
             name: t('string_id_682'),
-            id: 202,
+            id: 9202,
             rupa: [t('string_id_546'), t('string_id_587'), t('string_id_594'), t('string_id_600'), t('string_id_607'), t('string_id_612'), t('string_id_617')]
         },
         {
             name: t('string_id_683'),
-            id: 203,
+            id: 9203,
             rupa: [t('string_id_546'), t('string_id_587'), t('string_id_607'), t('string_id_612'), t('string_id_617')]
         },
         {
             name: t('string_id_684'),
-            id: 204,
+            id: 9204,
             rupa: [t('string_id_587'), t('string_id_607'), t('string_id_612'), t('string_id_617')]
         }
     ]
@@ -416,47 +416,47 @@ const rupaAgg =
                 children: [
                     {
                         name: t('string_id_687'),
-                        id: 315,
+                        id: 9315,
                         rupa: [t('string_id_133')]
                     },
                     {
                         name: t('string_id_688'),
-                        id: 316,
+                        id: 9316,
                         rupa: [t('string_id_137')]
                     },
                     {
                         name: t('string_id_689'),
-                        id: 317,
+                        id: 9317,
                         rupa: [t('string_id_140')]
                     },
                     {
                         name: t('string_id_690'),
-                        id: 318,
+                        id: 9318,
                         rupa: [t('string_id_143')]
                     },
                     {
                         name: t('string_id_691'),
-                        id: 319,
+                        id: 9319,
                         rupa: [t('string_id_147')]
                     },
                     {
                         name: t('string_id_692'),
-                        id: 320,
+                        id: 9320,
                         rupa: [t('string_id_563')]
                     },
                     {
                         name: t('string_id_693'),
-                        id: 321,
+                        id: 9321,
                         rupa: [t('string_id_568')]
                     },
                     {
                         name: t('string_id_694'),
-                        id: 322,
+                        id: 9322,
                         rupa: [t('string_id_572')]
                     },
                     {
                         name: t('string_id_695'),
-                        id: 323,
+                        id: 9323,
                         rupa: []
                     },
                 ]
@@ -466,42 +466,42 @@ const rupaAgg =
                 rupa: [],
                 children: [
                     {
-                        id: 301,
+                        id: 9301,
                         name: t('string_id_697'),
                         rupa: []
                     },
                     {
-                        id: 302,
+                        id: 9302,
                         name: t('string_id_698'),
                         rupa: [t('string_id_594')]
                     },
                     {
-                        id: 303,
+                        id: 9303,
                         name: t('string_id_699'),
                         rupa: [t('string_id_546'), t('string_id_600')]
                     },
                     {
-                        id: 304,
+                        id: 9304,
                         name: t('string_id_700'),
                         rupa: [t('string_id_607'), t('string_id_612'), t('string_id_617')]
                     },
                     {
-                        id: 305,
+                        id: 9305,
                         name: t('string_id_701'),
                         rupa: [t('string_id_607'), t('string_id_612'), t('string_id_617'), t('string_id_594')]
                     },
                     {
-                        id: 306,
+                        id: 9306,
                         name: t('string_id_702'),
                         rupa: [t('string_id_607'), t('string_id_612'), t('string_id_617'), t('string_id_546'), t('string_id_600')]
                     },
                     {
-                        id: 307,
+                        id: 9307,
                         name: t('string_id_703'),
                         rupa: [t('string_id_546')]
                     },
                     {
-                        id: 308,
+                        id: 9308,
                         name: t('string_id_704'),
                         rupa: [t('string_id_607'), t('string_id_612'), t('string_id_617'), t('string_id_546')]
                     },
@@ -512,22 +512,22 @@ const rupaAgg =
                 rupa: [],
                 children: [
                     {
-                        id: 309,
+                        id: 9309,
                         name: t('string_id_697'),
                         rupa: []
                     },
                     {
-                        id: 310,
+                        id: 9310,
                         name: t('string_id_706'),
                         rupa: [t('string_id_546')]
                     },
                     {
-                        id: 311,
+                        id: 9311,
                         name: t('string_id_700'),
                         rupa: [t('string_id_607'), t('string_id_612'), t('string_id_617')]
                     },
                     {
-                        id: 312,
+                        id: 9312,
                         name: t('string_id_707'),
                         rupa: [t('string_id_546'), t('string_id_607'), t('string_id_612'), t('string_id_617')]
                     },
@@ -538,12 +538,12 @@ const rupaAgg =
                 rupa: [],
                 children: [
                     {
-                        id: 313,
+                        id: 9313,
                         name: t('string_id_697'),
                         rupa: []
                     },
                     {
-                        id: 314,
+                        id: 9314,
                         name: t('string_id_700'),
                         rupa: [t('string_id_607'), t('string_id_612'), t('string_id_617')]
                     },
@@ -667,11 +667,12 @@ function renderRupaAttrTable(parent) {
         ebIndex.push(rupaIndex[d].id);
     });
     const endX = colx[9] + subRowHeadersW;
-    let min = 99;
+    let min = 99999;
     let max = 0;
     const len = 20;
     const b = columnHeaderLines * unit;
-    ebIndex.forEach(d => {
+    ebIndex.forEach(id => {
+        const d = id - 9000;
         min = Math.min(min, d);
         max = Math.max(max, d);
         parent.append('line')
@@ -709,9 +710,10 @@ function renderRupaAttrTable(parent) {
     threeChange.forEach((d) => {
         tcIndex.push(rupaIndex[d].id);
     });
-    let tcMin = 99;
+    let tcMin = 99999;
     let tcMax = 0;
-    tcIndex.forEach(d => {
+    tcIndex.forEach(id => {
+        const d = id - 9000;
         tcMin = Math.min(tcMin, d);
         tcMax = Math.max(tcMax, d);
         parent.append('line')
@@ -803,6 +805,7 @@ function renderNotesTable(parent, x, y) {
     renderGrid(x + subRowHeadersW, y + columnHeaderH);
 }
 
+let allRupaAgg = [];
 function renderRupaAggTable(parent, x, y) {
     const fontSize = 12; // px
     const padding = 3;
@@ -830,6 +833,7 @@ function renderRupaAggTable(parent, x, y) {
     function renderAggEN(parent, x, y, data, rupas) {
         const w = 250;
         if (!data.children) {
+            allRupaAgg.push(data);
             let ry = y;
             let rx = x;
             const item = renderTextBox(parent, rx, ry, w, unit, 'white', data.name, {size: fontSize});
@@ -879,6 +883,7 @@ function renderRupaAggTable(parent, x, y) {
 
     function renderAggCN(parent, x, y, data, rupas) {
         if (!data.children) {
+            allRupaAgg.push(data);
             let ry = y;
             const h1 = 13 * fontSize;
             const item = renderTextBox(parent, x, ry, unit, h1, 'white', data.name, {vertical: true, size: fontSize});
@@ -925,6 +930,7 @@ function renderRupaAggTable(parent, x, y) {
         return count;
     }
 
+    allRupaAgg = [];
     renderAgg(parent, x, y, rupaAgg, []);
 }
 

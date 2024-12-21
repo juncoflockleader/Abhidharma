@@ -66,6 +66,8 @@ function render() {
     createProgressUpdater();
 
     dependentOrigination(doSvg, dependentOriginData);
+
+    renderConditionsMapping(cmSvg);
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);

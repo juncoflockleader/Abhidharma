@@ -98,7 +98,9 @@ function renderCetasikaTable(y) {
     }
 }
 
+let allCetasika = [];
 function renderCetasikaTableCn(y) {
+  allCetasika = [];
   let columnWidth = 25;
   let rowHeight = 30;
   renderTextBox(cittaSvg, 0, y, columnWidth * 52, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
@@ -119,6 +121,7 @@ function renderCetasikaTableCn(y) {
   cetasika.children.forEach(group => {
     group.children.forEach(subGroup => {
       subGroup.children.forEach(child => {
+        allCetasika.push(child);
         let name = child.name;
         cetasikaIdIndex[name] = child.id;
         itemIndex[child.id] = renderTextBox(cittaSvg, x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, 'white', name, {size: '12px', vertical: true});
@@ -153,6 +156,7 @@ function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations) {
 }
 
 function renderCetasikaTableEn(y) {
+    allCetasika = [];
     let columnWidth = 140;
     let rowHeight = 14;
     renderTextBox(cittaSvg, 0, y, columnWidth * 7, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
@@ -174,6 +178,7 @@ function renderCetasikaTableEn(y) {
             y0 += rowHeight;
             for (; breakPoint < subGroup.children.length; breakPoint++) {
                 let child = subGroup.children[breakPoint];
+                allCetasika.push(child);
                 let name = child.name;
                 cetasikaIdIndex[name] = child.id;
                 itemIndex[child.id] = renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'white', name, {size: '12px', wrap: false});
@@ -390,8 +395,10 @@ function renderNoteTable(x, y, w, titlepx=14) {
     };
 }
 
+let allCittas = [];
 /** itemIndex is populated by now **/
 function calculateConnections() {
+    allCittas = [];
     let itemConnections = {};
     cittas.children.forEach((cittaGroup, index) => {
         let groupAttrs = {
@@ -494,6 +501,7 @@ function calculateConnections() {
                     addConnection(item.id, [word], 'yellow', 'yellow', idIndex);
                 }
             });
+            allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt});
         });
     });
     return itemConnections;

@@ -79,13 +79,19 @@ const rpnlSvg = container.select('#simulation-notes');
 
 const doSvg = container.select('#dependent-origination');
 
-const rpnsSvg = container.select('#container7').append('svg')
+const rpnsSvg = container.select('#container9').append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
     .attr('height', 1);
 
 const testSvg = d3.select('#test-svg');
 const testDiv = d3.select('#test-div');
+
+const cmSvg = container.select('#container7')
+    .append('svg')
+    .attr('class', 'svg-content')
+    .attr('width', svgWidth)
+    .attr('height', svgHeight * 1.5);
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
@@ -128,7 +134,7 @@ langs.on('click', function () {
 
 /** Helper functions **/
 function renderCell(parent, x, y, w, h, color) {
-    return parent.append('rect')
+    const cell = parent.append('rect')
         .attr('x', x)
         .attr('y', y)
         .attr('width', w)
@@ -136,6 +142,11 @@ function renderCell(parent, x, y, w, h, color) {
         .attr('stroke', 'grey')
         .attr('stroke-width', 1)
         .attr('fill', color);
+    cell.X = x;
+    cell.Y = y;
+    cell.endX = x + w;
+    cell.endY = y + h;
+    return cell;
 }
 
 function renderCircle(parent, x, y, r, color) {
@@ -384,10 +395,11 @@ function getWordLength(text, px) {
     return len;
 }
 
-function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemIndex) {
+function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemIndex, compact, headerColor) {
     // Define the table's header and item height
-    const headerHeight = 20;
-    const rowHeight = 15;
+    const headerHeight = compact ? 12 : 20;
+    const headerFontSize = compact ? '10px' : '12px';
+    const rowHeight = compact ? 12 : 15;
     if (!padding) {
         padding = 0;
     }
@@ -397,7 +409,7 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
         .attr('transform', `translate(${x}, ${y})`);
 
     // Draw the header row
-    renderTextBox(tableGroup, padding, padding, w - padding * 2, headerHeight, 'lightgrey', title, {size: '12px', padding: 2, align: 'left'});
+    renderTextBox(tableGroup, padding, padding, w - padding * 2, headerHeight, headerColor ? headerColor : 'lightgrey', title, {size: headerFontSize, padding: 2, align: 'left'});
     const boxes = [];
     // Loop through the data items and draw each row
     items.forEach((item, index) => {
@@ -408,6 +420,8 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
             align: 'left'
         });
         if (itemIndex) {
+            textbox.endX += x;
+            textbox.endY += y;
             itemIndex[item.id] = textbox;
         }
         boxes.push(textbox);
@@ -420,4 +434,20 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
     tableGroup.endX = x + w - padding;
     tableGroup.endY = y + padding + headerHeight + items.length * rowHeight + padding;
     return tableGroup;
+}
+
+function createElbowConnector(parent, x1, y1, x2, y2, len, color) {
+    const midX = len ? x1 + len : (x1 + x2) / 2;
+    const pathData = `M ${x1} ${y1} H ${midX} V ${y2} H ${x2}`;
+
+    parent.append('path')
+        .attr('d', pathData)
+        .attr('stroke', color ? color : 'black')
+        .attr('stroke-width', 1)
+        .attr('fill', 'none')
+        .attr('class', 'elbow-connector');
+}
+
+function removeAllConnectors(parent) {
+    parent.selectAll('path.elbow-connector').remove();
 }
