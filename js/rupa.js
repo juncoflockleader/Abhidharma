@@ -836,7 +836,7 @@ function renderRupaAggTable(parent, x, y) {
         const w = 250;
         if (!data.children) {
             allRupaAgg.push(data);
-            rupasSubEffects[data.id] = rupas.concat(eightBasics);
+            rupasSubEffects[data.id] = rupas.concat(eightBasics).map(e => rupaIndex[e].id);
             let ry = y;
             let rx = x;
             const item = renderTextBox(parent, rx, ry, w, unit, 'white', data.name, {size: fontSize});
@@ -886,7 +886,7 @@ function renderRupaAggTable(parent, x, y) {
     function renderAggCN(parent, x, y, data, rupas) {
         if (!data.children) {
             allRupaAgg.push(data);
-            rupasSubEffects[data.id] = rupas.concat(eightBasics);
+            rupasSubEffects[data.id] = rupas.concat(eightBasics).map(e => rupaIndex[e].id);
             let ry = y;
             const h1 = 13 * fontSize;
             const item = renderTextBox(parent, x, ry, unit, h1, 'white', data.name, {vertical: true, size: fontSize});

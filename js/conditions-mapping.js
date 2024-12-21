@@ -113,7 +113,7 @@ function renderConditionsMapping(parent) {
 
     let locked = null;
     let highlighted = [];
-    function renderConditions(parent, x, y, hub, causeIndex, effectIndex) {
+    function renderConditions(parent, x, y, hub, causeIndex, effectIndex, keywordsIndex) {
         const groups = {};
         conditions.children.forEach((condition, index) => {
             condition.children.forEach((child, index) => {
@@ -124,7 +124,7 @@ function renderConditionsMapping(parent) {
                     groups[child.group][condition.name] = {
                         id: condition.id,
                         name: condition.name,
-                        components: condition.components,
+                        keywords: condition.keywords,
                         children: []
                     };
                 }
@@ -157,6 +157,14 @@ function renderConditionsMapping(parent) {
                         function highlight() {
                             tb.highlight();
                             highlighted.push(tb);
+                            if (condition.keywords) {
+                                condition.keywords.forEach(
+                                    (keyword, index) => {
+                                        keywordsIndex[keyword].highlight();
+                                        highlighted.push(keywordsIndex[keyword]);
+                                    }
+                                );
+                            }
                             hub.setSummary(cause, condition.name, child.effectSummary, child.note, child.rebirth ? '结生' : '生命中');
                             const expandedCauses = child.expand(cause);
 
@@ -170,15 +178,17 @@ function renderConditionsMapping(parent) {
                             } else if (expandedCauses.length > 1) {
                                 const itemGroup = parent.append('g')
                                     .attr('class', 'expanded-cause-group');
+                                const colors = ['red', 'orange', 'brown', 'green', 'cyan', 'blue', 'purple'];
                                 expandedCauses.forEach((expandedCause, i) => {
+                                    const color = colors[i % colors.length];
                                     const cw = 10;
                                     const ch = 10;
-                                    const cell = renderCell(itemGroup, hub.X - cw - 5, hub.Y + ch * i, cw, ch, 'white');
+                                    const cell = renderCell(itemGroup, hub.X - cw - 5, hub.Y + ch * i, cw, ch, color);
                                     createElbowConnector(parent, cell.endX, cell.endY - ch / 2, hub.X, hub.Y + 9, 2);
                                     expandedCause.forEach((c, j) => {
                                         causeIndex[c].highlight();
                                         highlighted.push(causeIndex[c]);
-                                        createElbowConnector(parent, causeIndex[c].endX, causeIndex[c].endY - 5, cell.X, cell.Y + ch / 2, i*5+5, ['red', 'blue', 'black'][i % 3]);
+                                        createElbowConnector(parent, causeIndex[c].endX, causeIndex[c].endY - 5, cell.X, cell.Y + ch / 2, i*5+5, color);
                                     });
                                 });
                             }
@@ -190,10 +200,10 @@ function renderConditionsMapping(parent) {
                                     });
                                 }
                                 if (effect > 0 && effect < 100) {
-                                    addToSet(subEffectIndex[effect].map(e => cetasikaIdIndex[e]), set);
+                                    addToSet(subEffectIndex[effect], set);
                                 }
                                 if (effect > 9300 && effect < 9400) {
-                                    addToSet(rupasSubEffects[effect].map(e => rupaIndex[e].id), set);
+                                    addToSet(rupasSubEffects[effect], set);
                                 }
                             }
 
@@ -262,6 +272,16 @@ function renderConditionsMapping(parent) {
         });
     }
 
+    function renderKeywords(parent, x, y, keywordsIndex) {
+        const w = 140;
+        const h = 34;
+        const headerW = 30;
+        Object.keys(keywords).forEach((key, index) => {
+            renderTextBox(parent, x, y + h * index, headerW, h, 'lightcyan', key, {size: 12, wrap: true});
+            keywordsIndex[key] = renderTextBox(parent, x + headerW, y + h * index, w, h, 'white', keywords[key], {size: 12, wrap: true});
+        });
+    }
+
     const x = 520;
     const causeIndex = {};
     render52Cetasikas(x, 0, causeIndex);
@@ -271,6 +291,8 @@ function renderConditionsMapping(parent) {
     render23RupaAggs(x + 400, svgHeight / 2, causeIndex);
 
     const hub = renderHub(parent, t.endX + 50, svgHeight / 2 - 110);
+    const keywordsIndex = {};
+    renderKeywords(parent, t.endX + 30, 600, keywordsIndex);
 
     const effectIndex = {};
     render28Rupas(x + svgWidth / 2 - 160, 0, effectIndex);
@@ -278,5 +300,6 @@ function renderConditionsMapping(parent) {
     render89Cittas(x + svgWidth / 2, 0, effectIndex);
     render52Cetasikas(x + svgWidth / 2 + 260, 0, effectIndex);
 
-    renderConditions(parent, 60, 0, hub, causeIndex, effectIndex);
+
+    renderConditions(parent, 60, 0, hub, causeIndex, effectIndex, keywordsIndex);
 }

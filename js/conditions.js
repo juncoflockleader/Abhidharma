@@ -53,7 +53,7 @@ const conditions = {
         {
             name: '因缘',
             id: 1,
-            components: ['因'],
+            keywords: ['因'],
             children: [
                 // 连结名色法的缘法结生时较为特别，因为前一世的色法已不复存在，今生的色法将作为同时生起的色法来支助名法的生起。
                 {
@@ -134,14 +134,28 @@ const conditions = {
         {
             name: '所缘缘',
             id: 2,
-            components: ['所缘'],
+            keywords: ['所缘'],
             children: [
                 {
                     cause: ['名', '色', '概念', '涅槃'],
                     effect: '名',
-                    causes: [],
+                    causes: ['名', '色', '概念', '涅槃'],
                     group: '所缘组',
-                    effects: [],
+                    expand: function (cause) {
+                        if (cause === '名') {
+                            return [allCittas.map(citta => citta.id).concat(allCetasika.map(cetasika => cetasika.id))];
+                        } else if (cause === '色') {
+                            return [Object.keys(rupaIndex).map(key => rupaIndex[key].id)];
+                        } else if (cause === '概念') {
+                            return [[-1]];
+                        } else {
+                            return [[0]]
+                        }
+                    },
+                    effectSummary: '名聚',
+                    effects: function (causes) {
+                        return allCittas.map(citta => citta.id);
+                    },
                     note: '目标或对象作为名聚的所缘'
                 },
             ]
@@ -149,21 +163,57 @@ const conditions = {
         {
             name: '俱生增上缘',
             id: 3,
-            components: ['俱生', '增上'],
+            keywords: ['俱生', '增上'],
             children: [
                 {
                     cause: ['名'],
                     effect: '名',
-                    causes: [],
-                    effects: [],
+                    causes: ['心', '欲', '精进', '慧'],
+                    expand: function (cause) {
+                        if (cause === '心') {
+                            return [allCittas.map(citta => citta.id)];
+                        } else {
+                            return [[cetasikaIdIndex[cause]]];
+                        }
+                    },
+                    effectSummary: '名聚',
+                    effects: function (causes) {
+                        if (causes.length === 1) {
+                            // FIXME: need to be 2 or 3 roots
+                            return allCittas.filter(citta => {
+                                const cetasikas = new Set(subEffectIndex[citta.id]);
+
+                                if (cetasikas.has(118) && cetasikas.has(114) ||
+                                    cetasikas.has(121) && cetasikas.has(114) ||
+                                    cetasikas.has(132) && cetasikas.has(133)) {
+                                    return citta.functions.includes('root');
+                                }
+                                return false;
+                            }).map(citta => citta.id);
+                        } else {
+                            // FIXME: need to be 2 or 3 roots
+                            return allCittas.map(citta => citta.id);
+                        }
+                    },
                     group: '名俱生组',
                     note: '四增上之一作为2因或3因同一速行名聚里其余名法的增上缘'
                 },
                 {
                     cause: ['名'],
                     effect: '色',
-                    causes: [],
-                    effects: [],
+                    causes: ['心', '欲', '精进', '慧'],
+                    expand: function (cause) {
+                        if (cause === '心') {
+                            return [allCittas.map(citta => citta.id)];
+                        } else {
+                            return [[cetasikaIdIndex[cause]]];
+                        }
+                    },
+                    effectSummary: '心生色聚',
+                    effects: function (causes) {
+                        // TODO: implement
+                        return [];
+                    },
                     group: '名俱生组',
                     note: '四增上之一作为俱生心生色聚的增上缘'
                 },
@@ -172,7 +222,7 @@ const conditions = {
         {
             name: '所缘增上缘',
             id: 4,
-            components: ['所缘', '增上'],
+            keywords: ['所缘', '增上'],
             children: [
                 {
                     cause: ['名', '色', '涅槃'],
@@ -187,7 +237,7 @@ const conditions = {
         {
             name: '无间缘',
             id: 5,
-            components: ['无间'],
+            keywords: ['无间'],
             children: [
                 {
                     cause: ['名'],
@@ -202,7 +252,7 @@ const conditions = {
         {
             name: '等无间缘',
             id: 6,
-            components: ['等无间'],
+            keywords: ['等无间'],
             children: [
                 {
                     cause: ['名'],
@@ -217,7 +267,7 @@ const conditions = {
         {
             name: '俱生缘',
             id: 7,
-            components: ['俱生'],
+            keywords: ['俱生'],
             children: [
                 {
                     cause: ['名'],
@@ -283,7 +333,7 @@ const conditions = {
         {
             name: '相互缘',
             id: 8,
-            components: ['相互'],
+            keywords: ['相互'],
             children: [
                 {
                     cause: ['名'],
@@ -323,7 +373,7 @@ const conditions = {
         {
             name: '俱生依止缘',
             id: 9,
-            components: ['俱生', '依止'],
+            keywords: ['俱生', '依止'],
             note: '缘法与缘所生法同俱生缘，但是强调缘法作为缘所生法的依止与生起地',
             children: [
                 {
@@ -387,7 +437,7 @@ const conditions = {
         {
             name: '依处前生依止缘',
             id: 10,
-            components: ['依处', '前生', '依止'],
+            keywords: ['依处', '前生', '依止'],
             children: [
                 {
                     cause: ['色'],
@@ -402,7 +452,7 @@ const conditions = {
         {
             name: '依处所缘前生依止缘',
             id: 11,
-            components: ['依处', '所缘', '前生', '依止'],
+            keywords: ['依处', '所缘', '前生', '依止'],
             
             children: [
                 {
@@ -418,7 +468,7 @@ const conditions = {
         {
             name: '无间亲依止缘',
             id: 12,
-            components: ['无间', '亲依止'],
+            keywords: ['无间', '亲依止'],
             children: [
                 {
                     cause: ['名'],
@@ -433,7 +483,7 @@ const conditions = {
         {
             name: '所缘亲依止缘',
             id: 13,
-            components: ['所缘', '亲依止'],
+            keywords: ['所缘', '亲依止'],
             children: [
                 {
                     cause: ['名', '色', '涅槃'],
@@ -448,7 +498,7 @@ const conditions = {
         {
             name: '自然亲依止缘',
             id: 14,
-            components: ['自然', '亲依止'],
+            keywords: ['自然', '亲依止'],
             children: [
                 {
                     cause: ['名', '色', '概念'],
@@ -463,7 +513,7 @@ const conditions = {
         {
             name: '依处前生缘',
             id: 15,
-            components: ['依处', '前生'],
+            keywords: ['依处', '前生'],
             note: '前生缘的缘法一定是色法，缘所生法一定是名法',
             children: [
                 {
@@ -479,7 +529,7 @@ const conditions = {
         {
             name: '所缘前生缘',
             id: 16,
-            components: ['所缘', '前生'],
+            keywords: ['所缘', '前生'],
             children: [
                 {
                     cause: ['色'],
@@ -494,7 +544,7 @@ const conditions = {
         {
             name: '依处所缘前生缘',
             id: 17,
-            components: ['依处', '所缘', '前生'],
+            keywords: ['依处', '所缘', '前生'],
             children: [
                 {
                     cause: ['色'],
@@ -509,7 +559,7 @@ const conditions = {
         {
             name: '后生缘',
             id: 18,
-            components: ['后生'],
+            keywords: ['后生'],
             note: '后生缘的缘法一定是名法，缘所生法一定是色法',
             children: [
                 {
@@ -525,7 +575,7 @@ const conditions = {
         {
             name: '重复缘',
             id: 19,
-            components: ['重复'],
+            keywords: ['重复'],
             children: [
                 {
                     cause: ['名'],
@@ -540,7 +590,7 @@ const conditions = {
         {
             name: '俱生业缘',
             id: 20,
-            components: [],
+            keywords: [],
             note: '思心所作为同一名聚里其余名法的俱生业缘',
             children: [
                 {
@@ -573,7 +623,7 @@ const conditions = {
         {
             name: '无间业缘',
             id: 21,
-            components: ['无间', '业'],
+            keywords: ['无间', '业'],
             children: [
                 {
                     cause: ['名'],
@@ -588,7 +638,7 @@ const conditions = {
         {
             name: '异刹那业缘',
             id: 22,
-            components: ['异刹那', '业'],
+            keywords: ['异刹那', '业'],
             note: '思心所食未来果报名聚的异刹那业缘',
             children: [
                 {
@@ -612,7 +662,7 @@ const conditions = {
         {
             name: '自然亲依止业缘',
             id: 23,
-            components: ['自然', '亲依止', '业'],
+            keywords: ['自然', '亲依止', '业'],
             children: [
                 {
                     cause: ['名'],
@@ -627,7 +677,7 @@ const conditions = {
         {
             name: '果报缘',
             id: 24,
-            components: ['果报'],
+            keywords: ['果报'],
             children: [
                 {
                     cause: ['名'],
@@ -659,7 +709,7 @@ const conditions = {
         {
             name: '俱生食缘',
             id: 25,
-            components: ['俱生', '食'],
+            keywords: ['俱生', '食'],
             children: [
                 {
                     cause: ['名'],
@@ -691,7 +741,7 @@ const conditions = {
         {
             name: '色食缘',
             id: 26,
-            components: ['色', '食'],
+            keywords: ['色', '食'],
             children: [
                 {
                     cause: ['色'],
@@ -706,7 +756,7 @@ const conditions = {
         {
             name: '俱生根缘',
             id: 27,
-            components: ['俱生', '根'],
+            keywords: ['俱生', '根'],
             note: '疑心的根缘没有一境性',
             children: [
                 {
@@ -739,7 +789,7 @@ const conditions = {
         {
             name: '依处前生根缘',
             id: 28,
-            components: ['依处', '前生', '根'],
+            keywords: ['依处', '前生', '根'],
             children: [
                 {
                     cause: ['色'],
@@ -754,7 +804,7 @@ const conditions = {
         {
             name: '色命根缘',
             id: 29,
-            components: ['色', '命根'],
+            keywords: ['色', '命根'],
             children: [
                 {
                     cause: ['色'],
@@ -769,7 +819,7 @@ const conditions = {
         {
             name: '禅那缘',
             id: 30,
-            components: ['禅那'],
+            keywords: ['禅那'],
             note: '禅那缘不缘住双五识',
             children: [
                 {
@@ -802,7 +852,7 @@ const conditions = {
         {
             name: '道缘',
             id: 31,
-            components: ['道'],
+            keywords: ['道'],
             note: '道缘不缘助18无因心，疑心的道缘没有一境性',
             children: [
                 {
@@ -835,7 +885,7 @@ const conditions = {
         {
             name: '相应缘',
             id: 32,
-            components: ['相应'],
+            keywords: ['相应'],
             note: '同一名里的名法才有相应缘，色法及不同名聚的名法没有相应缘',
             children: [
                 {
@@ -851,7 +901,7 @@ const conditions = {
         {
             name: '俱生不相应缘',
             id: 33,
-            components: ['俱生', '不相应'],
+            keywords: ['俱生', '不相应'],
             note: '缘法与缘所生法一个是名，一个是色', // move to keyword section (不相应)
             children: [
                 {
@@ -891,7 +941,7 @@ const conditions = {
         {
             name: '依处前生不相应缘',
             id: 34,
-            components: ['依处', '前生', '不相应'],
+            keywords: ['依处', '前生', '不相应'],
             children: [
                 {
                     cause: ['色'],
@@ -906,7 +956,7 @@ const conditions = {
         {
             name: '依处所缘前生不相应缘',
             id: 35,
-            components: ['依处', '所缘', '前生', '不相应'],
+            keywords: ['依处', '所缘', '前生', '不相应'],
             children: [
                 {
                     cause: ['色'],
@@ -921,7 +971,7 @@ const conditions = {
         {
             name: '后生不相应缘',
             id: 36,
-            components: ['后生', '不相应'],
+            keywords: ['后生', '不相应'],
             children: [
                 {
                     cause: ['名'],
@@ -936,7 +986,7 @@ const conditions = {
         {
             name: '俱生有缘',
             id: 37,
-            components: ['俱生', '有'],
+            keywords: ['俱生', '有'],
             note: '缘法与缘所生法同时存在，故有缘',
             children: [
                 {
@@ -1003,7 +1053,7 @@ const conditions = {
         {
             name: '依处前生有缘',
             id: 38,
-            components: ['依处', '前生', '有'],
+            keywords: ['依处', '前生', '有'],
             children: [
                 {
                     cause: ['色'],
@@ -1018,7 +1068,7 @@ const conditions = {
         {
             name: '所缘前生有缘',
             id: 39,
-            components: ['所缘', '前生', '有'],
+            keywords: ['所缘', '前生', '有'],
             children: [
                 {
                     cause: ['色'],
@@ -1033,7 +1083,7 @@ const conditions = {
         {
             name: '依处所缘前生有缘',
             id: 40,
-            components: ['依处', '所缘', '前生', '有'],
+            keywords: ['依处', '所缘', '前生', '有'],
             children: [
                 {
                     cause: ['色'],
@@ -1048,7 +1098,7 @@ const conditions = {
         {
             name: '后生有缘',
             id: 41,
-            components: ['后生', '有'],
+            keywords: ['后生', '有'],
             children: [
                 {
                     cause: ['名'],
@@ -1063,7 +1113,7 @@ const conditions = {
         {
             name: '色食有缘',
             id: 42,
-            components: ['色', '食', '有'],
+            keywords: ['色', '食', '有'],
             children: [
                 {
                     cause: ['色'],
@@ -1078,7 +1128,7 @@ const conditions = {
         {
             name: '命根有缘',
             id: 43,
-            components: ['命根', '有'],
+            keywords: ['命根', '有'],
             children: [
                 {
                     cause: ['色'],
@@ -1093,7 +1143,7 @@ const conditions = {
         {
             name: '无有缘',
             id: 44,
-            components: ['无有'],
+            keywords: ['无有'],
             children: [
                 {
                     cause: ['名'],
@@ -1108,7 +1158,7 @@ const conditions = {
         {
             name: '离去缘',
             id: 45,
-            components: ['离去'],
+            keywords: ['离去'],
             children: [
                 {
                     cause: ['名'],
@@ -1123,7 +1173,7 @@ const conditions = {
         {
             name: '俱生不离去缘',
             id: 46,
-            components: ['俱生', '不离去'],
+            keywords: ['俱生', '不离去'],
             note: '尚未灭去的缘法或缘所生法其中之一与另一者重叠存在',
             children: [
                 {
@@ -1190,7 +1240,7 @@ const conditions = {
         {
             name: '依处前生不离去缘',
             id: 47,
-            components: ['依处', '前生', '不离去'],
+            keywords: ['依处', '前生', '不离去'],
             children: [
                 {
                     cause: ['色'],
@@ -1205,7 +1255,7 @@ const conditions = {
         {
             name: '所缘前生不离去缘',
             id: 48,
-            components: ['所缘', '前生', '不离去'],
+            keywords: ['所缘', '前生', '不离去'],
             children: [
                 {
                     cause: ['色'],
@@ -1220,7 +1270,7 @@ const conditions = {
         {
             name: '依处所缘前生不离去缘',
             id: 49,
-            components: ['依处', '所缘', '前生', '不离去'],
+            keywords: ['依处', '所缘', '前生', '不离去'],
             children: [
                 {
                     cause: ['色'],
@@ -1235,7 +1285,7 @@ const conditions = {
         {
             name: '后生不离去缘',
             id: 50,
-            components: ['后生', '不离去'],
+            keywords: ['后生', '不离去'],
             children: [
                 {
                     cause: ['名'],
@@ -1250,7 +1300,7 @@ const conditions = {
         {
             name: '色食不离去缘',
             id: 51,
-            components: ['色', '食', '不离去'],
+            keywords: ['色', '食', '不离去'],
             children: [
                 {
                     cause: ['色'],
@@ -1265,7 +1315,7 @@ const conditions = {
         {
             name: '命根不离去缘',
             id: 52,
-            components: ['命根', '不离去'],
+            keywords: ['命根', '不离去'],
             children: [
                 {
                     cause: ['色'],

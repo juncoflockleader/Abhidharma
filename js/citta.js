@@ -502,7 +502,7 @@ function calculateConnections() {
                     addConnection(item.id, [word], 'yellow', 'yellow', idIndex);
                 }
             });
-            subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt];
+            subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt].map(e => cetasikaIdIndex[e]);
             allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt});
         });
     });
