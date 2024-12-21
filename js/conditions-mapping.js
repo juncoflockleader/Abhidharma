@@ -111,6 +111,8 @@ function renderConditionsMapping(parent) {
         }
     }
 
+    let locked = null;
+    let highlighted = [];
     function renderConditions(parent, x, y, hub, causeIndex, effectIndex) {
         const groups = {};
         conditions.children.forEach((condition, index) => {
@@ -152,10 +154,9 @@ function renderConditionsMapping(parent) {
                     child.causes.forEach((cause, index) => {
                         const tb = renderTextBox(parent, x0, y, 160 / child.causes.length, 15, 'white', cause, {size: 12, wrap: true});
                         x0 = tb.endX;
-                        let locked = null;
-                        let highlighted = [];
                         function highlight() {
                             tb.highlight();
+                            highlighted.push(tb);
                             hub.setSummary(cause, condition.name, child.effectSummary, child.note, child.rebirth ? '结生' : '生命中');
                             const expandedCauses = child.expand(cause);
 
@@ -185,10 +186,13 @@ function renderConditionsMapping(parent) {
 
 
                             const expandedEffects = child.effects(expandedCauses);
-                            // connect the hub to the effects
+                            expandedEffects.forEach((expandedEffect, index) => {
+                                effectIndex[expandedEffect].highlight();
+                                highlighted.push(effectIndex[expandedEffect]);
+                                createElbowConnector(parent, effectIndex[expandedEffect].X, effectIndex[expandedEffect].Y + 5, hub.endX, hub.endY - 9, -10);
+                            });
                         }
                         function clear() {
-                            tb.clear();
                             hub.clear();
                             removeAllConnectors(parent);
                             highlighted.forEach((c, index) => {
@@ -211,10 +215,10 @@ function renderConditionsMapping(parent) {
                             if (locked) {
                                 clear();
                             }
-                            if (locked === this) {
+                            if (locked === tb) {
                                 locked = null;
                             } else {
-                                locked = this;
+                                locked = tb;
                                 highlight();
                             }
                         });

@@ -301,6 +301,8 @@ function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
     item.clear = function () {
         cell.attr('fill', bgColor);
     }
+    item.X = x;
+    item.Y = y;
     item.endX = x + w;
     item.endY = y + h;
     return item;
@@ -420,6 +422,8 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
             align: 'left'
         });
         if (itemIndex) {
+            textbox.X += x;
+            textbox.Y += y;
             textbox.endX += x;
             textbox.endY += y;
             itemIndex[item.id] = textbox;

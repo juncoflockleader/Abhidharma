@@ -102,7 +102,7 @@ const conditions = {
                         }
                     },
                     effects: function (causes) {
-                        return [[9320, 9321, 9322, 9323]];
+                        return [9320, 9321, 9322, 9323];
                     },
                     rebirth: true,
                     note: '结生时，二因、三因作为俱生有因业生色聚的因缘'
