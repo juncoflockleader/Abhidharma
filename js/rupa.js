@@ -806,6 +806,7 @@ function renderNotesTable(parent, x, y) {
 }
 
 let allRupaAgg = [];
+let rupasSubEffects = {};
 function renderRupaAggTable(parent, x, y) {
     const fontSize = 12; // px
     const padding = 3;
@@ -830,10 +831,12 @@ function renderRupaAggTable(parent, x, y) {
         }
     }
 
+    const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
     function renderAggEN(parent, x, y, data, rupas) {
         const w = 250;
         if (!data.children) {
             allRupaAgg.push(data);
+            rupasSubEffects[data.id] = rupas.concat(eightBasics);
             let ry = y;
             let rx = x;
             const item = renderTextBox(parent, rx, ry, w, unit, 'white', data.name, {size: fontSize});
@@ -855,7 +858,6 @@ function renderRupaAggTable(parent, x, y) {
                 });
 
             }
-            const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
             eightBasics.forEach(d => {
                 const items = highlightableItems[rupaIndex[d].id];
                 highlightableItems[data.id].push(...items);
@@ -884,6 +886,7 @@ function renderRupaAggTable(parent, x, y) {
     function renderAggCN(parent, x, y, data, rupas) {
         if (!data.children) {
             allRupaAgg.push(data);
+            rupasSubEffects[data.id] = rupas.concat(eightBasics);
             let ry = y;
             const h1 = 13 * fontSize;
             const item = renderTextBox(parent, x, ry, unit, h1, 'white', data.name, {vertical: true, size: fontSize});
@@ -907,7 +910,6 @@ function renderRupaAggTable(parent, x, y) {
                 });
 
             }
-            const eightBasics = [t('string_id_502'), t('string_id_507'), t('string_id_511'), t('string_id_515'), t('string_id_729'), t('string_id_550'), t('string_id_554'), t('string_id_581')];
             eightBasics.forEach(d => {
                 const items = highlightableItems[rupaIndex[d].id];
                 highlightableItems[data.id].push(...items);

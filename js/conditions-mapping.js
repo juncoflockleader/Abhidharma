@@ -143,7 +143,7 @@ function renderConditionsMapping(parent) {
             const group = groups[key];
             let y0 = y;
             Object.keys(group).forEach((ck, index) => {
-                let y0 = y;
+                let y1 = y;
                 const condition = group[ck];
                 condition.children.forEach((child, subIndex) => {
                     if (!child.causes) {
@@ -183,14 +183,37 @@ function renderConditionsMapping(parent) {
                                 });
                             }
 
+                            function addSubEffects(effect, set) {
+                                function addToSet(arr, s) {
+                                    arr.forEach((c, index) => {
+                                        s.add(c);
+                                    });
+                                }
+                                if (effect > 0 && effect < 100) {
+                                    addToSet(subEffectIndex[effect].map(e => cetasikaIdIndex[e]), set);
+                                }
+                                if (effect > 9300 && effect < 9400) {
+                                    addToSet(rupasSubEffects[effect].map(e => rupaIndex[e].id), set);
+                                }
+                            }
 
-
-                            const expandedEffects = child.effects(expandedCauses);
-                            expandedEffects.forEach((expandedEffect, index) => {
-                                effectIndex[expandedEffect].highlight();
-                                highlighted.push(effectIndex[expandedEffect]);
-                                createElbowConnector(parent, effectIndex[expandedEffect].X, effectIndex[expandedEffect].Y + 5, hub.endX, hub.endY - 9, -10);
+                            const subEffects = new Set();
+                            const itemGroup = parent.append('g')
+                                .attr('class', 'expanded-effect-group');
+                            expandedCauses.forEach((expandedCause, index) => {
+                                const expandedEffects = child.effects(expandedCause);
+                                expandedEffects.forEach((expandedEffect, index) => {
+                                    effectIndex[expandedEffect].highlight();
+                                    addSubEffects(expandedEffect, subEffects);
+                                    highlighted.push(effectIndex[expandedEffect]);
+                                    createElbowConnector(itemGroup, effectIndex[expandedEffect].X, effectIndex[expandedEffect].Y + 5, hub.endX, hub.endY - 9, -10);
+                                });
                             });
+                            subEffects.forEach((effect, index) => {
+                                effectIndex[effect].highlight();
+                                highlighted.push(effectIndex[effect]);
+                            });
+
                         }
                         function clear() {
                             hub.clear();
@@ -200,6 +223,7 @@ function renderConditionsMapping(parent) {
                             });
                             highlighted = [];
                             parent.selectAll('.expanded-cause-group').remove();
+                            parent.selectAll('.expanded-effect-group').remove();
                         }
                         tb.on('mouseover', function(event, d) {
                             if (locked) return;
@@ -225,7 +249,7 @@ function renderConditionsMapping(parent) {
                     });
                     y = t.endY;
                 });
-                const t = renderTextBox(parent, x + headerW, y0, w, y - y0, 'lightcyan', condition.name, {size: 12, wrap: true});
+                const t1 = renderTextBox(parent, x + headerW, y1, w, y - y1, 'lightcyan', condition.name, {size: 12, wrap: true});
                 counter++;
             });
             if (key === '自然亲依止组') { // text box is too small

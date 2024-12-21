@@ -139,6 +139,7 @@ const conditions = {
                 {
                     cause: ['名', '色', '概念', '涅槃'],
                     effect: '名',
+                    causes: [],
                     group: '所缘组',
                     effects: [],
                     note: '目标或对象作为名聚的所缘'
