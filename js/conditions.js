@@ -208,7 +208,6 @@ const conditions = {
                     },
                     effectSummary: '心生色聚',
                     effects: function (causes) {
-                        // TODO: implement
                         return [9301, 9302, 9303, 9304, 9305, 9306, 9307, 9308];
                     },
                     group: '名俱生组',
@@ -224,8 +223,27 @@ const conditions = {
                 {
                     cause: ['名', '色', '涅槃'],
                     effect: '名',
-                    causes: [],
-                    effects: [], // 名+18 完成色→8 貪；名→8 大善+4 三因唯作；涅槃→8 出世間心+4 三因大善+三因唯作
+                    causes: ['名色', '名', '涅槃'],
+                    expand: function (cause) {
+                        if (cause === '名色') {
+                            return [Array.from({length: 89}, (_, i) => i + 1).concat(Array.from({length: 18}, (_, i) => i + 9001))];
+                        } else if (cause === '名') {
+                            return [Array.from({length: 89}, (_, i) => i + 1)];
+                        } else {
+                            return [[0]];
+                        }
+                    },
+                    effectSummary: '名聚',
+                    effects: function (causes) {
+                        if (causes.length === 1){
+                            return [];
+                        } else if (causes.length === 89) {
+
+                        } else {
+
+                        }
+
+                    }, // 名+18完成色→8貪；名→8大善+4三因唯作；涅槃→8出世間心+4三因大善+三因唯作
                     group: '所缘组',
                     note: '极重视、尊重、执着的可意所缘作为名聚的增上缘'
                 },
