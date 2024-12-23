@@ -43,7 +43,7 @@ function renderConditionsMapping(parent) {
                     x += 80;
                     y = 0;
                 }
-                const t = renderVerticalTable(parent, x, y, 50, group.length * 15 + 20, group.name, group.children, 1, itemIndex, true, 'lightblue');
+                const t = renderVerticalTable(parent, x, y, 50, group.length * 15 + 20, group.name, group.children.filter(c => c.id > 0), 1, itemIndex, true, 'lightblue');
                 y = t.endY;
             });
         });
@@ -113,8 +113,12 @@ function renderConditionsMapping(parent) {
 
     let locked = null;
     let highlighted = [];
+    let conditions = null;
     function renderConditions(parent, x, y, hub, causeIndex, effectIndex, keywordsIndex) {
         const groups = {};
+        if (!conditions) {
+            conditions = getConditions();
+        }
         conditions.children.forEach((condition, index) => {
             condition.children.forEach((child, index) => {
                 if (!groups[child.group]) {
@@ -199,11 +203,19 @@ function renderConditionsMapping(parent) {
                                         s.add(c);
                                     });
                                 }
+                                function removeFromSet(arr, s) {
+                                    arr.forEach((c, index) => {
+                                        s.delete(c);
+                                    });
+                                }
                                 if (effect > 0 && effect < 100) {
                                     addToSet(subEffectIndex[effect], set);
                                 }
                                 if (effect > 9300 && effect < 9400) {
                                     addToSet(rupasSubEffects[effect], set);
+                                }
+                                if (child.suppressed) {
+                                    removeFromSet(child.suppressed, set);
                                 }
                             }
 
