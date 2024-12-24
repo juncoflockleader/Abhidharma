@@ -91,7 +91,7 @@ const cmSvg = container.select('#container7')
     .append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
-    .attr('height', svgHeight * 1.5);
+    .attr('height', svgHeight * 1.53);
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
