@@ -82,13 +82,13 @@ function renderConditionsMapping(parent) {
     function renderHub(parent, x, y) {
         const markerName = 'conditions-mapping-arrowhead';
         setupArrowHead(parent, markerName);
-        const timeSummary = renderTextBox(parent, x, y - 120, 100, 18, 'white', '', {size: 15, wrap: true});
-        const causeSummary = renderTextBox(parent, x, y, 100, 18, 'white', '', {size: 15, wrap: true});
-        const conditionSummary = renderTextBox(parent, x, y + 30, 100, 18, 'white', '', {size: 15, wrap: true});
-        const effectSummary = renderTextBox(parent, x, y + 60, 100, 18, 'white', '', {size: 15, wrap: true});
-        const noteSummary = renderTextBox(parent, x- 20, y + 120, 140, 52, 'white', '', {size: 12, wrap: true});
-        connect(parent, causeSummary.endX - 50, causeSummary.endY, conditionSummary.endX - 50, conditionSummary.endY - 18, markerName);
-        connect(parent, conditionSummary.endX - 50, conditionSummary.endY, effectSummary.endX - 50, effectSummary.endY - 18, markerName);
+        const timeSummary = renderTextBox(parent, x + 10, y - 70, 100, 18, 'white', '', {size: 14, wrap: true});
+        const causeSummary = renderTextBox(parent, x, y, 120, 18, 'white', '', {size: 14, wrap: true});
+        const conditionSummary = renderTextBox(parent, x, y + 30, 120, 18, 'white', '', {size: 13, wrap: true});
+        const effectSummary = renderTextBox(parent, x, y + 60, 120, 18, 'white', '', {size: 14, wrap: true});
+        const noteSummary = renderTextBox(parent, x - 10, y + 120, 140, 52, 'white', '', {size: 12, wrap: true});
+        connect(parent, causeSummary.endX - 60, causeSummary.endY, conditionSummary.endX - 60, conditionSummary.endY - 18, markerName);
+        connect(parent, conditionSummary.endX - 60, conditionSummary.endY, effectSummary.endX - 60, effectSummary.endY - 18, markerName);
         return {
             setSummary: function (cause, condition, effect, note, time) {
                 causeSummary.setText(cause);
@@ -302,7 +302,7 @@ function renderConditionsMapping(parent) {
     const t = renderExtras(x + 480, 250, causeIndex)
     render23RupaAggs(x + 400, svgHeight / 2, causeIndex);
 
-    const hub = renderHub(parent, t.endX + 50, svgHeight / 2 - 110);
+    const hub = renderHub(parent, t.endX + 40, svgHeight / 2 - 110);
     const keywordsIndex = {};
     renderKeywords(parent, t.endX + 26, 600, keywordsIndex);
 
