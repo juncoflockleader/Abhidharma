@@ -95,3 +95,10 @@ body {
     color: #666; /* Same as disabled text color */
     border: 1px solid #aaa; /* Same as disabled border */
 }
+
+.svg-side-container {
+    height: 100vh;
+    overflow: auto;
+    padding-right: 20px;
+    padding-left: 20px;
+}

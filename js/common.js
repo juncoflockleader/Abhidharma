@@ -87,11 +87,17 @@ const rpnsSvg = container.select('#container9').append('svg')
 const testSvg = d3.select('#test-svg');
 const testDiv = d3.select('#test-div');
 
-const cmSvg = container.select('#container7')
+const cdSvg = container.select('#left-svg-side-container')
     .append('svg')
     .attr('class', 'svg-content')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight * 1.53);
+    .attr('width', 500)
+    .attr('height', svgHeight * 1.63);
+
+const ceSvg = container.select('#right-svg-side-container')
+    .append('svg')
+    .attr('class', 'svg-content')
+    .attr('width', 1280)
+    .attr('height', svgHeight);
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');

@@ -67,7 +67,7 @@ function render() {
 
     dependentOrigination(doSvg, dependentOriginData);
 
-    renderConditionsMapping(cmSvg);
+    renderConditionsMapping(cdSvg, ceSvg);
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);
