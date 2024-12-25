@@ -2313,7 +2313,7 @@ function getConditions() {
             {
                 name: '色食不离去缘',
                 id: 51,
-                keywords: ['色', '食', '不离去'],
+                keywords: ['食', '不离去'],
                 children: [
                     {
                         cause: ['色'],
