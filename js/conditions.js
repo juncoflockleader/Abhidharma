@@ -2020,7 +2020,7 @@ function getConditions() {
             {
                 name: '命根有缘',
                 id: 43,
-                keywords: ['命根', '有'],
+                keywords: ['根', '有'],
                 children: [
                     {
                         cause: ['色'],
@@ -2348,7 +2348,7 @@ function getConditions() {
             {
                 name: '命根不离去缘',
                 id: 52,
-                keywords: ['命根', '不离去'],
+                keywords: ['根', '不离去'],
                 children: [
                     {
                         cause: ['色'],
