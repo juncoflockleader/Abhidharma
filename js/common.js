@@ -90,8 +90,8 @@ const testDiv = d3.select('#test-div');
 const cdSvg = container.select('#left-svg-side-container')
     .append('svg')
     .attr('class', 'svg-content')
-    .attr('width', 500)
-    .attr('height', svgHeight * 1.63);
+    .attr('width', 380)
+    .attr('height', svgHeight * 2);
 
 const ceSvg = container.select('#right-svg-side-container')
     .append('svg')

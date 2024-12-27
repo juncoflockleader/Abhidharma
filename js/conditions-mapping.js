@@ -136,11 +136,11 @@ function renderConditionsMapping(leftSvg, rightSvg) {
             });
         });
         const w = 120;
-        const headerW = 20
+        const headerW = 20;
         const header = renderTextBox(leftSvg, x, y, headerW, 15, 'lightcyan', '组', {size: 12, wrap: true});
         const t = renderTextBox(leftSvg, x + headerW, y, w, 15, 'lightcyan', '缘', {size: 12, wrap: true});
-        renderTextBox(leftSvg, t.endX, y, w + 20, 15, 'lightcyan', '缘法→缘生法', {size: 12, wrap: true});
-        renderTextBox(leftSvg, x + w + headerW + w + 20, y, 160, 15, 'lightcyan', '缘法', {size: 12, wrap: true});
+        renderTextBox(leftSvg, t.endX, y, w, 15, 'lightcyan', '缘法→缘生法', {size: 12, wrap: true});
+        renderTextBox(leftSvg, x + w + headerW + w, y, w, 15, 'lightcyan', '缘法', {size: 12, wrap: true});
         y = t.endY;
         let counter = 0;
         Object.keys(groups).forEach((key, index) => {
@@ -149,15 +149,19 @@ function renderConditionsMapping(leftSvg, rightSvg) {
             Object.keys(group).forEach((ck, index) => {
                 let y1 = y;
                 const condition = group[ck];
-                condition.children.forEach((child, subIndex) => {
-                    if (!child.causes) {
-                        return;
+                const subGroups = {}; // group by cause-effect. for example: 名→色, 名→名, etc
+                condition.children.forEach((child, index) => {
+                    const causeEffect = child.cause + '→' + child.effect;
+                    if (!subGroups[causeEffect]) {
+                        subGroups[causeEffect] = [child];
+                    } else {
+                        subGroups[causeEffect].push(child);
                     }
-                    const t = renderTextBox(leftSvg, x + w + headerW, y, w + 20, 15, counter % 2 === 0 ? 'lavender' : 'lightpink', child.cause + '→' + child.effect, {size: 12, wrap: true});
-                    let x0 = x + w + headerW + 20 + w;
-                    child.causes.forEach((cause, index) => {
-                        const tb = renderTextBox(leftSvg, x0, y, 160 / child.causes.length, 15, 'white', cause, {size: 12, wrap: true});
-                        x0 = tb.endX;
+                });
+                Object.keys(subGroups).map((key, index) => {
+                    const subGroup = subGroups[key];
+                    subGroup.forEach((child, index) => {
+                        const tb = renderTextBox(leftSvg, x + w + headerW + w, y, w, 15, 'white', child.causeSummary, {size: 12, wrap: true});
                         function highlight() {
                             tb.highlight();
                             highlighted.push(tb);
@@ -169,33 +173,15 @@ function renderConditionsMapping(leftSvg, rightSvg) {
                                     }
                                 );
                             }
-                            hub.setSummary(cause, condition.name, child.effectSummary, child.note, child.rebirth ? '结生' : '生命中');
-                            const expandedCauses = child.expand(cause);
+                            hub.setSummary(child.causeSummary, condition.name, child.effectSummary, child.note, child.rebirth ? '结生' : '生命中');
+                            const expandedCauses = child.expand();
 
                             // Connect causes to the hub
-                            if (expandedCauses.length === 1) {
-                                expandedCauses[0].forEach((expandedCause, index) => {
-                                    causeIndex[expandedCause].highlight();
-                                    highlighted.push(causeIndex[expandedCause]);
-                                    createElbowConnector(rightSvg, causeIndex[expandedCause].endX, causeIndex[expandedCause].endY - 5, hub.X, hub.Y + 9, 10);
-                                });
-                            } else if (expandedCauses.length > 1) {
-                                const itemGroup = rightSvg.append('g')
-                                    .attr('class', 'expanded-cause-group');
-                                const colors = ['red', 'orange', 'brown', 'green', 'cyan', 'blue', 'purple'];
-                                expandedCauses.forEach((expandedCause, i) => {
-                                    const color = colors[i % colors.length];
-                                    const cw = 10;
-                                    const ch = 10;
-                                    const cell = renderCell(itemGroup, hub.X - cw - 5, hub.Y + ch * i, cw, ch, color);
-                                    createElbowConnector(rightSvg, cell.endX, cell.endY - ch / 2, hub.X, hub.Y + 9, 2);
-                                    expandedCause.forEach((c, j) => {
-                                        causeIndex[c].highlight();
-                                        highlighted.push(causeIndex[c]);
-                                        createElbowConnector(rightSvg, causeIndex[c].endX, causeIndex[c].endY - 5, cell.X, cell.Y + ch / 2, i*5+5, color);
-                                    });
-                                });
-                            }
+                            expandedCauses.forEach((expandedCause, index) => {
+                                causeIndex[expandedCause].highlight();
+                                highlighted.push(causeIndex[expandedCause]);
+                                createElbowConnector(rightSvg, causeIndex[expandedCause].endX, causeIndex[expandedCause].endY - 5, hub.X, hub.Y + 9, 10);
+                            });
 
                             function addSubEffects(effect, set) {
                                 function addToSet(arr, s) {
@@ -222,14 +208,12 @@ function renderConditionsMapping(leftSvg, rightSvg) {
                             const subEffects = new Set();
                             const itemGroup = rightSvg.append('g')
                                 .attr('class', 'expanded-effect-group');
-                            expandedCauses.forEach((expandedCause, index) => {
-                                const expandedEffects = child.effects(expandedCause);
-                                expandedEffects.forEach((expandedEffect, index) => {
-                                    effectIndex[expandedEffect].highlight();
-                                    addSubEffects(expandedEffect, subEffects);
-                                    highlighted.push(effectIndex[expandedEffect]);
-                                    createElbowConnector(itemGroup, effectIndex[expandedEffect].X, effectIndex[expandedEffect].Y + 5, hub.endX, hub.endY - 9, -10);
-                                });
+                            const expandedEffects = child.effects();
+                            expandedEffects.forEach((expandedEffect, index) => {
+                                effectIndex[expandedEffect].highlight();
+                                addSubEffects(expandedEffect, subEffects);
+                                highlighted.push(effectIndex[expandedEffect]);
+                                createElbowConnector(itemGroup, effectIndex[expandedEffect].X, effectIndex[expandedEffect].Y + 5, hub.endX, hub.endY - 9, -10);
                             });
                             subEffects.forEach((effect, index) => {
                                 effectIndex[effect].highlight();
@@ -268,16 +252,18 @@ function renderConditionsMapping(leftSvg, rightSvg) {
                                 highlight();
                             }
                         });
+                        y = tb.endY;
                     });
-                    y = t.endY;
+                    const t = renderTextBox(leftSvg, x + w + headerW, y - 15 * subGroup.length, w, 15 * subGroup.length, counter % 2 === 0 ? 'lavender' : 'lightpink', key, {size: 12, wrap: true});
                 });
+
                 const t1 = renderTextBox(leftSvg, x + headerW, y1, w, y - y1, 'lightcyan', condition.name, {size: 12, wrap: true});
                 counter++;
             });
             if (key === '自然亲依止组') { // text box is too small
-                renderTextBox(leftSvg, x - 80 + headerW, y0, 80, y - y0, 'lightcyan', key, {size: 12, wrap: true});
+                renderTextBox(leftSvg, x, y0, 30, y - y0, 'lightcyan', key, {size: 12, wrap: true});
             } else if (key === '色命根组') {
-                renderTextBox(leftSvg, x - 80 + headerW, y0, 80, y - y0, 'lightcyan', key, {size: 12, wrap: true});
+                renderTextBox(leftSvg, x, y0, 30, y - y0, 'lightcyan', key, {size: 12, wrap: true});
             } else {
                 const header = renderTextBox(leftSvg, x, y0, headerW, y - y0, 'lightcyan', key, {size: 12, wrap: true});
             }
@@ -296,7 +282,7 @@ function renderConditionsMapping(leftSvg, rightSvg) {
             let h = 34;
             if (keywords[keys[i]].length > 22) {
                 h = 44;
-            } else if (keywords[keys[i]].length > 11) {
+            } else if (keywords[keys[i]].length > 11 || keys[i].length > 2) {
                 h = 34;
             } else {
                 h = 17;
@@ -325,5 +311,5 @@ function renderConditionsMapping(leftSvg, rightSvg) {
     render89Cittas(rightSvg, x + svgWidth / 2, 0, effectIndex);
     render52Cetasikas(rightSvg, x + svgWidth / 2 + 260, 0, effectIndex);
 
-    renderConditions(leftSvg, rightSvg, 60, 0, hub, causeIndex, effectIndex, keywordsIndex);
+    renderConditions(leftSvg, rightSvg, 0, 0, hub, causeIndex, effectIndex, keywordsIndex);
 }

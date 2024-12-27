@@ -172,7 +172,7 @@ class Builder {
             Builder.setVariable('嗔嫉悭恶作疑', rangeInclusive(120, 125));
             Builder.setVariable('54欲界心', rangeInclusive(1, 54));
             Builder.setVariable('后生心', new Builder('89心').sub('无色界果报心').build());
-            Builder.setVariable('23色聚', rangeInclusive(9301, 9325));
+            Builder.setVariable('23色聚', rangeInclusive(9301, 9323));
             Builder.setVariable('4出世间道心', rangeInclusive(82, 85));
             Builder.setVariable('4出世间果心', rangeInclusive(86, 89));
             Builder.setVariable('思心所', [104]);
@@ -199,6 +199,7 @@ class Builder {
     }
 }
 
+// TODO: Merge "名→名"s and "名→色"s ...
 function getConditions() {
     // '触:101', '受:102', '想:103', '思:104', '一境性:105', '命根:106', '作意:107', '寻:108',
     // '伺:109', '胜解:110', '精进:111', '喜:112', '欲:113', '痴:114', '无惭:115', '无愧:116',
@@ -248,72 +249,173 @@ function getConditions() {
                 keywords: ['因'],
                 children: [
                     // 连结名色法的缘法结生时较为特别，因为前一世的色法已不复存在，今生的色法将作为同时生起的色法来支助名法的生起。
+                    // 展开所有的缘法，虽然代码中比较复杂，但是UI会较为简洁
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['一因', '二因', '三因'],
+                        causeSummary: '一因',
                         effectSummary: '其余名法',
                         group: '名俱生组',
-                        expand: function (cause) {
-                            if (cause === '一因') {
-                                return [Builder.getVariable('一因心所')];
-                            } else if (cause === '二因') {
-                                return Builder.getVariable('二因心所');
-                            } else if (cause === '三因') {
-                                return [Builder.getVariable('三因心所')];
-                            }
+                        expand: function () {
+                            return Builder.getVariable('一因心所');
                         },
-                        effects: function (causes) {
-                            if (arraysEqual(causes, Builder.getVariable('一因心所'))) {
-                                return Builder.getVariable('一因心');
-                            } else if (arraysEqual(causes, Builder.getVariable('贪根心所'))) {
-                                return Builder.getVariable('贪根心');
-                            } else if (arraysEqual(causes, Builder.getVariable('嗔根心所'))) {
-                                return Builder.getVariable('嗔根心');
-                            } else if (arraysEqual(causes, Builder.getVariable('无贪无嗔心所'))) {
-                                return Builder.getVariable('无贪无嗔心');
-                            } else {
-                                return Builder.getVariable('三因心');
-                            }
+                        effects: function () {
+                            return Builder.getVariable('一因心');
                         },
                         note: '六因（一、二、三因）作为同一有因名聚里其余名法的因缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '贪根二因',
+                        effectSummary: '其余名法',
+                        group: '名俱生组',
+                        expand: function () {
+                            return Builder.getVariable('贪根心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('贪根心');
+                        },
+                        note: '六因（一、二、三因）作为同一有因名聚里其余名法的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '嗔根二因',
+                        effectSummary: '其余名法',
+                        group: '名俱生组',
+                        expand: function () {
+                            return Builder.getVariable('嗔根心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('嗔根心');
+                        },
+                        note: '六因（一、二、三因）作为同一有因名聚里其余名法的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '善二因',
+                        effectSummary: '其余名法',
+                        group: '名俱生组',
+                        expand: function () {
+                            return Builder.getVariable('无贪无嗔心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('无贪无嗔心');
+                        },
+                        note: '六因（一、二、三因）作为同一有因名聚里其余名法的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '三因',
+                        effectSummary: '其余名法',
+                        group: '名俱生组',
+                        expand: function () {
+                            return Builder.getVariable('三因心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('三因心');
+                        },
+                        note: '六因（一、二、三因）作为同一有因名聚里其余名法的因缘'
+                    },
+                    {
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生二因', '结生三因'],
+                        causeSummary: '结生二因',
                         group: '名俱生组',
                         effectSummary: '业生色聚',
-                        expand: function (cause) {
-                            if (cause === '结生二因') {
-                                return [Builder.getVariable('无贪无嗔心所')];
-                            } else if (cause === '结生三因') {
-                                return [Builder.getVariable('三因心所')];
-                            }
+                        expand: function () {
+                            return Builder.getVariable('无贪无嗔心所');
                         },
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('结生色聚');
                         },
                         rebirth: true,
                         note: '结生时，二因、三因作为俱生有因业生色聚的因缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['一因', '二因', '三因'],
+                        causeSummary: '结生三因',
+                        group: '名俱生组',
+                        effectSummary: '业生色聚',
+                        expand: function () {
+                            return Builder.getVariable('三因心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('结生色聚');
+                        },
+                        rebirth: true,
+                        note: '结生时，二因、三因作为俱生有因业生色聚的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '一因',
                         group: '名俱生组',
                         effectSummary: '心生色聚',
-                        expand: function (cause) {
-                            if (cause === '一因') {
-                                // ['痴']
-                                return [Builder.getVariable('一因心所')];
-                            } else if (cause === '二因') {
-                                return Builder.getVariable('二因心所');
-                            } else if (cause === '三因') {
-                                return [Builder.getVariable('三因心所')];
-                            }
+                        expand: function () {
+                            return Builder.getVariable('一因心所');
                         },
-                        effects: function (causes) {
+                        effects: function () {
+                            return Builder.getVariable('心生色聚');
+                        },
+                        note: '六因（一、二、三因）作为俱生有因心生色聚的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '贪根二因',
+                        group: '名俱生组',
+                        effectSummary: '心生色聚',
+                        expand: function () {
+                            return Builder.getVariable('贪根心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('心生色聚');
+                        },
+                        note: '六因（一、二、三因）作为俱生有因心生色聚的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '嗔根二因',
+                        group: '名俱生组',
+                        effectSummary: '心生色聚',
+                        expand: function () {
+                            return Builder.getVariable('嗔根心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('心生色聚');
+                        },
+                        note: '六因（一、二、三因）作为俱生有因心生色聚的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '善二因',
+                        group: '名俱生组',
+                        effectSummary: '心生色聚',
+                        expand: function () {
+                            return Builder.getVariable('无贪无嗔心所');
+                        },
+                        effects: function () {
+                            return Builder.getVariable('心生色聚');
+                        },
+                        note: '六因（一、二、三因）作为俱生有因心生色聚的因缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '三因',
+                        group: '名俱生组',
+                        effectSummary: '心生色聚',
+                        expand: function () {
+                            return Builder.getVariable('三因心所');
+                        },
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         note: '六因（一、二、三因）作为俱生有因心生色聚的因缘'
@@ -326,23 +428,57 @@ function getConditions() {
                 keywords: ['所缘'],
                 children: [
                     {
-                        cause: ['名', '色', '概念', '涅槃'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名', '色', '概念', '涅槃'],
+                        causeSummary: '名',
                         group: '所缘组',
-                        expand: function (cause) {
-                            if (cause === '名') {
-                                return [Builder.getVariable('名法')];
-                            } else if (cause === '色') {
-                                return [Builder.getVariable('色法')];
-                            } else if (cause === '概念') {
-                                return [Builder.getVariable('概念')];
-                            } else {
-                                return [Builder.getVariable('涅槃')];
-                            }
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
+                            return Builder.getVariable('89心');
+                        },
+                        note: '目标或对象作为名聚的所缘'
+                    },
+                    {
+                        cause: '色',
+                        effect: '名',
+                        causeSummary: '色',
+                        group: '所缘组',
+                        expand: function () {
+                            return Builder.getVariable('色法');
+                        },
+                        effectSummary: '名聚',
+                        effects: function () {
+                            return Builder.getVariable('89心');
+                        },
+                        note: '目标或对象作为名聚的所缘'
+                    },
+                    {
+                        cause: '概念',
+                        effect: '名',
+                        causeSummary: '概念',
+                        group: '所缘组',
+                        expand: function () {
+                            return Builder.getVariable('概念');
+                        },
+                        effectSummary: '名聚',
+                        effects: function () {
+                            return Builder.getVariable('89心');
+                        },
+                        note: '目标或对象作为名聚的所缘'
+                    },
+                    {
+                        cause: '涅槃',
+                        effect: '名',
+                        causeSummary: '涅槃',
+                        group: '所缘组',
+                        expand: function () {
+                            return Builder.getVariable('涅槃');
+                        },
+                        effectSummary: '名聚',
+                        effects: function () {
                             return Builder.getVariable('89心');
                         },
                         note: '目标或对象作为名聚的所缘'
@@ -355,54 +491,134 @@ function getConditions() {
                 keywords: ['俱生', '增上'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['心', '欲', '精进', '慧'],
-                        expand: function (cause) {
-                            if (cause === '心') {
-                                return [Builder.getVariable('二因及三因速行心')];
-                            } else {
-                                return [[cetasikaIdIndex[cause]]];
-                            }
+                        causeSummary: '心',
+                        expand: function () {
+                            return Builder.getVariable('二因及三因速行心');
+                        },
+                        effectSummary: '名聚',
+                        effects: function() {
+                            return Builder.getVariable('二因及三因速行心');
+                        },
+                        group: '名俱生组',
+                        note: '四增上之一作为2因或3因同一速行名聚里其余名法的增上缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '欲',
+                        expand: function () {
+                            return [cetasikaIdIndex['欲']];
                         },
                         effectSummary: '名聚',
                         effects: (function() {
-                            const resultCache = {};
-                            return function (causes) {
-                                let result = {};
-                                if (causes.length === 1) {
-                                    if (resultCache[causes[0]]) {
-                                        return resultCache[causes[0]];
-                                    }
-                                    if (causes[0] === cetasikaIdIndex['欲']) {
-                                        result = new Builder('欲心所对应心').intersect('二因及三因速行心').build();
-                                    } else if (causes[0] === cetasikaIdIndex['精进']) {
-                                        result = new Builder('精进心所对应心').intersect('二因及三因速行心').build();
-                                    } else {
-                                        result = new Builder('慧心所对应心').intersect('二因及三因速行心').build();
-                                    }
-                                    resultCache[causes[0]] = result;
-                                    return result;
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
                                 }
-                                return Builder.getVariable('二因及三因速行心');
+                                resultCache = new Builder('欲心所对应心').intersect('二因及三因速行心').build();
+                                return resultCache;
                             };
                         })(),
                         group: '名俱生组',
                         note: '四增上之一作为2因或3因同一速行名聚里其余名法的增上缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '精进',
+                        expand: function () {
+                            return [cetasikaIdIndex['精进']];
+                        },
+                        effectSummary: '名聚',
+                        effects: (function() {
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
+                                }
+                                resultCache = new Builder('精进心所对应心').intersect('二因及三因速行心').build();
+                                return resultCache;
+
+                            };
+                        })(),
+                        group: '名俱生组',
+                        note: '四增上之一作为2因或3因同一速行名聚里其余名法的增上缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '慧',
+                        expand: function () {
+                            return [cetasikaIdIndex['慧']];
+                        },
+                        effectSummary: '名聚',
+                        effects: (function() {
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
+                                }
+                                resultCache = new Builder('慧心所对应心').intersect('二因及三因速行心').build();
+                                return resultCache;
+                            };
+                        })(),
+                        group: '名俱生组',
+                        note: '四增上之一作为2因或3因同一速行名聚里其余名法的增上缘'
+                    },
+                    {
+                        cause: '名',
                         effect: '色',
-                        causes: ['心', '欲', '精进', '慧'],
-                        expand: function (cause) {
-                            if (cause === '心') {
-                                return [allCittas.map(citta => citta.id)];
-                            } else {
-                                return [[cetasikaIdIndex[cause]]];
-                            }
+                        causeSummary: '心',
+                        expand: function () {
+                            return Builder.getVariable('89心');
                         },
                         effectSummary: '心生色聚',
-                        effects: function (causes) {
+                        effects: function () {
+                            return rangeInclusive(9301, 9308);
+                        },
+                        group: '名俱生组',
+                        note: '四增上之一作为俱生心生色聚的增上缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '欲',
+                        expand: function () {
+                            return [cetasikaIdIndex['欲']];
+                        },
+                        effectSummary: '心生色聚',
+                        effects: function () {
+                            return rangeInclusive(9301, 9308);
+                        },
+                        group: '名俱生组',
+                        note: '四增上之一作为俱生心生色聚的增上缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '精进',
+                        expand: function () {
+                            return [cetasikaIdIndex['精进']];
+                        },
+                        effectSummary: '心生色聚',
+                        effects: function () {
+                            return rangeInclusive(9301, 9308);
+                        },
+                        group: '名俱生组',
+                        note: '四增上之一作为俱生心生色聚的增上缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '色',
+                        causeSummary: '慧',
+                        expand: function () {
+                            return [cetasikaIdIndex['慧']];
+                        },
+                        effectSummary: '心生色聚',
+                        effects: function () {
                             return rangeInclusive(9301, 9308);
                         },
                         group: '名俱生组',
@@ -416,31 +632,67 @@ function getConditions() {
                 keywords: ['所缘', '增上'],
                 children: [
                     {
-                        cause: ['名', '色', '涅槃'],
+                        cause: '涅槃',
                         effect: '名',
-                        causes: ['名', '色', '涅槃'],
+                        causeSummary: '涅槃',
+                        expand: function () {
+                            return Builder.getVariable('涅槃');
+                        },
+                        effectSummary: '名聚',
+                        effects: (function () {
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
+                                }
+                                resultCache = new Builder('贪根心').add('8大善心').add('智相应8大唯作心').add('8出世间心').build();
+                                return resultCache;
+                            };
+                        })(),
+                        suppressed: Builder.getVariable('2无量心所'),
+                        group: '所缘组',
+                        note: '极重视、尊重、执着的可意所缘作为名聚的增上缘'
+                    },
+                    {
+                        cause: '名',
+                        effect: '名',
+                        causeSummary: '名',
                         expand: (function() {
-                            const resultCache = {};
-                            return function (cause) {
-                                if (resultCache[cause]) {
-                                    return resultCache[cause];
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
                                 }
-                                let result = [];
-                                if (cause === '名') {
-                                    result = [new Builder('名法').sub('2嗔心2痴心1苦俱身识').sub('嗔嫉悭恶作疑').build()];
-                                } else if (cause === '色') {
-                                    result = [Builder.getVariable('18完成色')];
-                                } else {
-                                    result =  [Builder.getVariable('涅槃')];
-                                }
-                                resultCache[cause] = result;
-                                return result;
+                                resultCache = new Builder('名法').sub('2嗔心2痴心1苦俱身识').sub('嗔嫉悭恶作疑').build();
+                                return resultCache;
                             };
                         })(),
                         effectSummary: '名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
+                                }
+                                resultCache = new Builder('贪根心').add('8大善心').add('智相应8大唯作心').add('8出世间心').build();
+                                return resultCache;
+                            };
+                        })(),
+                        suppressed: Builder.getVariable('2无量心所'),
+                        group: '所缘组',
+                        note: '极重视、尊重、执着的可意所缘作为名聚的增上缘'
+                    },
+                    {
+                        cause: '色',
+                        effect: '名',
+                        causeSummary: '色',
+                        expand: function () {
+                            return Builder.getVariable('18完成色');
+                        },
+                        effectSummary: '名聚',
+                        effects: (function () {
+                            let resultCache = [];
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -460,14 +712,14 @@ function getConditions() {
                 keywords: ['无间'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '无间组',
@@ -481,14 +733,14 @@ function getConditions() {
                 keywords: ['等无间'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '无间组',
@@ -502,42 +754,42 @@ function getConditions() {
                 keywords: ['俱生'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚其余名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
                         note: '同一名聚里的任何名法与其余名法相互地作为俱生缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色俱生组',
                         note: '同一色聚里的任何四大与其余色法相互地作为俱生缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处色',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '结生果报心',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('15结生果报心');
                         },
                         rebirth: true,
@@ -545,14 +797,14 @@ function getConditions() {
                         note: '结生时，心所依处1色与结生名聚相互地作为俱生缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '心所依处色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心所依处色');
                         },
                         rebirth: true,
@@ -560,14 +812,14 @@ function getConditions() {
                         note: '结生时，结生名聚与心所依处1色相互地作为俱生缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '其他结生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').sub('心色十法聚').build();
                         },
                         rebirth: true,
@@ -575,35 +827,35 @@ function getConditions() {
                         note: '结生时，结生名聚作为业生29色(不含心色1色)的俱生缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['75心'],
+                        causeSummary: '75心',
                         expand: (function() {
                             let cachedResult = [];
-                            return function (cause) {
+                            return function () {
                                 if (cachedResult.length) {
                                     return cachedResult;
                                 }
-                                cachedResult = [new Builder('89心').sub('双五识').sub('无色界果报心').build()];
+                                cachedResult = new Builder('89心').sub('双五识').sub('无色界果报心').build();
                                 return cachedResult;
                             }
                         })(),
                         effectSummary: '俱生心生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
                         note: '现在名聚作为俱生心生色聚的俱生缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('四大所造色');
                         },
                         group: '色俱生组',
@@ -617,28 +869,28 @@ function getConditions() {
                 keywords: ['相互'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名法'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名法',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚其余名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
                         note: '同一名聚里的任何名法与其余名法相互地作为相互缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处色',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '结生果报心',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('15结生果报心');
                         },
                         rebirth: true,
@@ -646,28 +898,28 @@ function getConditions() {
                         note: '结生时，心所依处1色与结生名聚相互地作为相互缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '心所依处色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心所依处色');
                         },
                         group: '名俱生组',
                         note: '结生时，结生名聚与心所依处1色相互地作为相互缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '四大',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('四大');
                         },
                         group: '色俱生组',
@@ -682,42 +934,42 @@ function getConditions() {
                 note: '缘法与缘所生法同俱生缘，但是强调缘法作为缘所生法的依止与生起地',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚其余名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
                         note: '同一名聚里的任何名法与其余名法相互地作为依止缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色俱生组',
                         note: '同一色聚里的任何四大与其余四大相互地作为依止缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处色',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '结生果报心',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('15结生果报心');
                         },
                         rebirth: true,
@@ -725,14 +977,14 @@ function getConditions() {
                         note: '结生时，心所依处1色与结生名聚相互地作为依止缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '心所依处色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心所依处色');
                         },
                         rebirth: true,
@@ -740,14 +992,14 @@ function getConditions() {
                         note: '结生时，结生名聚与心所依处1色相互地作为依止缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '其他结生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').sub('心色十法聚').build();
                         },
                         rebirth: true,
@@ -755,35 +1007,35 @@ function getConditions() {
                         note: '结生时，结生名聚作为业生29色(不含心色1色)的依止缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['75心'],
+                        causeSummary: '75心',
                         expand: (function() {
                             let cachedResult = [];
-                            return function (cause) {
+                            return function () {
                                 if (cachedResult.length) {
                                     return cachedResult;
                                 }
-                                cachedResult = [new Builder('89心').sub('双五识').sub('无色界果报心').build()];
+                                cachedResult = new Builder('89心').sub('双五识').sub('无色界果报心').build();
                                 return cachedResult;
                             }
                         })(),
                         effectSummary: '俱生心生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
                         note: '现在名聚作为俱生心生色聚的依止缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('四大所造色');
                         },
                         group: '色俱生组',
@@ -797,16 +1049,16 @@ function getConditions() {
                 keywords: ['前生', '依止'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '75名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -818,14 +1070,14 @@ function getConditions() {
                         note: '由于前一心生起且是住时的心所依处，作为75名聚的依止缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['五净色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('五净色')];
+                        causeSummary: '五净色',
+                        expand: function () {
+                            return Builder.getVariable('五净色');
                         },
                         effectSummary: '双五识',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('双五识');
                         },
                         group: '依处组',
@@ -839,16 +1091,16 @@ function getConditions() {
                 keywords: ['所缘', '前生', '依止'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '43名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -868,14 +1120,14 @@ function getConditions() {
                 keywords: ['无间', '亲依止'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '无间组',
@@ -889,31 +1141,67 @@ function getConditions() {
                 keywords: ['所缘', '亲依止'],
                 children: [
                     {
-                        cause: ['名', '色', '涅槃'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名', '色', '涅槃'],
+                        causeSummary: '名',
                         expand: (function() {
-                            const resultCache = {};
-                            return function (cause) {
-                                if (resultCache[cause]) {
-                                    return resultCache[cause];
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
                                 }
-                                let result = [];
-                                if (cause === '名') {
-                                    result = [new Builder('名法').sub('2嗔心2痴心1苦俱身识').sub('嗔嫉悭恶作疑').build()];
-                                } else if (cause === '色') {
-                                    result = [Builder.getVariable('18完成色')];
-                                } else {
-                                    result =  [Builder.getVariable('涅槃')];
-                                }
-                                resultCache[cause] = result;
-                                return result;
+                                resultCache = new Builder('名法').sub('2嗔心2痴心1苦俱身识').sub('嗔嫉悭恶作疑').build();
+                                return resultCache;
                             };
                         })(),
                         effectSummary: '名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
+                                }
+                                resultCache = new Builder('贪根心').add('8大善心').add('智相应8大唯作心').add('8出世间心').build();
+                                return resultCache;
+                            };
+                        })(),
+                        suppressed: Builder.getVariable('2无量心所'),
+                        group: '所缘组',
+                        note: '强有力的可意所缘作为名聚的所缘亲依止缘'
+                    },
+                    {
+                        cause: '色',
+                        effect: '名',
+                        causeSummary: '色',
+                        expand: function () {
+                            return Builder.getVariable('18完成色');
+                        },
+                        effectSummary: '名聚',
+                        effects: (function () {
+                            let resultCache = [];
+                            return function () {
+                                if (resultCache.length) {
+                                    return resultCache;
+                                }
+                                resultCache = new Builder('贪根心').add('8大善心').add('智相应8大唯作心').add('8出世间心').build();
+                                return resultCache;
+                            };
+                        })(),
+                        suppressed: Builder.getVariable('2无量心所'),
+                        group: '所缘组',
+                        note: '强有力的可意所缘作为名聚的所缘亲依止缘'
+                    },
+                    {
+                        cause: '涅槃',
+                        effect: '名',
+                        causeSummary: '涅槃',
+                        expand: function () {
+                            return Builder.getVariable('涅槃');
+                        },
+                        effectSummary: '名聚',
+                        effects: (function () {
+                            let resultCache = [];
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -933,20 +1221,42 @@ function getConditions() {
                 keywords: ['亲依止'],
                 children: [
                     {
-                        cause: ['名', '色', '概念'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名', '色', '概念'], // 緣法包括：過去的任何名色及與時間無關的概念，及過去所造的業
-                        expand: function (cause) {
-                            if (cause === '名') {
-                                return [Builder.getVariable('名法')];
-                            }
-                            if (cause === '色') {
-                                return [Builder.getVariable('色法')];
-                            }
-                            return [Builder.getVariable('概念')];
+                        causeSummary: '名', // 緣法包括：過去的任何名色及與時間無關的概念，及過去所造的業
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
+                            return Builder.getVariable('名法');
+                        },
+                        group: '自然亲依止组',
+                        note: '任何强力的法作为现在名聚的自然亲依止缘'
+                    },
+                    {
+                        cause: '色',
+                        effect: '名',
+                        causeSummary: '色', // 緣法包括：過去的任何名色及與時間無關的概念，及過去所造的業
+                        expand: function () {
+                            return Builder.getVariable('色法');
+                        },
+                        effectSummary: '名聚',
+                        effects: function () {
+                            return Builder.getVariable('名法');
+                        },
+                        group: '自然亲依止组',
+                        note: '任何强力的法作为现在名聚的自然亲依止缘'
+                    },
+                    {
+                        cause: '概念',
+                        effect: '名',
+                        causeSummary: '概念', // 緣法包括：過去的任何名色及與時間無關的概念，及過去所造的業
+                        expand: function () {
+                            return Builder.getVariable('概念');
+                        },
+                        effectSummary: '名聚',
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '自然亲依止组',
@@ -961,16 +1271,16 @@ function getConditions() {
                 note: '前生缘的缘法一定是色法，缘所生法一定是名法',
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '75名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -982,14 +1292,14 @@ function getConditions() {
                         note: '于前一心生起且是住时的心所依处，作为75名聚的前生缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['五净色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('五净色')];
+                        causeSummary: '五净色',
+                        expand: function () {
+                            return Builder.getVariable('五净色');
                         },
                         effectSummary: '双五识',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('双五识');
                         },
                         group: '依处组',
@@ -1003,14 +1313,14 @@ function getConditions() {
                 keywords: ['所缘', '前生'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['18完成色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('18完成色')];
+                        causeSummary: '18完成色',
+                        expand: function () {
+                            return Builder.getVariable('18完成色');
                         },
                         effectSummary: '现在名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('54欲界心').add('神通心').build();
                         },
                         suppressed: Builder.getVariable('2无量心所'),
@@ -1025,16 +1335,16 @@ function getConditions() {
                 keywords: ['所缘', '前生'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '43名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -1055,14 +1365,14 @@ function getConditions() {
                 note: '后生缘的缘法一定是名法，缘所生法一定是色法',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['后生心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('后生心')];
+                        causeSummary: '后生心',
+                        expand: function () {
+                            return Builder.getVariable('后生心');
                         },
                         effectSummary: '四因所生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('23色聚').build();
                         },
                         group: '后生组',
@@ -1076,23 +1386,23 @@ function getConditions() {
                 keywords: ['重复'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['前一速行名聚'],
+                        causeSummary: '前一速行名聚',
                         expand: (function() {
                             let result = [];
-                            return function (cause) {
+                            return function () {
                                 if (result.length) {
                                     return result;
                                 }
-                                result = [new Builder('速行心').sub('8出世间心').add('52心所').build()];
+                                result = new Builder('速行心').sub('8出世间心').add('52心所').build();
                                 return result;
                             }
                         })(),
                         effectSummary: '后一速行名聚',
                         effects: (function() {
                             let result = [];
-                            return function (cause) {
+                            return function () {
                                 if (result.length) {
                                     return result;
                                 }
@@ -1112,14 +1422,14 @@ function getConditions() {
                 note: '思心所作为同一名聚里其余名法的俱生业缘',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['思心所'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('思心所')];
+                        causeSummary: '思心所',
+                        expand: function () {
+                            return Builder.getVariable('思心所');
                         },
                         effectSummary: '其余名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('89心').build();
                         },
                         suppressed: Builder.getVariable('思心所'),
@@ -1127,14 +1437,14 @@ function getConditions() {
                         note: '思心所作为同一名聚里其余名法的俱生业缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['思心所'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('思心所')];
+                        causeSummary: '思心所',
+                        expand: function () {
+                            return Builder.getVariable('思心所');
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').build();
                         },
                         rebirth: true,
@@ -1142,14 +1452,14 @@ function getConditions() {
                         note: '结生时，思心所作为俱生业生色聚的俱生业缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['思心所'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('思心所')];
+                        causeSummary: '思心所',
+                        expand: function () {
+                            return Builder.getVariable('思心所');
                         },
                         effectSummary: '心生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('心生色聚').build();
                         },
                         group: '名俱生组',
@@ -1163,14 +1473,14 @@ function getConditions() {
                 keywords: ['无间', '业'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['四道心思心所'],
-                        expand: function (cause) {
-                            return [new Builder('4出世间道心').add('思心所').build()];
+                        causeSummary: '四道心思心所',
+                        expand: function () {
+                            return new Builder('4出世间道心').add('思心所').build();
                         },
                         effectSummary: '四果心',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('4出世间果心').build();
                         },
                         group: '无间组',
@@ -1185,42 +1495,42 @@ function getConditions() {
                 note: '思心所食未来果报名聚的异刹那业缘',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['33心思心所'],
-                        expand: function (cause) {
-                            return [new Builder('21善心').add('12不善心').add('思心所').build()];
+                        causeSummary: '33心思心所',
+                        expand: function () {
+                            return new Builder('21善心').add('12不善心').add('思心所').build();
                         },
                         effectSummary: '果报名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('36果报心').build();
                         },
                         group: '异业组',
                         note: '过去造业的善或不善思心所作为现在果报名聚的异刹那业缘，包括道心对果心'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['33心思心所'],
-                        expand: function (cause) {
-                            return [new Builder('99921善心').add('12不善心').add('思心所').build()];
+                        causeSummary: '33心思心所',
+                        expand: function () {
+                            return new Builder('99921善心').add('12不善心').add('思心所').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('业生色聚').build();
                         },
                         group: '异业组',
                         note: '过去造业的善或不善思心所作为业生色聚的异刹那业缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['33心思心所'],
-                        expand: function (cause) {
-                            return [new Builder('21善心').add('12不善心').add('思心所').build()];
+                        causeSummary: '33心思心所',
+                        expand: function () {
+                            return new Builder('21善心').add('12不善心').add('思心所').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').build();
                         },
                         rebirth: true,
@@ -1235,14 +1545,14 @@ function getConditions() {
                 keywords: ['亲依止', '业'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['33心思心所'],
-                        expand: function (cause) {
-                            return [new Builder('21善心').add('12不善心').add('思心所').build()];
+                        causeSummary: '33心思心所',
+                        expand: function () {
+                            return new Builder('21善心').add('12不善心').add('思心所').build();
                         },
                         effectSummary: '36果报心',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('36果报心').build();
                         },
                         group: '异业组',
@@ -1256,28 +1566,28 @@ function getConditions() {
                 keywords: ['果报'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['果报名聚中名法'],
-                        expand: function (cause) {
-                            return [new Builder('果报名聚').build()];
+                        causeSummary: '果报名聚中名法',
+                        expand: function () {
+                            return new Builder('果报名聚').build();
                         },
                         effectSummary: '名聚中其他名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('果报名聚').build();
                         },
                         group: '名俱生组',
                         note: '同一果报名聚里的任何名法与其余名法相互地作为果报缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['果报名聚'],
-                        expand: function (cause) {
-                            return [new Builder('果报名聚').build()];
+                        causeSummary: '果报名聚',
+                        expand: function () {
+                            return new Builder('果报名聚').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').build();
                         },
                         rebirth: true,
@@ -1285,14 +1595,14 @@ function getConditions() {
                         note: '结生时，果报名聚作为俱生业生色聚（含心色）的果报缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['果报名聚'],
-                        expand: function (cause) {
-                            return [new Builder('果报名聚').build()];
+                        causeSummary: '果报名聚',
+                        expand: function () {
+                            return new Builder('果报名聚').build();
                         },
                         effectSummary: '心生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('心生色聚').build();
                         },
                         group: '名俱生组',
@@ -1306,28 +1616,28 @@ function getConditions() {
                 keywords: ['俱生', '食'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['3无色食'],
-                        expand: function (cause) {
-                            return [new Builder('3无色食').build()];
+                        causeSummary: '3无色食',
+                        expand: function () {
+                            return new Builder('3无色食').build();
                         },
                         effectSummary: '名聚中其他名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('名法').build();
                         },
                         group: '名俱生组',
                         note: '触、思、心作为同一名聚里其余名法的俱生食缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['3无色食'],
-                        expand: function (cause) {
-                            return [new Builder('3无色食').build()];
+                        causeSummary: '3无色食',
+                        expand: function () {
+                            return new Builder('3无色食').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').build();
                         },
                         rebirth: true,
@@ -1335,14 +1645,14 @@ function getConditions() {
                         note: '结生时，触、思、心作为俱生业生色聚（含心色）的俱生食缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['3无色食'],
-                        expand: function (cause) {
-                            return [new Builder('3无色食').build()];
+                        causeSummary: '3无色食',
+                        expand: function () {
+                            return new Builder('3无色食').build();
                         },
                         effectSummary: '心生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('心生色聚').build();
                         },
                         group: '名俱生组',
@@ -1356,28 +1666,28 @@ function getConditions() {
                 keywords: ['食'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['食素'],
-                        expand: function (cause) {
-                            return [new Builder('食素').build()];
+                        causeSummary: '食素',
+                        expand: function () {
+                            return new Builder('食素').build();
                         },
                         effectSummary: '食生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('食生色聚');
                         },
                         group: '色食组',
                         note: '食物中食素作为食生色聚的色食缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['食素'],
-                        expand: function (cause) {
-                            return [new Builder('食素').build()];
+                        causeSummary: '食素',
+                        expand: function () {
+                            return new Builder('食素').build();
                         },
                         effectSummary: '其他任何色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色食组',
@@ -1392,28 +1702,28 @@ function getConditions() {
                 note: '疑心的根缘没有一境性',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['8根'],
-                        expand: function (cause) {
-                            return [new Builder('8根').build()];
+                        causeSummary: '8根',
+                        expand: function () {
+                            return new Builder('8根').build();
                         },
                         effectSummary: '同名聚其他名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
                         note: '名根作为同一名聚里其余名法的俱生根缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['8根'],
-                        expand: function (cause) {
-                            return [new Builder('8根').build()];
+                        causeSummary: '8根',
+                        expand: function () {
+                            return new Builder('8根').build();
                         },
                         effectSummary: '结生俱生业生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('结生色聚');
                         },
                         rebirth: true,
@@ -1421,14 +1731,14 @@ function getConditions() {
                         note: '结生时，结生名聚作为俱生业生色聚（含心色）的俱生根缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['8根'],
-                        expand: function (cause) {
-                            return [new Builder('8根').build()];
+                        causeSummary: '8根',
+                        expand: function () {
+                            return new Builder('8根').build();
                         },
                         effectSummary: '俱生心生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
@@ -1442,14 +1752,14 @@ function getConditions() {
                 keywords: ['前生', '根'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['五净色'],
-                        expand: function (cause) {
-                            return [new Builder('五净色').build()];
+                        causeSummary: '五净色',
+                        expand: function () {
+                            return new Builder('五净色').build();
                         },
                         effectSummary: '双五识',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('双五识');
                         },
                         group: '依处组',
@@ -1463,14 +1773,14 @@ function getConditions() {
                 keywords: ['根'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['色命根'],
-                        expand: function (cause) {
-                            return [new Builder('色命根').build()];
+                        causeSummary: '色命根',
+                        expand: function () {
+                            return new Builder('色命根').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('业生色聚');
                         },
                         group: '色命根组',
@@ -1485,28 +1795,28 @@ function getConditions() {
                 note: '禅那缘不缘住双五识',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['5心所'],
-                        expand: function (cause) {
-                            return [new Builder('五禅那心所').build()];
+                        causeSummary: '5心所',
+                        expand: function () {
+                            return new Builder('五禅那心所').build();
                         },
                         effectSummary: '名聚中其他名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('89心').sub('双五识').build();
                         },
                         group: '名俱生组',
                         note: '禅支作为同一名聚里其余名法的禅那缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['5心所'],
-                        expand: function (cause) {
-                            return [new Builder('五禅那心所').build()];
+                        causeSummary: '5心所',
+                        expand: function () {
+                            return new Builder('五禅那心所').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('结生色聚');
                         },
                         rebirth: true,
@@ -1514,14 +1824,14 @@ function getConditions() {
                         note: '结生时，禅支作为俱生业生色聚（含心色）的禅那缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['5心所'],
-                        expand: function (cause) {
-                            return [new Builder('五禅那心所').build()];
+                        causeSummary: '5心所',
+                        expand: function () {
+                            return new Builder('五禅那心所').build();
                         },
                         effectSummary: '心生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
@@ -1536,28 +1846,28 @@ function getConditions() {
                 note: '道缘不缘助18无因心，疑心的道缘没有一境性',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['道心所'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('道心所')];
+                        causeSummary: '道心所',
+                        expand: function () {
+                            return Builder.getVariable('道心所');
                         },
                         effectSummary: '名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('89心').sub('18无因心').build();
                         },
                         group: '名俱生组',
                         note: '道分作为同一名聚里其余名法的道缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['道心所'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('道心所')];
+                        causeSummary: '道心所',
+                        expand: function () {
+                            return Builder.getVariable('道心所');
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('结生色聚');
                         },
                         rebirth: true,
@@ -1565,14 +1875,14 @@ function getConditions() {
                         note: '结生时，道分作为俱生业生色聚（含心色）的道缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['道心所'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('道心所')];
+                        causeSummary: '道心所',
+                        expand: function () {
+                            return Builder.getVariable('道心所');
                         },
                         effectSummary: '心生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
@@ -1587,14 +1897,14 @@ function getConditions() {
                 note: '同一名里的名法才有相应缘，色法及不同名聚的名法没有相应缘',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名法'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名法',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
@@ -1609,42 +1919,42 @@ function getConditions() {
                 note: '缘法与缘所生法一个是名，一个是色', // move to keyword section (不相应)
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心色',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '结生名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('15结生果报心');
                         },
                         group: '色俱生组',
                         note: '结生时，心色（1色）作为结生名聚的不相应缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生名聚'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生名聚',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '心所依处色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心所依处色');
                         },
                         group: '名俱生组',
                         note: '结生时，结生名聚作为心色（1色）的不相应缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生名聚'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生名聚',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('结生色聚');
                         },
                         suppressed: Builder.getVariable('心色'),
@@ -1652,21 +1962,21 @@ function getConditions() {
                         note: '结生时，结生名聚作为业生29色(不含心色1色)的不相应缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['75心'],
+                        causeSummary: '75心',
                         expand: (function() {
                             let cachedResult = [];
-                            return function (cause) {
+                            return function () {
                                 if (cachedResult.length) {
                                     return cachedResult;
                                 }
-                                cachedResult = [new Builder('89心').sub('双五识').sub('无色界果报心').build()];
+                                cachedResult = new Builder('89心').sub('双五识').sub('无色界果报心').build();
                                 return cachedResult;
                             }
                         })(),
                         effectSummary: '俱生心生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
@@ -1680,16 +1990,16 @@ function getConditions() {
                 keywords: ['前生', '不相应'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '75名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -1708,16 +2018,16 @@ function getConditions() {
                 keywords: ['所缘', '前生', '不相应'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '43名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -1737,14 +2047,14 @@ function getConditions() {
                 keywords: ['后生', '不相应'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['后生心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('后生心')];
+                        causeSummary: '后生心',
+                        expand: function () {
+                            return Builder.getVariable('后生心');
                         },
                         effectSummary: '四因所生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('23色聚').build();
                         },
                         group: '后生组',
@@ -1759,42 +2069,42 @@ function getConditions() {
                 note: '缘法与缘所生法同时存在，故有缘',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚其余名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
                         note: '同一名聚里的任何名法与其余名法相互地作为有缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色俱生组',
                         note: '同一色聚里的任何四大与其余四大相互地作为有缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '结生果报心',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('15结生果报心');
                         },
                         rebirth: true,
@@ -1802,14 +2112,14 @@ function getConditions() {
                         note: '结生时, 心所依处1色与俱生的结生名聚相互地作为有缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生名聚'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生名聚',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '心所依处色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心所依处色');
                         },
                         rebirth: true,
@@ -1817,14 +2127,14 @@ function getConditions() {
                         note: '结生时，结生名聚与俱生的心所依处1色相互地作为有缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '其他结生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').sub('心色十法聚').build();
                         },
                         rebirth: true,
@@ -1832,35 +2142,35 @@ function getConditions() {
                         note: '结生时，结生名聚作为俱生的业生29色(不含心色1色)的有缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['75心'],
+                        causeSummary: '75心',
                         expand: (function() {
                             let cachedResult = [];
-                            return function (cause) {
+                            return function () {
                                 if (cachedResult.length) {
                                     return cachedResult;
                                 }
-                                cachedResult = [new Builder('89心').sub('双五识').sub('无色界果报心').build()];
+                                cachedResult = new Builder('89心').sub('双五识').sub('无色界果报心').build();
                                 return cachedResult;
                             }
                         })(),
                         effectSummary: '俱生心生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
                         note: '现在名聚作为俱生的心生色聚的有缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('四大所造色');
                         },
                         group: '色俱生组',
@@ -1874,16 +2184,16 @@ function getConditions() {
                 keywords: ['前生', '有'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '75名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -1895,14 +2205,14 @@ function getConditions() {
                         note: '于前一心生起且是住时的心所依处，作为75名聚的前生有缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['五净色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('五净色')];
+                        causeSummary: '五净色',
+                        expand: function () {
+                            return Builder.getVariable('五净色');
                         },
                         effectSummary: '双五识',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('双五识');
                         },
                         group: '依处组',
@@ -1916,14 +2226,14 @@ function getConditions() {
                 keywords: ['所缘', '前生', '有'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['18完成色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('18完成色')];
+                        causeSummary: '18完成色',
+                        expand: function () {
+                            return Builder.getVariable('18完成色');
                         },
                         effectSummary: '现在名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('54欲界心').add('神通心').build();
                         },
                         suppressed: Builder.getVariable('2无量心所'),
@@ -1938,16 +2248,16 @@ function getConditions() {
                 keywords: ['所缘', '前生', '有'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '43名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -1967,14 +2277,14 @@ function getConditions() {
                 keywords: ['后生', '有'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['后生心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('后生心')];
+                        causeSummary: '后生心',
+                        expand: function () {
+                            return Builder.getVariable('后生心');
                         },
                         effectSummary: '四因所生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('23色聚').build();
                         },
                         group: '后生组',
@@ -1988,28 +2298,28 @@ function getConditions() {
                 keywords: ['食', '有'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['食素'],
-                        expand: function (cause) {
-                            return [new Builder('食素').build()];
+                        causeSummary: '食素',
+                        expand: function () {
+                            return new Builder('食素').build();
                         },
                         effectSummary: '食生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('食生色聚');
                         },
                         group: '色食组',
                         note: '食物中食素作为食生色聚的有缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['食素'],
-                        expand: function (cause) {
-                            return [new Builder('食素').build()];
+                        causeSummary: '食素',
+                        expand: function () {
+                            return new Builder('食素').build();
                         },
                         effectSummary: '其他任何色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色食组',
@@ -2023,14 +2333,14 @@ function getConditions() {
                 keywords: ['根', '有'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['色命根'],
-                        expand: function (cause) {
-                            return [new Builder('色命根').build()];
+                        causeSummary: '色命根',
+                        expand: function () {
+                            return new Builder('色命根').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('业生色聚');
                         },
                         group: '色命根组',
@@ -2044,14 +2354,14 @@ function getConditions() {
                 keywords: ['无有'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '无间组',
@@ -2065,14 +2375,14 @@ function getConditions() {
                 keywords: ['离去'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '无间组',
@@ -2087,42 +2397,42 @@ function getConditions() {
                 note: '尚未灭去的缘法或缘所生法其中之一与另一者重叠存在',
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '名',
-                        causes: ['名'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('名法')];
+                        causeSummary: '名',
+                        expand: function () {
+                            return Builder.getVariable('名法');
                         },
                         effectSummary: '名聚其余名法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('名法');
                         },
                         group: '名俱生组',
                         note: '同一名聚里的任何名法与其余名法相互地作为不离去缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色俱生组',
                         note: '同一色聚里的任何四大与其余四大相互地作为不离去缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '结生果报心',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('15结生果报心');
                         },
                         rebirth: true,
@@ -2130,14 +2440,14 @@ function getConditions() {
                         note: '结生时, 心所依处1色与俱生的结生名聚相互地作为不离去缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生名聚'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生名聚',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '心所依处色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心所依处色');
                         },
                         rebirth: true,
@@ -2145,14 +2455,14 @@ function getConditions() {
                         note: '结生时，结生名聚与俱生的心所依处1色相互地作为不离去缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['结生果报心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('15结生名聚')];
+                        causeSummary: '结生果报心',
+                        expand: function () {
+                            return Builder.getVariable('15结生名聚');
                         },
                         effectSummary: '其他结生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('结生色聚').sub('心色十法聚').build();
                         },
                         rebirth: true,
@@ -2160,35 +2470,35 @@ function getConditions() {
                         note: '结生时，结生名聚作为俱生的业生29色(不含心色1色)的不离去缘'
                     },
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['75心'],
+                        causeSummary: '75心',
                         expand: (function() {
                             let cachedResult = [];
-                            return function (cause) {
+                            return function () {
                                 if (cachedResult.length) {
                                     return cachedResult;
                                 }
-                                cachedResult = [new Builder('89心').sub('双五识').sub('无色界果报心').build()];
+                                cachedResult = new Builder('89心').sub('双五识').sub('无色界果报心').build();
                                 return cachedResult;
                             }
                         })(),
                         effectSummary: '俱生心生色',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('心生色聚');
                         },
                         group: '名俱生组',
                         note: '现在名聚作为俱生的心生色聚的不离去缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['四大'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('四大')];
+                        causeSummary: '四大',
+                        expand: function () {
+                            return Builder.getVariable('四大');
                         },
                         effectSummary: '色聚其余色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('四大所造色');
                         },
                         group: '色俱生组',
@@ -2202,16 +2512,16 @@ function getConditions() {
                 keywords: ['前生', '不离去'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '75名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -2223,14 +2533,14 @@ function getConditions() {
                         note: '于前一心生起且尚未灭去的心所依处，作为现在名聚的前生不离去缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['五净色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('五净色')];
+                        causeSummary: '五净色',
+                        expand: function () {
+                            return Builder.getVariable('五净色');
                         },
                         effectSummary: '双五识',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('双五识');
                         },
                         group: '依处组',
@@ -2244,14 +2554,14 @@ function getConditions() {
                 keywords: ['所缘', '前生', '不离去'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['18完成色'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('18完成色')];
+                        causeSummary: '18完成色',
+                        expand: function () {
+                            return Builder.getVariable('18完成色');
                         },
                         effectSummary: '现在名聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('54欲界心').add('神通心').build();
                         },
                         suppressed: Builder.getVariable('2无量心所'),
@@ -2266,16 +2576,16 @@ function getConditions() {
                 keywords: ['所缘', '前生', '不离去'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '名',
-                        causes: ['心所依处'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('心所依处色')];
+                        causeSummary: '心所依处',
+                        expand: function () {
+                            return Builder.getVariable('心所依处色');
                         },
                         effectSummary: '43名聚',
                         effects: (function () {
                             let resultCache = [];
-                            return function (causes) {
+                            return function () {
                                 if (resultCache.length) {
                                     return resultCache;
                                 }
@@ -2295,14 +2605,14 @@ function getConditions() {
                 keywords: ['后生', '不离去'],
                 children: [
                     {
-                        cause: ['名'],
+                        cause: '名',
                         effect: '色',
-                        causes: ['后生心'],
-                        expand: function (cause) {
-                            return [Builder.getVariable('后生心')];
+                        causeSummary: '后生心',
+                        expand: function () {
+                            return Builder.getVariable('后生心');
                         },
                         effectSummary: '四因所生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return new Builder('23色聚').build();
                         },
                         group: '后生组',
@@ -2316,28 +2626,28 @@ function getConditions() {
                 keywords: ['食', '不离去'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['食素'],
-                        expand: function (cause) {
-                            return [new Builder('食素').build()];
+                        causeSummary: '食素',
+                        expand: function () {
+                            return new Builder('食素').build();
                         },
                         effectSummary: '食生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('食生色聚');
                         },
                         group: '色食组',
                         note: '尚未灭去的食素作为食生色聚的不离去缘'
                     },
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['食素'],
-                        expand: function (cause) {
-                            return [new Builder('食素').build()];
+                        causeSummary: '食素',
+                        expand: function () {
+                            return new Builder('食素').build();
                         },
                         effectSummary: '其他任何色法',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('色法');
                         },
                         group: '色食组',
@@ -2351,14 +2661,14 @@ function getConditions() {
                 keywords: ['根', '不离去'],
                 children: [
                     {
-                        cause: ['色'],
+                        cause: '色',
                         effect: '色',
-                        causes: ['色命根'],
-                        expand: function (cause) {
-                            return [new Builder('色命根').build()];
+                        causeSummary: '色命根',
+                        expand: function () {
+                            return new Builder('色命根').build();
                         },
                         effectSummary: '业生色聚',
-                        effects: function (causes) {
+                        effects: function () {
                             return Builder.getVariable('业生色聚');
                         },
                         group: '色命根组',
