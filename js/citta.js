@@ -493,6 +493,9 @@ function calculateConnections() {
             const item_feeling = item.feeling || groupAttrs.feeling ? [item.feeling || groupAttrs.feeling] : [];
             addConnection(item.id, item_feeling, 'yellow', 'tomato', getIndex(feelings));
 
+            // overwrite.
+            itemConnections[item.id].counter = item_cetasika.length;
+            itemConnections[item.id].opt_counter = item_cetasika_opt.length;
             const item_name = item.name;
             const words = item_name.replace(/[,\\-]/g, ' ').split(' ');
             words.forEach(word => {
