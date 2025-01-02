@@ -99,6 +99,8 @@ const ceSvg = container.select('#right-svg-side-container')
     .attr('width', 1280)
     .attr('height', svgHeight);
 
+const ccSvg = container.select('#cause-condition-svg');
+
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
 const svgs = d3.selectAll('.svg-sub-container');
@@ -176,6 +178,9 @@ function updateParams(params={}) {
 }
 
 function renderText(parent, x, y, w, h, text, params={}) {
+    if (!(text instanceof String)) {
+        text = text.toString();
+    }
     params = updateParams(params);
     const rx = (params.align === 'middle' ? x + w / 2 : x) + params.padding;
     const ry = params.valign === 'top' ? y : y + h / 2;

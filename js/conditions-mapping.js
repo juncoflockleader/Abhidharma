@@ -113,12 +113,9 @@ function renderConditionsMapping(leftSvg, rightSvg) {
 
     let locked = null;
     let highlighted = [];
-    let conditions = null;
+    let conditions = getConditions();
     function renderConditions(leftSvg, rightSvg, x, y, hub, causeIndex, effectIndex, keywordsIndex) {
         const groups = {};
-        if (!conditions) {
-            conditions = getConditions();
-        }
         conditions.children.forEach((condition, index) => {
             condition.children.forEach((child, index) => {
                 if (!groups[child.group]) {
@@ -129,10 +126,15 @@ function renderConditionsMapping(leftSvg, rightSvg) {
                         id: condition.id,
                         name: condition.name,
                         keywords: condition.keywords,
-                        children: []
+                        subGroups: {}
                     };
                 }
-                groups[child.group][condition.name].children.push(child);
+                const causeEffect = child.cause + '→' + child.effect;
+                if (!groups[child.group][condition.name].subGroups[causeEffect]) {
+                    groups[child.group][condition.name].subGroups[causeEffect] = [child];
+                } else {
+                    groups[child.group][condition.name].subGroups[causeEffect].push(child);
+                }
             });
         });
         const w = 120;
@@ -144,24 +146,18 @@ function renderConditionsMapping(leftSvg, rightSvg) {
         y = t.endY;
         let counter = 0;
         Object.keys(groups).forEach((key, index) => {
+            let rows = 0;
             const group = groups[key];
             let y0 = y;
             Object.keys(group).forEach((ck, index) => {
                 let y1 = y;
                 const condition = group[ck];
-                const subGroups = {}; // group by cause-effect. for example: 名→色, 名→名, etc
-                condition.children.forEach((child, index) => {
-                    const causeEffect = child.cause + '→' + child.effect;
-                    if (!subGroups[causeEffect]) {
-                        subGroups[causeEffect] = [child];
-                    } else {
-                        subGroups[causeEffect].push(child);
-                    }
-                });
+                const subGroups = condition.subGroups;
                 Object.keys(subGroups).map((key, index) => {
                     const subGroup = subGroups[key];
                     subGroup.forEach((child, index) => {
                         const tb = renderTextBox(leftSvg, x + w + headerW + w, y, w, 15, 'white', child.causeSummary, {size: 12, wrap: true});
+                        rows++;
                         function highlight() {
                             tb.highlight();
                             highlighted.push(tb);
@@ -260,13 +256,7 @@ function renderConditionsMapping(leftSvg, rightSvg) {
                 const t1 = renderTextBox(leftSvg, x + headerW, y1, w, y - y1, 'lightcyan', condition.name, {size: 12, wrap: true});
                 counter++;
             });
-            if (key === '自然亲依止组') { // text box is too small
-                renderTextBox(leftSvg, x, y0, 30, y - y0, 'lightcyan', key, {size: 12, wrap: true});
-            } else if (key === '色命根组') {
-                renderTextBox(leftSvg, x, y0, 30, y - y0, 'lightcyan', key, {size: 12, wrap: true});
-            } else {
-                const header = renderTextBox(leftSvg, x, y0, headerW, y - y0, 'lightcyan', key, {size: 12, wrap: true});
-            }
+            const header = renderTextBox(leftSvg, x, y0, headerW +  (Math.ceil(key.length / rows) - 1) * 12, y - y0, 'lightcyan', key, {size: 12, wrap: true});
         });
     }
 

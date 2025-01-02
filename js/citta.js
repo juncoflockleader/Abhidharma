@@ -1,6 +1,7 @@
 let itemIndex = {};
 let noteIndex = {};
 let subEffectIndex = {};
+let idIndex = {};
 
 function renderCittaTable(parent) {
     const rowHeaderWidth = 120;
@@ -125,6 +126,7 @@ function renderCetasikaTableCn(y) {
         allCetasika.push(child);
         let name = child.name;
         cetasikaIdIndex[name] = child.id;
+        idIndex[child.id] = child;
         itemIndex[child.id] = renderTextBox(cittaSvg, x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, 'white', name, {size: '12px', vertical: true});
         noteIndex[child.id] = {
             'char_mark': child.char_mark,
@@ -182,6 +184,7 @@ function renderCetasikaTableEn(y) {
                 allCetasika.push(child);
                 let name = child.name;
                 cetasikaIdIndex[name] = child.id;
+                idIndex[child.id] = child;
                 itemIndex[child.id] = renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'white', name, {size: '12px', wrap: false});
                 noteIndex[child.id] = {
                     'char_mark': child.char_mark,
@@ -505,6 +508,7 @@ function calculateConnections() {
                     addConnection(item.id, [word], 'yellow', 'yellow', idIndex);
                 }
             });
+            idIndex[item.id] = item;
             subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt].map(e => cetasikaIdIndex[e]);
             allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt, functions: item_functions});
         });

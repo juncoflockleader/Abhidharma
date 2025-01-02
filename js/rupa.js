@@ -628,6 +628,7 @@ function renderRupaAttrTable(parent) {
     function renderGrid() {
         rupas.forEach(d => {
             rupaIndex[d.name] = d;
+            idIndex[d.id] = d;
         });
         rupaClass.forEach(((d, i) => {
             const x = colx[i];
