@@ -70,6 +70,7 @@ function render() {
     renderConditionsMapping(cdSvg, ceSvg);
 
     renderCauseCondition(ccSvg);
+    renderMyWords(mwSvg);
     const hash = window.location.hash.substring(1); // Get the hash without the '#'
     if (hash) {
         showTab(hash);

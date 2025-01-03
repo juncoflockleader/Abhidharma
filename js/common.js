@@ -101,6 +101,8 @@ const ceSvg = container.select('#right-svg-side-container')
 
 const ccSvg = container.select('#cause-condition-svg');
 
+const mwSvg = container.select('#my-words-svg');
+
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');
 const svgs = d3.selectAll('.svg-sub-container');
