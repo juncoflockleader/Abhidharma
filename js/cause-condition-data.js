@@ -22,6 +22,7 @@ const causeConditionWithNamaEffect = (function () {
         const funct = vars.funct;
         const great_obj = vars.great_obj;
         const prev_funct = vars.prev_funct;
+        const obj_condition_index = vars.obj_condition_index;
 
         const roots = [];
         for (let cetasika of cetasikas) {
@@ -78,31 +79,31 @@ const causeConditionWithNamaEffect = (function () {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['相互缘'] = {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['俱生依止缘'] = {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['俱生依止缘'] = {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['俱生业缘'] = {
             'cause': Builder.getVariable('思心所'),
             'causeSummary': '俱生思',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['果报缘'] = noop;
         if (Builder.getVariable('36果报心').includes(citta)) {
@@ -110,7 +111,7 @@ const causeConditionWithNamaEffect = (function () {
                 'cause': Builder.getVariable('思心所'),
                 'causeSummary': '俱生思',
                 'effect': namas,
-                'effectSummary': '其他名法'
+                'effectSummary': `${name}名聚-1`
             };
         }
         const namaFood = new Builder('名食心所').add([citta]).build();
@@ -151,19 +152,19 @@ const causeConditionWithNamaEffect = (function () {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['俱生有缘'] = {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['俱生不离去缘'] = {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
-            'effectSummary': '其他名法'
+            'effectSummary': `${name}名聚-1`
         };
         result['所缘组']['所缘缘'] = {
             'cause': obj,
@@ -173,11 +174,10 @@ const causeConditionWithNamaEffect = (function () {
         };
 
         result['所缘组']['所缘增上缘'] = noop;
-        if (funct === '速行' && roots.length > 1 && great_obj) {
-            // 意门心路 (速行 - 贪、善、唯作)
+        if (funct === '速行' && roots.length > 1 && obj_condition_index['所缘增上缘']) {
             result['所缘组']['所缘增上缘'] = {
                 'cause': great_obj,
-                'causeSummary': `(${great_obj}之一)`,
+                'causeSummary': `${great_obj}`,
                 'effect': namas,
                 'effectSummary': `${name}名聚`
             };
@@ -185,8 +185,7 @@ const causeConditionWithNamaEffect = (function () {
         result['所缘组']['所缘亲依止缘'] = result['所缘组']['所缘增上缘'];
 
         result['所缘组']['依处所缘前生依止缘'] = noop;
-        if (obj === '心所依处') { // FIXME: not because of obj. it's because of type of flow
-            // TODO: 意门心路 (转向、速行、彼所缘)
+        if (obj_condition_index['依处所缘前生依止缘']) {
             result['所缘组']['依处所缘前生依止缘'] = {
                 'cause': obj,
                 'causeSummary': obj,
@@ -199,12 +198,15 @@ const causeConditionWithNamaEffect = (function () {
         result['所缘组']['依处所缘前生不离去缘'] = result['所缘组']['依处所缘前生依止缘'];
         result['依处组']['依处所缘前生不相应缘'] = result['所缘组']['依处所缘前生依止缘'];
 
-        result['所缘组']['所缘前生缘'] = {
-            'cause': rupa_obj,
-            'causeSummary': rupa_obj,
-            'effect': namas,
-            'effectSummary': `${name}名聚`
-        };
+        result['所缘组']['所缘前生缘'] = noop;
+        if (obj_condition_index['所缘前生缘']) {
+            result['所缘组']['所缘前生缘'] = {
+                'cause': rupa_obj,
+                'causeSummary': rupa_obj,
+                'effect': namas,
+                'effectSummary': `${name}名聚`
+            };
+        }
         result['所缘组']['所缘前生有缘'] = result['所缘组']['所缘前生缘'];
         result['所缘组']['所缘前生不离去缘'] = result['所缘组']['所缘前生缘'];
 

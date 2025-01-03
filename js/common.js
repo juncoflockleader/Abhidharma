@@ -295,6 +295,7 @@ function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
     let item = parent.append('g');
     let cell = renderCell(item, x, y, w, h, bgColor);
     let textElement = renderText(item, x, y, w, h, text, params);
+    let markIdx = 0;
     item.setText = function(newText) {
         item.select('text').remove();
         textElement = renderText(item, x, y, w, h, newText, params);
@@ -311,6 +312,15 @@ function renderTextBox(parent, x, y, w, h, bgColor, text, params = {}) {
     }
     item.clear = function () {
         cell.attr('fill', bgColor);
+    }
+    item.clearMarks = function () {
+        item.selectAll('circle').remove();
+        markIdx = 0;
+    }
+    item.mark = function (color) {
+        const r = h / 2 - 2;
+        markIdx++;
+        renderCircle(item, x + w - r * markIdx -2, y + h/2, r, color);
     }
     item.X = x;
     item.Y = y;

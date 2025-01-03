@@ -478,7 +478,7 @@ function renderFlow(state) {
     }
 }
 
-function renderButtonGroup(controlsContainer, buttonData, title, state, stateUpdater) {
+function renderButtonGroup(controlsContainer, buttonData, title, state, stateUpdater, renderer) {
     const bg = controlsContainer.append('div')
         .attr('class', 'button-group')
         .style('border', '1px solid #ccc') // Add border for separation
@@ -509,7 +509,7 @@ function renderButtonGroup(controlsContainer, buttonData, title, state, stateUpd
             bg.selectAll('.radio-button').classed('active', false);
             d3.select(this).classed('active', true);
             stateUpdater(state, d);
-            return renderFlow(state);
+            return renderer(state);
         });
 
     return bg;
@@ -574,8 +574,8 @@ function renderControls(state, min, max) {
     renderTextBox(svg, 100+width-xOffset, 30, w, h, 'cyan', t('string_id_489'), {vertical: lang.vertical, size: lang.px + 2});
 
     // Create a container for the button group
-    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_490') }, { 'id': 2, 'name': t('string_id_491') }, { 'id': 3, 'name': t('string_id_492') }], t('string_id_493'), state, (state, data) => {state.likable = data.id;});
-    const intentButtonGroup = renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_494') }, { 'id': 2, 'name': t('string_id_495') }], t('string_id_15'), state, (state, data) => {state.goodIntention = data.id === 1;});
+    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_490') }, { 'id': 2, 'name': t('string_id_491') }, { 'id': 3, 'name': t('string_id_492') }], t('string_id_493'), state, (state, data) => {state.likable = data.id;}, renderFlow);
+    const intentButtonGroup = renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_494') }, { 'id': 2, 'name': t('string_id_495') }], t('string_id_15'), state, (state, data) => {state.goodIntention = data.id === 1;}, renderFlow);
     renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_496') }, { 'id': 2, 'name': t('string_id_497') }], t('string_id_498'), state, (state, data) => {
         state.arahant = data.id === 2;
         if (state.arahant) {
@@ -583,5 +583,5 @@ function renderControls(state, min, max) {
         } else {
             intentButtonGroup.selectAll('.radio-button').attr('disabled', null);
         }
-    });
+    }, renderFlow);
 }

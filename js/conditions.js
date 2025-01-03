@@ -146,6 +146,7 @@ class Builder {
             Builder.setVariable('12不善心', rangeInclusive(1, 12));
             Builder.setVariable('8出世间心', rangeInclusive(82, 89));
             Builder.setVariable('智相应8大唯作心', new Builder('8大唯作心').intersect('慧心所对应心').build());
+            Builder.setVariable('智不相应8大唯作心', new Builder('8大唯作心').intersect('二因速行心').build());
             Builder.setVariable('2无量心所', [150, 151]);
             Builder.setVariable('心所依处色', [9016]);
             Builder.setVariable('结生心', new Builder('8大果报心').add('色界果报心').add('无色界果报心').build().concat(34, 42));
@@ -164,6 +165,9 @@ class Builder {
             Builder.setVariable('意门转向心', [53]);
             Builder.setVariable('生笑心', [54]);
             Builder.setVariable('彼所缘心', allCittas.filter(citta => citta.functions.includes('彼所缘')).map(citta => citta.id));
+            Builder.setVariable('二因彼所缘心', new Builder('彼所缘心').intersect('二因心').build());
+            Builder.setVariable('三因彼所缘心', new Builder('彼所缘心').intersect('三因心').build());
+            Builder.setVariable('无因彼所缘心', new Builder('彼所缘心').sub('二因彼所缘心').sub('三因彼所缘心').build());
             Builder.setVariable('欲界速行心', new Builder('12不善心').add('8大善心').add('8大唯作心').add('生笑心').build());
             Builder.setVariable('神通心', [59, 69]);
             Builder.setVariable('2嗔心2痴心1苦俱身识', new Builder('嗔根心').add('痴根心').add('苦俱身识').build());
@@ -197,6 +201,8 @@ class Builder {
             Builder.setVariable('18无因心', rangeInclusive(29, 43).concat(52, 53, 54));
             Builder.setVariable('2因增上心所', [113, 111]);
             Builder.setVariable('3因增上心所', [113, 111, 152]);
+            Builder.setVariable('2因善心', new Builder('8大善心').intersect('二因心').build());
+            Builder.setVariable('3因善心', new Builder('8大善心').intersect('三因心').build());
             Builder.initialized = true;
         }
     }
