@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://github.com/juncoflockleader/Abhidharma/blob/main/robots.txt
