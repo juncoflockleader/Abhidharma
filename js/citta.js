@@ -244,6 +244,9 @@ function renderCetasikaTableByLayout(layoutConfig, y, model, state = cittaState)
             y0 += headerRowHeight;
             for (; breakPoint < subGroup.children.length; breakPoint++) {
                 const child = subGroup.children[breakPoint];
+                if (!child || !child.name) {
+                    continue;
+                }
                 state.allCetasika.push(child);
                 state.registerCetasika(child.name, child.id);
                 state.registerId(child.id, child);
