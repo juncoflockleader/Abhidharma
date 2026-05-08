@@ -1,9 +1,42 @@
-let itemIndex = {};
-let noteIndex = {};
-let subEffectIndex = {};
-let idIndex = {};
+function createCittaState() {
+    return {
+        itemIndex: {},
+        noteIndex: {},
+        subEffectIndex: {},
+        idIndex: {},
+        allCetasika: [],
+        allCittas: [],
+        cetasikaIdIndex: {},
+        cetasikaTableBottom: 0,
+        highlight: { locked: false, lockedItem: null, clearFunc: null },
+        filters: {},
+        registerItem(id, node) {
+            this.itemIndex[id] = node;
+            return node;
+        },
+        registerNote(id, note) {
+            this.noteIndex[id] = note;
+            return note;
+        },
+        registerId(id, entity) {
+            this.idIndex[id] = entity;
+            return entity;
+        },
+        registerCetasika(name, id) {
+            this.cetasikaIdIndex[name] = id;
+            return id;
+        }
+    };
+}
 
-function renderCittaTable(parent) {
+let cittaState = createCittaState();
+
+function resetCittaState() {
+    cittaState = createCittaState();
+    return cittaState;
+}
+
+function renderCittaTable(parent, state = cittaState) {
     const rowHeaderWidth = 120;
     const columnWidths = [120, 120, 120, 220, 120, 120];
     const columnHeaderHeight = 105;
@@ -67,7 +100,7 @@ function renderCittaTable(parent) {
                 cittasIndexes.forEach((cittaIndex, index) => {
                     const offsetX = cittasIndexes.length === 1 ? x0 : x0 + index * columnWidth / 2;
                     const width = cittasIndexes.length === 1 ? columnWidth : columnWidth / 2;
-                    renderVerticalTable(parent, offsetX, y0, width, rowHeight, cittas.children[cittaIndex].name, cittas.children[cittaIndex].children, 5, itemIndex);
+                    renderVerticalTable(parent, offsetX, y0, width, rowHeight, cittas.children[cittaIndex].name, cittas.children[cittaIndex].children, 5, state.itemIndex);
                 });
                 x0 += columnWidth;
             }
@@ -90,19 +123,16 @@ function renderCittaTable(parent) {
     };
 }
 
-const cetasikaIdIndex = {};
-let cetasikaTableBottom = 0;
-function renderCetasikaTable(y) {
+function renderCetasikaTable(y, state = cittaState) {
     if (getLang().fixed) {
-        renderCetasikaTableCn(y);
+        renderCetasikaTableCn(y, state);
     } else {
-        renderCetasikaTableEn(y);
+        renderCetasikaTableEn(y, state);
     }
 }
 
-let allCetasika = [];
-function renderCetasikaTableCn(y) {
-  allCetasika = [];
+function renderCetasikaTableCn(y, state = cittaState) {
+  state.allCetasika = [];
   let columnWidth = 25;
   let rowHeight = 30;
   renderTextBox(cittaSvg, 0, y, columnWidth * 52, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
@@ -123,43 +153,43 @@ function renderCetasikaTableCn(y) {
   cetasika.children.forEach(group => {
     group.children.forEach(subGroup => {
       subGroup.children.forEach(child => {
-        allCetasika.push(child);
+        state.allCetasika.push(child);
         let name = child.name;
-        cetasikaIdIndex[name] = child.id;
-        idIndex[child.id] = child;
-        itemIndex[child.id] = renderTextBox(cittaSvg, x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, 'white', name, {size: '12px', vertical: true});
-        noteIndex[child.id] = {
+        state.registerCetasika(name, child.id);
+        state.registerId(child.id, child);
+        state.registerItem(child.id, renderTextBox(cittaSvg, x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, 'white', name, {size: '12px', vertical: true}));
+        state.registerNote(child.id, {
             'char_mark': child.char_mark,
             'function': child.function,
             'appearance': child.appearance,
             'proximate_cause': child.proximate_cause,
-        };
+        });
         x += columnWidth;
       });
     });
   });
-  cetasikaTableBottom = y + rowHeight * 5.5;
+  state.cetasikaTableBottom = y + rowHeight * 5.5;
 }
 
-function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations) {
+function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
     renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, 'lightcyan', 'glossary', {size: '12px', wrap: false, align: 'middle'});
     renderTextBox(cittaSvg, x + columnWidth, y, columnWidth / 3, rowHeight, 'lightcyan', 'abbrev.', {size: '12px', wrap: false, align: 'middle'});
     let r = 0;
     for (const key in abbreviations) {
         const color = r % 2 === 0 ? 'white' : 'lightgrey';
         y += rowHeight;
-        itemIndex[key] = renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, color, abbreviations[key], {
+        state.registerItem(key, renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, color, abbreviations[key], {
             size: '12px',
             wrap: false,
             align: 'middle'
-        });
+        }));
         renderTextBox(cittaSvg, x + columnWidth, y, columnWidth / 3, rowHeight, color, key, {size: '12px', wrap: false, align: 'middle'});
         r++;
     }
 }
 
-function renderCetasikaTableEn(y) {
-    allCetasika = [];
+function renderCetasikaTableEn(y, state = cittaState) {
+    state.allCetasika = [];
     let columnWidth = 140;
     let rowHeight = 14;
     renderTextBox(cittaSvg, 0, y, columnWidth * 7, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
@@ -181,17 +211,17 @@ function renderCetasikaTableEn(y) {
             y0 += rowHeight;
             for (; breakPoint < subGroup.children.length; breakPoint++) {
                 let child = subGroup.children[breakPoint];
-                allCetasika.push(child);
+                state.allCetasika.push(child);
                 let name = child.name;
-                cetasikaIdIndex[name] = child.id;
-                idIndex[child.id] = child;
-                itemIndex[child.id] = renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'white', name, {size: '12px', wrap: false});
-                noteIndex[child.id] = {
+                state.registerCetasika(name, child.id);
+                state.registerId(child.id, child);
+                state.registerItem(child.id, renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'white', name, {size: '12px', wrap: false}));
+                state.registerNote(child.id, {
                     'char_mark': child.char_mark,
                     'function': child.function,
                     'appearance': child.appearance,
                     'proximate_cause': child.proximate_cause,
-                };
+                });
                 y0 += rowHeight;
                 rowCount++;
                 if (rowCount > maxRowCount) {
@@ -226,7 +256,7 @@ function renderCetasikaTableEn(y) {
         "UnPr": "Unprompted",
         "WrVw": "Wrong View",
     };
-    renderAbbrev(columnWidth * 7 + 5, y, columnWidth*0.9, rowHeight, abbreviations);
+    renderAbbrev(columnWidth * 7 + 5, y, columnWidth*0.9, rowHeight, abbreviations, state);
     const abbreviations2 = {
         "BsOf":"Base of",
         "Investg": "Investigation",
@@ -242,8 +272,8 @@ function renderCetasikaTableEn(y) {
         "MattPhenm": "Matter Phenomena",
     }
 
-    renderAbbrev(columnWidth * 8.3, y, columnWidth*1.4, rowHeight, abbreviations2);
-    cetasikaTableBottom = y + rowHeight * 5.5;
+    renderAbbrev(columnWidth * 8.3, y, columnWidth*1.4, rowHeight, abbreviations2, state);
+    state.cetasikaTableBottom = y + rowHeight * 5.5;
 }
 
 function renderSubTableV2(x, y, def) {
@@ -255,6 +285,7 @@ function renderSubTableV2(x, y, def) {
 }
 
 function renderSubTableV2CN(x, y, def) {
+    const state = cittaState;
     const names = def.names;
     let widths = [];
     for (let i = 0; i < names.length; ++i) {
@@ -266,10 +297,10 @@ function renderSubTableV2CN(x, y, def) {
     renderTextBox(cittaSvg, x, y, total, h, 'lightcyan', def.title, {size: '14px', wrap: false, align: 'middle'});
     let x0 = x;
     for (let i = 0; i < names.length; ++i) {
-        itemIndex[def['index_base'] + i + 1] = renderTextBox(cittaSvg, x0, y + h, widths[i], h, 'white', names[i], {
+        state.registerItem(def['index_base'] + i + 1, renderTextBox(cittaSvg, x0, y + h, widths[i], h, 'white', names[i], {
             size: '12px',
             align: 'middle'
-        });
+        }));
         x0 += widths[i];
     }
     return {
@@ -279,6 +310,7 @@ function renderSubTableV2CN(x, y, def) {
 }
 
 function renderSubTableV2En(x, y, def) {
+    const state = cittaState;
     const names = def.names;
     let width = 0;
     const padding = 5;
@@ -291,11 +323,11 @@ function renderSubTableV2En(x, y, def) {
 
     renderTextBox(cittaSvg, x, y, width, height, 'lightcyan', def.title, {size: '14px', wrap: false, align: 'middle'});
     for (let i = 0; i < names.length; ++i) {
-        itemIndex[def['index_base'] + i + 1] = renderTextBox(cittaSvg, x, y + height * (i + 1), width, height, 'white', names[i], {
+        state.registerItem(def['index_base'] + i + 1, renderTextBox(cittaSvg, x, y + height * (i + 1), width, height, 'white', names[i], {
             size: '12px',
             align: 'middle',
             wrap: false
-        });
+        }));
     }
     return {
         endX: x + width,
@@ -363,6 +395,7 @@ function renderCounterTable(x, y, w, titlepx=14) {
 }
 
 function renderNoteTable(x, y, w, titlepx=14) {
+    const state = cittaState;
     let h0 = 20;
 
     if (!w) {
@@ -381,11 +414,11 @@ function renderNoteTable(x, y, w, titlepx=14) {
     renderTextBox(cittaSvg, x, y, w + w0, h0, 'lightcyan', t('string_id_7'), {size: '14px'});
     return {
         update: function (itemId) {
-            if (noteIndex[itemId]) {
-                charTextBox.setText(noteIndex[itemId].char_mark);
-                functionTextBox.setText(noteIndex[itemId].function);
-                appearanceTextBox.setText(noteIndex[itemId].appearance);
-                proximateCauseTextBox.setText(noteIndex[itemId].proximate_cause);
+            if (state.noteIndex[itemId]) {
+                charTextBox.setText(state.noteIndex[itemId].char_mark);
+                functionTextBox.setText(state.noteIndex[itemId].function);
+                appearanceTextBox.setText(state.noteIndex[itemId].appearance);
+                proximateCauseTextBox.setText(state.noteIndex[itemId].proximate_cause);
             }
         },
         clear: function () {
@@ -399,10 +432,9 @@ function renderNoteTable(x, y, w, titlepx=14) {
     };
 }
 
-let allCittas = [];
 /** itemIndex is populated by now **/
-function calculateConnections() {
-    allCittas = [];
+function calculateConnections(state) {
+    state.allCittas = [];
     let itemConnections = {};
     cittas.children.forEach((cittaGroup, index) => {
         let groupAttrs = {
@@ -465,9 +497,9 @@ function calculateConnections() {
             }
 
             const item_cetasika = groupAttrs.cetasika.concat(item.cetasika || []);
-            addConnection(item.id, item_cetasika, 'yellow', 'yellow', cetasikaIdIndex);
+            addConnection(item.id, item_cetasika, 'yellow', 'yellow', state.cetasikaIdIndex);
             const item_cetasika_opt = groupAttrs.cetasika_opt.concat(item.cetasika_opt || []);
-            addConnection(item.id, item_cetasika_opt, 'yellow', 'lightyellow', cetasikaIdIndex, {reverse_color: true, opt: true});
+            addConnection(item.id, item_cetasika_opt, 'yellow', 'lightyellow', state.cetasikaIdIndex, {reverse_color: true, opt: true});
             const item_category = item.category || groupAttrs.category || [];
             const item_roots = groupAttrs.roots.concat(item.roots || []);
             addConnection(item.id, item_roots, 'yellow', 'lavender', getIndex(causes));
@@ -502,30 +534,30 @@ function calculateConnections() {
             const item_name = item.name;
             const words = item_name.replace(/[,\\-]/g, ' ').split(' ');
             words.forEach(word => {
-                if (itemIndex[word]) {
+                if (state.itemIndex[word]) {
                     let idIndex = {};
                     idIndex[word] = word;
                     addConnection(item.id, [word], 'yellow', 'yellow', idIndex);
                 }
             });
-            idIndex[item.id] = item;
-            subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt].map(e => cetasikaIdIndex[e]);
-            allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt, functions: item_functions});
+            state.registerId(item.id, item);
+            state.subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt].map(e => state.cetasikaIdIndex[e]);
+            state.allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt, functions: item_functions});
         });
     });
     return itemConnections;
 }
 
-function setupHighlightsBehavior(cntt, ntt) {
+function setupHighlightsBehavior(cntt, ntt, state) {
     let locked = false;
     let lockedItem = null;
     let clearFunc = null;
-    const itemGraph = calculateConnections();
+    const itemGraph = calculateConnections(state);
     for (let itemId in itemGraph) {
         function highlightsConnections(connections) {
             function setHighlights(connections, clear=false) {
                 let color = clear ? 'white' : connections.from_color
-                itemIndex[itemId].setColor(color);
+                state.itemIndex[itemId].setColor(color);
                 if (!clear) {
                     cntt.update(connections.counter, connections.opt_counter);
                     ntt.update(itemId);
@@ -537,7 +569,7 @@ function setupHighlightsBehavior(cntt, ntt) {
                 connections.connection_groups.forEach(connection => {
                     connection.ids.forEach(id => {
                         let color = clear ? 'white' : connection.to_color;
-                        itemIndex[id].setColor(color);
+                        state.itemIndex[id].setColor(color);
                     });
                 });
             }
@@ -548,7 +580,7 @@ function setupHighlightsBehavior(cntt, ntt) {
         }
 
         let connections = itemGraph[itemId];
-        let item = itemIndex[itemId];
+        let item = state.itemIndex[itemId];
         item.on('mouseover', function(event, d) {
             if (locked) return;
             highlightsConnections(connections);
