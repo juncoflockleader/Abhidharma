@@ -20,8 +20,13 @@ body {
     cursor: pointer;
     text-align: left;
 }
-.tabs button.active {
+.tabs button.active,
+.tabs button[aria-selected="true"] {
     background: #d0d0f0;
+}
+.tabs button:focus-visible {
+    outline: 2px solid #4a67d6;
+    outline-offset: 2px;
 }
 .lang {
     width: 20%;
@@ -55,6 +60,9 @@ body {
     flex: 1;
     padding: 10px;
     display: block;
+}
+.svg-sub-container[hidden] {
+    display: none;
 }
 .node {
     stroke: #fff;

@@ -10,17 +10,17 @@
 <body>
 <div id="tooltip" style="position: absolute; visibility: hidden; background-color: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; pointer-events: none;"></div>
 <div class="menu">
-  <div class="tabs">
-    <button id="tab1" class="active">心与心所</button>
-    <button id="tab2">欲界五门心路</button>
-    <button id="tab3">欲界意门心路</button>
-    <button id="tab4">欲界色法</button>
-    <button id="tab5">色法起源</button>
-    <button id="tab6">欲界十二缘起</button>
-    <button id="tab7">五十二缘对应</button>
-    <button id="tab8">五十二缘溯源</button>
-    <button id="tab9">写在后面的话</button>
-    <button id="tab10" style="display:none">色法模拟</button>
+  <div class="tabs" role="tablist" aria-label="阿毗达摩图表">
+    <button id="tab1" class="active" type="button" role="tab" data-tab-id="citta" aria-controls="container1" aria-selected="true" tabindex="0">心与心所</button>
+    <button id="tab2" type="button" role="tab" data-tab-id="sense-flow" aria-controls="container2" aria-selected="false" tabindex="-1">欲界五门心路</button>
+    <button id="tab3" type="button" role="tab" data-tab-id="mind-flow" aria-controls="container3" aria-selected="false" tabindex="-1">欲界意门心路</button>
+    <button id="tab4" type="button" role="tab" data-tab-id="rupa" aria-controls="container4" aria-selected="false" tabindex="-1">欲界色法</button>
+    <button id="tab5" type="button" role="tab" data-tab-id="rupa-origin" aria-controls="container5" aria-selected="false" tabindex="-1">色法起源</button>
+    <button id="tab6" type="button" role="tab" data-tab-id="dependent-origin" aria-controls="container6" aria-selected="false" tabindex="-1">欲界十二缘起</button>
+    <button id="tab7" type="button" role="tab" data-tab-id="conditions-map" aria-controls="container7" aria-selected="false" tabindex="-1">五十二缘对应</button>
+    <button id="tab8" type="button" role="tab" data-tab-id="cause-condition" aria-controls="container8" aria-selected="false" tabindex="-1">五十二缘溯源</button>
+    <button id="tab9" type="button" role="tab" data-tab-id="about" aria-controls="container9" aria-selected="false" tabindex="-1">写在后面的话</button>
+    <button id="tab10" type="button" role="tab" data-tab-id="simulation" aria-controls="container10" aria-selected="false" tabindex="-1" style="display:none">色法模拟</button>
   </div>
   <div class="lang">
     <button id="en">
@@ -39,7 +39,7 @@
   </div>
 </div>
 <div class="svg-container">
-  <div class ="svg-sub-container active" id="container1">
+  <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <svg id="citta" width="1800" height="800"></svg>
     <svg>
       <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank">
@@ -47,34 +47,34 @@
       </a>
     </svg>
   </div>
-  <div class ="svg-sub-container" id="container2">
+  <div class ="svg-sub-container" id="container2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" hidden>
     <div id="senseflow"></div>
     <div id="senseflowcontrols"></div>
   </div>
-  <div class ="svg-sub-container" id="container3">
+  <div class ="svg-sub-container" id="container3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" hidden>
     <div id="mindflow"></div>
     <div id="mindflowcontrols"></div>
   </div>
-  <div class="svg-sub-container" id="container4">
+  <div class="svg-sub-container" id="container4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" hidden>
   </div>
-  <div class="svg-sub-container" id="container5">
+  <div class="svg-sub-container" id="container5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" hidden>
   </div>
-  <div class="svg-sub-container" id="container6">
+  <div class="svg-sub-container" id="container6" role="tabpanel" aria-labelledby="tab6" aria-hidden="true" hidden>
     <svg id="dependent-origination" width="1600" height="800"></svg>
   </div>
-  <div class="svg-sub-container" id="container7">
+  <div class="svg-sub-container" id="container7" role="tabpanel" aria-labelledby="tab7" aria-hidden="true" hidden>
     <div style="display: flex">
       <div class="svg-side-container" id="left-svg-side-container"></div>
       <div class="svg-side-container" id="right-svg-side-container"></div>
     </div>
   </div>
-  <div class="svg-sub-container" id="container8">
+  <div class="svg-sub-container" id="container8" role="tabpanel" aria-labelledby="tab8" aria-hidden="true" hidden>
     <div id="cause-condition-container" style="display: flex">
       <svg id="cause-condition-svg" width="1300" height="700"></svg>
     </div>
     <div id="causeconditioncontrols"></div>
   </div>
-  <div class="svg-sub-container" id="container9">
+  <div class="svg-sub-container" id="container9" role="tabpanel" aria-labelledby="tab9" aria-hidden="true" hidden>
     <svg id="my-words-svg" width="830" height="500"></svg>
     <div>
       <svg>
@@ -84,7 +84,7 @@
       </svg>
     </div>
   </div>
-  <div class="svg-sub-container" id="container10">
+  <div class="svg-sub-container" id="container10" role="tabpanel" aria-labelledby="tab10" aria-hidden="true" hidden>
     <div style="display: flex">
       <svg id="simulation" width="800" height="600" style="border: 1px solid black;"></svg>
       <svg id="simulation-notes" width="200" height="600" ></svg>
