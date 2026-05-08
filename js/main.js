@@ -52,11 +52,12 @@ function updateRenderDebugPanel(errors) {
 function renderCittaSection(viewModel, context) {
     resetCittaState();
     const model = rebuildCittaModel();
-    const subPadding = 6;
-    const ctt = renderCittaTable(cittaSvg, model, cittaState);
+    const tab1Layout = viewModel.layout.tab1;
+    const subPadding = tab1Layout.sectionSpacing.subPadding;
+    const ctt = renderCittaTable(cittaSvg, model, cittaState, tab1Layout.cittaTable);
     let cntt = null;
     let ntt = null;
-    const sidePanelLayout = viewModel.layout.cittaSidePanel;
+    const sidePanelLayout = tab1Layout.cittaSidePanel;
     const rx = ctt.endX + subPadding;
     const fet = renderFeelingTable(rx, 0);
     const ct = renderCauseTable(fet.endX + subPadding, 0);
@@ -87,8 +88,52 @@ function renderCittaSection(viewModel, context) {
     );
     setupHighlightsBehavior(cntt, ntt, cittaState);
 
-    context.endX = ctt.endX;
-    context.endY = Math.max(ntt ? ntt.endY : 0, cntt ? cntt.endY : 0);
+    const keyRegions = {
+        cittaTable: ctt,
+        feelingTable: fet,
+        causeTable: ct,
+        timeTable: tt,
+        mentalObjectTable: mot,
+        realmTable: rt,
+        gateTable: gt,
+        basisTable: bt,
+        functionTable: ft,
+        notesTable: ntt,
+        counterTable: cntt,
+    };
+    validateLayoutBounds('#citta', keyRegions);
+
+    const regionValues = Object.values(keyRegions).filter(Boolean);
+    context.endX = Math.max(...regionValues.map((r) => r.endX));
+    context.endY = Math.max(...regionValues.map((r) => r.endY));
+}
+
+function validateLayoutBounds(containerSelector, keyRegions) {
+    const container = d3.select(containerSelector);
+    if (container.empty()) {
+        return;
+    }
+    const containerNode = container.node();
+    const containerWidth = containerNode.clientWidth || Number(container.style('width').replace('px', '')) || 0;
+    const containerHeight = containerNode.clientHeight || Number(container.style('height').replace('px', '')) || 0;
+    Object.entries(keyRegions).forEach(([name, region]) => {
+        if (!region) {
+            return;
+        }
+        const widthOverflow = region.endX > containerWidth;
+        const heightOverflow = region.endY > containerHeight;
+        if (!widthOverflow && !heightOverflow) {
+            return;
+        }
+
+        const suggestedWidth = Math.ceil(Math.max(region.endX, containerWidth));
+        const suggestedHeight = Math.ceil(Math.max(region.endY, containerHeight));
+        console.warn(
+            `[layout-check] ${name} 超出 ${containerSelector} 边界：endX=${region.endX}, endY=${region.endY}, ` +
+            `containerWidth=${containerWidth}, containerHeight=${containerHeight}. 建议将 ${containerSelector} ` +
+            `至少调整为 width=${suggestedWidth}px, height=${suggestedHeight}px。`
+        );
+    });
 }
 
 function renderFlowSection(context) {
