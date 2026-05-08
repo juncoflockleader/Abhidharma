@@ -201,7 +201,109 @@ function render() {
     updateRenderDebugPanel(renderErrors);
 }
 
+function buildPreflightCheckSpec() {
+    return [
+        {
+            module: 'Data Layer',
+            checks: [
+                { name: 'data', validate: () => typeof data !== 'undefined', script: 'js/data.js' },
+                { name: 'cittas', validate: () => typeof cittas !== 'undefined', script: 'js/citta-data.js' },
+                { name: 'cetasika', validate: () => typeof cetasika !== 'undefined', script: 'js/cetasika-data.js' },
+            ],
+        },
+        {
+            module: 'Citta Rendering',
+            checks: [
+                { name: 'buildCittaModel', validate: () => typeof buildCittaModel === 'function', script: 'js/citta-model.js' },
+                { name: 'renderCittaTable', validate: () => typeof renderCittaTable === 'function', script: 'js/citta.js' },
+            ],
+        },
+        {
+            module: 'Flow Rendering',
+            checks: [
+                { name: 'renderFlow', validate: () => typeof renderFlow === 'function', script: 'js/flow.js' },
+            ],
+        },
+        {
+            module: 'Rupa Rendering',
+            checks: [
+                { name: 'renderRupaAttrTable', validate: () => typeof renderRupaAttrTable === 'function', script: 'js/rupa.js' },
+            ],
+        },
+        {
+            module: 'I18n/Runtime',
+            checks: [
+                { name: 'getLang', validate: () => typeof getLang === 'function', script: 'js/lang.js' },
+            ],
+        },
+    ];
+}
+
+function renderPreflightError(missingByModule) {
+    const lines = [
+        '缺失依赖：页面已停止渲染。',
+        '建议检查以下脚本文件是否存在且按顺序加载：',
+    ];
+
+    const orderedScripts = [];
+    missingByModule.forEach(({ checks }) => {
+        checks.forEach(({ script }) => {
+            if (!orderedScripts.includes(script)) {
+                orderedScripts.push(script);
+            }
+        });
+    });
+
+    orderedScripts.forEach((script, index) => {
+        lines.push(`${index + 1}. ${script}`);
+    });
+
+    lines.push('', '按模块分组缺失项：');
+    missingByModule.forEach(({ module, checks }) => {
+        lines.push(`- ${module}: ${checks.map((check) => check.name).join('、')}`);
+    });
+
+    const message = lines.join('\n');
+    console.error('[preflight] dependency check failed', missingByModule);
+
+    const root = document.getElementById('root') || document.body;
+    if (root) {
+        root.innerHTML = '';
+        const panel = document.createElement('pre');
+        panel.textContent = message;
+        panel.style.whiteSpace = 'pre-wrap';
+        panel.style.padding = '12px';
+        panel.style.margin = '8px';
+        panel.style.border = '1px solid #d32f2f';
+        panel.style.background = '#fff7f7';
+        panel.style.color = '#b71c1c';
+        panel.style.fontSize = '14px';
+        panel.style.lineHeight = '1.5';
+        root.appendChild(panel);
+    }
+}
+
+function preflightCheck() {
+    const spec = buildPreflightCheckSpec();
+    const missingByModule = spec
+        .map(({ module, checks }) => ({
+            module,
+            checks: checks.filter((check) => !check.validate()),
+        }))
+        .filter(({ checks }) => checks.length > 0);
+
+    if (!missingByModule.length) {
+        return true;
+    }
+
+    renderPreflightError(missingByModule);
+    return false;
+}
+
 // On page load, check the URL
 window.addEventListener('DOMContentLoaded', () => {
+    if (!preflightCheck()) {
+        return;
+    }
     render();
 });
