@@ -315,9 +315,13 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
     renderTextBox(tableGroup, padding, padding, w - padding * 2, headerHeight, headerColor ? headerColor : 'lightgrey', title, {size: headerFontSize, padding: 2, align: 'left'});
     const boxes = [];
     // Loop through the data items and draw each row
-    items.forEach((item, index) => {
+    (items || []).forEach((item, index) => {
+        if (!item) {
+            return;
+        }
         const yPosition = padding + headerHeight + index * rowHeight;
-        const textbox = renderTextBox(tableGroup, padding, yPosition, w - padding * 2, rowHeight, 'white', item.name, {
+        const label = typeof item === 'string' ? item : (item.name || item.displayName || '');
+        const textbox = renderTextBox(tableGroup, padding, yPosition, w - padding * 2, rowHeight, 'white', label, {
             size: '10px',
             padding: 2,
             align: 'left'
@@ -327,7 +331,9 @@ function renderVerticalTable(parent, x, y, w, h, title, items, padding, itemInde
             textbox.Y += y;
             textbox.endX += x;
             textbox.endY += y;
-            itemIndex[item.id] = textbox;
+            if (item.id !== undefined) {
+                itemIndex[item.id] = textbox;
+            }
         }
         boxes.push(textbox);
     });
