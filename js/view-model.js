@@ -6,7 +6,7 @@ function buildPageViewModel(pageState) {
             raw: { data, cittas, cetasika },
         },
         layout: {
-            cittaSidePanel: getCittaSidePanelLayout(lang),
+            tab1: getTab1Layout(lang),
             rupaNotesOffset: lang.wide ? 100 : 240,
         },
     };

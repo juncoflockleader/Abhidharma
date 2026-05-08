@@ -61,12 +61,12 @@ function assertCittaModelStructure(model, functionName = 'unknown') {
     }
 }
 
-function renderCittaTable(parent, model, state = cittaState) {
+function renderCittaTable(parent, model, state = cittaState, layoutConfig = {}) {
     assertCittaModelStructure(model, 'renderCittaTable');
-    const rowHeaderWidth = 120;
-    const columnWidths = [120, 120, 120, 220, 120, 120];
-    const columnHeaderHeight = 105;
-    const rowHeights = [210, 105, 90, 90];
+    const rowHeaderWidth = layoutConfig.rowHeaderWidth || 120;
+    const columnWidths = layoutConfig.columnWidths || [120, 120, 120, 220, 120, 120];
+    const columnHeaderHeight = layoutConfig.columnHeaderHeight || 105;
+    const rowHeights = layoutConfig.rowHeights || [210, 105, 90, 90];
     function renderFirstCell(parent, x, y, w, h) {
         renderCell(parent, x, y, w, h, 'lightblue');
         parent.append('line')
