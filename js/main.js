@@ -74,7 +74,7 @@ function render() {
     syncTabWithHash();
 
     syncLanguageButtons();
-    testDiv.style('display', 'none;');
+    testDiv.style('display', 'none');
 }
 
 // On page load, check the URL
