@@ -30,13 +30,24 @@ function createCittaState() {
 }
 
 let cittaState = createCittaState();
+let cittaModel = null;
 
 function resetCittaState() {
     cittaState = createCittaState();
     return cittaState;
 }
 
+function rebuildCittaModel() {
+    cittaModel = buildCittaModel({ data, cittas, cetasika });
+    return cittaModel;
+}
+
+function getCittaModel() {
+    return cittaModel || rebuildCittaModel();
+}
+
 function renderCittaTable(parent, state = cittaState) {
+    const model = rebuildCittaModel();
     const rowHeaderWidth = 120;
     const columnWidths = [120, 120, 120, 220, 120, 120];
     const columnHeaderHeight = 105;
@@ -52,8 +63,8 @@ function renderCittaTable(parent, state = cittaState) {
             .attr('stroke-width', 1); // Line width
 
         // Add text to the first triangle
-        renderText(parent, x, y + h/3, w * 2/3, h, data.header.row_header);
-        renderText(parent, x + w/4, y, w, h * 2 / 3, data.header.column_header);
+        renderText(parent, x, y + h/3, w * 2/3, h, model.header.rowHeader);
+        renderText(parent, x + w/4, y, w, h * 2 / 3, model.header.columnHeader);
         return {
             endX: w,
             endY: h
@@ -63,25 +74,24 @@ function renderCittaTable(parent, state = cittaState) {
     function renderColumnHeaders(parent, x, y, ws, h, color) {
         let x0 = x;
         for (let i = 0; i < 2; ++i) {
-            renderTextBox(parent, x0, y, ws[i], h, color, data.columns_header[i].name);
+            renderTextBox(parent, x0, y, ws[i], h, color, model.columnDefinitions[i].displayName);
             x0 += ws[i];
         }
         let h0 = h/3;
         for (let i = 2; i < ws.length; ++i) {
-            let name = data.columns_header[2].children[Math.floor(i/4)].children[i%2].name;
-            renderTextBox(parent, x0, y + h0 * 2, ws[i], h0, color, name);
+            renderTextBox(parent, x0, y + h0 * 2, ws[i], h0, color, model.columnDefinitions[i].displayName);
             x0 += ws[i];
         }
 
-        renderTextBox(parent, x + subArraySum(ws, 0, 2), y + h / 3, subArraySum(ws, 2, 4), h/3, color, data.columns_header[2].children[0].name);
-        renderTextBox(parent, x + subArraySum(ws, 0, 4), y + h / 3, subArraySum(ws, 4, 6), h/3, color, data.columns_header[2].children[1].name);
-        renderTextBox(parent, x + subArraySum(ws, 0, 2), y, subArraySum(ws, 2, 6), h / 3, color, data.columns_header[2].name);
+        renderTextBox(parent, x + subArraySum(ws, 0, 2), y + h / 3, subArraySum(ws, 2, 4), h/3, color, model.columnDefinitions[2].groupDisplayName);
+        renderTextBox(parent, x + subArraySum(ws, 0, 4), y + h / 3, subArraySum(ws, 4, 6), h/3, color, model.columnDefinitions[4].groupDisplayName);
+        renderTextBox(parent, x + subArraySum(ws, 0, 2), y, subArraySum(ws, 2, 6), h / 3, color, model.columnDefinitions[2].topGroupDisplayName);
     }
 
     function renderRowHeaders(parent, x, y, w, hs) {
         let y0 = y;
         for (let i = 0; i < hs.length; i++) {
-            renderTextBox(parent, x, y0, w, hs[i], 'lightcyan', data.rows_header[i]);
+            renderTextBox(parent, x, y0, w, hs[i], 'lightcyan', model.rowDefinitions[i].displayName);
             y0 += hs[i];
         }
     }
@@ -96,11 +106,12 @@ function renderCittaTable(parent, state = cittaState) {
                 const columnWidth = ws[colIndex];
                 renderCell(parent, x0, y0, columnWidth, rowHeight, 'white');
 
-                let cittasIndexes = data.cells_citta_group[rowIndex][colIndex];
-                cittasIndexes.forEach((cittaIndex, index) => {
-                    const offsetX = cittasIndexes.length === 1 ? x0 : x0 + index * columnWidth / 2;
-                    const width = cittasIndexes.length === 1 ? columnWidth : columnWidth / 2;
-                    renderVerticalTable(parent, offsetX, y0, width, rowHeight, cittas.children[cittaIndex].name, cittas.children[cittaIndex].children, 5, state.itemIndex);
+                let cittaGroupIds = model.rowDefinitions[rowIndex].cittaGroupIds[colIndex];
+                cittaGroupIds.forEach((groupId, index) => {
+                    const cittaGroup = model.cittaGroupIndex[groupId];
+                    const offsetX = cittaGroupIds.length === 1 ? x0 : x0 + index * columnWidth / 2;
+                    const width = cittaGroupIds.length === 1 ? columnWidth : columnWidth / 2;
+                    renderVerticalTable(parent, offsetX, y0, width, rowHeight, cittaGroup.displayName, cittaGroup.raw.children, 5, state.itemIndex);
                 });
                 x0 += columnWidth;
             }
@@ -132,25 +143,26 @@ function renderCetasikaTable(y, state = cittaState) {
 }
 
 function renderCetasikaTableCn(y, state = cittaState) {
+  const model = getCittaModel();
   state.allCetasika = [];
   let columnWidth = 25;
   let rowHeight = 30;
-  renderTextBox(cittaSvg, 0, y, columnWidth * 52, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
-  renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 13, rowHeight, 'lightcyan', cetasika.children[0].name, {size: '12px', align: 'middle'});
-  renderTextBox(cittaSvg, columnWidth * 13, y + rowHeight, columnWidth * 14, rowHeight, 'lightcyan', cetasika.children[1].name, {size: '12px', align: 'middle'});
-  renderTextBox(cittaSvg, columnWidth * 27, y + rowHeight, columnWidth * 25, rowHeight, 'lightcyan', cetasika.children[2].name, {size: '12px', align: 'middle'});
+  renderTextBox(cittaSvg, 0, y, columnWidth * 52, rowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
+  renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 13, rowHeight, 'lightcyan', model.cetasika.groups[0].displayName, {size: '12px', align: 'middle'});
+  renderTextBox(cittaSvg, columnWidth * 13, y + rowHeight, columnWidth * 14, rowHeight, 'lightcyan', model.cetasika.groups[1].displayName, {size: '12px', align: 'middle'});
+  renderTextBox(cittaSvg, columnWidth * 27, y + rowHeight, columnWidth * 25, rowHeight, 'lightcyan', model.cetasika.groups[2].displayName, {size: '12px', align: 'middle'});
 
   let x = 0;
   for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < cetasika.children[i].children.length; j++) {
-      let n = cetasika.children[i].children[j].children.length;
-      renderTextBox(cittaSvg, x, y + rowHeight * 2, columnWidth * n, rowHeight, 'lightcyan', cetasika.children[i].children[j].name, {size: '12px', wrap: false, align: 'middle'});
+    for (let j = 0; j < model.cetasika.groups[i].children.length; j++) {
+      let n = model.cetasika.groups[i].children[j].children.length;
+      renderTextBox(cittaSvg, x, y + rowHeight * 2, columnWidth * n, rowHeight, 'lightcyan', model.cetasika.groups[i].children[j].displayName, {size: '12px', wrap: false, align: 'middle'});
       x += columnWidth * n;
     }
   }
 
   x = 0;
-  cetasika.children.forEach(group => {
+  model.cetasika.groups.forEach(group => {
     group.children.forEach(subGroup => {
       subGroup.children.forEach(child => {
         state.allCetasika.push(child);
@@ -189,18 +201,19 @@ function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
 }
 
 function renderCetasikaTableEn(y, state = cittaState) {
+    const model = getCittaModel();
     state.allCetasika = [];
     let columnWidth = 140;
     let rowHeight = 14;
-    renderTextBox(cittaSvg, 0, y, columnWidth * 7, rowHeight, 'lightcyan', cetasika.name, {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', cetasika.children[0].name, {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, columnWidth * 2, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', cetasika.children[1].name, {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, columnWidth * 4, y + rowHeight, columnWidth * 3, rowHeight, 'lightcyan', cetasika.children[2].name, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, 0, y, columnWidth * 7, rowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', model.cetasika.groups[0].displayName, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, columnWidth * 2, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', model.cetasika.groups[1].displayName, {size: '12px', align: 'middle'});
+    renderTextBox(cittaSvg, columnWidth * 4, y + rowHeight, columnWidth * 3, rowHeight, 'lightcyan', model.cetasika.groups[2].displayName, {size: '12px', align: 'middle'});
 
     const maxRowCount = 10;
     let x = 0;
     for (let i = 0; i < 3; i++) {
-        const group = cetasika.children[i].children;
+        const group = model.cetasika.groups[i].children;
         let y0 = y + rowHeight * 2;
         let rowCount = 0;
         let breakPoint = 0;
@@ -434,9 +447,11 @@ function renderNoteTable(x, y, w, titlepx=14) {
 
 /** itemIndex is populated by now **/
 function calculateConnections(state) {
+    const model = getCittaModel();
     state.allCittas = [];
     let itemConnections = {};
-    cittas.children.forEach((cittaGroup, index) => {
+    model.cittaGroups.forEach((modelGroup) => {
+        const cittaGroup = modelGroup.raw;
         let groupAttrs = {
             cetasika: (cittas.cetasika || []).concat(cittaGroup.cetasika || []),
             category: cittaGroup.category || null,
