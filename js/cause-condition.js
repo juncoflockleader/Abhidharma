@@ -11,6 +11,16 @@ function renderCauseCondition(parent) {
         '异业组': {}
     };
     const conditions = getConditions();
+    function getCittaAlias(cittaId) {
+        if (idIndex[cittaId] && idIndex[cittaId].name) {
+            return idIndex[cittaId].name;
+        }
+        const citta = Builder.getVariable(cittaId);
+        if (citta && citta.name) {
+            return citta.name;
+        }
+        return `心${cittaId}`;
+    }
     function renderConditions(parent, x, y, nama=true) {
         const groups = {};
         conditions.children.forEach((condition, index) => {
@@ -295,7 +305,7 @@ function renderCauseCondition(parent) {
     Builder.getVariable('欲界速行心').forEach((citta, index) => {
         impulseCittas1st.push({
             id: id++,
-            alias: idIndex[citta].name,
+            alias: getCittaAlias(citta),
             citta: citta
         });
     });
@@ -304,7 +314,7 @@ function renderCauseCondition(parent) {
     Builder.getVariable('欲界速行心').forEach((citta, index) => {
         impulseCittas2nd.push({
             id: id++,
-            alias: idIndex[citta].name,
+            alias: getCittaAlias(citta),
             citta: citta,
         });
     });
@@ -313,7 +323,7 @@ function renderCauseCondition(parent) {
     Builder.getVariable('彼所缘心').forEach((citta, index) => {
         recallCittas1st.push({
             id: id++,
-            alias: idIndex[citta].name,
+            alias: getCittaAlias(citta),
             citta: citta,
         });
     });
@@ -322,7 +332,7 @@ function renderCauseCondition(parent) {
     Builder.getVariable('彼所缘心').forEach((citta, index) => {
         recallCittas2nd.push({
             id: id++,
-            alias: idIndex[citta].name,
+            alias: getCittaAlias(citta),
             citta: citta,
         });
     });
@@ -695,7 +705,7 @@ function renderCauseCondition(parent) {
         Builder.getVariable(variableName).forEach((citta, index) => {
             instances.push({
                 id: id++,
-                alias: idIndex[citta].name,
+                alias: getCittaAlias(citta),
                 citta: citta,
             });
         });
