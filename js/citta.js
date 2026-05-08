@@ -1,3 +1,6 @@
+const cittaPageApi = getCittaPageApi();
+const cittaSvg = cittaPageApi.svg;
+
 function createCittaState() {
     return {
         itemIndex: {},
