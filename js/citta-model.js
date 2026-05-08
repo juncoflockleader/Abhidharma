@@ -3,28 +3,35 @@ function buildCittaModel(raw) {
     const columnIndex = {};
     const topHeaders = raw.data.columns_header || [];
 
-    (topHeaders[0] ? [topHeaders[0]] : []).forEach((header, idx) => {
-        const columnId = `column-${idx}`;
-        const column = { columnId, displayName: header.name, groupId: null, subgroupId: null };
-        columnDefinitions.push(column);
-        columnIndex[columnId] = column;
-    });
-
-    const nestedHeader = topHeaders[2] || { children: [] };
-    (nestedHeader.children || []).forEach((group, groupIndex) => {
-        (group.children || []).forEach((subgroup, subgroupIndex) => {
+    topHeaders.forEach((header, topIndex) => {
+        if (!header.children || header.children.length === 0) {
             const columnId = `column-${columnDefinitions.length}`;
             const column = {
                 columnId,
-                displayName: subgroup.name,
-                groupId: `column-group-${groupIndex}`,
-                groupDisplayName: group.name,
-                subgroupId: `column-subgroup-${groupIndex}-${subgroupIndex}`,
-                topGroupId: 'column-group-main',
-                topGroupDisplayName: nestedHeader.name,
+                displayName: header.name,
+                groupId: null,
+                subgroupId: null,
             };
             columnDefinitions.push(column);
             columnIndex[columnId] = column;
+            return;
+        }
+
+        (header.children || []).forEach((group, groupIndex) => {
+            (group.children || []).forEach((subgroup, subgroupIndex) => {
+                const columnId = `column-${columnDefinitions.length}`;
+                const column = {
+                    columnId,
+                    displayName: subgroup.name,
+                    groupId: `column-group-${topIndex}-${groupIndex}`,
+                    groupDisplayName: group.name,
+                    subgroupId: `column-subgroup-${topIndex}-${groupIndex}-${subgroupIndex}`,
+                    topGroupId: `column-top-group-${topIndex}`,
+                    topGroupDisplayName: header.name,
+                };
+                columnDefinitions.push(column);
+                columnIndex[columnId] = column;
+            });
         });
     });
 

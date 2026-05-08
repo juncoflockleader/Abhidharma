@@ -37,12 +37,14 @@ let cittaModel = null;
 
 // Legacy aliases used by conditions/rupa modules.
 let subEffectIndex = cittaState.subEffectIndex;
+let allCetasika = cittaState.allCetasika;
 let allCittas = cittaState.allCittas;
 let cetasikaIdIndex = cittaState.cetasikaIdIndex;
 
 function resetCittaState() {
     cittaState = createCittaState();
     subEffectIndex = cittaState.subEffectIndex;
+    allCetasika = cittaState.allCetasika;
     allCittas = cittaState.allCittas;
     cetasikaIdIndex = cittaState.cetasikaIdIndex;
     return cittaState;
@@ -181,6 +183,7 @@ const CETASIKA_TABLE_LAYOUT_CN = {
     shouldBreakColumn: () => false,
     resetBreakPoint: () => ({breakPoint: 0, groupIndexOffset: 0}),
     tableBottomMultiplier: 5.5,
+    alignSubgroupHeaders: true,
 };
 
 const CETASIKA_TABLE_LAYOUT_EN = {
@@ -201,6 +204,7 @@ const CETASIKA_TABLE_LAYOUT_EN = {
     resetBreakPoint: ({breakPoint, subGroup}) =>
         breakPoint >= subGroup.children.length - 1 ? {breakPoint: 0, groupIndexOffset: 0} : {breakPoint: breakPoint + 1, groupIndexOffset: -1},
     tableBottomMultiplier: 5.5,
+    alignSubgroupHeaders: false,
 };
 
 function renderCetasikaTableByLayout(layoutConfig, y, model, state = cittaState) {
@@ -221,8 +225,9 @@ function renderCetasikaTableByLayout(layoutConfig, y, model, state = cittaState)
         shouldBreakColumn,
         resetBreakPoint,
         tableBottomMultiplier,
+        alignSubgroupHeaders,
     } = layoutConfig;
-    state.allCetasika = [];
+    state.allCetasika.length = 0;
     renderTextBox(cittaPageSvg, 0, y, itemColumnWidth * totalColumns, headerRowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
     let groupHeaderX = 0;
     for (let i = 0; i < model.cetasika.groups.length; i++) {
@@ -273,6 +278,9 @@ function renderCetasikaTableByLayout(layoutConfig, y, model, state = cittaState)
             const breakState = resetBreakPoint({breakPoint, subGroup});
             breakPoint = breakState.breakPoint;
             j += breakState.groupIndexOffset;
+            if (alignSubgroupHeaders) {
+                y0 = y + headerRowHeight * 2;
+            }
         }
     }
     state.cetasikaTableBottom = y + headerRowHeight * tableBottomMultiplier;
@@ -497,7 +505,7 @@ function renderNoteTable(x, y, w, titlepx=14) {
 /** itemIndex is populated by now **/
 function calculateConnections(model, state) {
     assertCittaModelStructure(model, 'calculateConnections');
-    state.allCittas = [];
+    state.allCittas.length = 0;
     let itemConnections = {};
     model.cittaGroups.forEach((modelGroup) => {
         const cittaGroup = modelGroup.raw;
