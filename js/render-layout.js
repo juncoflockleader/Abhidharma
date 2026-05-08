@@ -14,5 +14,6 @@ const CITTA_SIDE_PANEL_LAYOUTS = {
 };
 
 function getCittaSidePanelLayout(lang) {
-    return lang.fixed ? CITTA_SIDE_PANEL_LAYOUTS.cn : CITTA_SIDE_PANEL_LAYOUTS.en;
+    const normalizedLang = typeof lang === 'string' ? (langCfg[lang] || langCfg.cn) : (lang || langCfg.cn);
+    return normalizedLang.fixed ? CITTA_SIDE_PANEL_LAYOUTS.cn : CITTA_SIDE_PANEL_LAYOUTS.en;
 }
