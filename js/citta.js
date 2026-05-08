@@ -35,8 +35,16 @@ function createCittaState() {
 let cittaState = createCittaState();
 let cittaModel = null;
 
+// Legacy aliases used by conditions/rupa modules.
+let subEffectIndex = cittaState.subEffectIndex;
+let allCittas = cittaState.allCittas;
+let cetasikaIdIndex = cittaState.cetasikaIdIndex;
+
 function resetCittaState() {
     cittaState = createCittaState();
+    subEffectIndex = cittaState.subEffectIndex;
+    allCittas = cittaState.allCittas;
+    cetasikaIdIndex = cittaState.cetasikaIdIndex;
     return cittaState;
 }
 
@@ -87,20 +95,24 @@ function renderCittaTable(parent, model, state = cittaState, layoutConfig = {}) 
     }
 
     function renderColumnHeaders(parent, x, y, ws, h, color) {
+        const defs = model.columnDefinitions.slice(0, ws.length);
         let x0 = x;
-        for (let i = 0; i < 2; ++i) {
-            renderTextBox(parent, x0, y, ws[i], h, color, model.columnDefinitions[i].displayName);
+        const simpleColumns = Math.min(2, defs.length);
+        for (let i = 0; i < simpleColumns; ++i) {
+            renderTextBox(parent, x0, y, ws[i], h, color, defs[i].displayName || '');
             x0 += ws[i];
         }
-        let h0 = h/3;
-        for (let i = 2; i < ws.length; ++i) {
-            renderTextBox(parent, x0, y + h0 * 2, ws[i], h0, color, model.columnDefinitions[i].displayName);
+        const h0 = h / 3;
+        for (let i = 2; i < defs.length; ++i) {
+            renderTextBox(parent, x0, y + h0 * 2, ws[i], h0, color, defs[i].displayName || '');
             x0 += ws[i];
         }
 
-        renderTextBox(parent, x + subArraySum(ws, 0, 2), y + h / 3, subArraySum(ws, 2, 4), h/3, color, model.columnDefinitions[2].groupDisplayName);
-        renderTextBox(parent, x + subArraySum(ws, 0, 4), y + h / 3, subArraySum(ws, 4, 6), h/3, color, model.columnDefinitions[4].groupDisplayName);
-        renderTextBox(parent, x + subArraySum(ws, 0, 2), y, subArraySum(ws, 2, 6), h / 3, color, model.columnDefinitions[2].topGroupDisplayName);
+        if (defs.length >= 6) {
+            renderTextBox(parent, x + subArraySum(ws, 0, 2), y + h / 3, subArraySum(ws, 2, 4), h / 3, color, defs[2].groupDisplayName || '');
+            renderTextBox(parent, x + subArraySum(ws, 0, 4), y + h / 3, subArraySum(ws, 4, 6), h / 3, color, defs[4].groupDisplayName || '');
+            renderTextBox(parent, x + subArraySum(ws, 0, 2), y, subArraySum(ws, 2, 6), h / 3, color, defs[2].topGroupDisplayName || '');
+        }
     }
 
     function renderRowHeaders(parent, x, y, w, hs) {

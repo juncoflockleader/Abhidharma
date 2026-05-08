@@ -1,3 +1,5 @@
+const idIndex = {};
+
 const rupa = {
     name: t('string_id_499'),
     children: [
