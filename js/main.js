@@ -50,8 +50,10 @@ function updateRenderDebugPanel(errors) {
 }
 
 function renderCittaSection(viewModel, context) {
+    resetCittaState();
+    const model = rebuildCittaModel();
     const subPadding = 6;
-    const ctt = renderCittaTable(cittaSvg);
+    const ctt = renderCittaTable(cittaSvg, model, cittaState);
     let cntt = null;
     let ntt = null;
     const sidePanelLayout = viewModel.layout.cittaSidePanel;
@@ -77,8 +79,13 @@ function renderCittaSection(viewModel, context) {
     pageState.citta.layout = ctt;
     pageState.citta.counters = cntt;
     pageState.citta.notes = ntt;
-    renderCetasikaTable(ctt.endY + 15);
-    setupHighlightsBehavior(cntt, ntt);
+    renderCetasikaTableByLayout(
+        getLang().fixed ? CETASIKA_TABLE_LAYOUT_CN : CETASIKA_TABLE_LAYOUT_EN,
+        ctt.endY + 15,
+        model,
+        cittaState
+    );
+    setupHighlightsBehavior(cntt, ntt, cittaState);
 
     context.endX = ctt.endX;
     context.endY = Math.max(ntt ? ntt.endY : 0, cntt ? cntt.endY : 0);
