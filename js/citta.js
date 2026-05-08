@@ -49,8 +49,20 @@ function getCittaModel() {
     return cittaModel || rebuildCittaModel();
 }
 
-function renderCittaTable(parent, state = cittaState) {
-    const model = rebuildCittaModel();
+function assertCittaModelStructure(model, functionName = 'unknown') {
+    if (!model || !Array.isArray(model.rowDefinitions) || model.rowDefinitions.length === 0) {
+        throw new Error(`[${functionName}] Invalid citta model: model.rowDefinitions is empty or missing.`);
+    }
+    if (!Array.isArray(model.columnDefinitions) || model.columnDefinitions.length === 0) {
+        throw new Error(`[${functionName}] Invalid citta model: model.columnDefinitions is empty or missing.`);
+    }
+    if (!model.cittaGroupIndex || Object.keys(model.cittaGroupIndex).length === 0) {
+        throw new Error(`[${functionName}] Invalid citta model: model.cittaGroupIndex is empty or missing.`);
+    }
+}
+
+function renderCittaTable(parent, model, state = cittaState) {
+    assertCittaModelStructure(model, 'renderCittaTable');
     const rowHeaderWidth = 120;
     const columnWidths = [120, 120, 120, 220, 120, 120];
     const columnHeaderHeight = 105;
@@ -138,7 +150,7 @@ function renderCittaTable(parent, state = cittaState) {
 }
 
 function renderCetasikaTable(y, state = cittaState) {
-    renderCetasikaTableByLayout(getLang().fixed ? CETASIKA_TABLE_LAYOUT_CN : CETASIKA_TABLE_LAYOUT_EN, y, state);
+    renderCetasikaTableByLayout(getLang().fixed ? CETASIKA_TABLE_LAYOUT_CN : CETASIKA_TABLE_LAYOUT_EN, y, getCittaModel(), state);
 }
 
 const CETASIKA_TABLE_LAYOUT_CN = {
@@ -179,8 +191,8 @@ const CETASIKA_TABLE_LAYOUT_EN = {
     tableBottomMultiplier: 5.5,
 };
 
-function renderCetasikaTableByLayout(layoutConfig, y, state = cittaState) {
-    const model = getCittaModel();
+function renderCetasikaTableByLayout(layoutConfig, y, model, state = cittaState) {
+    assertCittaModelStructure(model, 'renderCetasikaTableByLayout');
     const {
         headerRowHeight,
         itemColumnWidth,
@@ -252,7 +264,7 @@ function renderCetasikaTableByLayout(layoutConfig, y, state = cittaState) {
 }
 
 function renderCetasikaTableCn(y, state = cittaState) {
-    renderCetasikaTableByLayout(CETASIKA_TABLE_LAYOUT_CN, y, state);
+    renderCetasikaTableByLayout(CETASIKA_TABLE_LAYOUT_CN, y, getCittaModel(), state);
 }
 
 function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
@@ -275,7 +287,7 @@ function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
 function renderCetasikaTableEn(y, state = cittaState) {
     const columnWidth = CETASIKA_TABLE_LAYOUT_EN.itemColumnWidth;
     const rowHeight = CETASIKA_TABLE_LAYOUT_EN.headerRowHeight;
-    renderCetasikaTableByLayout(CETASIKA_TABLE_LAYOUT_EN, y, state);
+    renderCetasikaTableByLayout(CETASIKA_TABLE_LAYOUT_EN, y, getCittaModel(), state);
 
     const abbreviations = {
         "MFact": "Mental Factor",
@@ -468,8 +480,8 @@ function renderNoteTable(x, y, w, titlepx=14) {
 }
 
 /** itemIndex is populated by now **/
-function calculateConnections(state) {
-    const model = getCittaModel();
+function calculateConnections(model, state) {
+    assertCittaModelStructure(model, 'calculateConnections');
     state.allCittas = [];
     let itemConnections = {};
     model.cittaGroups.forEach((modelGroup) => {
@@ -589,7 +601,7 @@ function setupHighlightsBehavior(cntt, ntt, state) {
     let locked = false;
     let lockedItem = null;
     let clearFunc = null;
-    const itemGraph = calculateConnections(state);
+    const itemGraph = calculateConnections(getCittaModel(), state);
     for (let itemId in itemGraph) {
         function highlightsConnections(connections) {
             function setHighlights(connections, clear=false) {
