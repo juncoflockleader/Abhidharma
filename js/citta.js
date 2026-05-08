@@ -1,5 +1,5 @@
 const cittaPageApi = getCittaPageApi();
-const cittaSvg = cittaPageApi.svg;
+const cittaPageSvg = cittaPageApi.svg;
 
 function createCittaState() {
     return {
@@ -199,10 +199,10 @@ function renderCetasikaTableByLayout(layoutConfig, y, state = cittaState) {
         tableBottomMultiplier,
     } = layoutConfig;
     state.allCetasika = [];
-    renderTextBox(cittaSvg, 0, y, itemColumnWidth * totalColumns, headerRowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
+    renderTextBox(cittaPageSvg, 0, y, itemColumnWidth * totalColumns, headerRowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
     let groupHeaderX = 0;
     for (let i = 0; i < model.cetasika.groups.length; i++) {
-        renderTextBox(cittaSvg, groupHeaderX, y + headerRowHeight, itemColumnWidth * groupColumns[i], headerRowHeight, 'lightcyan', model.cetasika.groups[i].displayName, {size: '12px', align: 'middle'});
+        renderTextBox(cittaPageSvg, groupHeaderX, y + headerRowHeight, itemColumnWidth * groupColumns[i], headerRowHeight, 'lightcyan', model.cetasika.groups[i].displayName, {size: '12px', align: 'middle'});
         groupHeaderX += itemColumnWidth * groupColumns[i];
     }
 
@@ -215,7 +215,7 @@ function renderCetasikaTableByLayout(layoutConfig, y, state = cittaState) {
         for (let j = 0; j < group.length; j++) {
             const subGroup = group[j];
             const subgroupColumnSpan = subgroupColumnSpanFn(subGroup);
-            renderTextBox(cittaSvg, x, y0, itemColumnWidth * subgroupColumnSpan, headerRowHeight, subgroupHeaderBg, subGroup[subgroupLabelKey], {size: '12px', wrap: autoWrap, align: 'middle'});
+            renderTextBox(cittaPageSvg, x, y0, itemColumnWidth * subgroupColumnSpan, headerRowHeight, subgroupHeaderBg, subGroup[subgroupLabelKey], {size: '12px', wrap: autoWrap, align: 'middle'});
             rowCount++;
             y0 += headerRowHeight;
             for (; breakPoint < subGroup.children.length; breakPoint++) {
@@ -223,7 +223,7 @@ function renderCetasikaTableByLayout(layoutConfig, y, state = cittaState) {
                 state.allCetasika.push(child);
                 state.registerCetasika(child.name, child.id);
                 state.registerId(child.id, child);
-                state.registerItem(child.id, renderTextBox(cittaSvg, x, y0, itemColumnWidth, itemRowHeight, 'white', child.name, {size: '12px', wrap: autoWrap, vertical: verticalText}));
+                state.registerItem(child.id, renderTextBox(cittaPageSvg, x, y0, itemColumnWidth, itemRowHeight, 'white', child.name, {size: '12px', wrap: autoWrap, vertical: verticalText}));
                 state.registerNote(child.id, {
                     'char_mark': child.char_mark,
                     'function': child.function,
@@ -256,18 +256,18 @@ function renderCetasikaTableCn(y, state = cittaState) {
 }
 
 function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
-    renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, 'lightcyan', 'glossary', {size: '12px', wrap: false, align: 'middle'});
-    renderTextBox(cittaSvg, x + columnWidth, y, columnWidth / 3, rowHeight, 'lightcyan', 'abbrev.', {size: '12px', wrap: false, align: 'middle'});
+    renderTextBox(cittaPageSvg, x, y, columnWidth, rowHeight, 'lightcyan', 'glossary', {size: '12px', wrap: false, align: 'middle'});
+    renderTextBox(cittaPageSvg, x + columnWidth, y, columnWidth / 3, rowHeight, 'lightcyan', 'abbrev.', {size: '12px', wrap: false, align: 'middle'});
     let r = 0;
     for (const key in abbreviations) {
         const color = r % 2 === 0 ? 'white' : 'lightgrey';
         y += rowHeight;
-        state.registerItem(key, renderTextBox(cittaSvg, x, y, columnWidth, rowHeight, color, abbreviations[key], {
+        state.registerItem(key, renderTextBox(cittaPageSvg, x, y, columnWidth, rowHeight, color, abbreviations[key], {
             size: '12px',
             wrap: false,
             align: 'middle'
         }));
-        renderTextBox(cittaSvg, x + columnWidth, y, columnWidth / 3, rowHeight, color, key, {size: '12px', wrap: false, align: 'middle'});
+        renderTextBox(cittaPageSvg, x + columnWidth, y, columnWidth / 3, rowHeight, color, key, {size: '12px', wrap: false, align: 'middle'});
         r++;
     }
 }
