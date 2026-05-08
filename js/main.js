@@ -71,12 +71,9 @@ function render() {
 
     renderCauseCondition(ccSvg);
     renderMyWords(mwSvg);
-    const hash = window.location.hash.substring(1); // Get the hash without the '#'
-    if (hash) {
-        showTab(hash);
-    }
+    syncTabWithHash();
 
-    langs.classed('active', (d, i) => i === lang.index);
+    syncLanguageButtons();
     testDiv.style('display', 'none;');
 }
 
