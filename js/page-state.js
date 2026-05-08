@@ -1,6 +1,7 @@
 function createPageState() {
     return {
         lang: getLang(),
+        tab: typeof getActiveTab === 'function' ? getActiveTab() : null,
         citta: {
             layout: null,
             counters: null,
@@ -18,5 +19,6 @@ function createPageState() {
 
 function refreshPageState(pageState) {
     pageState.lang = getLang();
+    pageState.tab = typeof getActiveTab === 'function' ? getActiveTab() : null;
     return pageState;
 }
