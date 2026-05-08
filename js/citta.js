@@ -135,52 +135,121 @@ function renderCittaTable(parent, state = cittaState) {
 }
 
 function renderCetasikaTable(y, state = cittaState) {
-    if (getLang().fixed) {
-        renderCetasikaTableCn(y, state);
-    } else {
-        renderCetasikaTableEn(y, state);
+    renderCetasikaTableByLayout(getLang().fixed ? CETASIKA_TABLE_LAYOUT_CN : CETASIKA_TABLE_LAYOUT_EN, y, state);
+}
+
+const CETASIKA_TABLE_LAYOUT_CN = {
+    headerRowHeight: 30,
+    itemColumnWidth: 25,
+    itemRowHeight: 75,
+    totalColumns: 52,
+    groupColumns: [13, 14, 25],
+    maxRowCount: Infinity,
+    verticalText: true,
+    autoWrap: false,
+    subgroupHeaderBg: 'lightcyan',
+    subgroupLabelKey: 'displayName',
+    subgroupColumnSpanFn: (subGroup) => subGroup.children.length,
+    nextItemPosition: ({x, y0, rowCount, itemColumnWidth}) => ({x: x + itemColumnWidth, y0, rowCount}),
+    shouldBreakColumn: () => false,
+    resetBreakPoint: () => ({breakPoint: 0, groupIndexOffset: 0}),
+    tableBottomMultiplier: 5.5,
+};
+
+const CETASIKA_TABLE_LAYOUT_EN = {
+    headerRowHeight: 14,
+    itemColumnWidth: 140,
+    itemRowHeight: 14,
+    totalColumns: 7,
+    groupColumns: [2, 2, 3],
+    maxRowCount: 10,
+    verticalText: false,
+    autoWrap: false,
+    subgroupHeaderBg: 'lavender',
+    subgroupLabelKey: 'name',
+    subgroupColumnSpanFn: () => 1,
+    nextItemPosition: ({x, y0, rowCount, itemRowHeight}) => ({x, y0: y0 + itemRowHeight, rowCount: rowCount + 1}),
+    shouldBreakColumn: ({breakPoint, subGroup, group, groupIndex, rowCount, maxRowCount}) =>
+        breakPoint < subGroup.children.length - 1 || groupIndex === group.length - 1 || rowCount + group[groupIndex + 1].children.length >= maxRowCount,
+    resetBreakPoint: ({breakPoint, subGroup}) =>
+        breakPoint >= subGroup.children.length - 1 ? {breakPoint: 0, groupIndexOffset: 0} : {breakPoint: breakPoint + 1, groupIndexOffset: -1},
+    tableBottomMultiplier: 5.5,
+};
+
+function renderCetasikaTableByLayout(layoutConfig, y, state = cittaState) {
+    const model = getCittaModel();
+    const {
+        headerRowHeight,
+        itemColumnWidth,
+        itemRowHeight,
+        totalColumns,
+        groupColumns,
+        maxRowCount,
+        verticalText,
+        autoWrap,
+        subgroupHeaderBg,
+        subgroupLabelKey,
+        subgroupColumnSpanFn,
+        nextItemPosition,
+        shouldBreakColumn,
+        resetBreakPoint,
+        tableBottomMultiplier,
+    } = layoutConfig;
+    state.allCetasika = [];
+    renderTextBox(cittaSvg, 0, y, itemColumnWidth * totalColumns, headerRowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
+    let groupHeaderX = 0;
+    for (let i = 0; i < model.cetasika.groups.length; i++) {
+        renderTextBox(cittaSvg, groupHeaderX, y + headerRowHeight, itemColumnWidth * groupColumns[i], headerRowHeight, 'lightcyan', model.cetasika.groups[i].displayName, {size: '12px', align: 'middle'});
+        groupHeaderX += itemColumnWidth * groupColumns[i];
     }
+
+    let x = 0;
+    for (let i = 0; i < model.cetasika.groups.length; i++) {
+        const group = model.cetasika.groups[i].children;
+        let y0 = y + headerRowHeight * 2;
+        let rowCount = 0;
+        let breakPoint = 0;
+        for (let j = 0; j < group.length; j++) {
+            const subGroup = group[j];
+            const subgroupColumnSpan = subgroupColumnSpanFn(subGroup);
+            renderTextBox(cittaSvg, x, y0, itemColumnWidth * subgroupColumnSpan, headerRowHeight, subgroupHeaderBg, subGroup[subgroupLabelKey], {size: '12px', wrap: autoWrap, align: 'middle'});
+            rowCount++;
+            y0 += headerRowHeight;
+            for (; breakPoint < subGroup.children.length; breakPoint++) {
+                const child = subGroup.children[breakPoint];
+                state.allCetasika.push(child);
+                state.registerCetasika(child.name, child.id);
+                state.registerId(child.id, child);
+                state.registerItem(child.id, renderTextBox(cittaSvg, x, y0, itemColumnWidth, itemRowHeight, 'white', child.name, {size: '12px', wrap: autoWrap, vertical: verticalText}));
+                state.registerNote(child.id, {
+                    'char_mark': child.char_mark,
+                    'function': child.function,
+                    'appearance': child.appearance,
+                    'proximate_cause': child.proximate_cause,
+                });
+                const nextPos = nextItemPosition({x, y0, rowCount, itemColumnWidth, itemRowHeight});
+                x = nextPos.x;
+                y0 = nextPos.y0;
+                rowCount = nextPos.rowCount;
+                if (rowCount > maxRowCount) {
+                    break;
+                }
+            }
+            if (shouldBreakColumn({breakPoint, subGroup, group, groupIndex: j, rowCount, maxRowCount})) {
+                y0 = y + headerRowHeight * 2;
+                x += itemColumnWidth;
+                rowCount = 0;
+            }
+            const breakState = resetBreakPoint({breakPoint, subGroup});
+            breakPoint = breakState.breakPoint;
+            j += breakState.groupIndexOffset;
+        }
+    }
+    state.cetasikaTableBottom = y + headerRowHeight * tableBottomMultiplier;
 }
 
 function renderCetasikaTableCn(y, state = cittaState) {
-  const model = getCittaModel();
-  state.allCetasika = [];
-  let columnWidth = 25;
-  let rowHeight = 30;
-  renderTextBox(cittaSvg, 0, y, columnWidth * 52, rowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
-  renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 13, rowHeight, 'lightcyan', model.cetasika.groups[0].displayName, {size: '12px', align: 'middle'});
-  renderTextBox(cittaSvg, columnWidth * 13, y + rowHeight, columnWidth * 14, rowHeight, 'lightcyan', model.cetasika.groups[1].displayName, {size: '12px', align: 'middle'});
-  renderTextBox(cittaSvg, columnWidth * 27, y + rowHeight, columnWidth * 25, rowHeight, 'lightcyan', model.cetasika.groups[2].displayName, {size: '12px', align: 'middle'});
-
-  let x = 0;
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < model.cetasika.groups[i].children.length; j++) {
-      let n = model.cetasika.groups[i].children[j].children.length;
-      renderTextBox(cittaSvg, x, y + rowHeight * 2, columnWidth * n, rowHeight, 'lightcyan', model.cetasika.groups[i].children[j].displayName, {size: '12px', wrap: false, align: 'middle'});
-      x += columnWidth * n;
-    }
-  }
-
-  x = 0;
-  model.cetasika.groups.forEach(group => {
-    group.children.forEach(subGroup => {
-      subGroup.children.forEach(child => {
-        state.allCetasika.push(child);
-        let name = child.name;
-        state.registerCetasika(name, child.id);
-        state.registerId(child.id, child);
-        state.registerItem(child.id, renderTextBox(cittaSvg, x, y + rowHeight * 3, columnWidth, rowHeight * 2.5, 'white', name, {size: '12px', vertical: true}));
-        state.registerNote(child.id, {
-            'char_mark': child.char_mark,
-            'function': child.function,
-            'appearance': child.appearance,
-            'proximate_cause': child.proximate_cause,
-        });
-        x += columnWidth;
-      });
-    });
-  });
-  state.cetasikaTableBottom = y + rowHeight * 5.5;
+    renderCetasikaTableByLayout(CETASIKA_TABLE_LAYOUT_CN, y, state);
 }
 
 function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
@@ -201,59 +270,9 @@ function renderAbbrev(x, y, columnWidth, rowHeight, abbreviations, state) {
 }
 
 function renderCetasikaTableEn(y, state = cittaState) {
-    const model = getCittaModel();
-    state.allCetasika = [];
-    let columnWidth = 140;
-    let rowHeight = 14;
-    renderTextBox(cittaSvg, 0, y, columnWidth * 7, rowHeight, 'lightcyan', model.cetasika.name, {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, 0, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', model.cetasika.groups[0].displayName, {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, columnWidth * 2, y + rowHeight, columnWidth * 2, rowHeight, 'lightcyan', model.cetasika.groups[1].displayName, {size: '12px', align: 'middle'});
-    renderTextBox(cittaSvg, columnWidth * 4, y + rowHeight, columnWidth * 3, rowHeight, 'lightcyan', model.cetasika.groups[2].displayName, {size: '12px', align: 'middle'});
-
-    const maxRowCount = 10;
-    let x = 0;
-    for (let i = 0; i < 3; i++) {
-        const group = model.cetasika.groups[i].children;
-        let y0 = y + rowHeight * 2;
-        let rowCount = 0;
-        let breakPoint = 0;
-        for (let j = 0; j < group.length; j++) {
-            const subGroup = group[j];
-            renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'lavender', subGroup.name, {size: '12px', wrap: false, align: 'middle'});
-            rowCount++;
-            y0 += rowHeight;
-            for (; breakPoint < subGroup.children.length; breakPoint++) {
-                let child = subGroup.children[breakPoint];
-                state.allCetasika.push(child);
-                let name = child.name;
-                state.registerCetasika(name, child.id);
-                state.registerId(child.id, child);
-                state.registerItem(child.id, renderTextBox(cittaSvg, x, y0, columnWidth, rowHeight, 'white', name, {size: '12px', wrap: false}));
-                state.registerNote(child.id, {
-                    'char_mark': child.char_mark,
-                    'function': child.function,
-                    'appearance': child.appearance,
-                    'proximate_cause': child.proximate_cause,
-                });
-                y0 += rowHeight;
-                rowCount++;
-                if (rowCount > maxRowCount) {
-                    break;
-                }
-            }
-            if (breakPoint < subGroup.children.length - 1 || j === group.length - 1 || rowCount + group[j+1].children.length >= maxRowCount) {
-                y0 = y + rowHeight * 2;
-                x += columnWidth;
-                rowCount = 0;
-            }
-            if (breakPoint >= subGroup.children.length - 1) {
-                breakPoint = 0;
-            } else {
-                breakPoint++;
-                j = j - 1;
-            }
-        }
-    }
+    const columnWidth = CETASIKA_TABLE_LAYOUT_EN.itemColumnWidth;
+    const rowHeight = CETASIKA_TABLE_LAYOUT_EN.headerRowHeight;
+    renderCetasikaTableByLayout(CETASIKA_TABLE_LAYOUT_EN, y, state);
 
     const abbreviations = {
         "MFact": "Mental Factor",
