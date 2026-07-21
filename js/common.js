@@ -51,7 +51,7 @@ const container = d3.select('.svg-container');
 
 const svgWidth = 1800;
 const svgHeight = 1000;
-const cittaSvg = container.select('#citta');
+const cittaSvg = container.select('#citta-svg');
 
 const msSvg = container.select('#container2').append('svg')
     .attr('class', 'svg-content')
@@ -63,7 +63,8 @@ const mmSvg = container.select('#container3').append('svg')
     .attr('width', svgWidth)
     .attr('height', 1);
 
-const rpSvg = container.select('#container4').append('svg')
+const rupaSvgHost = container.select('#rupa-svg-stage').empty() ? container.select('#container4') : container.select('#rupa-svg-stage');
+const rpSvg = rupaSvgHost.append('svg')
     .attr('class', 'svg-content')
     .attr('width', svgWidth)
     .attr('height', 1200);

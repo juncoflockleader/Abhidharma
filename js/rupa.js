@@ -941,15 +941,19 @@ function renderRupaAggTable(parent, x, y) {
 
 let rupaLock = null;
 function setupRupaHighlightBehavior() {
+    const itemById = {};
     interactiveItems.forEach((item, i) => {
+        if (!itemById[item.id]) {
+            itemById[item.id] = item;
+        }
         item.highlight = function () {
-            const subItems = highlightableItems[item.id];
+            const subItems = highlightableItems[item.id] || [];
             subItems.forEach((d, i) => {
                 d.highlight();
             });
         }
         item.clear = function () {
-            const subItems = highlightableItems[item.id];
+            const subItems = highlightableItems[item.id] || [];
             subItems.forEach((d, i) => {
                 d.clear();
             });
@@ -966,15 +970,46 @@ function setupRupaHighlightBehavior() {
             })
             .on('click', function() {
                 if (rupaLock === item) {
-                    rupaLock = null;
-                    item.clear();
+                    clearRupaHighlight({notify: true});
                 } else {
-                    if (rupaLock) {
-                        rupaLock.clear();
-                    }
-                    rupaLock = item;
-                    item.highlight();
+                    selectRupaHighlight(item.id, {notify: true});
                 }
             });
     });
+
+    function clearRupaHighlight(options = {}) {
+        if (rupaLock) {
+            rupaLock.clear();
+        }
+        rupaLock = null;
+        if (options.notify && typeof studyGuideHandleSelection === 'function') {
+            studyGuideHandleSelection('rupa', null, {clear: true});
+        }
+    }
+
+    function selectRupaHighlight(itemId, options = {}) {
+        const normalizedId = Number(itemId);
+        const item = itemById[normalizedId] || itemById[itemId];
+        if (!item) {
+            return null;
+        }
+        if (rupaLock) {
+            rupaLock.clear();
+        }
+        rupaLock = item;
+        item.highlight();
+        if (options.notify && typeof studyGuideHandleSelection === 'function') {
+            studyGuideHandleSelection('rupa', normalizedId, {});
+        }
+        return item;
+    }
+
+    window.rupaGuideApi = {
+        itemById,
+        selectItem: selectRupaHighlight,
+        clear: clearRupaHighlight,
+        getActiveId: function () {
+            return rupaLock ? rupaLock.id : null;
+        }
+    };
 }

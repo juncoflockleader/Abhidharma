@@ -82,6 +82,7 @@ function activateTab(tabIdOrLegacyIndex, options = {}) {
             candidate.panel.setAttribute('aria-hidden', String(!isActive));
         }
     });
+    document.body.classList.toggle('citta-tab-active', entry.id === 'citta');
 
     if (updateHash) {
         setTabHash(entry, replaceHash);

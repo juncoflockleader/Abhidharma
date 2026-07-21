@@ -101,7 +101,7 @@ function renderCittaSection(viewModel, context) {
         notesTable: ntt,
         counterTable: cntt,
     };
-    validateLayoutBounds('#citta', keyRegions);
+    validateLayoutBounds('#citta-svg', keyRegions);
 
     const regionValues = Object.values(keyRegions).filter(Boolean);
     context.endX = Math.max(...regionValues.map((r) => r.endX));
@@ -196,6 +196,10 @@ function render() {
     executeRenderStage('condition', context, renderErrors, () => renderConditionSection(context));
 
     syncTabWithHash();
+
+    if (typeof initializeStudyGuide === 'function') {
+        initializeStudyGuide(pageState);
+    }
 
     syncLanguageButtons();
     updateRenderDebugPanel(renderErrors);
