@@ -147,6 +147,7 @@ function renderFlowSection(context) {
 
 function renderRupaSection(viewModel, context) {
     const subPadding = 6;
+    resetRupaState();
     const rat = renderRupaAttrTable(rpSvg);
     const offset = viewModel.layout.rupaNotesOffset;
     renderNotesTable(rpSvg, rat.endX + offset, 0);

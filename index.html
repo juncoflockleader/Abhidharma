@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="images/favicon.png" type="image/png">
 </head>
-<body class="citta-tab-active">
+<body class="citta-tab-active inspector-tab-active">
 <div id="tooltip" style="position: absolute; visibility: hidden; background-color: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; pointer-events: none;"></div>
 <button id="left-sidebar-toggle" class="sidebar-toggle sidebar-toggle--left" type="button" aria-controls="primary-menu" aria-expanded="true" aria-label="收起左侧导航" title="收起左侧导航">‹</button>
 <div class="menu" id="primary-menu">
@@ -39,7 +39,7 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
-<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <div class="citta-workspace">
@@ -68,8 +68,17 @@
     <div id="mindflowcontrols"></div>
   </div>
   <div class="svg-sub-container" id="container4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" hidden>
-    <div id="rupa-guide" class="study-guide" data-study-page="rupa"></div>
-    <div id="rupa-svg-stage" class="svg-scroll"></div>
+    <div class="rupa-workspace">
+      <div id="rupa-guide" class="study-guide study-guide--rupa" data-study-page="rupa"></div>
+      <div class="rupa-canvas" aria-label="色法互动表">
+        <div class="svg-scroll" id="rupa-scroll" tabindex="0" aria-label="可滚动的色法与色聚表格">
+          <div id="rupa-svg-stage"></div>
+        </div>
+      </div>
+      <aside id="rupa-inspector" class="rupa-inspector" aria-label="当前选中色法详情" aria-live="polite">
+        <div class="study-guide__panel" data-study-panel="rupa"></div>
+      </aside>
+    </div>
   </div>
   <div class="svg-sub-container" id="container5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" hidden>
   </div>

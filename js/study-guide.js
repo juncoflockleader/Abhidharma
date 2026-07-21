@@ -62,6 +62,7 @@ const STUDY_GUIDE_TEXT = {
         onlyRight: '仅右侧',
         remove: '移除',
         browseMobile: '快速浏览心与心所',
+        browseRupa: '快速浏览色法与色聚',
         chooseItem: '选择一项查看详情',
         more: '展开',
         positive: '肯定/相应',
@@ -69,6 +70,10 @@ const STUDY_GUIDE_TEXT = {
         neutral: '皆可/中性',
         inseparable: '八不离色',
         change: '变化色',
+        origins: '生起因',
+        additional: '补充说明',
+        rupaHeading: '表头 / 分类',
+        rupaHighlight: '当前关联',
         cittaWhy: '从选中项目出发，反查它在心、心所和属性维度中的连接。',
         rupaWhy: '从选中项目出发，反查它在属性表、注释表和色聚组合中的位置。',
         filterWisdom: '含慧心所的心',
@@ -126,6 +131,7 @@ const STUDY_GUIDE_TEXT = {
         onlyRight: 'Right only',
         remove: 'Remove',
         browseMobile: 'Quick browse consciousness and factors',
+        browseRupa: 'Quick browse rupa and clusters',
         chooseItem: 'Choose an item to view details',
         more: 'more',
         positive: 'positive/linked',
@@ -133,6 +139,10 @@ const STUDY_GUIDE_TEXT = {
         neutral: 'both/neutral',
         inseparable: 'eight inseparables',
         change: 'changeable rupa',
+        origins: 'Origins',
+        additional: 'Additional note',
+        rupaHeading: 'heading / category',
+        rupaHighlight: 'current relation',
         cittaWhy: 'Start from the selected item and trace its links across consciousness, mental factors, and attributes.',
         rupaWhy: 'Start from the selected item and trace where it appears in attributes, notes, and cluster composition.',
         filterWisdom: 'With wisdom factor',
@@ -567,6 +577,7 @@ function sgBuildRupaSearchIndex() {
         entries.push({
             page: 'rupa',
             id: String(item.id),
+            kind: 'rupa',
             label: item.alias || item.name,
             type: sgT('rupa'),
             keywords: [item.name, item.character, item.functions, item.manifestation, item.cause].concat(item.path || []),
@@ -577,6 +588,7 @@ function sgBuildRupaSearchIndex() {
         entries.push({
             page: 'rupa',
             id: String(item.id),
+            kind: 'rupaAgg',
             label: item.name,
             type: sgT('rupaAgg'),
             keywords: composition.concat(item.path || []),
@@ -623,9 +635,12 @@ function sgBuildRupaSummary(itemId) {
 
     if (entity.kind === 'rupa') {
         const raw = entity.raw;
-        const clusterNames = cache.aggLeaves
+        const clusters = cache.aggLeaves
             .filter((cluster) => (rupasSubEffects[cluster.id] || []).includes(entity.id))
-            .map((cluster) => cluster.name);
+            .map((cluster) => ({id: cluster.id, label: cluster.name, type: sgT('rupaAgg')}));
+        const originNames = (rupaCause.children || [])
+            .filter((origin) => (rupaCause.rupa || []).includes(raw.name) || (origin.rupa || []).includes(raw.name))
+            .map((origin) => origin.name);
         const special = [];
         if (cache.eightNames.includes(raw.name)) {
             special.push(sgT('inseparable'));
@@ -633,18 +648,33 @@ function sgBuildRupaSummary(itemId) {
         if (cache.changeNames.includes(raw.name)) {
             special.push(sgT('change'));
         }
+        sections.push({title: sgT('path'), text: (raw.path || []).join(' / ')});
         sections.push({title: sgT('category'), tags: sgRupaClassifications(raw)});
-        sections.push({
-            title: sgT('notes'),
-            text: [raw.character, raw.functions, raw.manifestation, raw.cause].filter(Boolean).join(' / '),
+        [
+            [t('string_id_3'), raw.character],
+            [t('string_id_4'), raw.functions],
+            [t('string_id_5'), raw.manifestation],
+            [t('string_id_6'), raw.cause],
+        ].filter((entry) => entry[1]).forEach(([title, text]) => {
+            sections.push({title, text});
         });
-        sections.push({title: sgT('clusters'), tags: clusterNames});
+        if (raw.extra) {
+            sections.push({title: sgT('additional'), text: raw.extra});
+        }
+        if (originNames.length) {
+            sections.push({title: sgT('origins'), tags: originNames});
+        }
+        sections.push({title: sgT('clusters'), text: `${clusters.length} ${sgT('items')}`, tags: clusters});
         if (special.length) {
             sections.push({title: sgT('special'), tags: special});
         }
     } else {
         const compositionIds = rupasSubEffects[entity.id] || [];
-        const composition = compositionIds.map(sgRupaNameById);
+        const composition = compositionIds.map((id) => ({
+            id,
+            label: sgRupaNameById(id),
+            type: sgT('rupa'),
+        }));
         const special = [];
         const eightIds = cache.eightNames.map((name) => cache.leafByName[name] && cache.leafByName[name].id).filter(Boolean);
         const changeIds = cache.changeNames.map((name) => cache.leafByName[name] && cache.leafByName[name].id).filter(Boolean);
@@ -655,7 +685,7 @@ function sgBuildRupaSummary(itemId) {
             special.push(sgT('change'));
         }
         sections.push({title: sgT('path'), text: (entity.raw.path || []).join(' / ')});
-        sections.push({title: sgT('composition'), tags: composition});
+        sections.push({title: sgT('composition'), text: `${composition.length} ${sgT('items')}`, tags: composition});
         if (special.length) {
             sections.push({title: sgT('special'), tags: special});
         }
@@ -819,10 +849,12 @@ function sgLegend(page) {
             ['feeling', sgT('feelingRelation')],
         ]
         : [
-            ['object', sgT('positive')],
-            ['optional', sgT('negative')],
-            ['mental-basis', sgT('neutral')],
-            ['root-time', sgT('inseparable')],
+            ['rupa-highlight', sgT('rupaHighlight')],
+            ['rupa-heading', sgT('rupaHeading')],
+            ['rupa-positive', sgT('positive')],
+            ['rupa-negative', sgT('negative')],
+            ['rupa-neutral', sgT('neutral')],
+            ['rupa-basic', sgT('inseparable')],
         ];
     return items.map(([token, label]) => (
         `<span class="study-guide__legend-item"><span class="study-guide__swatch study-guide__swatch--${sgEscape(token)}"></span>${sgEscape(label)}</span>`
@@ -830,21 +862,25 @@ function sgLegend(page) {
 }
 
 function sgMobileBrowser(page) {
-    if (page !== 'citta') {
-        return '';
-    }
-    const entries = studyState.citta.searchIndex || [];
-    const cittaEntries = entries.filter((entry) => entry.kind === 'citta');
-    const cetasikaEntries = entries.filter((entry) => entry.kind === 'cetasika');
+    const entries = studyState[page].searchIndex || [];
     const optionGroup = (label, values) => `<optgroup label="${sgEscape(label)}">${values.map((entry) => (
         `<option value="${sgEscape(entry.id)}">${sgEscape(entry.label)}${entry.kind === 'citta' && entry.type.includes('·') ? ` · ${sgEscape(entry.type.split('·').slice(1).join('·').trim())}` : ''}</option>`
     )).join('')}</optgroup>`;
+    const groups = page === 'citta'
+        ? [
+            [sgT('citta'), entries.filter((entry) => entry.kind === 'citta')],
+            [sgT('cetasika'), entries.filter((entry) => entry.kind === 'cetasika')],
+        ]
+        : [
+            [sgT('rupa'), entries.filter((entry) => entry.kind === 'rupa')],
+            [sgT('rupaAgg'), entries.filter((entry) => entry.kind === 'rupaAgg')],
+        ];
+    const label = page === 'citta' ? sgT('browseMobile') : sgT('browseRupa');
     return `<details class="study-guide__mobile-browser">
-        <summary>${sgEscape(sgT('browseMobile'))}</summary>
-        <select class="study-guide__mobile-select" data-study-mobile-select aria-label="${sgEscape(sgT('browseMobile'))}">
+        <summary>${sgEscape(label)}</summary>
+        <select class="study-guide__mobile-select" data-study-mobile-select aria-label="${sgEscape(label)}">
             <option value="">${sgEscape(sgT('chooseItem'))}</option>
-            ${optionGroup(sgT('citta'), cittaEntries)}
-            ${optionGroup(sgT('cetasika'), cetasikaEntries)}
+            ${groups.map(([groupLabel, values]) => optionGroup(groupLabel, values)).join('')}
         </select>
     </details>`;
 }
@@ -957,12 +993,17 @@ function renderStudyPanel(summary, pageOverride) {
 }
 
 function sgRevealStudyItem(page, itemId, options = {}) {
-    if (page !== 'citta' || !cittaState.itemIndex || !cittaState.itemIndex[String(itemId)]) {
-        return false;
+    let item = null;
+    let scroller = null;
+    if (page === 'citta' && cittaState.itemIndex && cittaState.itemIndex[String(itemId)]) {
+        item = cittaState.itemIndex[String(itemId)];
+        scroller = document.getElementById('citta-scroll');
+    } else if (page === 'rupa' && window.rupaGuideApi && window.rupaGuideApi.itemById) {
+        const entry = window.rupaGuideApi.itemById[String(itemId)];
+        item = entry ? entry.item : null;
+        scroller = document.getElementById('rupa-scroll');
     }
-    const item = cittaState.itemIndex[String(itemId)];
-    const node = item.node();
-    const scroller = document.getElementById('citta-scroll');
+    const node = item && typeof item.node === 'function' ? item.node() : null;
     if (!node || !scroller || typeof node.getBBox !== 'function') {
         return false;
     }
@@ -998,6 +1039,17 @@ function sgSyncCittaUrl() {
 function sgRenderCurrentCittaPanel() {
     const selectedId = studyState.citta.selectedId;
     renderStudyPanel(selectedId ? sgBuildCittaSummary(selectedId) : null, 'citta');
+}
+
+function sgSetMobileSelection(page, itemId) {
+    const mobileSelect = document.querySelector(`#${page}-guide [data-study-mobile-select]`);
+    if (!mobileSelect) {
+        return;
+    }
+    const value = itemId === null || itemId === undefined ? '' : String(itemId);
+    if (!value || [...mobileSelect.options].some((option) => option.value === value)) {
+        mobileSelect.value = value;
+    }
 }
 
 function sgAddComparisonItem(itemId) {
@@ -1052,13 +1104,19 @@ function selectStudyItem(page, itemId, options = {}) {
     }
     renderStudyPanel(summary);
     if (page === 'citta') {
-        const mobileSelect = document.querySelector('[data-study-mobile-select]');
-        if (mobileSelect && [...mobileSelect.options].some((option) => option.value === String(itemId))) {
-            mobileSelect.value = String(itemId);
-        }
+        sgSetMobileSelection(page, itemId);
         if (options.updateUrl !== false) {
             sgSyncCittaUrl();
         }
+        if (options.reveal !== false) {
+            sgRevealStudyItem(page, itemId, {
+                behavior: options.behavior || 'smooth',
+                focus: Boolean(options.focus),
+                focusCanvas: Boolean(options.focusCanvas),
+            });
+        }
+    } else if (page === 'rupa') {
+        sgSetMobileSelection(page, itemId);
         if (options.reveal !== false) {
             sgRevealStudyItem(page, itemId, {
                 behavior: options.behavior || 'smooth',
@@ -1077,15 +1135,13 @@ function clearStudySelection(page) {
             cittaState.highlight.clear({notify: false});
         }
         studyState.citta.selectedId = null;
-        const mobileSelect = document.querySelector('[data-study-mobile-select]');
-        if (mobileSelect) {
-            mobileSelect.value = '';
-        }
+        sgSetMobileSelection(page, null);
     } else if (page === 'rupa') {
         if (window.rupaGuideApi && window.rupaGuideApi.clear) {
             window.rupaGuideApi.clear({notify: false});
         }
         studyState.rupa.selectedId = null;
+        sgSetMobileSelection(page, null);
     }
 
     const activeFilter = studyState[page].activeFilter;
@@ -1114,6 +1170,7 @@ function studyGuideHandleSelection(page, itemId, options = {}) {
     studyState.activePage = page;
     if (options.clear || itemId === null || itemId === undefined) {
         studyState[page].selectedId = null;
+        sgSetMobileSelection(page, null);
         const activeFilter = studyState[page].activeFilter;
         const definition = activeFilter
             ? (page === 'citta' ? sgCittaFilterDefinition(activeFilter) : sgRupaFilterDefinition(activeFilter))
@@ -1125,6 +1182,7 @@ function studyGuideHandleSelection(page, itemId, options = {}) {
         return;
     }
     studyState[page].selectedId = String(itemId);
+    sgSetMobileSelection(page, itemId);
     const summary = page === 'citta' ? sgBuildCittaSummary(itemId) : sgBuildRupaSummary(itemId);
     renderStudyPanel(summary);
     if (page === 'citta') {
@@ -1255,8 +1313,15 @@ function initializeStudyGuide(pageState) {
     sgRestoreCittaUrlState();
     if (!studyState.globalEventsBound) {
         document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && studyState.citta.selectedId) {
-                clearStudySelection('citta');
+            if (event.key !== 'Escape') {
+                return;
+            }
+            const activeTab = typeof getActiveTab === 'function' ? getActiveTab() : null;
+            const activePage = activeTab && (activeTab.id === 'citta' || activeTab.id === 'rupa')
+                ? activeTab.id
+                : studyState.activePage;
+            if (studyState[activePage] && studyState[activePage].selectedId) {
+                clearStudySelection(activePage);
             }
         });
         studyState.globalEventsBound = true;

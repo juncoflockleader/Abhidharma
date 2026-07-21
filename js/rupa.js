@@ -557,6 +557,17 @@ const rupaAgg =
 const interactiveItems = [];
 const highlightableItems = {};
 const rupaIndex = {};
+
+function resetRupaState() {
+    interactiveItems.length = 0;
+    Object.keys(highlightableItems).forEach((key) => delete highlightableItems[key]);
+    Object.keys(rupaIndex).forEach((key) => delete rupaIndex[key]);
+    Object.keys(idIndex).forEach((key) => delete idIndex[key]);
+    allRupaAgg = [];
+    rupasSubEffects = {};
+    rupaLock = null;
+}
+
 function renderRupaAttrTable(parent) {
     const lang = getLang();
     const fontSize = 12; // px
@@ -942,25 +953,47 @@ function renderRupaAggTable(parent, x, y) {
 let rupaLock = null;
 function setupRupaHighlightBehavior() {
     const itemById = {};
+    const itemsById = {};
     interactiveItems.forEach((item, i) => {
-        if (!itemById[item.id]) {
-            itemById[item.id] = item;
+        const itemId = String(item.id);
+        if (!itemById[itemId]) {
+            itemById[itemId] = item;
         }
+        if (!itemsById[itemId]) {
+            itemsById[itemId] = [];
+        }
+        itemsById[itemId].push(item);
+
+        const itemLabel = item.item.select('text').text() || itemId;
+        item.item
+            .classed('rupa-item', true)
+            .attr('data-rupa-id', itemId)
+            .attr('role', 'button')
+            .attr('tabindex', 0)
+            .attr('aria-pressed', 'false')
+            .attr('aria-label', itemLabel);
+
         item.highlight = function () {
             const subItems = highlightableItems[item.id] || [];
-            subItems.forEach((d, i) => {
+            subItems.forEach((d) => {
                 d.highlight();
+                d.classed('is-related', true);
             });
         }
         item.clear = function () {
             const subItems = highlightableItems[item.id] || [];
-            subItems.forEach((d, i) => {
+            subItems.forEach((d) => {
                 d.clear();
+                d.classed('is-related', false);
+            });
+            (itemsById[itemId] || []).forEach((entry) => {
+                entry.item.classed('is-hover-source', false);
             });
         }
         item.item.on('mouseover', function(event, d) {
                 if (rupaLock) return;
                 item.highlight();
+                d3.select(this).classed('is-hover-source', true);
             })
             .on('mousemove', function(event) {
             })
@@ -968,18 +1001,48 @@ function setupRupaHighlightBehavior() {
                 if (rupaLock) return;
                 item.clear();
             })
+            .on('focus', function() {
+                if (rupaLock) return;
+                item.highlight();
+                d3.select(this).classed('is-hover-source', true);
+            })
+            .on('blur', function() {
+                if (rupaLock) return;
+                item.clear();
+            })
             .on('click', function() {
-                if (rupaLock === item) {
+                if (rupaLock && String(rupaLock.id) === itemId) {
                     clearRupaHighlight({notify: true});
                 } else {
-                    selectRupaHighlight(item.id, {notify: true});
+                    selectRupaHighlight(item.id, {notify: true, sourceNode: this});
+                }
+            })
+            .on('keydown', function(event) {
+                if (event.key !== 'Enter' && event.key !== ' ') {
+                    return;
+                }
+                event.preventDefault();
+                if (rupaLock && String(rupaLock.id) === itemId) {
+                    clearRupaHighlight({notify: true});
+                } else {
+                    selectRupaHighlight(item.id, {notify: true, sourceNode: this});
                 }
             });
     });
 
+    function setPressed(itemId, pressed) {
+        (itemsById[String(itemId)] || []).forEach((entry) => {
+            entry.item
+                .classed('is-selected', pressed)
+                .attr('aria-pressed', String(pressed));
+        });
+    }
+
     function clearRupaHighlight(options = {}) {
         if (rupaLock) {
+            const previousId = rupaLock.id;
             rupaLock.clear();
+            setPressed(previousId, false);
         }
         rupaLock = null;
         if (options.notify && typeof studyGuideHandleSelection === 'function') {
@@ -988,16 +1051,19 @@ function setupRupaHighlightBehavior() {
     }
 
     function selectRupaHighlight(itemId, options = {}) {
-        const normalizedId = Number(itemId);
-        const item = itemById[normalizedId] || itemById[itemId];
+        const normalizedId = String(itemId);
+        const item = itemById[normalizedId];
         if (!item) {
             return null;
         }
         if (rupaLock) {
+            const previousId = rupaLock.id;
             rupaLock.clear();
+            setPressed(previousId, false);
         }
         rupaLock = item;
         item.highlight();
+        setPressed(normalizedId, true);
         if (options.notify && typeof studyGuideHandleSelection === 'function') {
             studyGuideHandleSelection('rupa', normalizedId, {});
         }
@@ -1006,6 +1072,7 @@ function setupRupaHighlightBehavior() {
 
     window.rupaGuideApi = {
         itemById,
+        itemsById,
         selectItem: selectRupaHighlight,
         clear: clearRupaHighlight,
         getActiveId: function () {

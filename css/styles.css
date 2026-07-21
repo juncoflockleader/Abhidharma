@@ -141,12 +141,14 @@ body.sidebar-left-collapsed .sidebar-toggle--left {
     left: 0;
 }
 
-body.sidebar-right-collapsed .citta-workspace {
+body.sidebar-right-collapsed .citta-workspace,
+body.sidebar-right-collapsed .rupa-workspace {
     grid-template-columns: minmax(0, 1fr) 0;
     column-gap: 0;
 }
 
-body.sidebar-right-collapsed .citta-inspector {
+body.sidebar-right-collapsed .citta-inspector,
+body.sidebar-right-collapsed .rupa-inspector {
     min-width: 0;
     width: 0;
     min-height: 0;
@@ -162,7 +164,7 @@ body.sidebar-right-collapsed .sidebar-toggle--right {
     right: 0;
 }
 
-body:not(.citta-tab-active) .sidebar-toggle--right {
+body:not(.inspector-tab-active) .sidebar-toggle--right {
     display: none;
 }
 .svg-sub-container {
@@ -249,7 +251,8 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
     box-sizing: border-box;
 }
 
-.citta-workspace {
+.citta-workspace,
+.rupa-workspace {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
     grid-template-areas:
@@ -259,17 +262,20 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
     align-items: start;
 }
 
-.study-guide--citta {
+.study-guide--citta,
+.study-guide--rupa {
     grid-area: guide;
     margin-bottom: 0;
 }
 
-.citta-canvas {
+.citta-canvas,
+.rupa-canvas {
     grid-area: canvas;
     min-width: 0;
 }
 
-.citta-inspector {
+.citta-inspector,
+.rupa-inspector {
     grid-area: inspector;
     position: sticky;
     top: 10px;
@@ -401,6 +407,12 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
 .study-guide__swatch--mental-basis { background: var(--relation-mental-basis); }
 .study-guide__swatch--realm { background: var(--relation-realm); }
 .study-guide__swatch--feeling { background: var(--relation-feeling); }
+.study-guide__swatch--rupa-highlight { background: #ffd84d; border: 2px solid var(--accent); }
+.study-guide__swatch--rupa-heading { background: lightcyan; }
+.study-guide__swatch--rupa-positive { background: lightgreen; }
+.study-guide__swatch--rupa-negative { background: lightyellow; }
+.study-guide__swatch--rupa-neutral { background: lightblue; }
+.study-guide__swatch--rupa-basic { background: lavender; }
 
 .study-guide__title {
     margin: 0 0 4px;
@@ -567,6 +579,41 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
     stroke-dasharray: 4 2;
 }
 
+#rupa-svg-stage svg {
+    display: block;
+}
+
+#rupa-svg-stage .rupa-item {
+    cursor: pointer;
+    outline: none;
+}
+
+#rupa-svg-stage .rupa-item > rect,
+#rupa-svg-stage .is-related > rect {
+    transition: fill 90ms ease, stroke 90ms ease, stroke-width 90ms ease;
+}
+
+#rupa-svg-stage .is-related > rect {
+    stroke: #526969;
+    stroke-width: 1.5;
+}
+
+#rupa-svg-stage .rupa-item.is-hover-source > rect {
+    stroke: var(--accent);
+    stroke-width: 2.5;
+}
+
+#rupa-svg-stage .rupa-item.is-selected > rect {
+    stroke: #075e59;
+    stroke-width: 3.5;
+}
+
+#rupa-svg-stage .rupa-item:focus-visible > rect {
+    stroke: #1456c0;
+    stroke-width: 3;
+    stroke-dasharray: 4 2;
+}
+
 @media (max-width: 900px) {
     body {
         display: block;
@@ -639,7 +686,8 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
         padding: 6px;
     }
 
-    .citta-workspace {
+    .citta-workspace,
+    .rupa-workspace {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             "guide"
@@ -648,7 +696,8 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
         gap: 8px;
     }
 
-    body.sidebar-right-collapsed .citta-workspace {
+    body.sidebar-right-collapsed .citta-workspace,
+    body.sidebar-right-collapsed .rupa-workspace {
         grid-template-columns: minmax(0, 1fr);
         grid-template-areas:
             "guide"
@@ -658,17 +707,21 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
     }
 
     .study-guide--citta,
-    .citta-inspector {
+    .study-guide--rupa,
+    .citta-inspector,
+    .rupa-inspector {
         position: static;
     }
 
-    .citta-inspector {
+    .citta-inspector,
+    .rupa-inspector {
         min-height: 160px;
         max-height: none;
         padding: 12px;
     }
 
-    body.sidebar-right-collapsed .citta-inspector {
+    body.sidebar-right-collapsed .citta-inspector,
+    body.sidebar-right-collapsed .rupa-inspector {
         width: auto;
         min-height: 160px;
         max-height: none;
@@ -686,7 +739,8 @@ body:not(.citta-tab-active) .sidebar-toggle--right {
         font-size: 12px;
     }
 
-    #citta-scroll {
+    #citta-scroll,
+    #rupa-scroll {
         max-height: 72vh;
     }
 
