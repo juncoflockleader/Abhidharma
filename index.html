@@ -39,7 +39,7 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
-<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector dependent-origin-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <div class="citta-workspace">
@@ -107,7 +107,14 @@
     </div>
   </div>
   <div class="svg-sub-container" id="container6" role="tabpanel" aria-labelledby="tab6" aria-hidden="true" hidden>
-    <svg id="dependent-origination" width="1600" height="800"></svg>
+    <div class="dependent-origin-workspace">
+      <section id="dependent-origin-summary" class="dependent-origin-summary" aria-live="polite"></section>
+      <section id="dependent-origin-controls" class="dependent-origin-controls"></section>
+      <div class="dependent-origin-layout">
+        <main id="dependent-origin-map" class="dependent-origin-map" tabindex="0"></main>
+        <aside id="dependent-origin-inspector" class="dependent-origin-inspector" aria-live="polite"></aside>
+      </div>
+    </div>
   </div>
   <div class="svg-sub-container" id="container7" role="tabpanel" aria-labelledby="tab7" aria-hidden="true" hidden>
     <div style="display: flex">
@@ -164,7 +171,9 @@
 <script src="js/rupa-origin-model.js"></script>
 <script src="js/rupa-origin.js"></script>
 <script src="js/rupagen.js"></script>
-<script src="js/dependent-origin.js"></script>
+<script src="js/dependent-origin-data.js"></script>
+<script src="js/dependent-origin-model.js"></script>
+<script src="js/dependent-origin-workspace.js"></script>
 <script src="js/conditions.js"></script>
 <script src="js/conditions-mapping.js"></script>
 <script src="js/cause-condition-data.js"></script>

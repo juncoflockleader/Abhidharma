@@ -75,7 +75,7 @@ const rpnSvg = container.select('#simulation');
 
 const rpnlSvg = container.select('#simulation-notes');
 
-const doSvg = container.select('#dependent-origination');
+const doSvg = container.select('#dependent-origin-map');
 
 const rpnsSvg = container.select('#container9').append('svg')
     .attr('class', 'svg-content')

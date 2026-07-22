@@ -15,6 +15,7 @@ function createPageState() {
             attrTable: null,
         },
         rupaOrigin: rupaOriginState,
+        dependentOrigin: dependentOriginState,
     };
 }
 

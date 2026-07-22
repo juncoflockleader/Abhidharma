@@ -6,6 +6,7 @@ function clearAll() {
     d3.select('#mindflowcontrols').selectAll('*').remove();
     rpSvg.selectAll('*').remove();
     rpgSvg.selectAll('*').remove();
+    doSvg.selectAll('*').remove();
     rpnSvg.selectAll('*').remove();
     rpnlSvg.selectAll('*').remove();
 }
@@ -236,6 +237,14 @@ function buildPreflightCheckSpec() {
                 { name: 'renderRupaAttrTable', validate: () => typeof renderRupaAttrTable === 'function', script: 'js/rupa.js' },
                 { name: 'buildRupaOriginModel', validate: () => typeof buildRupaOriginModel === 'function', script: 'js/rupa-origin-model.js' },
                 { name: 'renderRupaOrigins', validate: () => typeof renderRupaOrigins === 'function', script: 'js/rupa-origin.js' },
+            ],
+        },
+        {
+            module: 'Dependent Origination',
+            checks: [
+                { name: 'dependentOriginData', validate: () => typeof dependentOriginData !== 'undefined', script: 'js/dependent-origin-data.js' },
+                { name: 'buildDependentOriginModel', validate: () => typeof buildDependentOriginModel === 'function', script: 'js/dependent-origin-model.js' },
+                { name: 'dependentOrigination', validate: () => typeof dependentOrigination === 'function', script: 'js/dependent-origin-workspace.js' },
             ],
         },
         {
