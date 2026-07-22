@@ -90,6 +90,16 @@ function buildConditionRupaAggregateIndex(entityById) {
             index[entity.name] = entity.id;
             return index;
         }, {});
+
+    function indexRupaSourceNames(node) {
+        if (node.id > 0) {
+            if (node.name) nameToId[node.name] = node.id;
+            if (node.alias) nameToId[node.alias] = node.id;
+        }
+        (node.children || []).forEach(indexRupaSourceNames);
+    }
+    indexRupaSourceNames(rupa);
+
     const result = {};
     const baseNames = rupaAgg.rupa || [];
 

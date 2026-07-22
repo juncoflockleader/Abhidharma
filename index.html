@@ -20,7 +20,7 @@
     <button id="tab6" type="button" role="tab" data-tab-id="dependent-origin" aria-controls="container6" aria-selected="false" tabindex="-1">欲界十二缘起</button>
     <button id="tab7" type="button" role="tab" data-tab-id="conditions-map" aria-controls="container7" aria-selected="false" tabindex="-1">五十二缘对应</button>
     <button id="tab8" type="button" role="tab" data-tab-id="cause-condition" aria-controls="container8" aria-selected="false" tabindex="-1">五十二缘溯源</button>
-    <button id="tab9" type="button" role="tab" data-tab-id="about" aria-controls="container9" aria-selected="false" tabindex="-1">写在后面的话</button>
+    <button id="tab9" type="button" role="tab" data-tab-id="about" aria-controls="container9" aria-selected="false" tabindex="-1">关于与致谢</button>
     <button id="tab10" type="button" role="tab" data-tab-id="simulation" aria-controls="container10" aria-selected="false" tabindex="-1" style="display:none">色法模拟</button>
   </div>
   <div class="lang" aria-label="Language / 语言">
@@ -39,7 +39,7 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
-<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector dependent-origin-inspector conditions-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector dependent-origin-inspector conditions-inspector cause-trace-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <div class="citta-workspace">
@@ -133,20 +133,96 @@
     </div>
   </div>
   <div class="svg-sub-container" id="container8" role="tabpanel" aria-labelledby="tab8" aria-hidden="true" hidden>
-    <div id="cause-condition-container" style="display: flex">
-      <svg id="cause-condition-svg" width="1300" height="700"></svg>
+    <div class="cause-trace-workspace" id="cause-trace-workspace">
+      <section id="cause-trace-summary" class="cause-trace-summary" aria-live="polite"></section>
+      <section id="cause-trace-controls" class="cause-trace-controls" aria-label="溯源对象选择"></section>
+      <div class="cause-trace-layout">
+        <main class="cause-trace-explorer">
+          <section id="cause-trace-selector" class="cause-trace-selector" aria-label="溯源目标选择"></section>
+          <section id="cause-trace-results" class="cause-trace-results" aria-live="polite"></section>
+        </main>
+        <aside id="cause-trace-inspector" class="cause-trace-inspector" aria-label="缘力详情" aria-live="polite"></aside>
+      </div>
     </div>
-    <div id="causeconditioncontrols"></div>
   </div>
   <div class="svg-sub-container" id="container9" role="tabpanel" aria-labelledby="tab9" aria-hidden="true" hidden>
-    <svg id="my-words-svg" width="830" height="500"></svg>
-    <div>
-      <svg class="repo-link" width="32" height="32" aria-hidden="true">
-        <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank">
-          <image href="images/github-square.svg" x="0" y="0" width="32" height="32"></image>
+    <article class="about-workspace">
+      <header class="about-hero">
+        <div class="about-hero__copy">
+          <span class="about-eyebrow">ABOUT · ACKNOWLEDGEMENTS</span>
+          <h1>写在后面的话</h1>
+          <p>这是一份关于学习、感谢与回向的记录，也是这个互动表解不断生长的缘起。</p>
+        </div>
+        <div class="about-hero__seal" aria-hidden="true">
+          <span>法</span>
+          <small>DHAMMA</small>
+        </div>
+      </header>
+
+      <div class="about-content">
+        <section class="about-letter" aria-labelledby="about-letter-title">
+          <span class="about-section-number">01</span>
+          <h2 id="about-letter-title">从一无所知，到尝试把所学整理成图</h2>
+          <p class="about-letter__lead">随着五十二缘溯源的完成，这个项目也走到了一个阶段性的节点。回首过去的半年，我对正法从一无所知到有了初步的了解，离不开诸多尊者、老师与贤友的帮助。</p>
+          <p>本站最初只计划做到心路过程便暂停；后来在学习与鼓励中，继续整理了色法、色法起源、十二缘起及五十二缘。如今色法溯源也已经补入，但这仍是一份持续学习中的作品，并非最终定稿。</p>
+          <p>它依然有许多不足：英文翻译尚未完成，部分名相、规则与交互仍需继续校对。对我个人而言，也需要把更多时间放回学习和实修，再让理解慢慢沉淀。</p>
+          <blockquote>
+            <p>希望这个项目能让庞杂的表解更容易查询，也能为您的学习提供一点帮助。</p>
+          </blockquote>
+          <footer class="about-signature">
+            <span>2025 年 1 月</span>
+            <strong>Junco 于加州</strong>
+          </footer>
+        </section>
+
+        <aside class="about-gratitude" aria-label="致谢名单">
+          <div class="about-section-heading">
+            <div><span class="about-section-number">02</span><h2>感恩</h2></div>
+            <small>这些善缘让项目得以继续</small>
+          </div>
+          <ol class="about-gratitude__list">
+            <li><span>01</span><div><strong>佛陀</strong><p>感谢佛陀，让我有机会听闻正法。</p></div></li>
+            <li><span>02</span><div><strong>罗庆龙老师</strong><p>他的阿毗达摩课程令我受益匪浅。</p></div></li>
+            <li><span>03</span><div><strong>群里的贤友</strong><p>从他们对待佛法的态度与讨论中，我学到了很多。</p></div></li>
+            <li><span>04</span><div><strong>智藏尊者</strong><p>他在律上的讲解及对佛法的理解，让我茅塞顿开。</p></div></li>
+            <li><span>05</span><div><strong>UKassapa 尊者</strong><p>他的鼓励与对色法的讲解，给了我继续整理下去的动力。</p></div></li>
+          </ol>
+        </aside>
+      </div>
+
+      <section class="about-dedication" aria-labelledby="about-dedication-title">
+        <header>
+          <div>
+            <span class="about-eyebrow">DEDICATION OF MERIT</span>
+            <h2 id="about-dedication-title">礼敬与回向</h2>
+          </div>
+          <span class="about-dedication__mark">Sādhu · Sādhu · Sādhu</span>
+        </header>
+        <div class="about-homage">
+          <span class="about-homage__count">× 3</span>
+          <p lang="pi">Namo tassa bhagavato arahato sammā-sambuddhassa.</p>
+          <strong>礼敬彼世尊、阿拉汉、正自觉者！</strong>
+        </div>
+        <div class="about-verses">
+          <div><p lang="pi">Idaṃ me puññaṃ āsavakkhayāvahaṃ hotu.</p><strong>愿我此功德，导向诸漏尽！</strong></div>
+          <div><p lang="pi">Idaṃ me puññaṃ nibbānassa paccayo hotu.</p><strong>愿我此功德，为证涅槃缘！</strong></div>
+          <div><p lang="pi">Mama puññabhāgaṃ sabbasattānaṃ bhājemi,<br>Te sabbe me samaṃ puññabhāgaṃ labhantu.</p><strong>我此功德分，回向诸有情；<br>愿彼等一切，同得功德分！</strong></div>
+        </div>
+      </section>
+
+      <footer class="about-project">
+        <div>
+          <span class="about-eyebrow">OPEN SOURCE</span>
+          <h2>一起让这份表解更准确、更好用</h2>
+          <p>如有问题、建议或校对意见，欢迎前往 GitHub 联系与反馈。</p>
+        </div>
+        <a class="about-project__link" href="https://github.com/juncoflockleader/Abhidharma" target="_blank" rel="noopener noreferrer">
+          <img src="images/github-square.svg" alt="" width="28" height="28">
+          <span>查看 GitHub 项目</span>
+          <b aria-hidden="true">↗</b>
         </a>
-      </svg>
-    </div>
+      </footer>
+    </article>
   </div>
   <div class="svg-sub-container" id="container10" role="tabpanel" aria-labelledby="tab10" aria-hidden="true" hidden>
     <div style="display: flex">
@@ -188,8 +264,8 @@
 <script src="js/conditions-model.js"></script>
 <script src="js/conditions-workspace.js"></script>
 <script src="js/cause-condition-data.js"></script>
-<script src="js/cause-condition.js"></script>
-<script src="js/mywords.js"></script>
+<script src="js/cause-condition-model.js"></script>
+<script src="js/cause-condition-workspace.js"></script>
 <script src="js/study-guide.js"></script>
 <script src="js/main.js"></script>
 </body>

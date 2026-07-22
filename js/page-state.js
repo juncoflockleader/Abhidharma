@@ -19,6 +19,9 @@ function createPageState() {
         conditions: {
             workspace: null,
         },
+        causeCondition: {
+            workspace: null,
+        },
     };
 }
 

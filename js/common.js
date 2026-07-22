@@ -77,17 +77,8 @@ const rpnlSvg = container.select('#simulation-notes');
 
 const doSvg = container.select('#dependent-origin-map');
 
-const rpnsSvg = container.select('#container9').append('svg')
-    .attr('class', 'svg-content')
-    .attr('width', svgWidth)
-    .attr('height', 1);
-
 const testSvg = d3.select('#test-svg');
 const testDiv = d3.select('#test-div');
-
-const ccSvg = container.select('#cause-condition-svg');
-
-const mwSvg = container.select('#my-words-svg');
 
 // Tab switching logic
 const tabs = d3.selectAll('.tabs button');

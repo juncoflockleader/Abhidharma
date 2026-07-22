@@ -1,17 +1,33 @@
 const causeConditionWithNamaEffect = (function () {
     function idsToNames(ids, cittaAbbr = true) {
         return ids.map(id => {
-            if (cittaAbbr && id < 100) {
+            if (cittaAbbr && id > 0 && id < 100) {
                 return '心';
             }
-            return idIndex[id].name
+            if (typeof cittaState !== 'undefined' && cittaState.idIndex && cittaState.idIndex[id]) {
+                return cittaState.idIndex[id].name;
+            }
+            if (typeof idIndex !== 'undefined' && idIndex[id]) {
+                return idIndex[id].name;
+            }
+            return `法${id}`;
         });
     }
 
     const resultCache = {};
     return function (vars) {
-        if (resultCache[vars.id]) {
-            return resultCache[vars.id];
+        const cacheKey = [
+            vars.id,
+            vars.obj,
+            vars.rupa_obj,
+            vars.great_obj,
+            vars.funct,
+            vars.prev_funct,
+            (vars.basisIds || []).join(','),
+            Object.keys(vars.obj_condition_index || {}).sort().join(','),
+        ].join('|');
+        if (resultCache[cacheKey]) {
+            return resultCache[cacheKey];
         }
 
         const citta = vars.citta; // id
@@ -22,7 +38,7 @@ const causeConditionWithNamaEffect = (function () {
         const funct = vars.funct;
         const great_obj = vars.great_obj;
         const prev_funct = vars.prev_funct;
-        const obj_condition_index = vars.obj_condition_index;
+        const obj_condition_index = vars.obj_condition_index || {};
 
         const roots = [];
         for (let cetasika of cetasikas) {
@@ -60,7 +76,7 @@ const causeConditionWithNamaEffect = (function () {
             result['名俱生组']['因缘'] = {
                 'cause': roots,
                 'causeSummary': `${roots.length}因(${idsToNames(roots)})`,
-                'effect': name, // NOTE: effects may not be accurate - sometimes we need to remove some namas. applies to all following effects
+                'effect': namas,
                 'effectSummary': `${name}名聚-${roots.length}`,
             };
         }
@@ -82,12 +98,6 @@ const causeConditionWithNamaEffect = (function () {
             'effectSummary': `${name}名聚-1`
         };
         result['名俱生组']['相互缘'] = {
-            'cause': namas,
-            'causeSummary': '任一名法',
-            'effect': namas,
-            'effectSummary': `${name}名聚-1`
-        };
-        result['名俱生组']['俱生依止缘'] = {
             'cause': namas,
             'causeSummary': '任一名法',
             'effect': namas,
@@ -244,13 +254,13 @@ const causeConditionWithNamaEffect = (function () {
 
         result['依处组']['依处前生依止缘'] = noop;
         if (!Builder.getVariable('无色界果报心').includes(citta)) {
-            let rupa = Builder.getVariable('心所依处色');
-            if (prev_funct === '五识') {
+            let rupa = vars.basisIds || Builder.getVariable('心所依处色');
+            if (!vars.basisIds && funct === '五识') {
                 rupa = Builder.getVariable('五净色');
             }
             result['依处组']['依处前生依止缘'] = {
                 'cause': rupa,
-                'causeSummary': `前一名聚(${prev_funct})${prev_funct === '五识' ? '净色' : '心色'}`,
+                'causeSummary': vars.basisSummary || (funct === '五识' ? '前生净色' : '前生心所依处色'),
                 'effect': namas,
                 'effectSummary': `${name}名聚`
             };
@@ -272,34 +282,11 @@ const causeConditionWithNamaEffect = (function () {
             base = 9005 + c - 29;
             result['依处组']['依处前生根缘'] = {
                 'cause': base,
-                'causeSummary': `前生${idIndex[base].name}`,
+                'causeSummary': `前生${idsToNames([base], false)[0]}`,
                 'effect': namas,
                 'effectSummary': `${name}名聚`
             };
         }
-
-        /*
-        result['依处组']['依处前生根缘'] = noop;
-        if (!Builder.getVariable('无色界果报心').includes(citta)) {
-            let base = 9016; // 心色
-            let c = citta;
-            // 心: 29-33, 36-40 双五识 - 眼耳鼻舌身
-            // 色: 9005-9010 眼耳鼻舌身
-            if (citta >= 36 && citta <= 40) {
-                c -= 7;
-            }
-            if (c >= 29 && c <= 33) {
-                base = 9005 + c - 29;
-            }
-            result['依处组']['依处前生根缘'] = {
-                'cause': base,
-                'causeSummary': '前一名聚心色',
-                'effect': namas,
-                'effectSummary': `${name}名聚`
-            };
-        }
-
-         */
 
         result['自然亲依止组']['自然亲依止缘'] = {
             'cause': new Builder('名法').add('色法').add('概念').build(),
@@ -316,208 +303,13 @@ const causeConditionWithNamaEffect = (function () {
                 'effect': namas,
                 'effectSummary': `${name}名聚`
             };
-            result['异业组']['自然亲依止业缘'] = structuredClone(result['异业组']['异刹那业缘']);
+            result['异业组']['自然亲依止业缘'] = {...result['异业组']['异刹那业缘']};
             result['异业组']['自然亲依止业缘'].causeSummary = '过去强力善不善思心所';
         } else {
             result['异业组']['自然亲依止业缘'] = result['异业组']['异刹那业缘'];
         }
 
-        resultCache[vars.id] = result;
+        resultCache[cacheKey] = result;
         return result;
     };
 })();
-
-const causeConditionWithRupaEffect = {
-    '名俱生组': {
-        '因缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生增上缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '相互缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生依止缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生业缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '果报缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生食缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生根缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '禅那缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '道缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生不相应缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生有缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生不离去缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        }
-    },
-    '色俱生组': {
-        '俱生缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '相互缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生依止缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生有缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '俱生不离去缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        }
-    },
-    '后生组': {
-        '后生缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '后生不相应缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '后生有缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '后生不离去缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        }
-    },
-    '异业组': {
-        '异刹那业缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        }
-    },
-    '色食组': {
-        '色食缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '色食有缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '色食不离去缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        }
-    },
-    '色命根组': {
-        '色命根缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '命根有缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        },
-        '命根不离去缘': {
-            'cause': '',
-            'causeSummary': '',
-            'effect': '',
-            'effectSummary': ''
-        }
-    }
-};

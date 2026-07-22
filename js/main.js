@@ -14,6 +14,7 @@ function clearAll() {
 const pageState = createPageState();
 let conditionsRuntimeReady = false;
 let conditionsWorkspaceRendered = false;
+let causeConditionWorkspaceRendered = false;
 
 function logRenderStage(stageName, marker, context = {}) {
     const { tabId = 'unknown', lang = 'unknown', endX = '-', endY = '-' } = context;
@@ -166,10 +167,42 @@ function renderConditionSection(context) {
     createLegend();
     createProgressUpdater();
     dependentOrigination(doSvg, dependentOriginData);
-    renderCauseCondition(ccSvg);
-    renderMyWords(mwSvg);
     context.endX = '-';
     context.endY = '-';
+}
+
+function ensureCauseConditionWorkspaceRendered() {
+    if (!conditionsRuntimeReady || causeConditionWorkspaceRendered) {
+        return;
+    }
+    const activeTab = typeof getActiveTab === 'function' ? getActiveTab() : null;
+    if (!activeTab || activeTab.id !== 'cause-condition') {
+        return;
+    }
+    const host = document.getElementById('cause-trace-workspace');
+    if (!host) {
+        return;
+    }
+    try {
+        const conditionModel = pageState.conditions.workspace && pageState.conditions.workspace.model
+            ? pageState.conditions.workspace.model
+            : buildConditionsModel();
+        const traceModel = buildCauseConditionTraceModel(conditionModel);
+        pageState.causeCondition.workspace = renderCauseConditionWorkspace(host, traceModel);
+        causeConditionWorkspaceRendered = true;
+        console.log('[render:cause-condition] done', traceModel.stats);
+    } catch (error) {
+        console.error('[render:cause-condition] failed', error);
+        host.innerHTML = '';
+        const panel = document.createElement('div');
+        panel.className = 'cause-trace-empty cause-trace-empty--error';
+        const title = document.createElement('strong');
+        title.textContent = '五十二缘溯源暂时无法显示';
+        const detail = document.createElement('span');
+        detail.textContent = error && error.message ? error.message : String(error);
+        panel.append(title, detail);
+        host.appendChild(panel);
+    }
 }
 
 function ensureConditionsWorkspaceRendered() {
@@ -233,6 +266,7 @@ function render() {
 
     syncTabWithHash();
     ensureConditionsWorkspaceRendered();
+    ensureCauseConditionWorkspaceRendered();
 
     if (typeof initializeStudyGuide === 'function') {
         initializeStudyGuide(pageState);
@@ -287,6 +321,13 @@ function buildPreflightCheckSpec() {
             checks: [
                 { name: 'buildConditionsModel', validate: () => typeof buildConditionsModel === 'function', script: 'js/conditions-model.js' },
                 { name: 'renderConditionsWorkspace', validate: () => typeof renderConditionsWorkspace === 'function', script: 'js/conditions-workspace.js' },
+            ],
+        },
+        {
+            module: 'Cause Condition Trace',
+            checks: [
+                { name: 'buildCauseConditionTraceModel', validate: () => typeof buildCauseConditionTraceModel === 'function', script: 'js/cause-condition-model.js' },
+                { name: 'renderCauseConditionWorkspace', validate: () => typeof renderCauseConditionWorkspace === 'function', script: 'js/cause-condition-workspace.js' },
             ],
         },
         {
@@ -360,6 +401,7 @@ function preflightCheck() {
 }
 
 window.addEventListener('abhidharma:tabchange', ensureConditionsWorkspaceRendered);
+window.addEventListener('abhidharma:tabchange', ensureCauseConditionWorkspaceRendered);
 
 // On page load, check the URL
 window.addEventListener('DOMContentLoaded', () => {
