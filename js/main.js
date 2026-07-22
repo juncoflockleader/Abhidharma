@@ -137,10 +137,10 @@ function validateLayoutBounds(containerSelector, keyRegions) {
 }
 
 function renderFlowSection(context) {
-    renderFlow(senseFlowState);
     renderControls(senseFlowState, 1, 15);
-    renderFlow(mindFlowState);
+    renderFlow(senseFlowState);
     renderControls(mindFlowState, 1, 6);
+    renderFlow(mindFlowState);
     context.endX = 1;
     context.endY = 15;
 }
@@ -226,7 +226,8 @@ function buildPreflightCheckSpec() {
         {
             module: 'Flow Rendering',
             checks: [
-                { name: 'renderFlow', validate: () => typeof renderFlow === 'function', script: 'js/flow.js' },
+                { name: 'resolveFlowScenario', validate: () => typeof resolveFlowScenario === 'function', script: 'js/flow-engine.js' },
+                { name: 'renderFlow', validate: () => typeof renderFlow === 'function', script: 'js/flows.js' },
             ],
         },
         {

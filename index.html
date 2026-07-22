@@ -39,7 +39,7 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
-<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <div class="citta-workspace">
@@ -60,12 +60,28 @@
     </svg>
   </div>
   <div class ="svg-sub-container" id="container2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" hidden>
-    <div id="senseflow"></div>
-    <div id="senseflowcontrols"></div>
+    <div class="flow-workspace" id="sense-flow-workspace">
+      <section class="flow-summary" id="senseflowsummary" aria-live="polite"></section>
+      <section class="flow-controls" id="senseflowcontrols" aria-label="五门心路情境控制"></section>
+      <div class="flow-layout">
+        <div class="flow-canvas">
+          <div class="flow-scroll" id="senseflow" tabindex="0" aria-label="可横向滚动的五门心路时间线"></div>
+        </div>
+        <aside class="flow-inspector" id="senseflowinspector" aria-label="五门心路阶段详情" aria-live="polite"></aside>
+      </div>
+    </div>
   </div>
   <div class ="svg-sub-container" id="container3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" hidden>
-    <div id="mindflow"></div>
-    <div id="mindflowcontrols"></div>
+    <div class="flow-workspace" id="mind-flow-workspace">
+      <section class="flow-summary" id="mindflowsummary" aria-live="polite"></section>
+      <section class="flow-controls" id="mindflowcontrols" aria-label="意门心路情境控制"></section>
+      <div class="flow-layout">
+        <div class="flow-canvas">
+          <div class="flow-scroll" id="mindflow" tabindex="0" aria-label="可横向滚动的意门心路时间线"></div>
+        </div>
+        <aside class="flow-inspector" id="mindflowinspector" aria-label="意门心路阶段详情" aria-live="polite"></aside>
+      </div>
+    </div>
   </div>
   <div class="svg-sub-container" id="container4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" hidden>
     <div class="rupa-workspace">
@@ -132,6 +148,9 @@
 <script src="js/data.js"></script>
 <script src="js/citta-model.js"></script>
 <script src="js/citta.js"></script>
+<script src="js/flow-definitions.js"></script>
+<script src="js/flow-engine.js"></script>
+<script src="js/flow-view-model.js"></script>
 <script src="js/flows.js"></script>
 <script src="js/rupa.js"></script>
 <script src="js/rupa-origin.js"></script>

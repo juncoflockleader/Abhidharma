@@ -1,587 +1,573 @@
-const flowCittas = [
-    {
-        'id': 1,
-        'name': t('string_id_460'),
-        'color': 'dimgrey',
-    },
-    {
-        'id': 2,
-        'name': t('string_id_461'),
-        'color': 'grey',
-    },
-    {
-        'id': 3,
-        'name': t('string_id_462'),
-        'color': 'darkgrey',
-    },
-    {
-        'id': 4,
-        'name': t('string_id_463'),
-        'color': 'lightgrey',
-    },
-    {
-        'id': 5,
-        'name': t('string_id_464'),
-        'color': 'palevioletred',
-        'cittas': [{'class': t('string_id_465'), 'cittas': [t('string_id_163')]}]
-    },
-    {
-        'id': 6,
-        'name': t('string_id_135'),
-        'color': 'tomato',
-        'cittas': [{'class': t('string_id_466'), 'cittas': [t('string_id_132'), t('string_id_136'), t('string_id_139'), t('string_id_142'), t('string_id_145')], 'matcher': {'likable': 3}},
-            {'class': t('string_id_467'), 'cittas': [t('string_id_132'), t('string_id_136'), t('string_id_139'), t('string_id_142'), t('string_id_145')]}]
-    },
-    {
-        'id': 7,
-        'name': t('string_id_150'),
-        'color': 'gold',
-        'cittas': [{'class': t('string_id_466'), 'cittas': [t('string_id_148')], 'matcher': {'likable': 3}},
-            {'class': t('string_id_467'), 'cittas': [t('string_id_148')]}]
-    },
-    {
-        'id': 8,
-        'name': t('string_id_153'),
-        'color': 'darkseagreen',
-        'cittas': [{'class': t('string_id_466'), 'cittas': [t('string_id_148')], 'matcher': {'likable': 3}},
-            {'class': t('string_id_467'), 'cittas': [t('string_id_148')], 'matcher': {'likable': 2}},
-            {'class': t('string_id_467'), 'cittas': [t('string_id_157')]}]
-    },
-    {
-        'id': 9,
-        'name': t('string_id_166'),
-        'color': 'cyan',
-        'cittas': [{'class': t('string_id_465'), 'cittas': [t('string_id_165')]}]
-    },
-    {
-        'id': 10,
-        'name': t('string_id_25'),
-        'color': 'lightblue',
-        'cittas': [{'class': t('string_id_468'), 'cittas': [t('string_id_47'), t('string_id_59'), t('string_id_63'), t('string_id_66'),
-            t('string_id_67'), t('string_id_69'), t('string_id_70'), t('string_id_71'), t('string_id_72'), t('string_id_80'),
-            t('string_id_81'), t('string_id_83')], 'matcher': {'arahant': false, 'goodIntention': false}},
-            {'class': t('string_id_469'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'),
-                t('string_id_118'), t('string_id_119'), t('string_id_120'), t('string_id_121'),
-                t('string_id_122')], 'matcher': {'arahant': false, 'goodIntention': true}},
-            {'class': t('string_id_470'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'),
-                    t('string_id_118'), t('string_id_119'), t('string_id_120'), t('string_id_121'),
-                    t('string_id_122'), t('string_id_167')], 'matcher': {'arahant': true}}]
-    },
-    {
-        'id': 11,
-        'name': t('string_id_128'),
-        'color': 'mediumslateblue',
-        'cittas': [{'class': t('string_id_471'), 'cittas': [t('string_id_119'), t('string_id_120'), t('string_id_121'),t('string_id_122'), t('string_id_152')], 'matcher': {'likable': 3}},
-            {'class': t('string_id_472'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'), t('string_id_118'), t('string_id_152')], 'matcher': {'likable': 2}},
-            {'class': t('string_id_472'), 'cittas': [t('string_id_110'), t('string_id_116'), t('string_id_117'), t('string_id_118'), t('string_id_157')]}]
-    },
-    {
-        'id': 12,
-        'name': t('string_id_473'),
-        'color': 'cornflowerblue',
-        'cittas': [{'class': t('string_id_465'), 'cittas': [t('string_id_165')]}]
-    }
-];
+function createFlowWorkspaceState(type, options) {
+    return {
+        type,
+        likable: 1,
+        arahant: false,
+        goodIntention: true,
+        sliderValue: 1,
+        selectedPhaseId: null,
+        container: options.container,
+        controls: options.controls,
+        summary: options.summary,
+        inspector: options.inspector,
+        markerName: options.markerName,
+        viewModel: null,
+    };
+}
 
-const fiveDoorFlows = [
-    {'id': 1, 'class': t('string_id_474'), 'flowCittas': [1, 2, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, {'id': 11, 'count': 2}, 1]},
-    {'id': 2, 'class': t('string_id_475'), 'flowCittas': [1, {'id': 2, 'count': 2}, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, {'id': 1, 'count': 2}]},
-    {'id': 3, 'class': t('string_id_475'), 'flowCittas': [1, {'id': 2, 'count': 3}, 3, 4, 5, 6, 7, 8, 9, {'id': 10, 'count': 7}, 1]},
-    {'id': 4, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 4}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 5}]},
-    {'id': 5, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 5}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 4}]},
-    {'id': 6, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 6}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 3}]},
-    {'id': 7, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 7}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 2}]},
-    {'id': 8, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 8}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 3}, {'id': 1, 'count': 1}]},
-    {'id': 9, 'class': t('string_id_476'), 'flowCittas': [1, {'id': 2, 'count': 9}, 3, 4, 5, 6, 7, 8, {'id': 9, 'count': 2}, {'id': 1, 'count': 1}]},
-    {'id': 10, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 10}, {'id': 3, 'count': 2}, {'id': 1, 'count': 6}]},
-    {'id': 11, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 11}, {'id': 3, 'count': 2}, {'id': 1, 'count': 5}]},
-    {'id': 12, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 12}, {'id': 3, 'count': 2}, {'id': 1, 'count': 4}]},
-    {'id': 13, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 13}, {'id': 3, 'count': 2}, {'id': 1, 'count': 3}]},
-    {'id': 14, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 14}, {'id': 3, 'count': 2}, {'id': 1, 'count': 2}]},
-    {'id': 15, 'class': t('string_id_477'), 'flowCittas': [1, {'id': 2, 'count': 15}, {'id': 3, 'count': 2}, {'id': 1, 'count': 1}]},
-];
-
-const mindDoorFlows = [
-    {'id': 1, 'class': t('string_id_478'), 'flowCittas': [1, 2, 3, 4, 12, {'id': 10, 'count': 7}, {'id': 11, 'count': 2}, 1]},
-    {'id': 2, 'class': t('string_id_479'), 'flowCittas': [1, 2, 3, 4, 12, {'id': 10, 'count': 7},  {'id': 1, 'count': 3}]},
-    {'id': 3, 'class': t('string_id_480'), 'flowCittas': [1, 2, {'id': 12, 'count': 3}, {'id': 1, 'count': 10}]},
-    {'id': 4, 'class': t('string_id_480'), 'flowCittas': [1, 2, {'id': 12, 'count': 2}, {'id': 1, 'count': 11}]},
-    {'id': 5, 'class': t('string_id_481'), 'flowCittas': [1, 2, {'id': 3, 'count': 3},  {'id': 1, 'count': 10}]},
-    {'id': 6, 'class': t('string_id_481'), 'flowCittas': [1, 2, {'id': 3, 'count': 2},  {'id': 1, 'count': 11}]},
-];
-
-const senseFlowState = {
-    likable: 1, // 1 == very likable 2 == likable 3 == not likable
-    arahant: false,
-    goodIntention: true,
-    sliderValue: 1,
-    // actually configs, but
+const senseFlowState = createFlowWorkspaceState('sense', {
     container: '#senseflow',
     controls: '#senseflowcontrols',
-    doorFlow: fiveDoorFlows,
-    renderEntity: true,
-    markerName: '#sensearraw',
+    summary: '#senseflowsummary',
+    inspector: '#senseflowinspector',
+    markerName: 'sense-flow-arrow',
+});
 
-};
-
-const mindFlowState = {
-    likable: 1, // 1 == very likable 2 == likable 3 == not likable
-    arahant: false,
-    goodIntention: true,
-    sliderValue: 1,
-    // actually configs, but
+const mindFlowState = createFlowWorkspaceState('mind', {
     container: '#mindflow',
     controls: '#mindflowcontrols',
-    doorFlow: mindDoorFlows,
-    markerName: '#mindarrow',
-};
+    summary: '#mindflowsummary',
+    inspector: '#mindflowinspector',
+    markerName: 'mind-flow-arrow',
+});
 
-
-function createNode(flowCitta, i) {
-    return {
-        id: i,
-        'fcid': flowCitta.id,
-        'name': flowCitta.name,
-        'color': flowCitta.color,
-        'cittas': flowCitta.cittas
-    }
+function flowEscapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
-function getRenderData(state) {
-    const i = state.sliderValue - 1;
-    const flow = state.doorFlow[i];
-    const data = {};
-    data['name'] = flow['class'];
-    const nodes = [];
-    flow['flowCittas'].forEach((item, i) => {
-        if (typeof item === 'object') {
-            for (let i = 0; i < item.count; ++i) {
-                const node = createNode(flowCittas[item.id - 1], nodes.length);
-                nodes.push(node);
-            }
-        } else {
-            const node = createNode(flowCittas[item - 1], nodes.length);
-            nodes.push(node);
-        }
-    });
+function flowLabelLines(label, limit = 11, maxLines = 3) {
+    const value = String(label || '');
+    const words = /\s/.test(value) ? value.split(/\s+/).filter(Boolean) : [...value];
+    const joiner = /\s/.test(value) ? ' ' : '';
+    const lines = [];
+    let current = '';
 
-    const ids = {};
-    nodes.forEach((item, i) => {
-        ids[item.cid] = item.id;
-    });
-
-    data['nodes'] = nodes;
-    return data;
-}
-
-function findMatch(cittas, state) {
-    let score = 0;
-    let match = {};
-    cittas.forEach((def, i) => {
-        let s = 0;
-        if (def.matcher) {
-            if (def.matcher.likable) {
-                if (def.matcher.likable === state.likable) s++;
-                else s = -1;
-            }
-            if (s >= 0 && def.matcher.arahant) {
-                if (def.matcher.arahant === state.arahant) s++;
-                else s = -1;
-            }
-            if (s >= 0 && def.matcher.goodIntention) {
-                if (def.matcher.goodIntention === state.goodIntention) s++;
-                else s = -1;
-            }
-        }
-        if (s >= 0 && s >= score) {
-            score = s;
-            match = def;
-        }
-    });
-    return match;
-}
-
-function renderEntity(svg, x, y, radius, state) {
-    const cfg = getLang();
-    // material
-    svg.append('circle')
-        .attr('cx', x(1))
-        .attr('cy', 0)
-        .attr('r', radius)
-        .style('fill', 'red')
-        .style('stroke', 'black')
-        .style('stroke-width', 1);
-    if (cfg.wide) { // should add a field like concise or something
-        svg.append('text')
-            .attr('x', x(1))
-            .attr('y', 0)
-            .style('fill', 'black')
-            .style('text-anchor', 'middle')
-            .attr('dominant-baseline', 'middle')
-            .text(t('string_id_482'));
-    } else {
-        renderTextBox(svg, x(1) - radius - 80, 0 - radius, 60, 20, 'red', t('string_id_482'));
-    }
-
-
-
-    svg.append('line')
-        .attr('x1', x(1))
-        .attr('y1', radius)
-        .attr('x2', x(1))
-        .attr('y2', y - radius)
-        .attr('stroke', 'black')
-        .attr('stroke-width', 2)
-        .attr('marker-end', 'url(#'+ state.markerName+ ')');
-    const h = cfg.wide ? 20 : 42;
-    renderTextBox(svg, x(1) + 3, y / 2 - 20, 120, h, 'red', t('string_id_483'))
-
-    svg.append('line')
-        .attr('x1', x(1) + radius)
-        .attr('y1', 0)
-        .attr('x2', x(17))
-        .attr('y2', 0)
-        .attr('stroke', 'black')
-        .attr('stroke-width', 2);
-    renderTextBox(svg, (x(1) + radius + x(17)) / 2 - 50, -h - 5, 100, h, 'red', t('string_id_484'));
-
-    svg.append('line')
-        .attr('x1', x(17))
-        .attr('y1', 0)
-        .attr('x2', x(17))
-        .attr('y2', y - radius)
-        .attr('stroke', 'black')
-        .attr('stroke-width', 2)
-        .attr('marker-end', 'url(#'+ state.markerName+ ')');
-}
-
-function renderFlow(state) {
-    const cfg = getLang();
-    const vertical = cfg.vertical;
-    const px = cfg.px;
-    const wrap = cfg.wrap;
-    const wide = cfg.wide;
-    const data = getRenderData(state);
-    d3.select(state.container).selectAll('*').remove();
-    const margin = vertical ? {top: 30, right: 30, bottom: 20, left: 30} : {top: 60, right: 30, bottom: 20, left: 30},
-        width = 1200 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
-
-    const svg = d3.select(state.container)
-        .append('svg')
-        .attr('width', width + margin.left + margin.right)
-        .attr('height', height + margin.top + margin.bottom)
-        .append('g')
-        .attr('transform',`translate(${margin.left},${margin.top})`);
-
-    // List of node names
-    const allNodes = data.nodes.map(d=>d.id)
-
-    // A linear scale to position the nodes on the X axis
-    const x = d3.scalePoint()
-        .range([0, width])
-        .domain(allNodes)
-
-    const y = margin.top + 80;
-
-    const radius = 20;
-
-    const idToNode = {};
-    data.nodes.forEach(function (n) {
-        idToNode[n.id] = n;
-    });
-
-    // Define the arrowhead marker
-    setupArrowHead(svg, state.markerName);
-
-    svg.selectAll('nextarrow')
-        .data(data.nodes.slice(0, -1))
-        .join('line')
-        .attr('x1', d => x(d.id) + radius)
-        .attr('y1', y)
-        .attr('x2', d => x(d.id + 1) -radius)
-        .attr('y2', y)
-        .attr('stroke', 'black')
-        .attr('stroke-width', 2)
-        .attr('marker-end', 'url(#'+ state.markerName+ ')');
-
-    // Add the circle for the nodes
-    const nodes = svg
-        .selectAll('mynodes')
-        .data(data.nodes)
-        .join('circle')
-        .attr('cx', d => x(d.id))
-        .attr('cy', y)
-        .attr('r', radius)
-        .style('fill', d => d.color)
-        .style('stroke', 'black')
-        .style('stroke-width', 1)
-        .each(function(d) {
-            d['circle'] = d3.select(this);
-        });
-
-    const numbers = svg
-        .selectAll('numbers')
-        .data(data.nodes)
-        .join('text')
-        .attr('x', d => x(d.id))
-        .attr('y', y)
-        .style('fill', 'black')
-        .style('text-anchor', 'middle')
-        .attr('dominant-baseline', 'middle')
-        .each(function(d) {
-            const textElement = d3.select(this);
-            textElement.text(d.id);
-        });
-
-    const padding = 6;
-    let w = vertical ? 24 : 60;
-    let h = vertical ? 80 : 34;
-    let labelBottom = y + radius + padding + h;
-    const labels = svg.selectAll('labels')
-        .data(data.nodes)
-        .join('g')
-        .attr('x', d => x(d.id))
-        .attr('y', y + radius * 2)
-        .each(function(d) {
-            d['label'] = renderTextBox(svg, x(d.id) - w / 2, y + radius + padding, w, h, 'transparent', d.name, {vertical: vertical, size: px, wrap: wrap});
-        });
-
-    // Add the highlighting functionality
-    function handleMouseOver(event, d) {
-        data.nodes.forEach((node, i) => {
-            if (node.fcid !== d.fcid) return;
-            node.circle.transition()
-                .duration(200)
-                .attr('r', radius * 1.2)             // increase the radius to make it look larger
-                .style('stroke', 'black')  // add a black border
-                .style('stroke-width', 2); // set border thickness
-            node.label.setColor('lightblue');
-            if (node.ct) node.ct.setColor('lightblue');
-        });
-    }
-
-    function handleMouseOut(event, d) {
-        data.nodes.forEach((node, i) => {
-            if (node.fcid !== d.fcid) return;
-            node.label.setColor('transparent');
-            node.circle.transition()
-                .duration(200)
-                .attr('r', radius)             // increase the radius to make it look larger
-                .style('stroke', 'black')  // add a black border
-                .style('stroke-width', 1); // set border thickness\
-            if (node.ct) node.ct.setColor('white');
-        });
-    }
-
-    nodes
-        .on('mouseover', handleMouseOver)
-        .on('mouseout', handleMouseOut);
-
-    numbers
-        .on('mouseover', function(event, d) {
-            d3.select(nodes.filter(node => node.id === d.id).node())
-                .each(function() { handleMouseOver.call(this, event, d); });
-        })
-        .on('mouseout', function(event, d) {
-            d3.select(nodes.filter(node => node.id === d.id).node())
-                .each(function() { handleMouseOut.call(this, event, d); });
-        });
-
-    {
-        const w = vertical ? 20 : 120;
-        const h = vertical ? 105 : 34;
-        const yOffset = vertical ? 0 : 40
-        renderTextBox(svg, -10, -radius - yOffset, w, h, 'orange', data.name, {vertical: vertical, size: px + 2});
-
-    }
-
-    if (state.renderEntity) {
-        renderEntity(svg, x, y, radius, state);
-    }
-
-
-    const rendered = {};
-    let first = -1;
-    // Render the vertical tables
-    data.nodes.forEach((node, i) => {
-        if (node.fcid < 5 || node.fcid > 12) {
+    words.forEach((word) => {
+        const candidate = current ? `${current}${joiner}${word}` : word;
+        if (candidate.length <= limit || !current) {
+            current = candidate;
             return;
         }
-        if (rendered[node.fcid]) return;
-        rendered[node.fcid] = true;
-        if (first === -1) {
-            first = node.id;
-        }
-
-        const def = findMatch(node.cittas, state);
-        const w = 110;
-        const ty = 240 + ((node.id - first) % 2) * 110;
-        svg.append('line')
-            .attr('x1', x(node.id))
-            .attr('y1', labelBottom)
-            .attr('x2', x(node.id))
-            .attr('y2', ty)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 2)
-            .attr('marker-end', 'url(#'+ state.markerName+ ')');
-        node['ct'] = renderVerticalTable(svg, x(node.id) - w / 2, ty, w, 10, def.class, def.cittas.map(c => ({'name': c})), 3);
+        lines.push(current);
+        current = word;
     });
+    if (current) {
+        lines.push(current);
+    }
+    if (lines.length > maxLines) {
+        const visible = lines.slice(0, maxLines);
+        visible[maxLines - 1] = `${visible[maxLines - 1].slice(0, Math.max(1, limit - 1))}…`;
+        return visible;
+    }
+    return lines;
+}
 
-    let left = -1;
-    let right = -1;
-    data.nodes.forEach((node, i) => {
-        if (node.fcid === 10) { // 速行
-            if (left === -1) left = node.id;
-            right = Math.max(right, node.id);
-        }
+function appendFlowNodeLabel(group, label) {
+    const lines = flowLabelLines(label);
+    const text = group.append('text')
+        .attr('class', 'flow-node__label')
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle');
+    const lineHeight = 12;
+    const startY = -((lines.length - 1) * lineHeight) / 2;
+    lines.forEach((line, index) => {
+        text.append('tspan')
+            .attr('x', 0)
+            .attr('y', startY + index * lineHeight)
+            .text(line);
     });
-    if (left !== -1) {
-        svg.append('line')
-            .attr('x1', x(left))
-            .attr('y1', y - radius)
-            .attr('x2', x(left))
-            .attr('y2', y - 4 * radius)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 2);
+}
 
-        svg.append('line')
-            .attr('x1', x(right))
-            .attr('y1', y - radius)
-            .attr('x2', x(right))
-            .attr('y2', y - 4 * radius)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 2);
+function flowCandidateTags(values, limit = 8) {
+    if (!values || !values.length) {
+        return '';
+    }
+    const visible = values.slice(0, limit)
+        .map((value) => `<span class="flow-tag">${flowEscapeHtml(value)}</span>`)
+        .join('');
+    const hidden = values.slice(limit);
+    const more = hidden.length
+        ? `<details class="flow-inspector__more"><summary>+${hidden.length}</summary><div class="flow-tags">${hidden.map((value) => `<span class="flow-tag">${flowEscapeHtml(value)}</span>`).join('')}</div></details>`
+        : '';
+    return `<div class="flow-tags">${visible}${more}</div>`;
+}
 
-        svg.append('line')
-            .attr('x1', x(left))
-            .attr('y1', y - 2 * radius)
-            .attr('x2', x(right))
-            .attr('y2', y - 2 * radius)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 2)
-            .attr('marker-end', 'url(#'+ state.markerName+ ')');
+function renderFlowSummary(state, viewModel) {
+    const host = document.querySelector(state.summary);
+    if (!host) {
+        return;
+    }
+    host.innerHTML = `
+        <div class="flow-summary__copy">
+            <div class="flow-summary__eyebrow">${flowEscapeHtml(flowUiText('currentConclusion'))}</div>
+            <h2>${flowEscapeHtml(viewModel.title)}</h2>
+            <p>${flowEscapeHtml(viewModel.intro)}</p>
+        </div>
+        <div class="flow-summary__result">
+            <strong>${flowEscapeHtml(viewModel.patternLabel)}</strong>
+            <div class="flow-summary__badges">
+                ${viewModel.badges.map((badge) => `<span>${flowEscapeHtml(badge)}</span>`).join('')}
+            </div>
+        </div>
+    `;
+}
 
-        svg.append('line')
-            .attr('x1', x(right))
-            .attr('y1', y - 2 * radius)
-            .attr('x2', x(left))
-            .attr('y2', y - 2 * radius)
-            .attr('stroke', 'black')
-            .attr('stroke-width', 2)
-            .attr('marker-end', 'url(#'+ state.markerName+ ')');
+function renderFlowInspector(state, viewModel, phaseId, options = {}) {
+    const host = document.querySelector(state.inspector);
+    if (!host) {
+        return;
+    }
+    const detail = phaseId === null || phaseId === undefined
+        ? null
+        : buildFlowPhaseDetail(viewModel, phaseId);
 
+    if (!detail) {
+        const conditionLabels = [
+            `${flowUiText('currentLevel')}: ${viewModel.pattern.id} · ${viewModel.patternLabel}`,
+            `${flowUiText('objectNature')}: ${flowUiText(viewModel.scenario.likable === 1 ? 'veryPleasant' : (viewModel.scenario.likable === 2 ? 'pleasant' : 'unpleasant'))}`,
+            `${flowUiText('person')}: ${flowUiText(viewModel.scenario.arahant ? 'arahant' : 'learner')}`,
+        ];
+        if (!viewModel.scenario.arahant) {
+            conditionLabels.push(`${flowUiText('attention')}: ${flowUiText(viewModel.scenario.goodIntention ? 'properAttention' : 'improperAttention')}`);
+        }
+        host.innerHTML = `
+            <div class="flow-inspector__breadcrumb">${flowEscapeHtml(viewModel.title)} › ${flowEscapeHtml(flowUiText('overview'))}</div>
+            <h3>${flowEscapeHtml(viewModel.patternLabel)}</h3>
+            <p class="flow-inspector__lead">${flowEscapeHtml(flowUiText('selectPhase'))}</p>
+            <section>
+                <strong>${flowEscapeHtml(flowUiText('whyThisFlow'))}</strong>
+                <ul>${viewModel.overviewReasons.map((reason) => `<li>${flowEscapeHtml(reason)}</li>`).join('')}</ul>
+            </section>
+            <section>
+                <strong>${flowEscapeHtml(flowUiText('currentConditions'))}</strong>
+                ${flowCandidateTags(conditionLabels, 10)}
+            </section>
+            <p class="flow-inspector__hint">${flowEscapeHtml(flowUiText('overviewHint'))}</p>
+        `;
+        return;
+    }
 
-        const w = 120;
-        const h = wide ? 20 : 42;
-        renderTextBox(svg, (x(left) + x(right)) / 2 - w / 2, y - 2 * radius - h- 5, w, h, 'yellow', t('string_id_486'));
+    const lockButton = options.transient
+        ? ''
+        : `<button class="flow-button flow-button--quiet" type="button" data-flow-unlock>${flowEscapeHtml(flowUiText('unlock'))}</button>`;
+    host.innerHTML = `
+        <div class="flow-inspector__breadcrumb">${flowEscapeHtml(viewModel.title)} › ${flowEscapeHtml(detail.familyLabel)}</div>
+        <div class="flow-inspector__heading-row">
+            <div>
+                <h3>${flowEscapeHtml(detail.title)}</h3>
+                <div class="flow-inspector__meta">${flowEscapeHtml(detail.occurrences)} ${flowEscapeHtml(flowUiText('occurrences'))} · ${flowEscapeHtml(flowUiText('moment'))} ${detail.moments.join(', ')}</div>
+            </div>
+            ${lockButton}
+        </div>
+        <p class="flow-inspector__lead">${flowEscapeHtml(detail.description)}</p>
+        <section>
+            <strong>${flowEscapeHtml(flowUiText('whyThisFlow'))}</strong>
+            <p>${flowEscapeHtml(detail.reason)}</p>
+        </section>
+        ${detail.candidateClass ? `<section><strong>${flowEscapeHtml(flowUiText('candidateClass'))}</strong><p>${flowEscapeHtml(detail.candidateClass)}</p></section>` : ''}
+        ${detail.candidateCittas.length ? `<section><strong>${flowEscapeHtml(flowUiText('candidateCittas'))}</strong>${flowCandidateTags(detail.candidateCittas)}</section>` : ''}
+        <section>
+            <strong>${flowEscapeHtml(flowUiText('relation'))}</strong>
+            <div class="flow-relation"><span>${flowEscapeHtml(flowUiText('before'))}: ${flowEscapeHtml(detail.previous)}</span><span>${flowEscapeHtml(flowUiText('after'))}: ${flowEscapeHtml(detail.next)}</span></div>
+        </section>
+    `;
+
+    const unlock = host.querySelector('[data-flow-unlock]');
+    if (unlock) {
+        unlock.addEventListener('click', () => {
+            state.selectedPhaseId = null;
+            renderFlow(state);
+        });
     }
 }
 
-function renderButtonGroup(controlsContainer, buttonData, title, state, stateUpdater, renderer) {
-    const bg = controlsContainer.append('div')
-        .attr('class', 'button-group')
-        .style('border', '1px solid #ccc') // Add border for separation
-        .style('padding', '15px') // Add padding inside the box
-        .style('border-radius', '5px') // Rounded corners
-        .style('display', 'flex')
-        .style('flex-direction', 'column')
-        .style('position', 'relative')
-        .style('padding-top', '35px')
-        .style('background', '#f9f9f9'); // Light background for differentiation
+function renderRupaLifeOverlay(svg, xForMoment, cardTop, markerName) {
+    const startX = xForMoment(1);
+    const endX = xForMoment(17);
+    const lineY = 78;
 
+    svg.append('line')
+        .attr('class', 'flow-rupa-life')
+        .attr('x1', startX)
+        .attr('y1', lineY)
+        .attr('x2', endX)
+        .attr('y2', lineY);
+    svg.append('circle')
+        .attr('class', 'flow-rupa-object')
+        .attr('cx', startX)
+        .attr('cy', lineY)
+        .attr('r', 10);
+    svg.append('text')
+        .attr('class', 'flow-rupa-life__label')
+        .attr('x', (startX + endX) / 2)
+        .attr('y', lineY - 10)
+        .attr('text-anchor', 'middle')
+        .text(flowUiText('rupaLife'));
+    svg.append('text')
+        .attr('class', 'flow-rupa-life__impact')
+        .attr('x', startX + 14)
+        .attr('y', lineY + 18)
+        .text(flowUiText('impact'));
+    [startX, endX].forEach((x) => {
+        svg.append('line')
+            .attr('class', 'flow-rupa-drop')
+            .attr('x1', x)
+            .attr('y1', lineY + 11)
+            .attr('x2', x)
+            .attr('y2', cardTop - 10)
+            .attr('marker-end', `url(#${markerName})`);
+    });
+}
 
-    bg.append('div')
-        .attr('class', 'group-label')
-        .text(title)
-        .style('position', 'absolute')
-        .style('top', '5px')
-        .style('left', '10px')
-        .style('font-weight', 'bold');
+function renderFlowTimeline(state, viewModel) {
+    const host = d3.select(state.container);
+    host.selectAll('*').remove();
 
-    bg.selectAll('button')
-        .data(buttonData)
-        .enter()
-        .append('button')
-        .text(d => d.name)
-        .attr('class', d => d.id === 1 ? 'radio-button active' : 'radio-button')
-        .on('click', function (event, d) {
-            bg.selectAll('.radio-button').classed('active', false);
-            d3.select(this).classed('active', true);
-            stateUpdater(state, d);
-            return renderer(state);
+    const nodeWidth = 66;
+    const nodeHeight = 62;
+    const step = 82;
+    const paddingX = 48;
+    const cardTop = viewModel.type === 'sense' ? 142 : 94;
+    const cardCenterY = cardTop + nodeHeight / 2;
+    const width = Math.max(920, paddingX * 2 + (viewModel.nodes.length - 1) * step + nodeWidth);
+    const height = cardTop + nodeHeight + 72;
+    const xForMoment = (moment) => paddingX + nodeWidth / 2 + moment * step;
+
+    const svg = host.append('svg')
+        .attr('class', 'flow-timeline')
+        .attr('width', width)
+        .attr('height', height)
+        .attr('role', 'group')
+        .attr('aria-label', `${viewModel.title}: ${viewModel.patternLabel}`);
+
+    setupArrowHead(svg, state.markerName);
+
+    const bands = svg.append('g').attr('class', 'flow-phase-bands');
+    const bandGroups = bands.selectAll('g')
+        .data(viewModel.groups)
+        .join('g')
+        .attr('class', 'flow-phase-band');
+    bandGroups.append('rect')
+        .attr('x', (group) => xForMoment(group.startIndex) - nodeWidth / 2 - 5)
+        .attr('y', 8)
+        .attr('width', (group) => xForMoment(group.endIndex) - xForMoment(group.startIndex) + nodeWidth + 10)
+        .attr('height', 30)
+        .attr('rx', 7)
+        .attr('fill', (group) => group.color)
+        .attr('opacity', 0.13);
+    bandGroups.append('text')
+        .attr('x', (group) => (xForMoment(group.startIndex) + xForMoment(group.endIndex)) / 2)
+        .attr('y', 27)
+        .attr('text-anchor', 'middle')
+        .attr('fill', (group) => group.color)
+        .text((group) => `${group.label}${group.count > 1 ? ` ×${group.count}` : ''}`);
+
+    if (viewModel.type === 'sense') {
+        renderRupaLifeOverlay(svg, xForMoment, cardTop, state.markerName);
+    }
+
+    svg.append('g')
+        .attr('class', 'flow-connectors')
+        .selectAll('line')
+        .data(viewModel.nodes.slice(0, -1))
+        .join('line')
+        .attr('x1', (node) => xForMoment(node.id) + nodeWidth / 2 + 3)
+        .attr('y1', cardCenterY)
+        .attr('x2', (node) => xForMoment(node.id + 1) - nodeWidth / 2 - 7)
+        .attr('y2', cardCenterY)
+        .attr('marker-end', `url(#${state.markerName})`);
+
+    svg.append('g')
+        .attr('class', 'flow-moment-labels')
+        .selectAll('text')
+        .data(viewModel.nodes)
+        .join('text')
+        .attr('x', (node) => xForMoment(node.id))
+        .attr('y', cardTop - 9)
+        .attr('text-anchor', 'middle')
+        .text((node) => node.moment);
+
+    const nodeGroups = svg.append('g')
+        .attr('class', 'flow-nodes')
+        .selectAll('g')
+        .data(viewModel.nodes)
+        .join('g')
+        .attr('class', 'flow-node')
+        .attr('transform', (node) => `translate(${xForMoment(node.id)}, ${cardCenterY})`)
+        .attr('data-flow-phase-id', (node) => node.phaseId)
+        .attr('role', 'button')
+        .attr('tabindex', 0)
+        .attr('aria-pressed', (node) => String(Number(state.selectedPhaseId) === node.phaseId))
+        .attr('aria-label', (node) => `${flowUiText('moment')} ${node.moment}: ${flowTranslatedKey(node.definition.labelKey)}`);
+
+    nodeGroups.append('rect')
+        .attr('x', -nodeWidth / 2)
+        .attr('y', -nodeHeight / 2)
+        .attr('width', nodeWidth)
+        .attr('height', nodeHeight)
+        .attr('rx', 10)
+        .attr('fill', (node) => FLOW_FAMILY_DEFINITIONS[node.family].color);
+
+    nodeGroups.each(function(node) {
+        appendFlowNodeLabel(d3.select(this), flowTranslatedKey(node.definition.labelKey));
+    });
+
+    function applyLockedSelection() {
+        const selectedId = Number(state.selectedPhaseId);
+        nodeGroups
+            .classed('is-selected', (node) => Number.isFinite(selectedId) && node.phaseId === selectedId)
+            .attr('aria-pressed', (node) => String(Number.isFinite(selectedId) && node.phaseId === selectedId));
+    }
+
+    function previewPhase(source, node) {
+        nodeGroups
+            .classed('is-related', (candidate) => candidate.phaseId === node.phaseId)
+            .classed('is-hover-source', false);
+        d3.select(source).classed('is-hover-source', true);
+        renderFlowInspector(state, viewModel, node.phaseId, {transient: true});
+    }
+
+    function clearPreview() {
+        nodeGroups.classed('is-related', false).classed('is-hover-source', false);
+        renderFlowInspector(state, viewModel, state.selectedPhaseId);
+    }
+
+    function togglePhase(node) {
+        state.selectedPhaseId = Number(state.selectedPhaseId) === node.phaseId ? null : node.phaseId;
+        applyLockedSelection();
+        clearPreview();
+    }
+
+    nodeGroups
+        .on('mouseenter', function(event, node) {
+            if (state.selectedPhaseId !== null) {
+                return;
+            }
+            previewPhase(this, node);
+        })
+        .on('mouseleave', function() {
+            if (state.selectedPhaseId !== null) {
+                return;
+            }
+            clearPreview();
+        })
+        .on('focus', function(event, node) {
+            if (state.selectedPhaseId !== null) {
+                return;
+            }
+            previewPhase(this, node);
+        })
+        .on('blur', function() {
+            if (state.selectedPhaseId !== null) {
+                return;
+            }
+            clearPreview();
+        })
+        .on('click', function(event, node) {
+            togglePhase(node);
+        })
+        .on('keydown', function(event, node) {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                state.selectedPhaseId = null;
+                applyLockedSelection();
+                clearPreview();
+                return;
+            }
+            if (event.key !== 'Enter' && event.key !== ' ') {
+                return;
+            }
+            event.preventDefault();
+            togglePhase(node);
         });
 
-    return bg;
+    applyLockedSelection();
+}
+
+function flowSettingButtons(key, options) {
+    return options.map((option) => (
+        `<button class="flow-segment" type="button" data-flow-setting="${flowEscapeHtml(key)}" data-flow-value="${flowEscapeHtml(option.value)}">${flowEscapeHtml(option.label)}</button>`
+    )).join('');
 }
 
 function renderControls(state, min, max) {
-    const width = 90*3;
+    const host = d3.select(state.controls);
+    host.selectAll('*').remove();
+    const type = state.type;
+    const bands = FLOW_STRENGTH_BANDS[type];
+    const presets = FLOW_PRESETS[type];
+    const strengthTitle = flowUiText(type === 'sense' ? 'intensity' : 'clarity');
 
-    var slider = d3
-        .sliderHorizontal()
-        .min(min)
-        .max(max)
-        .step(1)
-        .default(min)
-        .tickValues(Array.from({ length: max }, (_, i) => i + 1))
-        .width(width)
-        .handle(d3.symbol().type(d3.symbolCircle).size(100)())
-        .fill('orange')
-        .on('onchange', (selection) => {
-            state.sliderValue = selection;
-            return renderFlow(state);
-        });
+    host.html(`
+        <div class="flow-presets">
+            <span>${flowEscapeHtml(flowUiText('presets'))}</span>
+            ${presets.map((preset) => `<button class="flow-preset" type="button" data-flow-preset="${flowEscapeHtml(preset.id)}">${flowEscapeHtml(flowUiText(preset.labelKey))}</button>`).join('')}
+        </div>
+        <div class="flow-control-card flow-control-card--strength">
+            <div class="flow-control-card__title"><span>${flowEscapeHtml(strengthTitle)}</span><output data-flow-strength-output></output></div>
+            <div class="flow-range-wrap">
+                <span>${flowEscapeHtml(flowUiText('strongest'))}</span>
+                <input type="range" min="${min}" max="${max}" step="1" value="${state.sliderValue}" data-flow-strength aria-label="${flowEscapeHtml(strengthTitle)}">
+                <span>${flowEscapeHtml(flowUiText('weakest'))}</span>
+            </div>
+            <div class="flow-strength-bands">
+                ${bands.map((band) => `<button type="button" data-flow-band="${flowEscapeHtml(band.id)}" data-flow-start="${band.start}" data-flow-end="${band.end}">${flowEscapeHtml(flowTranslatedKey(band.classKey))}<small>${band.start === band.end ? band.start : `${band.start}–${band.end}`}</small></button>`).join('')}
+            </div>
+        </div>
+        <div class="flow-control-card">
+            <div class="flow-control-card__title">${flowEscapeHtml(flowUiText('objectNature'))}</div>
+            <div class="flow-segments">
+                ${flowSettingButtons('likable', [
+                    {value: 1, label: flowUiText('veryPleasant')},
+                    {value: 2, label: flowUiText('pleasant')},
+                    {value: 3, label: flowUiText('unpleasant')},
+                ])}
+            </div>
+        </div>
+        <div class="flow-control-card">
+            <div class="flow-control-card__title">${flowEscapeHtml(flowUiText('attention'))}</div>
+            <div class="flow-segments">
+                ${flowSettingButtons('goodIntention', [
+                    {value: true, label: flowUiText('properAttention')},
+                    {value: false, label: flowUiText('improperAttention')},
+                ])}
+            </div>
+        </div>
+        <div class="flow-control-card">
+            <div class="flow-control-card__title">${flowEscapeHtml(flowUiText('person'))}</div>
+            <div class="flow-segments">
+                ${flowSettingButtons('arahant', [
+                    {value: false, label: flowUiText('learner')},
+                    {value: true, label: flowUiText('arahant')},
+                ])}
+            </div>
+        </div>
+        <p class="flow-control-note" data-flow-control-note></p>
+    `);
 
+    host.select('[data-flow-strength]').on('input', function() {
+        state.sliderValue = Number(this.value);
+        state.selectedPhaseId = null;
+        renderFlow(state);
+    });
 
-    // Set up the controls container as a flexbox
-    const controlsContainer = d3.select(state.controls)
-        .style('display', 'flex')
-        .style('gap', '20px') // Add space between the groups
-        .style('align-items', 'flex-start, stretch'); // Align items to the top
+    host.selectAll('[data-flow-band]').on('click', function() {
+        state.sliderValue = Number(this.dataset.flowStart);
+        state.selectedPhaseId = null;
+        renderFlow(state);
+    });
 
-    // Create a container for the slider group
-    const sliderGroup = controlsContainer.append('div')
-        .attr('class', 'slider-group')
-        .style('border', '1px solid #ccc') // Add border for separation
-        .style('padding', '15px') // Add padding inside the box
-        .style('border-radius', '5px') // Rounded corners
-        .style('position', 'relative')
-        .style('background', '#f9f9f9'); // Light background for differentiation
+    host.selectAll('[data-flow-setting]').on('click', function() {
+        const key = this.dataset.flowSetting;
+        const rawValue = this.dataset.flowValue;
+        state[key] = key === 'likable' ? Number(rawValue) : rawValue === 'true';
+        state.selectedPhaseId = null;
+        renderFlow(state);
+    });
 
-    sliderGroup.append('div')
-        .attr('class', 'group-label')
-        .text(t('string_id_487'))
-        .style('position', 'absolute')
-        .style('top', '5px')
-        .style('left', '10px')
-        .style('font-weight', 'bold');
-
-    // Append SVG for the slider and other graphical elements
-    const svg = sliderGroup.append('svg')
-        .attr('width', 400)
-        .attr('height', 150);
-
-
-    const lang = getLang();
-    const w = lang.vertical ? 22 : 120;
-    const h = lang.vertical ? 120 : 22;
-    const xOffset = lang.vertical ? 0 : 120;
-    renderTextBox(svg, 0, 30, w, h, 'cyan', t('string_id_488'), {vertical: lang.vertical, size: lang.px + 2});
-    svg.append('g')
-        .attr('transform', 'translate(60,70)')
-        .call(slider);
-    renderTextBox(svg, 100+width-xOffset, 30, w, h, 'cyan', t('string_id_489'), {vertical: lang.vertical, size: lang.px + 2});
-
-    // Create a container for the button group
-    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_490') }, { 'id': 2, 'name': t('string_id_491') }, { 'id': 3, 'name': t('string_id_492') }], t('string_id_493'), state, (state, data) => {state.likable = data.id;}, renderFlow);
-    const intentButtonGroup = renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_494') }, { 'id': 2, 'name': t('string_id_495') }], t('string_id_15'), state, (state, data) => {state.goodIntention = data.id === 1;}, renderFlow);
-    renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': t('string_id_496') }, { 'id': 2, 'name': t('string_id_497') }], t('string_id_498'), state, (state, data) => {
-        state.arahant = data.id === 2;
-        if (state.arahant) {
-            intentButtonGroup.selectAll('.radio-button').attr('disabled', true);
-        } else {
-            intentButtonGroup.selectAll('.radio-button').attr('disabled', null);
+    host.selectAll('[data-flow-preset]').on('click', function() {
+        const preset = presets.find((candidate) => candidate.id === this.dataset.flowPreset);
+        if (!preset) {
+            return;
         }
-    }, renderFlow);
+        Object.assign(state, preset.values, {selectedPhaseId: null});
+        renderFlow(state);
+    });
+
+    bindFlowGlobalEvents();
+    syncFlowControls(state, buildFlowViewModel(state));
 }
+
+function syncFlowControls(state, viewModel) {
+    const host = d3.select(state.controls);
+    if (host.empty()) {
+        return;
+    }
+    host.select('[data-flow-strength]').property('value', state.sliderValue);
+    host.select('[data-flow-strength-output]').text(viewModel.strengthLabel);
+    host.selectAll('[data-flow-band]')
+        .classed('active', function() {
+            const start = Number(this.dataset.flowStart);
+            const end = Number(this.dataset.flowEnd);
+            return state.sliderValue >= start && state.sliderValue <= end;
+        });
+    host.selectAll('[data-flow-setting]').each(function() {
+        const key = this.dataset.flowSetting;
+        const rawValue = this.dataset.flowValue;
+        const target = key === 'likable' ? Number(rawValue) : rawValue === 'true';
+        const disabled = key === 'goodIntention' && state.arahant;
+        const active = !disabled && state[key] === target;
+        d3.select(this)
+            .classed('active', active)
+            .attr('aria-pressed', String(active))
+            .attr('disabled', disabled ? true : null);
+    });
+    host.select('[data-flow-control-note]').text(
+        !viewModel.hasJavana
+            ? flowUiText('noJavanaControls')
+            : (state.arahant ? flowUiText('attentionNotApplicable') : '')
+    );
+}
+
+function renderFlow(state) {
+    const viewModel = buildFlowViewModel(state);
+    state.viewModel = viewModel;
+    if (state.selectedPhaseId !== null && !viewModel.phaseCounts[state.selectedPhaseId]) {
+        state.selectedPhaseId = null;
+    }
+    renderFlowSummary(state, viewModel);
+    renderFlowTimeline(state, viewModel);
+    renderFlowInspector(state, viewModel, state.selectedPhaseId);
+    syncFlowControls(state, viewModel);
+    return viewModel;
+}
+
+function bindFlowGlobalEvents() {
+    if (window.flowGlobalEventsBound) {
+        return;
+    }
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') {
+            return;
+        }
+        const activeTab = typeof getActiveTab === 'function' ? getActiveTab() : null;
+        const state = activeTab && activeTab.id === 'sense-flow'
+            ? senseFlowState
+            : (activeTab && activeTab.id === 'mind-flow' ? mindFlowState : null);
+        if (!state || state.selectedPhaseId === null) {
+            return;
+        }
+        state.selectedPhaseId = null;
+        renderFlow(state);
+    });
+    window.flowGlobalEventsBound = true;
+}
+
+// Kept as a small generic helper for the cause-condition page.
+function renderButtonGroup(controlsContainer, buttonData, title, state, stateUpdater, renderer) {
+    const group = controlsContainer.append('div').attr('class', 'button-group');
+    group.append('div').attr('class', 'group-label').text(title);
+    const buttons = group.selectAll('button')
+        .data(buttonData)
+        .enter()
+        .append('button')
+        .attr('type', 'button')
+        .text((data) => data.name)
+        .attr('class', (data, index) => index === 0 ? 'radio-button active' : 'radio-button')
+        .attr('aria-pressed', (data, index) => String(index === 0))
+        .on('click', function(event, data) {
+            buttons.classed('active', false).attr('aria-pressed', 'false');
+            d3.select(this).classed('active', true).attr('aria-pressed', 'true');
+            stateUpdater(state, data);
+            return renderer(state);
+        });
+    return group;
+}
+
+window.renderFlow = renderFlow;
+window.renderControls = renderControls;

@@ -83,7 +83,10 @@ function activateTab(tabIdOrLegacyIndex, options = {}) {
         }
     });
     document.body.classList.toggle('citta-tab-active', entry.id === 'citta');
-    document.body.classList.toggle('inspector-tab-active', entry.id === 'citta' || entry.id === 'rupa');
+    document.body.classList.toggle(
+        'inspector-tab-active',
+        entry.id === 'citta' || entry.id === 'rupa' || entry.id === 'sense-flow' || entry.id === 'mind-flow'
+    );
 
     if (updateHash) {
         setTabHash(entry, replaceHash);
