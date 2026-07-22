@@ -234,6 +234,8 @@ function buildPreflightCheckSpec() {
             module: 'Rupa Rendering',
             checks: [
                 { name: 'renderRupaAttrTable', validate: () => typeof renderRupaAttrTable === 'function', script: 'js/rupa.js' },
+                { name: 'buildRupaOriginModel', validate: () => typeof buildRupaOriginModel === 'function', script: 'js/rupa-origin-model.js' },
+                { name: 'renderRupaOrigins', validate: () => typeof renderRupaOrigins === 'function', script: 'js/rupa-origin.js' },
             ],
         },
         {

@@ -69,10 +69,7 @@ const rpSvg = rupaSvgHost.append('svg')
     .attr('width', svgWidth)
     .attr('height', 1200);
 
-const rpgSvg = container.select('#container5').append('svg')
-    .attr('class', 'svg-content')
-    .attr('width', svgWidth)
-    .attr('height', svgHeight);
+const rpgSvg = container.select('#rupa-origin-map');
 
 const rpnSvg = container.select('#simulation');
 

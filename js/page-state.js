@@ -14,6 +14,7 @@ function createPageState() {
         rupa: {
             attrTable: null,
         },
+        rupaOrigin: rupaOriginState,
     };
 }
 

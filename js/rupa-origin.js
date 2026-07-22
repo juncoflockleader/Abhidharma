@@ -1,178 +1,330 @@
-const rupaAggs = [
-    {
-        id: 0,
-        name: t('string_id_710'),
-        fire: t('string_id_711'),
-        food: t('string_id_712')
-    },
-    {
-        id: 1,
-        name: t('string_id_713'),
-        fire: t('string_id_714'),
-        food: t('string_id_715')
-    },
-    {
-        id: 2,
-        name: t('string_id_716'),
-        fire: t('string_id_717'),
-        food: t('string_id_718')
-    },
-    {
-        id: 3,
-        name: t('string_id_719'),
-        fire: t('string_id_720'),
-        food: t('string_id_721')
-    }
-];
+const rupaOriginState = {
+    originId: 'kamma',
+    lockedDetail: null,
+    previewDetail: null,
+};
 
-function renderAgg(parent, x, y, data) {
-    const group = parent.append('g');
-    const rx = 90;
-    const ry = 60;
-    const colors = ['lightblue', 'lightcyan', 'lavender', 'skyblue'];
-    const main = group.append('ellipse')
-        .attr('cx', x)  // Center x
-        .attr('cy', y)  // Center y
-        .attr('rx', rx)  // Horizontal radius
-        .attr('ry', ry)   // Vertical radius
-        .style('fill', colors[data.id])
-        .style('stroke', 'black');
-
-    group.append('text')
-        .attr('x', x)
-        .attr('y', y)
-        .attr('text-anchor', 'middle')
-        .attr('dominant-baseline', 'middle')
-        .style('font-size', '16px')
-        .text(data.name);
-
-    const fireX = x - ry/1.75;
-    const fireY = y - ry/2;
-    group.append('ellipse')
-        .attr('cx', fireX) // Center x
-        .attr('cy', fireY) // Center y
-        .attr('rx', rx/3)  // Horizontal radius
-        .attr('ry', ry/3)   // Vertical radius
-        .style('fill', 'pink')
-        .style('stroke', 'black');
-
-    group.append('text')
-        .attr('x', fireX)
-        .attr('y', fireY)
-        .attr('text-anchor', 'middle')
-        .attr('dominant-baseline', 'middle')
-        .style('font-size', '12px')
-        .text(data.fire);
-
-    const foodX = x + ry/1.75;
-    const foodY = y + ry/2;
-    group.append('ellipse')
-        .attr('cx', foodX) // Center x
-        .attr('cy', foodY) // Center y
-        .attr('rx', rx/3)  // Horizontal radius
-        .attr('ry', ry/3)   // Vertical radius
-        .style('fill', 'lightgreen')
-        .style('stroke', 'black');
-
-    group.append('text')
-        .attr('x', foodX)
-        .attr('y', foodY)
-        .attr('text-anchor', 'middle')
-        .attr('dominant-baseline', 'middle')
-        .style('font-size', '12px')
-        .text(data.food);
-
-    return {
-        fireX: fireX,
-        fireY: fireY,
-        foodX: foodX,
-        foodY: foodY,
-        x: x,
-        y: y,
-        rx: rx,
-        ry: ry,
-        highlight: function () {
-            main.style('stroke-width', 2);
-        },
-        clear: function () {
-            main.style('stroke-width', 1);
-        }
-    };
+function rupaOriginEscape(value) {
+    return String(value === undefined || value === null ? '' : value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
 }
 
-function renderCurve(parent, x1, y1, x2, y2, d, label, labelColor) {
-    let dx = 0;
-    let dy = 0;
-    if (Math.abs(x1 - x2) < Math.abs(y1 - y2)) {
-        dx = d;
-    } else {
-        dy = d;
+function rupaOriginTags(values, modifier = '') {
+    return (values || []).map((value) => (
+        `<span class="rupa-origin-tag${modifier ? ` rupa-origin-tag--${modifier}` : ''}">${rupaOriginEscape(value)}</span>`
+    )).join('');
+}
+
+function rupaOriginDetail(model, detail) {
+    const origin = model.originById[rupaOriginState.originId] || model.origins[0];
+    if (!detail || detail.kind === 'origin') {
+        return {kind: 'origin', item: origin, origin};
     }
-    const midX = (x1 + x2) / 2 - dx;
-    const midY = (y1 + y2) / 2 - dy; // Adjust according to the curve
+    if (detail.kind === 'cluster') {
+        const cluster = origin.clusters.find((item) => String(item.id) === String(detail.id));
+        return cluster ? {kind: 'cluster', item: cluster, origin} : {kind: 'origin', item: origin, origin};
+    }
+    if (detail.kind === 'route') {
+        const route = origin.routes.find((item) => item.id === detail.id);
+        return route ? {kind: 'route', item: route, origin} : {kind: 'origin', item: origin, origin};
+    }
+    return {kind: 'origin', item: origin, origin};
+}
 
-    const pathData = `M ${x1} ${y1} 
-                      Q ${midX} ${midY} 
-                      ${x2} ${y2}`;
+function renderRupaOriginSummary(model) {
+    const host = document.getElementById('rupa-origin-summary');
+    if (!host) {
+        return;
+    }
+    const origin = model.originById[rupaOriginState.originId] || model.origins[0];
+    host.innerHTML = `
+        <div class="rupa-origin-summary__copy">
+            <span class="rupa-origin-eyebrow">${rupaOriginEscape(rupaOriginText('selectedOrigin'))} · ${rupaOriginEscape(origin.name)}</span>
+            <h2>${rupaOriginEscape(rupaOriginText('title'))}</h2>
+            <p>${rupaOriginEscape(rupaOriginText('intro'))}</p>
+        </div>
+        <div class="rupa-origin-summary__stats" aria-label="${rupaOriginEscape(rupaOriginText('overview'))}">
+            <span><strong>${model.totals.origins}</strong> ${rupaOriginEscape(rupaOriginText('fourOrigins'))}</span>
+            <span><strong>${model.totals.clusters}</strong> ${rupaOriginEscape(rupaOriginText('clusters'))}</span>
+            <span><strong>${model.totals.commonRupa}</strong> ${rupaOriginEscape(rupaOriginText('inseparables'))}</span>
+        </div>
+    `;
+}
 
-    const curve = parent.append('path')
-        .attr('d', pathData)
-        .attr('fill', 'none')
-        .attr('stroke', 'black')
-        .attr('stroke-width', 1)
-        .attr('marker-end', 'url(#rupa-arrowhead)');
+function renderRupaOriginControls(model, parent) {
+    const host = document.getElementById('rupa-origin-controls');
+    if (!host) {
+        return;
+    }
+    const locked = rupaOriginDetail(model, rupaOriginState.lockedDetail);
+    host.setAttribute('aria-label', rupaOriginText('originAria'));
+    host.innerHTML = `
+        <div class="rupa-origin-controls__heading">
+            <span>${rupaOriginEscape(rupaOriginText('chooseOrigin'))}</span>
+            <small>${rupaOriginEscape(rupaOriginText('clusterHint'))}</small>
+        </div>
+        <div class="rupa-origin-selector-list">
+            ${model.origins.map((origin) => {
+                const selected = origin.id === rupaOriginState.originId;
+                const related = locked.kind === 'route' && locked.item.targetId === origin.id;
+                return `
+                    <button class="rupa-origin-selector${selected ? ' is-selected' : ''}${related ? ' is-related' : ''}"
+                            type="button" data-origin-id="${rupaOriginEscape(origin.id)}"
+                            data-origin="${rupaOriginEscape(origin.id)}" aria-pressed="${String(selected)}">
+                        <span class="rupa-origin-selector__name">${rupaOriginEscape(origin.name)}</span>
+                        <span class="rupa-origin-selector__cause">${rupaOriginEscape(origin.cause)}</span>
+                        <span class="rupa-origin-selector__meta">${origin.producedRupa.length} ${rupaOriginEscape(rupaOriginText('rupaTypes'))} · ${origin.clusters.length} ${rupaOriginEscape(rupaOriginText('clusters'))}</span>
+                    </button>
+                `;
+            }).join('')}
+        </div>
+    `;
 
-    const px = 12;
-    const padding = 3;
-    const len = getWordLength(label, px);
-    renderTextBox(parent, (x1 + x2) / 2 - px * 2, (y1 + y2) / 2 - px * 2, len + padding * 2, px + padding * 2, labelColor, label,{size: px, wrap: false});
+    host.querySelectorAll('[data-origin-id]').forEach((button) => {
+        button.addEventListener('click', () => {
+            rupaOriginState.originId = button.dataset.originId;
+            rupaOriginState.lockedDetail = null;
+            rupaOriginState.previewDetail = null;
+            renderRupaOrigins(parent);
+        });
+    });
+}
 
-    return {
-        highlight: function () {
-            curve.attr('stroke-width', 2);
-        },
-        clear: function () {
-            curve.attr('stroke-width', 1);
+function rupaOriginStageCard(label, value, body, originId, className = '') {
+    return `
+        <section class="rupa-origin-stage-card ${className}" data-origin="${rupaOriginEscape(originId)}">
+            <span class="rupa-origin-stage-card__label">${rupaOriginEscape(label)}</span>
+            <strong>${rupaOriginEscape(value)}</strong>
+            <div class="rupa-origin-stage-card__body">${body}</div>
+        </section>
+    `;
+}
+
+function renderRupaOriginMap(model, parent) {
+    const host = parent && typeof parent.node === 'function' ? parent.node() : document.getElementById('rupa-origin-map');
+    if (!host) {
+        return;
+    }
+    const origin = model.originById[rupaOriginState.originId] || model.origins[0];
+    const selectedDetail = rupaOriginState.lockedDetail;
+    const commonPreview = origin.commonRupa.slice(0, 4);
+    const distinctivePreview = origin.distinctiveRupa.slice(0, 5);
+
+    host.setAttribute('aria-label', rupaOriginText('mapAria'));
+    host.dataset.origin = origin.id;
+    host.innerHTML = `
+        <div class="rupa-origin-path" role="group" aria-label="${rupaOriginEscape(origin.name)}">
+            ${rupaOriginStageCard(
+                rupaOriginText('sourceCause'),
+                origin.name,
+                `<p>${rupaOriginEscape(origin.cause)}</p>`,
+                origin.id,
+                'rupa-origin-stage-card--source'
+            )}
+            <span class="rupa-origin-path__arrow" aria-hidden="true">→</span>
+            ${rupaOriginStageCard(
+                rupaOriginText('directResult'),
+                `${origin.producedRupa.length} ${rupaOriginText('rupaTypes')} · ${origin.clusters.length} ${rupaOriginText('clusters')}`,
+                `<p>${rupaOriginEscape(rupaOriginText('contains'))} ${origin.commonRupa.length} ${rupaOriginEscape(rupaOriginText('inseparables'))}</p>
+                 <div class="rupa-origin-tag-list">${rupaOriginTags([...commonPreview, ...distinctivePreview])}</div>`,
+                origin.id,
+                'rupa-origin-stage-card--result'
+            )}
+            <span class="rupa-origin-path__arrow" aria-hidden="true">→</span>
+            <section class="rupa-origin-propagation" aria-label="${rupaOriginEscape(rupaOriginText('propagation'))}">
+                <span class="rupa-origin-stage-card__label">${rupaOriginEscape(rupaOriginText('propagation'))}</span>
+                ${origin.routes.map((route) => {
+                    const isSelected = selectedDetail && selectedDetail.kind === 'route' && selectedDetail.id === route.id;
+                    return `
+                        <button type="button" class="rupa-origin-route${isSelected ? ' is-selected' : ''}"
+                                data-detail-kind="route" data-detail-id="${rupaOriginEscape(route.id)}"
+                                data-target-origin="${rupaOriginEscape(route.targetId)}">
+                            <span class="rupa-origin-route__seed rupa-origin-route__seed--${rupaOriginEscape(route.seed)}">${rupaOriginEscape(route.seedName)}</span>
+                            <span class="rupa-origin-route__arrow" aria-hidden="true">→</span>
+                            <span class="rupa-origin-route__result">
+                                <strong>${rupaOriginEscape(route.targetName)}</strong>
+                                <small>${route.requiresSupport ? `${rupaOriginEscape(rupaOriginText('needsSupport'))} · ` : ''}${rupaOriginEscape(route.generationLabel)}</small>
+                            </span>
+                        </button>
+                    `;
+                }).join('')}
+            </section>
+        </div>
+        <section class="rupa-origin-clusters" aria-labelledby="rupa-origin-cluster-title">
+            <div class="rupa-origin-section-heading">
+                <div>
+                    <span>${rupaOriginEscape(origin.name)}</span>
+                    <h3 id="rupa-origin-cluster-title">${rupaOriginEscape(rupaOriginText('clusterCatalogue'))}</h3>
+                </div>
+                <span class="rupa-origin-count">${origin.clusters.length} ${rupaOriginEscape(rupaOriginText('clusters'))}</span>
+            </div>
+            <div class="rupa-origin-cluster-grid">
+                ${origin.clusters.map((cluster) => {
+                    const isSelected = selectedDetail && selectedDetail.kind === 'cluster' && String(selectedDetail.id) === String(cluster.id);
+                    const additions = cluster.additions.length ? cluster.additions : [rupaOriginText('noExtraRupa')];
+                    return `
+                        <button type="button" class="rupa-origin-cluster${isSelected ? ' is-selected' : ''}"
+                                data-detail-kind="cluster" data-detail-id="${cluster.id}">
+                            <span class="rupa-origin-cluster__index">${cluster.composition.length}</span>
+                            <strong>${rupaOriginEscape(cluster.name)}</strong>
+                            <span>${rupaOriginEscape(additions.join(' · '))}</span>
+                        </button>
+                    `;
+                }).join('')}
+            </div>
+        </section>
+    `;
+
+    bindRupaOriginDetailInteractions(model, parent, host);
+}
+
+function renderRupaOriginInspector(model, detailReference) {
+    const host = document.getElementById('rupa-origin-inspector');
+    if (!host) {
+        return;
+    }
+    host.setAttribute('aria-label', rupaOriginText('inspectorAria'));
+    const detail = rupaOriginDetail(model, detailReference);
+    const showUnlock = detail.kind !== 'origin' && Boolean(rupaOriginState.lockedDetail);
+
+    if (detail.kind === 'cluster') {
+        const cluster = detail.item;
+        host.innerHTML = `
+            <div class="rupa-origin-inspector__eyebrow">${rupaOriginEscape(detail.origin.name)} · ${rupaOriginEscape(rupaOriginText('clusterComposition'))}</div>
+            <h3>${rupaOriginEscape(cluster.name)}</h3>
+            <p>${rupaOriginEscape(rupaOriginText('total'))} ${cluster.composition.length} ${rupaOriginEscape(rupaOriginText('items'))}</p>
+            <div class="rupa-origin-inspector__section">
+                <strong>${rupaOriginEscape(rupaOriginText('commonRupa'))}</strong>
+                <div class="rupa-origin-tag-list">${rupaOriginTags(detail.origin.commonRupa, 'common')}</div>
+            </div>
+            <div class="rupa-origin-inspector__section">
+                <strong>${rupaOriginEscape(rupaOriginText('distinctiveRupa'))}</strong>
+                <div class="rupa-origin-tag-list">${rupaOriginTags(cluster.additions.length ? cluster.additions : [rupaOriginText('noExtraRupa')], 'specific')}</div>
+            </div>
+            ${showUnlock ? `<button type="button" class="rupa-origin-unlock" data-rupa-origin-unlock>${rupaOriginEscape(rupaOriginText('unlock'))}</button>` : ''}
+        `;
+    } else if (detail.kind === 'route') {
+        const route = detail.item;
+        host.innerHTML = `
+            <div class="rupa-origin-inspector__eyebrow">${rupaOriginEscape(detail.origin.name)} · ${rupaOriginEscape(rupaOriginText('routeDetail'))}</div>
+            <h3>${rupaOriginEscape(route.name)}</h3>
+            <dl class="rupa-origin-facts">
+                <div><dt>${rupaOriginEscape(rupaOriginText('routeFrom'))}</dt><dd>${rupaOriginEscape(detail.origin.name)} · ${rupaOriginEscape(route.seedName)}</dd></div>
+                <div><dt>${rupaOriginEscape(rupaOriginText('routeTo'))}</dt><dd>${rupaOriginEscape(route.targetName)}</dd></div>
+                <div><dt>${rupaOriginEscape(rupaOriginText('generations'))}</dt><dd>${rupaOriginEscape(route.generationLabel)}</dd></div>
+            </dl>
+            <div class="rupa-origin-inspector__section">
+                <strong>${rupaOriginEscape(rupaOriginText('routeCondition'))}</strong>
+                <p>${rupaOriginEscape(route.condition)}</p>
+            </div>
+            ${showUnlock ? `<button type="button" class="rupa-origin-unlock" data-rupa-origin-unlock>${rupaOriginEscape(rupaOriginText('unlock'))}</button>` : ''}
+        `;
+    } else {
+        const origin = detail.origin;
+        host.innerHTML = `
+            <div class="rupa-origin-inspector__eyebrow">${rupaOriginEscape(rupaOriginText('overview'))}</div>
+            <h3>${rupaOriginEscape(origin.name)}</h3>
+            <p class="rupa-origin-inspector__lead">${rupaOriginEscape(origin.cause)}</p>
+            <dl class="rupa-origin-facts">
+                <div><dt>${rupaOriginEscape(rupaOriginText('producedRupa'))}</dt><dd>${origin.producedRupa.length} ${rupaOriginEscape(rupaOriginText('rupaTypes'))}</dd></div>
+                <div><dt>${rupaOriginEscape(rupaOriginText('clusterCatalogue'))}</dt><dd>${origin.clusters.length} ${rupaOriginEscape(rupaOriginText('clusters'))}</dd></div>
+                <div><dt>${rupaOriginEscape(rupaOriginText('generations'))}</dt><dd>${rupaOriginEscape(origin.generationLabel)}</dd></div>
+            </dl>
+            <div class="rupa-origin-inspector__section">
+                <strong>${rupaOriginEscape(rupaOriginText('why'))}</strong>
+                <p>${rupaOriginEscape(origin.why)}</p>
+            </div>
+            <div class="rupa-origin-inspector__section">
+                <strong>${rupaOriginEscape(rupaOriginText('distinctiveRupa'))}</strong>
+                <div class="rupa-origin-tag-list">${rupaOriginTags(origin.distinctiveRupa, 'specific')}</div>
+            </div>
+        `;
+    }
+
+    const unlock = host.querySelector('[data-rupa-origin-unlock]');
+    if (unlock) {
+        unlock.addEventListener('click', () => {
+            rupaOriginState.lockedDetail = null;
+            rupaOriginState.previewDetail = null;
+            renderRupaOrigins(rpgSvg);
+        });
+    }
+}
+
+function syncRupaOriginHighlight(detailReference) {
+    const workspace = document.querySelector('.rupa-origin-workspace');
+    if (!workspace) {
+        return;
+    }
+    workspace.querySelectorAll('.is-preview, .is-related-preview').forEach((element) => {
+        element.classList.remove('is-preview', 'is-related-preview');
+    });
+    if (!detailReference) {
+        return;
+    }
+    const detailElement = workspace.querySelector(`[data-detail-kind="${detailReference.kind}"][data-detail-id="${detailReference.id}"]`);
+    if (detailElement) {
+        detailElement.classList.add('is-preview');
+    }
+    if (detailReference.kind === 'route') {
+        const targetId = detailElement && detailElement.dataset.targetOrigin;
+        const target = targetId ? workspace.querySelector(`[data-origin-id="${targetId}"]`) : null;
+        if (target) {
+            target.classList.add('is-related-preview');
         }
     }
+}
+
+function bindRupaOriginDetailInteractions(model, parent, host) {
+    host.querySelectorAll('[data-detail-kind]').forEach((element) => {
+        const detail = {kind: element.dataset.detailKind, id: element.dataset.detailId};
+        const preview = () => {
+            rupaOriginState.previewDetail = detail;
+            syncRupaOriginHighlight(detail);
+            renderRupaOriginInspector(model, detail);
+        };
+        const clearPreview = () => {
+            rupaOriginState.previewDetail = null;
+            syncRupaOriginHighlight(rupaOriginState.lockedDetail);
+            renderRupaOriginInspector(model, rupaOriginState.lockedDetail);
+        };
+        element.addEventListener('pointerenter', preview);
+        element.addEventListener('pointerleave', clearPreview);
+        element.addEventListener('focus', preview);
+        element.addEventListener('blur', clearPreview);
+        element.addEventListener('click', () => {
+            rupaOriginState.lockedDetail = detail;
+            rupaOriginState.previewDetail = null;
+            renderRupaOrigins(parent);
+        });
+    });
 }
 
 function renderRupaOrigins(parent) {
-    parent.append('defs')
-        .append('marker')
-        .attr('id', 'rupa-arrowhead')
-        .attr('viewBox', '0 -5 10 10')
-        .attr('refX', 10)
-        .attr('refY', 0)
-        .attr('markerWidth', 6)
-        .attr('markerHeight', 6)
-        .attr('orient', 'auto')
-        .append('path')
-        .attr('d', 'M0,-5L10,0L0,5')
-        .attr('fill', 'black');
+    const model = buildRupaOriginModel();
+    if (!model.originById[rupaOriginState.originId]) {
+        rupaOriginState.originId = model.origins[0].id;
+    }
+    renderRupaOriginSummary(model);
+    renderRupaOriginControls(model, parent);
+    renderRupaOriginMap(model, parent);
+    renderRupaOriginInspector(model, rupaOriginState.previewDetail || rupaOriginState.lockedDetail);
 
-    const x0 = 400;
-    const y0 = 100;
-    const d = 20;
-    const karma = renderAgg(parent, x0, y0, rupaAggs[2]);
-    const food = renderAgg(parent, x0, y0 + 200, rupaAggs[0]);
-    const fk1 = renderCurve(parent, food.foodX, food.foodY - food.ry/3, karma.foodX, karma.foodY + karma.ry/3, d, t('string_id_722'), 'orange');
-    const karmaFood = renderAgg(parent, x0 + 300, y0, rupaAggs[0]);
-    const kg1 = renderCurve(parent, karma.foodX + karma.rx / 3, karma.foodY, karmaFood.x - karmaFood.rx, karmaFood.y, d, t('string_id_723'), 'orange');
-    const karmaFire = renderAgg(parent, x0 - 300, y0, rupaAggs[3]);
-    const kg2 = renderCurve(parent, karma.fireX, karma.fireY - karma.ry / 3, karmaFire.x, karmaFire.y - karmaFire.ry, d, t('string_id_723'), 'yellow');
-    const citta = renderAgg(parent, x0, y0 + 400, rupaAggs[1]);
-    const cf1 = renderCurve(parent, food.foodX, food.foodY + food.ry/3, citta.foodX, citta.foodY - karma.ry/3, d, t('string_id_722'), 'cyan');
-    const cittaFood = renderAgg(parent, x0, y0 + 600, rupaAggs[0]);
-    const ccf1 = renderCurve(parent, citta.foodX - citta.rx /3, citta.foodY, cittaFood.x, cittaFood.y - cittaFood.ry, d, t('string_id_724'), 'cyan');
-    const cittaFire = renderAgg(parent, x0 - 300, y0 + 400, rupaAggs[3]);
-    const ccf2 = renderCurve(parent, citta.fireX, citta.fireY - citta.ry / 3, cittaFire.x, cittaFire.y - cittaFire.ry, d * 2, t('string_id_724'), 'burlywood');
-    const fire = renderAgg(parent, x0 + 300, y0 + 200, rupaAggs[3]);
-    const ff = renderCurve(parent, food.foodX + food.rx / 3, food.foodY, fire.foodX - fire.rx / 3, fire.foodY, d, t('string_id_722'), 'Tomato');
-    const foodFireFood = renderAgg(parent, x0 + 700, y0 + 200, rupaAggs[0]);
-    const ffff = renderCurve(parent, fire.foodX + fire.rx / 3, fire.foodY, foodFireFood.x - foodFireFood.rx, foodFireFood.y, d * 2, t('string_id_725'), 'Tomato');
-    const foodFire = renderAgg(parent, x0 - 300, y0 + 200, rupaAggs[3]);
-    const fff2 = renderCurve(parent, food.fireX, food.fireY - food.ry / 3, foodFire.x, foodFire.y - foodFire.ry, d, t('string_id_725'), 'mistyrose');
-    const foodFood = renderAgg(parent, x0 + 300, y0 + 400, rupaAggs[0]);
-    const fff3 = renderCurve(parent, food.foodX + food.rx / 3, food.foodY, foodFood.x - foodFood.rx, foodFood.y, d, t('string_id_725'), 'violet');
+    const workspace = document.querySelector('.rupa-origin-workspace');
+    if (workspace && !workspace.dataset.keyboardBound) {
+        workspace.dataset.keyboardBound = 'true';
+        workspace.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && rupaOriginState.lockedDetail) {
+                rupaOriginState.lockedDetail = null;
+                rupaOriginState.previewDetail = null;
+                renderRupaOrigins(rpgSvg);
+            }
+        });
+    }
 }
+
+window.renderRupaOrigins = renderRupaOrigins;

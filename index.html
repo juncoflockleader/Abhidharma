@@ -39,7 +39,7 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
-<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <div class="citta-workspace">
@@ -97,6 +97,14 @@
     </div>
   </div>
   <div class="svg-sub-container" id="container5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" hidden>
+    <div class="rupa-origin-workspace">
+      <section id="rupa-origin-summary" class="rupa-origin-summary" aria-live="polite"></section>
+      <section id="rupa-origin-controls" class="rupa-origin-controls"></section>
+      <div class="rupa-origin-layout">
+        <main id="rupa-origin-map" class="rupa-origin-map" tabindex="0"></main>
+        <aside id="rupa-origin-inspector" class="rupa-origin-inspector" aria-live="polite"></aside>
+      </div>
+    </div>
   </div>
   <div class="svg-sub-container" id="container6" role="tabpanel" aria-labelledby="tab6" aria-hidden="true" hidden>
     <svg id="dependent-origination" width="1600" height="800"></svg>
@@ -153,6 +161,7 @@
 <script src="js/flow-view-model.js"></script>
 <script src="js/flows.js"></script>
 <script src="js/rupa.js"></script>
+<script src="js/rupa-origin-model.js"></script>
 <script src="js/rupa-origin.js"></script>
 <script src="js/rupagen.js"></script>
 <script src="js/dependent-origin.js"></script>
