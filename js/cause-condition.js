@@ -900,7 +900,8 @@ function renderCauseCondition(parent) {
     const controlsContainer = d3.select('#causeconditioncontrols')
         .style('display', 'flex')
         .style('gap', '20px') // Add space between the groups
-        .style('align-items', 'flex-start, stretch'); // Align items to the top
+        .style('align-items', 'flex-start')
+        .style('flex-wrap', 'wrap');
 
     function renderFlowSelectButtonGroup() {
         renderButtonGroup(controlsContainer, [{ 'id': 1, 'name': '五门心路' }, { 'id': 2, 'name': '意门心路' }], '心路类型', state, (state, data) => {

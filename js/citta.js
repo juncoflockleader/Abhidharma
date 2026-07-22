@@ -244,7 +244,8 @@ function renderCetasikaTableByLayout(layoutConfig, y, model, state = cittaState)
         for (let j = 0; j < group.length; j++) {
             const subGroup = group[j];
             const subgroupColumnSpan = subgroupColumnSpanFn(subGroup);
-            renderTextBox(cittaPageSvg, x, y0, itemColumnWidth * subgroupColumnSpan, headerRowHeight, subgroupHeaderBg, subGroup[subgroupLabelKey], {size: '12px', wrap: autoWrap, align: 'middle'});
+            const subgroupLabel = subGroup[subgroupLabelKey] || subGroup.displayName || subGroup.name || '';
+            renderTextBox(cittaPageSvg, x, y0, itemColumnWidth * subgroupColumnSpan, headerRowHeight, subgroupHeaderBg, subgroupLabel, {size: '12px', wrap: autoWrap, align: 'middle'});
             rowCount++;
             y0 += headerRowHeight;
             for (; breakPoint < subGroup.children.length; breakPoint++) {
@@ -534,8 +535,9 @@ function calculateConnections(model, state) {
                 return idIndex;
             }
 
-            function addConnection(id, item_names, from_color, to_color, idIndex, params={reverse_color:false, opt:false}) {
+            function addConnection(id, item_names, from_color, to_color, idIndex, params={reverse_color:false, opt:false, relation:'related'}) {
                 let reverse_color = params.reverse_color;
+                const relation = params.relation || 'related';
                 if (!itemConnections[id]) {
                     itemConnections[id] = {'from_color': from_color, 'connection_groups': [], counter: 0, opt_counter: 0};
                 }
@@ -548,11 +550,11 @@ function calculateConnections(model, state) {
                     if (!itemConnections[to_id]) {
                         itemConnections[to_id] = {'from_color': tc, 'connection_groups': [], counter: 0, opt_counter: 0};
                     }
-                    let connectionGroup = itemConnections[to_id].connection_groups.find(group => group.to_color === fc);
+                    let connectionGroup = itemConnections[to_id].connection_groups.find(group => group.to_color === fc && group.relation === relation);
                     if (connectionGroup) {
                         connectionGroup.ids.push(id);
                     } else {
-                        itemConnections[to_id].connection_groups.push({'to_color': fc, 'ids': [id]});
+                        itemConnections[to_id].connection_groups.push({'to_color': fc, 'ids': [id], relation});
                     }
                     if (params.opt) {
                         itemConnections[to_id].opt_counter++;
@@ -560,7 +562,7 @@ function calculateConnections(model, state) {
                         itemConnections[to_id].counter++;
                     }
                 });
-                itemConnections[id].connection_groups.push({'to_color':to_color, 'ids': ids});
+                itemConnections[id].connection_groups.push({'to_color':to_color, 'ids': ids, relation});
                 if (params.opt) {
                     itemConnections[id].opt_counter += ids.length;
                 } else {
@@ -569,36 +571,36 @@ function calculateConnections(model, state) {
             }
 
             const item_cetasika = groupAttrs.cetasika.concat(item.cetasika || []);
-            addConnection(item.id, item_cetasika, 'yellow', 'yellow', state.cetasikaIdIndex);
+            addConnection(item.id, item_cetasika, 'yellow', 'yellow', state.cetasikaIdIndex, {relation: 'required'});
             const item_cetasika_opt = groupAttrs.cetasika_opt.concat(item.cetasika_opt || []);
-            addConnection(item.id, item_cetasika_opt, 'yellow', 'lightyellow', state.cetasikaIdIndex, {reverse_color: true, opt: true});
+            addConnection(item.id, item_cetasika_opt, 'yellow', 'lightyellow', state.cetasikaIdIndex, {reverse_color: true, opt: true, relation: 'optional'});
             const item_category = item.category || groupAttrs.category || [];
             const item_roots = groupAttrs.roots.concat(item.roots || []);
-            addConnection(item.id, item_roots, 'yellow', 'lavender', getIndex(causes));
+            addConnection(item.id, item_roots, 'yellow', 'lavender', getIndex(causes), {relation: 'root-time'});
 
             const item_functions = groupAttrs.functions.concat(item.functions || []);
-            addConnection(item.id, item_functions, 'yellow', 'orange', getIndex(functions));
+            addConnection(item.id, item_functions, 'yellow', 'orange', getIndex(functions), {relation: 'function'});
 
             const item_gates = groupAttrs.gates.concat(item.gates || []);
-            addConnection(item.id, item_gates, 'yellow', 'pink', getIndex(gates));
+            addConnection(item.id, item_gates, 'yellow', 'pink', getIndex(gates), {relation: 'gate'});
 
             const item_objects = groupAttrs.objects.concat(item.objects || []);
-            addConnection(item.id, item_objects, 'yellow', 'lightgreen', getIndex(objects));
+            addConnection(item.id, item_objects, 'yellow', 'lightgreen', getIndex(objects), {relation: 'object'});
 
             const item_mental_objects = groupAttrs.mental_objects.concat(item.mental_objects || []);
-            addConnection(item.id, item_mental_objects, 'yellow', 'lightblue', getIndex(mental_objects));
+            addConnection(item.id, item_mental_objects, 'yellow', 'lightblue', getIndex(mental_objects), {relation: 'mental-basis'});
 
             const item_object_time = groupAttrs.object_time.concat(item.object_time || []);
-            addConnection(item.id, item_object_time, 'yellow', 'lavender', getIndex(times));
+            addConnection(item.id, item_object_time, 'yellow', 'lavender', getIndex(times), {relation: 'root-time'});
 
             const item_basis = item.basis || groupAttrs.basis ? [item.basis || groupAttrs.basis] : [];
-            addConnection(item.id, item_basis, 'yellow', 'lightblue', getIndex(basis));
+            addConnection(item.id, item_basis, 'yellow', 'lightblue', getIndex(basis), {relation: 'mental-basis'});
 
             const item_realms = groupAttrs.realms.concat(item.realms || []);
-            addConnection(item.id, item_realms, 'yellow', 'violet', getIndex(realms));
+            addConnection(item.id, item_realms, 'yellow', 'violet', getIndex(realms), {relation: 'realm'});
 
             const item_feeling = item.feeling || groupAttrs.feeling ? [item.feeling || groupAttrs.feeling] : [];
-            addConnection(item.id, item_feeling, 'yellow', 'tomato', getIndex(feelings));
+            addConnection(item.id, item_feeling, 'yellow', 'tomato', getIndex(feelings), {relation: 'feeling'});
 
             // overwrite.
             itemConnections[item.id].counter = item_cetasika.length;
@@ -609,12 +611,19 @@ function calculateConnections(model, state) {
                 if (state.itemIndex[word]) {
                     let idIndex = {};
                     idIndex[word] = word;
-                    addConnection(item.id, [word], 'yellow', 'yellow', idIndex);
+                    addConnection(item.id, [word], 'yellow', 'yellow', idIndex, {relation: 'required'});
                 }
             });
             state.registerId(item.id, item);
             state.subEffectIndex[item.id] = [...item_cetasika, ...item_cetasika_opt].map(e => state.cetasikaIdIndex[e]);
-            state.allCittas.push({id: item.id, name: item.name, cetasika: item_cetasika, cetasika_opt: item_cetasika_opt, functions: item_functions});
+            state.allCittas.push({
+                id: item.id,
+                name: item.name,
+                group: cittaGroup.name,
+                cetasika: item_cetasika,
+                cetasika_opt: item_cetasika_opt,
+                functions: item_functions
+            });
         });
     });
     return itemConnections;
@@ -623,16 +632,24 @@ function calculateConnections(model, state) {
 function setupHighlightsBehavior(cntt, ntt, state) {
     let locked = false;
     let lockedItem = null;
+    let lockedItemId = null;
     let clearFunc = null;
     const itemGraph = calculateConnections(getCittaModel(), state);
     for (let itemId in itemGraph) {
-        function highlightsConnections(connections) {
+        function highlightsConnections(targetItemId, connections, options = {}) {
+            const selected = Boolean(options.selected);
             function setHighlights(connections, clear=false) {
                 let color = clear ? 'white' : connections.from_color
-                state.itemIndex[itemId].setColor(color);
+                if (state.itemIndex[targetItemId]) {
+                    const target = state.itemIndex[targetItemId];
+                    target.setColor(color);
+                    target.classed('is-hover-source', !clear && !selected);
+                    target.classed('is-selected', !clear && selected);
+                    target.attr('aria-pressed', String(!clear && selected));
+                }
                 if (!clear) {
                     cntt.update(connections.counter, connections.opt_counter);
-                    ntt.update(itemId);
+                    ntt.update(targetItemId);
                 }
                 else {
                     cntt.clear();
@@ -641,7 +658,13 @@ function setupHighlightsBehavior(cntt, ntt, state) {
                 connections.connection_groups.forEach(connection => {
                     connection.ids.forEach(id => {
                         let color = clear ? 'white' : connection.to_color;
-                        state.itemIndex[id].setColor(color);
+                        if (state.itemIndex[id]) {
+                            const related = state.itemIndex[id];
+                            const relationClass = `relation-${connection.relation || 'related'}`;
+                            related.setColor(color);
+                            related.classed('is-related', !clear);
+                            related.classed(relationClass, !clear);
+                        }
                     });
                 });
             }
@@ -653,9 +676,20 @@ function setupHighlightsBehavior(cntt, ntt, state) {
 
         let connections = itemGraph[itemId];
         let item = state.itemIndex[itemId];
+        if (!item) {
+            continue;
+        }
+        const itemLabel = item.select('text').text() || String(itemId);
+        item
+            .classed('citta-item', true)
+            .attr('data-item-id', itemId)
+            .attr('role', 'button')
+            .attr('tabindex', 0)
+            .attr('aria-pressed', 'false')
+            .attr('aria-label', itemLabel);
         item.on('mouseover', function(event, d) {
             if (locked) return;
-            highlightsConnections(connections);
+            highlightsConnections(itemId, connections);
         })
         .on('mousemove', function(event) {
         })
@@ -665,17 +699,62 @@ function setupHighlightsBehavior(cntt, ntt, state) {
         })
         .on('click', function() {
             if (locked && lockedItem === this) {
-                locked = false;
-                lockedItem = null;
-                if (clearFunc) clearFunc();
+                clearCittaHighlight({notify: true});
             } else {
-                if (locked && clearFunc) {
-                    clearFunc();
-                }
-                locked = true;
-                lockedItem = this;
-                highlightsConnections(connections);
+                selectCittaHighlight(itemId, {node: this, notify: true});
+            }
+        })
+        .on('keydown', function(event) {
+            if (event.key !== 'Enter' && event.key !== ' ') {
+                return;
+            }
+            event.preventDefault();
+            if (locked && lockedItem === this) {
+                clearCittaHighlight({notify: true});
+            } else {
+                selectCittaHighlight(itemId, {node: this, notify: true});
             }
         });
     }
+
+    function clearCittaHighlight(options = {}) {
+        if (clearFunc) {
+            clearFunc();
+        }
+        locked = false;
+        lockedItem = null;
+        lockedItemId = null;
+        clearFunc = null;
+        if (options.notify && typeof studyGuideHandleSelection === 'function') {
+            studyGuideHandleSelection('citta', null, {clear: true});
+        }
+    }
+
+    function selectCittaHighlight(itemId, options = {}) {
+        const normalizedId = String(itemId);
+        const connections = itemGraph[normalizedId];
+        if (!connections || !state.itemIndex[normalizedId]) {
+            return null;
+        }
+        if (clearFunc) {
+            clearFunc();
+        }
+        locked = true;
+        lockedItem = options.node || state.itemIndex[normalizedId].node();
+        lockedItemId = normalizedId;
+        highlightsConnections(normalizedId, connections, {selected: true});
+        if (options.notify && typeof studyGuideHandleSelection === 'function') {
+            studyGuideHandleSelection('citta', normalizedId, {connections});
+        }
+        return connections;
+    }
+
+    state.highlight = {
+        itemGraph,
+        selectItem: selectCittaHighlight,
+        clear: clearCittaHighlight,
+        getActiveId: function () {
+            return lockedItemId;
+        }
+    };
 }

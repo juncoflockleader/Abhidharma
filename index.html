@@ -7,9 +7,10 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="images/favicon.png" type="image/png">
 </head>
-<body>
+<body class="citta-tab-active inspector-tab-active">
 <div id="tooltip" style="position: absolute; visibility: hidden; background-color: #f0f0f0; padding: 5px; border-radius: 5px; border: 1px solid #ccc; pointer-events: none;"></div>
-<div class="menu">
+<button id="left-sidebar-toggle" class="sidebar-toggle sidebar-toggle--left" type="button" aria-controls="primary-menu" aria-expanded="true" aria-label="收起左侧导航" title="收起左侧导航">‹</button>
+<div class="menu" id="primary-menu">
   <div class="tabs" role="tablist" aria-label="阿毗达摩图表">
     <button id="tab1" class="active" type="button" role="tab" data-tab-id="citta" aria-controls="container1" aria-selected="true" tabindex="0">心与心所</button>
     <button id="tab2" type="button" role="tab" data-tab-id="sense-flow" aria-controls="container2" aria-selected="false" tabindex="-1">欲界五门心路</button>
@@ -22,14 +23,14 @@
     <button id="tab9" type="button" role="tab" data-tab-id="about" aria-controls="container9" aria-selected="false" tabindex="-1">写在后面的话</button>
     <button id="tab10" type="button" role="tab" data-tab-id="simulation" aria-controls="container10" aria-selected="false" tabindex="-1" style="display:none">色法模拟</button>
   </div>
-  <div class="lang">
-    <button id="en">
-      <svg height="32">
+  <div class="lang" aria-label="Language / 语言">
+    <button id="en" type="button" aria-label="Switch to English" title="English">
+      <svg width="32" height="32" aria-hidden="true">
         <image href="images/en.svg" x="0" y="0" width="28" height="28"></image>
       </svg>
     </button>
-    <button id="cn">
-      <svg height="32">
+    <button id="cn" type="button" aria-label="切换到中文" title="中文">
+      <svg width="32" height="32" aria-hidden="true">
         <image href="images/cn.svg" x="0" y="0" width="28" height="28"></image>
       </svg>
     </button>
@@ -38,24 +39,62 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
-    <svg id="citta" width="1800" height="800"></svg>
-    <svg>
-      <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank">
+    <div class="citta-workspace">
+      <div id="citta-guide" class="study-guide study-guide--citta" data-study-page="citta"></div>
+      <div class="citta-canvas" aria-label="心与心所互动表">
+        <div class="svg-scroll" id="citta-scroll" tabindex="0" aria-label="可水平滚动的心与心所表格">
+          <svg id="citta-svg" width="1800" height="800" role="group" aria-label="心与心所关系图"></svg>
+        </div>
+      </div>
+      <aside id="citta-inspector" class="citta-inspector" aria-label="当前选中项详情" aria-live="polite">
+        <div class="study-guide__panel" data-study-panel="citta"></div>
+      </aside>
+    </div>
+    <svg class="repo-link" width="32" height="32" aria-hidden="true">
+      <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
         <image href="images/github-square.svg" x="0" y="0" width="32" height="32"></image>
       </a>
     </svg>
   </div>
   <div class ="svg-sub-container" id="container2" role="tabpanel" aria-labelledby="tab2" aria-hidden="true" hidden>
-    <div id="senseflow"></div>
-    <div id="senseflowcontrols"></div>
+    <div class="flow-workspace" id="sense-flow-workspace">
+      <section class="flow-summary" id="senseflowsummary" aria-live="polite"></section>
+      <section class="flow-controls" id="senseflowcontrols" aria-label="五门心路情境控制"></section>
+      <div class="flow-layout">
+        <div class="flow-canvas">
+          <div class="flow-scroll" id="senseflow" tabindex="0" aria-label="可横向滚动的五门心路时间线"></div>
+        </div>
+        <aside class="flow-inspector" id="senseflowinspector" aria-label="五门心路阶段详情" aria-live="polite"></aside>
+      </div>
+    </div>
   </div>
   <div class ="svg-sub-container" id="container3" role="tabpanel" aria-labelledby="tab3" aria-hidden="true" hidden>
-    <div id="mindflow"></div>
-    <div id="mindflowcontrols"></div>
+    <div class="flow-workspace" id="mind-flow-workspace">
+      <section class="flow-summary" id="mindflowsummary" aria-live="polite"></section>
+      <section class="flow-controls" id="mindflowcontrols" aria-label="意门心路情境控制"></section>
+      <div class="flow-layout">
+        <div class="flow-canvas">
+          <div class="flow-scroll" id="mindflow" tabindex="0" aria-label="可横向滚动的意门心路时间线"></div>
+        </div>
+        <aside class="flow-inspector" id="mindflowinspector" aria-label="意门心路阶段详情" aria-live="polite"></aside>
+      </div>
+    </div>
   </div>
   <div class="svg-sub-container" id="container4" role="tabpanel" aria-labelledby="tab4" aria-hidden="true" hidden>
+    <div class="rupa-workspace">
+      <div id="rupa-guide" class="study-guide study-guide--rupa" data-study-page="rupa"></div>
+      <div class="rupa-canvas" aria-label="色法互动表">
+        <div class="svg-scroll" id="rupa-scroll" tabindex="0" aria-label="可滚动的色法与色聚表格">
+          <div id="rupa-svg-stage"></div>
+        </div>
+      </div>
+      <aside id="rupa-inspector" class="rupa-inspector" aria-label="当前选中色法详情" aria-live="polite">
+        <div class="study-guide__panel" data-study-panel="rupa"></div>
+      </aside>
+    </div>
   </div>
   <div class="svg-sub-container" id="container5" role="tabpanel" aria-labelledby="tab5" aria-hidden="true" hidden>
   </div>
@@ -77,7 +116,7 @@
   <div class="svg-sub-container" id="container9" role="tabpanel" aria-labelledby="tab9" aria-hidden="true" hidden>
     <svg id="my-words-svg" width="830" height="500"></svg>
     <div>
-      <svg>
+      <svg class="repo-link" width="32" height="32" aria-hidden="true">
         <a href="https://github.com/juncoflockleader/Abhidharma" target="_blank">
           <image href="images/github-square.svg" x="0" y="0" width="32" height="32"></image>
         </a>
@@ -102,12 +141,16 @@
 <script src="js/common-lang.js"></script>
 <script src="js/common-svg.js"></script>
 <script src="js/common-frame.js"></script>
+<script src="js/sidebar-layout.js"></script>
 <script src="js/page-state.js"></script>
 <script src="js/view-model.js"></script>
 <script src="js/render-layout.js"></script>
 <script src="js/data.js"></script>
 <script src="js/citta-model.js"></script>
 <script src="js/citta.js"></script>
+<script src="js/flow-definitions.js"></script>
+<script src="js/flow-engine.js"></script>
+<script src="js/flow-view-model.js"></script>
 <script src="js/flows.js"></script>
 <script src="js/rupa.js"></script>
 <script src="js/rupa-origin.js"></script>
@@ -118,6 +161,7 @@
 <script src="js/cause-condition-data.js"></script>
 <script src="js/cause-condition.js"></script>
 <script src="js/mywords.js"></script>
+<script src="js/study-guide.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
