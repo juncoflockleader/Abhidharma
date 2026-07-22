@@ -85,18 +85,6 @@ const rpnsSvg = container.select('#container9').append('svg')
 const testSvg = d3.select('#test-svg');
 const testDiv = d3.select('#test-div');
 
-const cdSvg = container.select('#left-svg-side-container')
-    .append('svg')
-    .attr('class', 'svg-content')
-    .attr('width', 380)
-    .attr('height', svgHeight * 2);
-
-const ceSvg = container.select('#right-svg-side-container')
-    .append('svg')
-    .attr('class', 'svg-content')
-    .attr('width', 1280)
-    .attr('height', svgHeight);
-
 const ccSvg = container.select('#cause-condition-svg');
 
 const mwSvg = container.select('#my-words-svg');

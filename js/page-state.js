@@ -16,6 +16,9 @@ function createPageState() {
         },
         rupaOrigin: rupaOriginState,
         dependentOrigin: dependentOriginState,
+        conditions: {
+            workspace: null,
+        },
     };
 }
 

@@ -85,7 +85,7 @@ function activateTab(tabIdOrLegacyIndex, options = {}) {
     document.body.classList.toggle('citta-tab-active', entry.id === 'citta');
     document.body.classList.toggle(
         'inspector-tab-active',
-        entry.id === 'citta' || entry.id === 'rupa' || entry.id === 'sense-flow' || entry.id === 'mind-flow' || entry.id === 'rupa-origin' || entry.id === 'dependent-origin'
+        entry.id === 'citta' || entry.id === 'rupa' || entry.id === 'sense-flow' || entry.id === 'mind-flow' || entry.id === 'rupa-origin' || entry.id === 'dependent-origin' || entry.id === 'conditions-map'
     );
 
     if (updateHash) {
@@ -96,7 +96,9 @@ function activateTab(tabIdOrLegacyIndex, options = {}) {
         entry.tab.focus();
     }
 
-    return getActiveTab();
+    const activeTab = getActiveTab();
+    window.dispatchEvent(new CustomEvent('abhidharma:tabchange', {detail: activeTab}));
+    return activeTab;
 }
 
 function getActiveTab() {

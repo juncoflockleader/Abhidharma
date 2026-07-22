@@ -39,7 +39,7 @@
     <svg id="test-svg" width="32" height="32"></svg>
   </div>
 </div>
-<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector dependent-origin-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
+<button id="right-sidebar-toggle" class="sidebar-toggle sidebar-toggle--right" type="button" aria-controls="citta-inspector rupa-inspector senseflowinspector mindflowinspector rupa-origin-inspector dependent-origin-inspector conditions-inspector" aria-expanded="true" aria-label="收起右侧详情" title="收起右侧详情">›</button>
 <div class="svg-container">
   <div class ="svg-sub-container active" id="container1" role="tabpanel" aria-labelledby="tab1" aria-hidden="false">
     <div class="citta-workspace">
@@ -117,9 +117,19 @@
     </div>
   </div>
   <div class="svg-sub-container" id="container7" role="tabpanel" aria-labelledby="tab7" aria-hidden="true" hidden>
-    <div style="display: flex">
-      <div class="svg-side-container" id="left-svg-side-container"></div>
-      <div class="svg-side-container" id="right-svg-side-container"></div>
+    <div class="conditions-workspace" id="conditions-workspace">
+      <section id="conditions-summary" class="conditions-summary" aria-live="polite"></section>
+      <section id="conditions-controls" class="conditions-controls" aria-label="五十二缘筛选"></section>
+      <div class="conditions-layout">
+        <main class="conditions-explorer">
+          <nav id="conditions-navigator" class="conditions-navigator" aria-label="五十二缘目录"></nav>
+          <div class="conditions-content">
+            <section id="conditions-relation" class="conditions-relation" aria-live="polite"></section>
+            <section id="conditions-results" class="conditions-results" aria-label="具体缘规则"></section>
+          </div>
+        </main>
+        <aside id="conditions-inspector" class="conditions-inspector" aria-label="当前规则详情" aria-live="polite"></aside>
+      </div>
     </div>
   </div>
   <div class="svg-sub-container" id="container8" role="tabpanel" aria-labelledby="tab8" aria-hidden="true" hidden>
@@ -175,7 +185,8 @@
 <script src="js/dependent-origin-model.js"></script>
 <script src="js/dependent-origin-workspace.js"></script>
 <script src="js/conditions.js"></script>
-<script src="js/conditions-mapping.js"></script>
+<script src="js/conditions-model.js"></script>
+<script src="js/conditions-workspace.js"></script>
 <script src="js/cause-condition-data.js"></script>
 <script src="js/cause-condition.js"></script>
 <script src="js/mywords.js"></script>

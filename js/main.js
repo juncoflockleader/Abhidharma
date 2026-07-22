@@ -12,6 +12,8 @@ function clearAll() {
 }
 
 const pageState = createPageState();
+let conditionsRuntimeReady = false;
+let conditionsWorkspaceRendered = false;
 
 function logRenderStage(stageName, marker, context = {}) {
     const { tabId = 'unknown', lang = 'unknown', endX = '-', endY = '-' } = context;
@@ -160,14 +162,45 @@ function renderRupaSection(viewModel, context) {
 }
 
 function renderConditionSection(context) {
+    Builder.initializeVariables();
     createLegend();
     createProgressUpdater();
     dependentOrigination(doSvg, dependentOriginData);
-    renderConditionsMapping(cdSvg, ceSvg);
     renderCauseCondition(ccSvg);
     renderMyWords(mwSvg);
     context.endX = '-';
     context.endY = '-';
+}
+
+function ensureConditionsWorkspaceRendered() {
+    if (!conditionsRuntimeReady || conditionsWorkspaceRendered) {
+        return;
+    }
+    const activeTab = typeof getActiveTab === 'function' ? getActiveTab() : null;
+    if (!activeTab || activeTab.id !== 'conditions-map') {
+        return;
+    }
+    const host = document.getElementById('conditions-workspace');
+    if (!host) {
+        return;
+    }
+    try {
+        const model = buildConditionsModel();
+        pageState.conditions.workspace = renderConditionsWorkspace(host, model);
+        conditionsWorkspaceRendered = true;
+        console.log('[render:conditions-map] done', model.stats);
+    } catch (error) {
+        console.error('[render:conditions-map] failed', error);
+        host.innerHTML = '';
+        const panel = document.createElement('div');
+        panel.className = 'conditions-empty conditions-empty--error';
+        const title = document.createElement('strong');
+        title.textContent = '五十二缘工作台暂时无法显示';
+        const detail = document.createElement('span');
+        detail.textContent = error && error.message ? error.message : String(error);
+        panel.append(title, detail);
+        host.appendChild(panel);
+    }
 }
 
 function executeRenderStage(stageName, context, errors, callback) {
@@ -196,8 +229,10 @@ function render() {
     executeRenderStage('flow', context, renderErrors, () => renderFlowSection(context));
     executeRenderStage('rupa', context, renderErrors, () => renderRupaSection(viewModel, context));
     executeRenderStage('condition', context, renderErrors, () => renderConditionSection(context));
+    conditionsRuntimeReady = true;
 
     syncTabWithHash();
+    ensureConditionsWorkspaceRendered();
 
     if (typeof initializeStudyGuide === 'function') {
         initializeStudyGuide(pageState);
@@ -245,6 +280,13 @@ function buildPreflightCheckSpec() {
                 { name: 'dependentOriginData', validate: () => typeof dependentOriginData !== 'undefined', script: 'js/dependent-origin-data.js' },
                 { name: 'buildDependentOriginModel', validate: () => typeof buildDependentOriginModel === 'function', script: 'js/dependent-origin-model.js' },
                 { name: 'dependentOrigination', validate: () => typeof dependentOrigination === 'function', script: 'js/dependent-origin-workspace.js' },
+            ],
+        },
+        {
+            module: 'Conditions Workspace',
+            checks: [
+                { name: 'buildConditionsModel', validate: () => typeof buildConditionsModel === 'function', script: 'js/conditions-model.js' },
+                { name: 'renderConditionsWorkspace', validate: () => typeof renderConditionsWorkspace === 'function', script: 'js/conditions-workspace.js' },
             ],
         },
         {
@@ -316,6 +358,8 @@ function preflightCheck() {
     renderPreflightError(missingByModule);
     return false;
 }
+
+window.addEventListener('abhidharma:tabchange', ensureConditionsWorkspaceRendered);
 
 // On page load, check the URL
 window.addEventListener('DOMContentLoaded', () => {
